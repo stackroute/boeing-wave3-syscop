@@ -1,0 +1,38 @@
+version: "2"
+services:
+
+  apigateway:
+    image: zuul-service
+    build: zuul-gatewayservice/
+    restart: always
+    network_mode: host
+    depends_on:
+    - eurekaserver
+    ports:
+    - 8092:8092
+    expose:
+    - 8092
+
+  eurekaserver:
+    image: eureka-servcie:latest
+    build: eureka-server/
+    restart: always
+    network_mode: host
+    ports:
+    - 9091:9091
+    expose:
+    - 9091
+
+  configserver:
+      image: config-servcie:latest
+      build: config-server/
+      restart: always
+      network_mode: host
+      ports:
+      - 8888:8888
+      expose:
+      - 8888
+
+
+
+

@@ -1,14 +1,15 @@
 ######################
 # Project Specific
 ######################
+
 /build/www/**
 /src/test/javascript/coverage/
 /src/test/javascript/PhantomJS*/
-/data
 
 ######################
 # Node
 ######################
+
 /node/
 node_tmp/
 node_modules/
@@ -36,6 +37,18 @@ local.properties
 .settings/
 .loadpath
 .factorypath
+.settings
+.mvn
+target
+target/*
+logs
+logs.*
+mvnw
+mvnw.*
+bin
+.bin
+.bin/*
+
 /src/main/resources/rebel.xml
 
 # External tool builders
@@ -70,8 +83,6 @@ local.properties
 ######################
 /log/
 /target/
-/.mvn/
-/mvn*
 
 ######################
 # Gradle
@@ -142,3 +153,4 @@ Desktop.ini
 # ESLint
 ######################
 .eslintcache
+/.recommenders/
