@@ -1,6 +1,6 @@
 language: java
 
-jdk: openjdk11
+jdk: openjdk8
 
 after_success:
   - mvn clean coveralls:report
