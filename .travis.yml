@@ -1,13 +1,15 @@
 language: java
 
+jdk: openjdk11
+
 after_success:
-  - mvn clean cobertura:cobertura coveralls:report
+  - mvn clean coveralls:report
 
-addons:
-  sonarcloud:
-    organization: "stackroute"
-    token:
-      secure: "0.............="
+# addons:
+#   sonarcloud:
+#     organization: "stackroute"
+#     token:
+#       secure: "0.............="
 
-script:
-  - sonar-scanner
+# script:
+#   - sonar-scanner
