@@ -1,0 +1,72 @@
+<mat-card class="example-card">
+    <mat-card-header>
+        <mat-card-title>Login</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <form (ngSubmit)="onSubmit()" [formGroup]="form">
+            <table class="example-full-width" cellspacing="0">
+                <tr>
+                    <td>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Enter your Username</mat-label>
+                            <input matInput placeholder="Username" [formControlName]="'username'" required>
+                            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+                            <mat-hint>Username must be unique</mat-hint>
+                        </mat-form-field>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <mat-form-field appearance="outline">
+                                <mat-label>Enter your Password</mat-label>
+                            <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'"
+                                [formControlName]="'password'" required>
+                            <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </mat-form-field>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-raised-button (click)=onSubmit() color="primary">Login</button>
+    </mat-card-actions>
+</mat-card>
+
+<!-- <div *ngIf="isLoggedIn; else loggedOut">
+        User successfully logged in !
+      </div>
+      
+      <ng-template #loggedOut>
+        <div class="row col-sm-6" style="max-width:350px;">
+          <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+            <div class="form-group">
+              <label for="username">Username</label>
+              <input type="text" class="form-control" name="username" [(ngModel)]="form.username" #username="ngModel"
+                required />
+              <div *ngIf="f.submitted && username.invalid">
+                <div *ngIf="username.errors.required">Username is required</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" class="form-control" name="password" [(ngModel)]="form.password" #password="ngModel"
+                required minlength="6" />
+              <div *ngIf="f.submitted && password.invalid">
+                <div *ngIf="password.errors.required">Password is required</div>
+                <div *ngIf="password.errors.minlength">Password must be at least 6 characters</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <button class="btn btn-success">Login</button>
+              <div *ngIf="f.submitted && isLoginFailed" class="alert alert-danger">
+                Login failed: {{errorMessage}}
+              </div>
+            </div>
+          </form>
+          <hr />
+          <p>New to Syscop?</p>
+          <a href="signup" class="btn btn-success" >Sign Up</a>
+          <button type="button" class="btn btn-info" >Click here to SIGN UP!</button>
+        </div>
+      </ng-template> -->

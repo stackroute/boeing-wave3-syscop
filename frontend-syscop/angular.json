@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "frontend-syscop": {
+    "register-front": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/frontend-syscop",
+            "outputPath": "dist/register-front",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -57,18 +57,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "frontend-syscop:build"
+            "browserTarget": "register-front:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "frontend-syscop:build:production"
+              "browserTarget": "register-front:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "frontend-syscop:build"
+            "browserTarget": "register-front:build"
           }
         },
         "test": {
@@ -102,7 +102,7 @@
         }
       }
     },
-    "frontend-syscop-e2e": {
+    "register-front-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "prefix": "",
@@ -111,11 +111,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "frontend-syscop:serve"
+            "devServerTarget": "register-front:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "frontend-syscop:serve:production"
+              "devServerTarget": "register-front:serve:production"
             }
           }
         },
@@ -131,5 +131,5 @@
       }
     }
   },
-  "defaultProject": "frontend-syscop"
+  "defaultProject": "register-front"
 }
