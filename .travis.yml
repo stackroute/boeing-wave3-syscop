@@ -1,19 +1,7 @@
 language: java
-
-jdk: openjdk8
-
+jdk: openjdk11
 cache:
- directories:
- - "$HOME/.m2/repository"
-
+directories:
+- "$HOME/.m2/repository"
 after_success:
-  - mvn clean coveralls:report
-
-# addons:
-#   sonarcloud:
-#     organization: "stackroute"
-#     token:
-#       secure: "0.............="
-
-# script:
-#   - sonar-scanner
+- bash <(curl -s https://codecov.io/bash)
