@@ -10,6 +10,8 @@ export class UserService {
   public url = 'http://172.23.239.170:8096/api/v1/register';
   public userUrl = 'http://172.23.239.148:8090/api/test/user';
 
+
+
   constructor(private http: HttpClient) { }
   saveUser(user: any) {
     this.http.post(this.url, user, {responseType: 'text'} ).subscribe((data) => {

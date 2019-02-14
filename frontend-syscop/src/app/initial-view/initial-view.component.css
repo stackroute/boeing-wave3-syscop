@@ -12,7 +12,8 @@
   /* Control the left side */
   .left {
     left: 0;
-    background-color: deepskyblue;
+    background-color:  rgba(20,30,45,1);
+    color: white;
   }
   
   /* Control the right side */
@@ -30,7 +31,7 @@
     text-align: center;
   }
   .log,.sign{
-    background:  deepskyblue;
+    background:  rgba(20,30,45,1);
     color:white;
     width: 25rem;
     height:2rem;

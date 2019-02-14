@@ -1,34 +1,4 @@
-// import { Component, OnInit } from '@angular/core';
-// import { FormGroup, FormControl, Validators } from '@angular/forms';
-// import { UserService } from '../user.service';
 
-// @Component({
-//   selector: 'app-login',
-//   templateUrl: './login.component.html',
-//   styleUrls: ['./login.component.css']
-// })
-// export class LoginComponent implements OnInit {
-
-//   myForm: FormGroup;
-//   constructor(private userService: UserService) { }
-
-//   ngOnInit() {
-//     this.myForm = new FormGroup({
-//       username: new FormControl('', [Validators.required ]),
-//       password: new FormControl('', [Validators.required ]),
-//    });
-//   }
-//   onSubmit() {
-//     // stop print if form is invalid
-//     if (this.myForm.invalid) {
-//       console.log('register form is invalid ');
-//       return;
-//     }
-//     console.log('registerForm.value : ', this.myForm.value);
-//     this.userService.saveUser(this.myForm.value);
-//   }
-
-// }
 import { Component, OnInit } from '@angular/core';
 
 import { AuthService } from '../auth/auth.service';
@@ -84,7 +54,7 @@ export class LoginComponent implements OnInit {
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.roles = this.tokenStorage.getAuthorities();
-        this.router.navigateByUrl('/home');
+        this.router.navigateByUrl('home');
       },
       error => {
         console.log(error);
