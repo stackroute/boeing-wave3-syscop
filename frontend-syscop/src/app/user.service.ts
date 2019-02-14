@@ -7,8 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class UserService {
 
-  public url = 'http://172.23.239.170:8096/api/v1/register';
-  public userUrl = 'http://172.23.239.148:8090/api/test/user';
+  public url = 'http://localhost:8095/register-service/api/v1/register';
 
 
 
@@ -20,9 +19,7 @@ export class UserService {
 
     console.log(user);
   }
-  getUserBoard(): Observable<string> {
-    return this.http.get(this.userUrl, { responseType: 'text' });
-  }
+
   // getUsers(): Observable<User[]> {
   //   return this
   //          .http

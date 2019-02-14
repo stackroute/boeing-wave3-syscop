@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  hide;
   form: any = {};
   isLoggedIn = false;
   isLoginFailed = false;

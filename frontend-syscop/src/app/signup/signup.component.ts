@@ -8,6 +8,7 @@ import { FormControl, Validators, FormGroup } from '@angular/forms';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
+  hide;
   myForm: FormGroup;
   constructor(private userService: UserService) { }
 

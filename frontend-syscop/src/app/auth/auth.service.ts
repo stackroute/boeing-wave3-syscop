@@ -18,8 +18,7 @@ export class AuthService {
   // private loginUrl = 'http://13.232.165.99:8090/api/auth/signin';
   // private signupUrl = 'http://13.232.165.99:8090/api/auth/signup';
 
-  public loginUrl = 'http://172.23.239.148:8090/api/auth/signin';
-  public signupUrl = 'http://172.23.239.148:8090/api/auth/signup';
+  public loginUrl = 'http://localhost:8095/login-service/api/auth/signin';
 
   constructor(private http: HttpClient) {
   }
@@ -28,7 +27,4 @@ export class AuthService {
     return this.http.post<JwtResponse>(this.loginUrl, credentials, httpOptions);
   }
 
-  signUp(info: SignUpInfo): Observable<string> {
-    return this.http.post<string>(this.signupUrl, info, httpOptions);
-  }
 }
