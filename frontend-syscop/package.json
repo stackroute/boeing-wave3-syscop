@@ -22,6 +22,8 @@
     "@angular/platform-browser": "~7.2.0",
     "@angular/platform-browser-dynamic": "~7.2.0",
     "@angular/router": "~7.2.0",
+    "babel-preset-es2015": "^6.24.1",
+    "canvasjs": "^1.8.1",
     "core-js": "^2.5.4",
     "d3": "^5.9.1",
     "hammerjs": "^2.0.8",

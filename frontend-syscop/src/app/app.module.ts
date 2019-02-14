@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { MatTabsModule, MatSidenavModule, MatToolbarModule, MatIconModule,
-  MatButtonModule, MatListModule, MatNativeDateModule } from '@angular/material';
+  MatButtonModule, MatListModule, MatNativeDateModule, MatGridListModule, MatMenuModule } from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent, } from './app.component';
@@ -20,6 +20,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatBadgeModule } from '@angular/material/badge';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ChartOneComponent } from './chart-one/chart-one.component';
+import { ChartTwoComponent } from './chart-two/chart-two.component';
+import { ChartThreeComponent } from './chart-three/chart-three.component';
+import { ChartFourComponent } from './chart-four/chart-four.component';
 
 
 
@@ -31,6 +35,10 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     InitialViewComponent,
     HomeComponent,
     DashboardComponent,
+    ChartOneComponent,
+    ChartTwoComponent,
+    ChartThreeComponent,
+    ChartFourComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,10 +60,12 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     MatDatepickerModule,
     MatNativeDateModule,
     FlexLayoutModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatGridListModule,
+    MatMenuModule
 
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent ]
 })
 export class AppModule { }

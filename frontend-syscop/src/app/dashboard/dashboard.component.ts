@@ -1,33 +1,36 @@
-import { Component, AfterContentInit } from '@angular/core';
-import * as d3 from 'd3';
+import { Component, OnInit } from '@angular/core';
+import { map } from 'rxjs/operators';
+import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
+import * as CanvasJS from 'src/canvasjs-2.3.1/canvasjs.min.js';
+
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements AfterContentInit {
+export class DashboardComponent implements OnInit {
+  /** Based on the screen size, switch from standard to one column per row */
+  cards = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
+    map(({ matches }) => {
+      if (matches) {
+        return [
+          { title: 'Card 1', cols: 2, rows: 1 },
+          { title: 'Card 2', cols: 2, rows: 1 },
+          { title: 'Card 3', cols: 2, rows: 1 },
+          { title: 'Card 4', cols: 2, rows: 1 }
+        ];
+      }
 
-  title = 'app';
+      return [
+        { title: 'Card 1', cols: 2, rows: 1 },
+        { title: 'Card 2', cols: 2, rows: 1 },
+        { title: 'Card 3', cols: 2, rows: 1 },
+        { title: 'Card 4', cols: 2, rows: 1 }
+      ];
+    })
+  );
 
-
-  radius = 10;
-
-  ngAfterContentInit() {
-    d3.select('p').style('color', 'red');
+  constructor(private breakpointObserver: BreakpointObserver) { }
+  ngOnInit() {}
   }
-
-  colorMe() {
-    d3.select('button').style('color', 'red');
-  }
-
-  clicked(event: any) {
-    d3.select(event.target).append('circle')
-      .attr('cx', event.x)
-      .attr('cy', event.y)
-      .attr('r', () => {
-        return this.radius;
-      })
-      .attr('fill', 'red');
-  }
-
-}

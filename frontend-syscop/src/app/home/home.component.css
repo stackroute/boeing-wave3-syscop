@@ -7,12 +7,12 @@
 }
 
 .sidenav .mat-toolbar {
-  background: rgba(20,30,45,1);
+  background: inherit;
   color: white;
 }
 
 .mat-toolbar.mat-primary {
-  position: sticky;
+  position: fixed;
   top: 0;
   z-index: 1000;
   background: rgba(20,30,45,1);

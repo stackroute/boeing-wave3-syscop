@@ -1,3 +1,26 @@
-<svg width="100%" height="1200" class="mySvg" (click)="clicked($event)">
-    <text x="10" y="20">Click anywhere</text>
-</svg>
+<div class="grid-container">
+  <h1 class="mat-h1">Dashboard</h1>
+  <mat-grid-list cols="2" rowHeight="500px">
+    <mat-grid-tile *ngFor="let card of cards | async;let idx=index" [colspan]="card.cols" [rowspan]="card.rows">
+      <mat-card  class="dashboard-card"*ngIf="idx === 0">
+        <mat-card-content class="dashboard-card-content">
+          <app-chart-three></app-chart-three>
+        </mat-card-content>
+      </mat-card>
+      <mat-card class="dashboard-card"*ngIf="idx === 1">
+        <mat-card-content class="dashboard-card-content">
+          <app-chart-two></app-chart-two>
+        </mat-card-content>
+      </mat-card>
+      <mat-card class="dashboard-card"*ngIf="idx === 2">
+        <mat-card-content class="dashboard-card-content">
+          <app-chart-one></app-chart-one>
+        </mat-card-content>
+      </mat-card>
+      <mat-card class="dashboard-card"*ngIf="idx === 3">
+        <mat-card-content class="dashboard-card-content">
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
