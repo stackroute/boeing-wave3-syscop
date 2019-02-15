@@ -1,0 +1,76 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>io.promagent</groupId>
+    <artifactId>promagent-example</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <name>promagent example</name>
+
+    <packaging>jar</packaging>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.build.outputEncoding>UTF-8</project.build.outputEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <promagent.framework.version>1.0-SNAPSHOT</promagent.framework.version>
+    </properties>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>io.promagent</groupId>
+            <artifactId>promagent-api</artifactId>
+            <version>${promagent.framework.version}</version>
+            <scope>provided</scope> <!-- provided via the system class loader -->
+        </dependency>
+
+        <!-- APIs to be instrumented -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>4.0.1</version>
+            <scope>provided</scope><!-- provided by the Servlet container -->
+        </dependency>
+
+        <!-- tests -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.3.1</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>3.11.0</version>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <finalName>promagent</finalName>
+        <plugins>
+            <plugin>
+                <groupId>io.promagent</groupId>
+                <artifactId>promagent-maven-plugin</artifactId>
+                <version>${promagent.framework.version}</version>
+                <executions>
+                    <execution>
+                        <id>promagent</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>build</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
