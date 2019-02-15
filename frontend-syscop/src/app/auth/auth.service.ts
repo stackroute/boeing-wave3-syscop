@@ -18,7 +18,7 @@ export class AuthService {
   // private loginUrl = 'http://13.232.165.99:8090/api/auth/signin';
   // private signupUrl = 'http://13.232.165.99:8090/api/auth/signup';
 
-  public loginUrl = 'http://localhost:8095/login-service/api/auth/signin';
+  public loginUrl = 'http://13.232.165.99:8095/login-service/api/auth/signin';
 
   constructor(private http: HttpClient) {
   }

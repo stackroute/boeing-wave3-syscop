@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class UserService {
 
-  public url = 'http://localhost:8095/register-service/api/v1/register';
+  public url = 'http://13.232.165.99:8095/register-service/api/v1/register';
 
 
 
