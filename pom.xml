@@ -29,7 +29,6 @@
         <module>eureka-server</module>
         <module>zuul-gatewayservice</module>
         <module>config-server</module>
-        <module>eventbrite-service</module>
     </modules>
     <dependencies>
         <dependency>
