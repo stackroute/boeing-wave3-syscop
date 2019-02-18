@@ -25,12 +25,12 @@ export class HomeComponent implements OnInit {
       username: this.token.getUsername(),
       authorities: this.token.getAuthorities()
     };
-    if (!this.info.token) {
-      this.router.navigateByUrl('login');
-    }
-  }
-  logout() {
-    this.token.signOut();
-    this.router.navigateByUrl('');
-  }
+  //   if (!this.info.token) {
+  //     this.router.navigateByUrl('login');
+  //   }
+   }
+  // logout() {
+  //   this.token.signOut();
+  //   this.router.navigateByUrl('');
+  // }
 }

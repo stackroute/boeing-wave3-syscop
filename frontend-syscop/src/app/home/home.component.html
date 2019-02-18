@@ -47,6 +47,17 @@
         <a ><mat-icon class="example-icon">account_circle</mat-icon></a>
       </mat-toolbar-row>
     </mat-toolbar>
+
+    <md-list ng-repeat="topic in menu.activities">
+
+      <md-list-item md-expando>
+         <md-icon src="{{topic.icon}}"></md-icon>
+        <label>{{topic.title}}</label>
+      </md-list-item>
+   
+   </md-list>
+
+    
     <!-- Add Content Here -->
     <router-outlet></router-outlet>
   </mat-sidenav-content>
