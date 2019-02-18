@@ -32,6 +32,7 @@ import com.grokonez.jwtauthentication.security.jwt.JwtProvider;
 @RequestMapping("/api/auth")
 public class AuthRestAPIs {
 
+
 	@Autowired
 	AuthenticationManager authenticationManager;
 
@@ -78,11 +79,9 @@ public class AuthRestAPIs {
 					HttpStatus.BAD_REQUEST);
 		}
 
-		// Creating user's account
 		User user = new User(signUpRequest.getName(), signUpRequest.getUsername(), signUpRequest.getEmail(),
 				encoder.encode(signUpRequest.getPassword()));
 
-//		Set<String> strRoles = signUpRequest.getRole();
 		Set<String> strRoles = new HashSet<String>();
 		strRoles.add("user");
 		Set<Role> roles = new HashSet<>();
@@ -95,12 +94,7 @@ public class AuthRestAPIs {
 				roles.add(adminRole);
 
 				break;
-//			case "pm":
-//				Role pmRole = roleRepository.findByName(RoleName.ROLE_PM)
-//						.orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
-//				roles.add(pmRole);
-//
-//				break;
+
 			default:
 				Role userRole = roleRepository.findByName(RoleName.ROLE_USER)
 						.orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));

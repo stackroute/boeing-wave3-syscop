@@ -35,8 +35,6 @@ public class KafkaListenerService {
         user.setUsername(strMessage[1].split(":")[1].replace("\"",""));
 //        user.setPassword(strMessage[2].split(":")[1].replace("\"",""));
         user.setPassword(encoder.encode(  (strMessage[2].split(":")[1].replace("\"","")) ) );
-//        System.out.println(user.getName());
-//        System.out.println(user.getEmail());
         System.out.println(user.getUsername());
         System.out.println(user.getPassword());
         userRepository.save(user);
