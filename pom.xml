@@ -29,6 +29,9 @@
         <module>eureka-server</module>
         <module>zuul-gatewayservice</module>
         <module>config-server</module>
+	<module>userservice</module>
+	<module>authentication-service</module>
+	<module>monitoring service</module>
     </modules>
     <dependencies>
         <dependency>
