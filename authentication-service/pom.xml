@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.grokonez</groupId>
 	<artifactId>jwtauthentication</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>v1.0.1-SNAPSHOT</version>
 	<name>jwtauthentication</name>
 	<description>Demo project for Spring Boot</description>
 
