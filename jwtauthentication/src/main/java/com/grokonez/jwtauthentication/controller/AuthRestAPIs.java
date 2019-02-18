@@ -33,20 +33,24 @@ import com.grokonez.jwtauthentication.security.jwt.JwtProvider;
 public class AuthRestAPIs {
 
 
-	@Autowired
-	AuthenticationManager authenticationManager;
+	private AuthenticationManager authenticationManager;
+
+	private UserRepository userRepository;
+
+	private RoleRepository roleRepository;
+
+	private PasswordEncoder encoder;
+
+	private JwtProvider jwtProvider;
 
 	@Autowired
-	UserRepository userRepository;
-
-	@Autowired
-	RoleRepository roleRepository;
-
-	@Autowired
-	PasswordEncoder encoder;
-
-	@Autowired
-	JwtProvider jwtProvider;
+	public AuthRestAPIs(AuthenticationManager authenticationManager, UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder encoder, JwtProvider jwtProvider) {
+		this.authenticationManager = authenticationManager;
+		this.userRepository = userRepository;
+		this.roleRepository = roleRepository;
+		this.encoder = encoder;
+		this.jwtProvider = jwtProvider;
+	}
 
 	@PostMapping("/signin")
 	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginForm loginRequest) {
