@@ -14,6 +14,6 @@ Services and their dbs:
 6. Data Collector Service
 7. Alert Service
 8. Processor Service-Influx
-9. Agent-mongo
-10. Threshold-mongo/sql
+9. Agent Service-mongo
+10. Threshold Service-mongo/sql
 
