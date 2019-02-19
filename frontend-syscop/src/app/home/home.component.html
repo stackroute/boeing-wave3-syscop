@@ -21,6 +21,13 @@
     <mat-sidenav #drawer class="sidenav" fixedInViewport="!(isHandset$ | async)" [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="!(isHandset$ | async)" fixedTopGap="56">
       <mat-nav-list>
+          <a mat-list-item >
+              <span>
+                <mat-icon>assignment</mat-icon>
+              </span>
+              <span> Application Registration </span>
+              
+            </a>
         <a mat-list-item routerLink='dashboard'>
           <span>
             <mat-icon>dashboard</mat-icon>
@@ -53,6 +60,13 @@
         </a>
       </mat-nav-list>
     </mat-sidenav>
+
+    <mat-select >
+      <mat-option >
+        kh
+      </mat-option>
+    </mat-select>
+
     <mat-sidenav-content>
 
       <router-outlet></router-outlet>
