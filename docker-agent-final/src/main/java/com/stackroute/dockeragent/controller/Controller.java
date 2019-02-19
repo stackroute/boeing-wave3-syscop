@@ -18,14 +18,6 @@ import java.util.List;
 @RequestMapping("/docker")
 public class Controller {
 
-//    @Autowired
-//    private Metrics metrics;
-
-//    @Autowired
-//    public Controller(Metrics metrics) {
-//        this.metrics = metrics;
-//    }
-
     @GetMapping("/stats")
     public ResponseEntity<?> getMetrics() throws IOException
     {
@@ -41,7 +33,6 @@ public class Controller {
         // starting the process
         Process process = pb.start();
         BufferedReader stdInput = new BufferedReader(new InputStreamReader(process.getInputStream()));
-//        System.out.println(stdInput.readLine());
 
         String s = null;
         String temp="";
@@ -49,7 +40,6 @@ public class Controller {
         int f=0;
         List<Metrics> metricsList = new ArrayList<>();
 
-//        System.out.println("here is the string array");
         while ((s = stdInput.readLine()) != null)
         {
 
@@ -60,10 +50,7 @@ public class Controller {
                 Metrics metrics = new Metrics();
 
                 String[] str =s.trim().split("\\s+");
-//                System.out.println("String[] : " + str);
-//                System.out.println("length ==="+str.length);
 
-                  //  System.out.println(str[i]);
                     metrics.setContainerId(str[0]);
                     metrics.setContainerName(str[1]);
                     metrics.setCpu(str[2]);
@@ -71,14 +58,12 @@ public class Controller {
                     metrics.setNetIO(str[7]+str[8]+str[9]);
                     metrics.setBlockIO(str[10]+str[10]+str[12]);
                     metrics.setpId(str[13]);
-                //System.out.println("Metrics : " + metrics.toString());
+
                 metricsList.add(metrics);
             }
             f++;
-
-            //System.out.println("jjjjjjjjjjjjjjjjjjjjjjjjjj");
         }
-//        System.out.println(metricsList.toString());
+
         for(Metrics model : metricsList) {
             System.out.println(model);
         }
@@ -86,17 +71,3 @@ public class Controller {
     }
 
 }
-//        01ba60de2082
-//        elegant_mclaren
-//        5.04%
-//        1.985GiB
-//        /
-//        15.54GiB
-//        12.77%
-//        807MB
-//        /
-//        809MB
-//        9.49MB
-//        /
-//        1.32GB
-//        307

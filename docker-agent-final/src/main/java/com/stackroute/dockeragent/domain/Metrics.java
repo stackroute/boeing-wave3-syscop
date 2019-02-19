@@ -1,10 +1,6 @@
 package com.stackroute.dockeragent.domain;
 
-import org.springframework.stereotype.Component;
-
-@Component
 public class Metrics {
-
 
     private String containerId;
     private String containerName;
