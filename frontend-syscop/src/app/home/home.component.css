@@ -6,11 +6,6 @@
   width: 200px;
 }
 
-.sidenav .mat-toolbar {
-  background: inherit;
-  color: white;
-}
-
 .mat-toolbar.mat-primary {
   position: fixed;
   top: 0;
@@ -18,7 +13,7 @@
   background: rgba(20,30,45,1);
 }
 .sidenav{
-  background: rgba(20,30,45,0.5);
+  background: inherit;
   color: white;
 }
 .example-icon {
