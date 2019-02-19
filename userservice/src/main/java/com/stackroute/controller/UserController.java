@@ -18,13 +18,13 @@ public class UserController {
 
     private static final String TOPIC = "Kafka_NewUser_Registration";
     private UserService userService;
-    @Autowired
-   private KafkaTemplate<String, User> kafkaTemplate;
+    private KafkaTemplate<String, User> kafkaTemplate;
 
     @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
     }
+
 
 //Request mapping for posting user details
     @PostMapping("register")
