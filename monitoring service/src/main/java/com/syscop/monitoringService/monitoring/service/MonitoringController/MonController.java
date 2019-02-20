@@ -34,8 +34,6 @@ public class MonController {
     public ResponseEntity<?> getMonitorData(){
 
         System.out.println (monitor);
-        //List<Monitor> allObjects= kafkaListenerSer.toString ();
-        //return new ResponseEntity<>(monitor.toString (), HttpStatus.OK);
         return new ResponseEntity<>(monitor, HttpStatus.OK);
 
     }

@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { MatTabsModule, MatSidenavModule, MatToolbarModule, MatIconModule,
-  MatButtonModule, MatListModule, MatNativeDateModule, MatGridListModule, MatMenuModule } from '@angular/material';
+  MatButtonModule, MatListModule, MatNativeDateModule, MatGridListModule, MatMenuModule, MatSelectModule } from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent, } from './app.component';
@@ -63,7 +63,8 @@ import { ChartFourComponent } from './chart-four/chart-four.component';
     MatBadgeModule,
     MatGridListModule,
     MatMenuModule,
-    MatGridListModule
+    MatGridListModule,
+    MatSelectModule
 
   ],
   providers: [],
