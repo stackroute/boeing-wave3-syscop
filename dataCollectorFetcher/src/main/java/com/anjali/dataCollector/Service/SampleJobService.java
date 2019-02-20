@@ -1,5 +1,7 @@
 package com.anjali.dataCollector.Service;
 
+import com.anjali.dataCollector.FactoryModel.MetricFactory;
+import com.anjali.dataCollector.MetricModel.MetricInterface;
 import com.anjali.dataCollector.Model.AgentUrl;
 import com.anjali.dataCollector.Model.DataCollectorModel;
 import org.slf4j.Logger;
@@ -13,14 +15,22 @@ public class SampleJobService {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 
-    @Autowired
     private AgentUrl agentUrl;
 
-    @Autowired
     private DataCollectorModel dataCollectorModel;
 
-    @Autowired
     private KafkaTemplate<String, String> kafkaTemplate;
+
+    private MetricFactory metricFactory;
+    private MetricInterface metricObject;
+
+    @Autowired
+    public SampleJobService(AgentUrl agentUrl, DataCollectorModel dataCollectorModel, KafkaTemplate<String, String> kafkaTemplate, MetricFactory metricFactory) {
+        this.agentUrl = agentUrl;
+        this.dataCollectorModel = dataCollectorModel;
+        this.kafkaTemplate = kafkaTemplate;
+        this.metricFactory = metricFactory;
+    }
 
     private static final String TOPIC = "Kafka_Example_Test_Final";
 
@@ -32,7 +42,12 @@ public class SampleJobService {
 
         agentUrl.setUrl ("http://172.23.239.162:8020/docker/stats");
         String response = dataCollectorModel.getMetrics (agentUrl.getUrl());
-        kafkaTemplate.send(TOPIC, response);
+
+        metricObject = metricFactory.createObject ("dockermetric");
+
+        metricObject.parse (response);
+
+        kafkaTemplate.send(TOPIC, metricObject.toString ());
 
 //        End Of Job
         try {

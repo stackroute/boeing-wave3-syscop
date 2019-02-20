@@ -10,7 +10,7 @@ public class DockerMetric implements MetricInterface {
     DataCollectorModel dataCollectorModel;
 
     @Override
-    public void parse() {
+    public void parse(String agentType) {
 
 
 
