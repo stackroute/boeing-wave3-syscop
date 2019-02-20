@@ -34,15 +34,9 @@ public class KafkaListenerSer {
 
         ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
         String json = ow.writeValueAsString(strMessage);
-//
-//        userRepository.save(user);
-//        System.out.println("New Message");
 
-       // System.out.println("Consumed msg : " + message);
 
     }
 
 
 }
-
-//{"id":"5c62ba2be20e7a15998003d3","username":"phone1","password":"123phone","phoneNumber":"9090909099","email":"swetha96devi@gmail.com","company":"BOEING","dob":"29/2/1996","roles":[]}
