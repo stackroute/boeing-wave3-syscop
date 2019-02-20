@@ -24,6 +24,7 @@ import { ChartOneComponent } from './chart-one/chart-one.component';
 import { ChartTwoComponent } from './chart-two/chart-two.component';
 import { ChartThreeComponent } from './chart-three/chart-three.component';
 import { ChartFourComponent } from './chart-four/chart-four.component';
+import { AppRegistrationComponent } from './app-registration/app-registration.component';
 
 
 
@@ -39,6 +40,7 @@ import { ChartFourComponent } from './chart-four/chart-four.component';
     ChartTwoComponent,
     ChartThreeComponent,
     ChartFourComponent,
+    AppRegistrationComponent,
   ],
   imports: [
     BrowserModule,
