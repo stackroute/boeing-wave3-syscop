@@ -62,7 +62,8 @@ import { ChartFourComponent } from './chart-four/chart-four.component';
     FlexLayoutModule,
     MatBadgeModule,
     MatGridListModule,
-    MatMenuModule
+    MatMenuModule,
+    MatGridListModule
 
   ],
   providers: [],
