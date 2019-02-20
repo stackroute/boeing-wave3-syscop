@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
+import java.util.TimerTask;
+
 @Service
-public class KafkaListenerService {
+public class KafkaListenerService  {
 
 
 //    @KafkaListener(topics = "Kafka_Example_Test_Final", groupId = "group_id")
@@ -17,6 +19,8 @@ public class KafkaListenerService {
 //
 //        System.out.println(message);
 //    }
+    //long startTimer = System.currentTimeMillis();
+    int counter = 0;
     @Autowired
     private InfluxServiceImpl influxService;
 
@@ -26,6 +30,7 @@ public class KafkaListenerService {
     @KafkaListener(topics = "Kafka_Example_Test_Final", groupId = "group_id2")
     public void consume(String message) throws JsonProcessingException {
         System.out.println("Consumed msg : " + message);
+
 
 
         String[] strMessage = message.split(",");
@@ -39,9 +44,15 @@ public class KafkaListenerService {
         metrics.setpId (strMessage[6].split(":")[1].replace("\"","").replace("}]"," "));
 
         System.out.println("Saving Metrics");
+        counter++;
+        System.out.println(counter);
 
-        influxService.saveMetrics(metrics);
-        System.out.println("Mereics Saved");
+       //while(System.currentTimeMillis() - startTimer < 100000) {
+        if(counter <= 10) {
+            influxService.saveMetrics(metrics);
+            System.out.println("Metrics Saved");
+            //}
+        }
 
         System.out.println(metrics.toString ());
 
