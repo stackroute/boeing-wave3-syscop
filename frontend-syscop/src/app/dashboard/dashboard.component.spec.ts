@@ -10,6 +10,7 @@ import {
 } from '@angular/material';
 
 import { DashboardComponent } from './dashboard.component';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
@@ -18,6 +19,7 @@ describe('DashboardComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [DashboardComponent],
+      schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
       imports: [
         NoopAnimationsModule,
         LayoutModule,

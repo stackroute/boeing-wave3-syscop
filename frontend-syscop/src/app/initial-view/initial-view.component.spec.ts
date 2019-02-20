@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { InitialViewComponent } from './initial-view.component';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('InitialViewComponent', () => {
   let component: InitialViewComponent;
@@ -8,7 +9,8 @@ describe('InitialViewComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ InitialViewComponent ]
+      declarations: [ InitialViewComponent ],
+      schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
     })
     .compileComponents();
   }));

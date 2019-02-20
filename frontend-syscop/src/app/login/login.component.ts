@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   hide;
-  form: any = {};
+  form: FormGroup;
   isLoggedIn = false;
   isLoginFailed = false;
   errorMessage = '';
