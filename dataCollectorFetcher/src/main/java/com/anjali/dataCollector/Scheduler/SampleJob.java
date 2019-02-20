@@ -24,7 +24,6 @@ public class SampleJob implements Job {
 
 
         logger.info("Next job scheduled @ {}", context.getNextFireTime());
-        logger.info("-------------anjali--------------");
 
     }
 }

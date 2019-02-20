@@ -26,7 +26,7 @@ public class SampleJobService {
 
     public void executeSampleJob() {
 
-        logger.info("The sample job has begun...");
+        logger.info("The docker job has begun...");
 
 //        Start Of Job
 
@@ -40,7 +40,7 @@ public class SampleJobService {
         } catch (InterruptedException e) {
             logger.error("Error while executing sample job", e);
         } finally {
-            logger.info("------------Sample job has finished-----------");
+            logger.info("---------The docker job has finished-----------");
         }
     }
 }

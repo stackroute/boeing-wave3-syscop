@@ -1,9 +1,9 @@
 package com.anjali.dataCollector.Controller;
 
-import com.anjali.dataCollector.Model.AgentUrl;
+//import com.anjali.dataCollector.Model.AgentUrl;
 import com.anjali.dataCollector.Model.DataCollectorModel;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+//import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.*;
@@ -23,11 +23,6 @@ public class dataCollectorController {
     @Autowired
     public dataCollectorController(DataCollectorModel dataCollectorModel) {
         this.dataCollectorModel = dataCollectorModel;
-    }
-
-    @GetMapping("hi")
-    public ResponseEntity<?> check(){
-        return new ResponseEntity<String> ("Hello", HttpStatus.OK);
     }
 
 //    @PostMapping("api")
