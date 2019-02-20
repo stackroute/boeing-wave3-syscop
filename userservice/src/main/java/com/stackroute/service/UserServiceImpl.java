@@ -15,9 +15,6 @@ public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;
 
-//    @Autowired
-//    private PasswordEncoder passwordEncoder;
-
     @Autowired
     public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -29,8 +26,7 @@ public class UserServiceImpl implements UserService {
 
             throw new UserAlreadyExistsException("User already exists");
         }
-        //Encrypting password
-       // user.setPassword(passwordEncoder.encode(user.getPassword()));
+
         User user1 = userRepository.save(user);
         if (user1 == null) {
             throw new UserAlreadyExistsException("User already exists!!try to register new user");

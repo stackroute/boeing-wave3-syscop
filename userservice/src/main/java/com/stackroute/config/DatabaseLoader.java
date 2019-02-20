@@ -19,21 +19,21 @@ public abstract class DatabaseLoader implements ApplicationListener<ContextRefre
 
 
 
-    @Value(("${id1}"))
+    @Value(("${id2}"))
     private String id1;
-    @Value("${username1}")
+    @Value("${username2}")
     private String username1;
-    @Value("${password1}")
+    @Value("${password2}")
     private String password1;
-    @Value("{phonenumber1}")
+    @Value("{phonenumber2}")
     private  String phonenumber1;
-    @Value("${emailid1}")
+    @Value("${emailid2}")
     private String emailId1;
-    @Value("{organisationname1}")
+    @Value("{organisationname2}")
     private String company1;
-    @Value("{dob1}")
+    @Value("{dob2}")
     private  String dob1;
-    @Value("${role1}")
+    @Value("${role2}")
     private String role1;
 
 
@@ -42,6 +42,7 @@ public abstract class DatabaseLoader implements ApplicationListener<ContextRefre
 
     @Override
     public void onApplicationEvent(final ContextRefreshedEvent event){
+        System.out.println("");
         seedData();
     }
 
@@ -55,6 +56,7 @@ public abstract class DatabaseLoader implements ApplicationListener<ContextRefre
         user2.setCompany(company1);
         user2.setDob(dob1);
         userRepository.save(user2);
+        System.out.println("gogogogogo: ====>"+username1);
         }
 
 
