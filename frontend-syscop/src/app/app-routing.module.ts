@@ -5,6 +5,7 @@ import { SignupComponent } from './signup/signup.component';
 import { InitialViewComponent } from './initial-view/initial-view.component';
 import { HomeComponent } from './home/home.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { AppRegistrationComponent } from './app-registration/app-registration.component';
 
 const routes: Routes = [
   {path: '', component: InitialViewComponent},
@@ -14,6 +15,7 @@ const routes: Routes = [
     component: HomeComponent,
     children: [
       {path: 'dashboard', component: DashboardComponent },
+      {path: 'appRegistration', component: AppRegistrationComponent }
     ]
   },
 ];
