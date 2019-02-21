@@ -22,6 +22,7 @@ public class InfluxController {
         this.influxService = influxService;
     }
 
+    //Controller Test Method to check data persistence in InfluxDB
     @PostMapping(value = "data")
     public ResponseEntity<?> saveData(@RequestBody Person person) {
         System.out.println(person.getName() + "######");

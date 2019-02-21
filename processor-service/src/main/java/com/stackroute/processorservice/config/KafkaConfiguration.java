@@ -12,6 +12,8 @@ import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import java.util.HashMap;
 import java.util.Map;
 
+
+//Kafka Configuration Class to make the service a Kafka Listener
 @EnableKafka
 @Configuration
 public class KafkaConfiguration {

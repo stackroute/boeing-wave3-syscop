@@ -2,12 +2,18 @@ package com.stackroute.processorservice.model;
 
 import org.springframework.stereotype.Component;
 
-
-
+/*Metrics POJO to identify the incoming metrics data from data-collector service.
+The data corresponds to the metrics collected by the docker-agent.*/
 @Component
 public class Metrics {
 
     private String containerId;
+    private String containerName;
+    private String cpu;
+    private String mem;
+    private String netIO;
+    private String blockIO;
+    private String pId;
 
     public String getContainerId() {
         return containerId;
@@ -65,12 +71,7 @@ public class Metrics {
         this.pId = pId;
     }
 
-    private String containerName;
-    private String cpu;
-    private String mem;
-    private String netIO;
-    private String blockIO;
-    private String pId;
+
 
     public Metrics()
     {
