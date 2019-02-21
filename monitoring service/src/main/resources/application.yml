@@ -1,0 +1,11 @@
+server:
+  port: 8018
+
+spring:
+  influxdb:
+    url: http://localhost:8086
+    username: admin
+    password: admin
+    database: mydb
+    retention-policy: autogen
+    series: flux

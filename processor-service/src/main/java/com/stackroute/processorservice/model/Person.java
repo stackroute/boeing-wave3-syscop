@@ -1,5 +1,7 @@
 package com.stackroute.processorservice.model;
 
+
+/*This is a test POJO created to check persistence of data in InfluxDB*/
 public class Person {
 
     private String name;
