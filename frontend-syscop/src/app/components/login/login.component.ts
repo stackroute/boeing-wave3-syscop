@@ -1,11 +1,10 @@
 
 import { Component, OnInit } from '@angular/core';
-
-import { AuthService } from '../auth/auth.service';
-import { TokenStorageService } from '../auth/token-storage.service';
-import { AuthLoginInfo } from '../auth/login-info';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthLoginInfo } from 'src/app/auth/login-info';
+import { AuthService } from 'src/app/auth/auth.service';
+import { TokenStorageService } from 'src/app/auth/token-storage.service';
 
 @Component({
   selector: 'app-login',

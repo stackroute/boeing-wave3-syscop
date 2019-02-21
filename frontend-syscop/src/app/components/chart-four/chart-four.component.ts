@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import * as $ from 'jquery';
 import * as CanvasJS from 'src/canvasjs-2.3.1/canvasjs.min.js';
 import { Observable } from 'rxjs';
-import { UserService } from '../service/user.service';
+import { UserService } from 'src/app/service/user.service';
 
 @Component({
   selector: 'app-chart-four',
@@ -29,7 +29,8 @@ export class ChartFourComponent implements OnInit {
         dataPoints: dataPoints,
       }]
     });
-    $.getJSON('http://172.23.239.170:9999/api/v1/data', function (data) {
+    /*Url of datasource */
+    $.getJSON('', function (data) {
       $.each(data, function () {
         dataPoints.push({y: parseFloat(data.netIO)});
         console.log('netIO' + data.netIO);
@@ -38,8 +39,9 @@ export class ChartFourComponent implements OnInit {
       chart.render();
       updateChart();
     });
+    /*Url of datasource */
     function updateChart() {
-      $.getJSON('http://172.23.239.170:9999/api/v1/data' , function (data) {
+      $.getJSON('' , function (data) {
         $.each(data, function () {
           dataPoints.push({
             y: parseFloat(data.netIO)

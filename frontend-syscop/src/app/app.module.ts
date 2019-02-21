@@ -5,12 +5,9 @@ import { MatTabsModule, MatSidenavModule, MatToolbarModule, MatIconModule,
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent, } from './app.component';
-import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
-import { InitialViewComponent } from './initial-view/initial-view.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutModule } from '@angular/cdk/layout';
-import { HomeComponent } from './home/home.component';
 import { MatFormFieldModule, MatError } from '@angular/material/form-field';
 import { MatCardModule} from '@angular/material/card';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -19,14 +16,18 @@ import { MatDatepickerModule} from '@angular/material/datepicker';
 import { HttpClientModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatBadgeModule } from '@angular/material/badge';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { ChartOneComponent } from './chart-one/chart-one.component';
-import { ChartTwoComponent } from './chart-two/chart-two.component';
-import { ChartThreeComponent } from './chart-three/chart-three.component';
-import { ChartFourComponent } from './chart-four/chart-four.component';
-import { AppRegistrationComponent } from './app-registration/app-registration.component';
-
-
+import { MatTableModule } from '@angular/material/table';
+import { MatRadioModule } from '@angular/material/radio';
+import { LoginComponent } from './components/login/login.component';
+import { InitialViewComponent } from './components/initial-view/initial-view.component';
+import { HomeComponent } from './components/home/home.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { ChartOneComponent } from './components/chart-one/chart-one.component';
+import { ChartTwoComponent } from './components/chart-two/chart-two.component';
+import { ChartThreeComponent } from './components/chart-three/chart-three.component';
+import { ChartFourComponent } from './components/chart-four/chart-four.component';
+import { AppRegistrationComponent } from './components/app-registration/app-registration.component';
+import { MydialogComponent } from './components/mydialog/mydialog.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { AppRegistrationComponent } from './app-registration/app-registration.co
     ChartThreeComponent,
     ChartFourComponent,
     AppRegistrationComponent,
+    MydialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -66,10 +68,14 @@ import { AppRegistrationComponent } from './app-registration/app-registration.co
     MatGridListModule,
     MatMenuModule,
     MatGridListModule,
+    MatSelectModule,
+    MatTableModule,
+    MatRadioModule,
     MatSelectModule
 
   ],
   providers: [],
-  bootstrap: [AppComponent ]
+  bootstrap: [AppComponent ],
+  entryComponents : [MydialogComponent]
 })
 export class AppModule { }

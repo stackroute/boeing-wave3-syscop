@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import * as $ from 'jquery';
 import * as CanvasJS from 'src/canvasjs-2.3.1/canvasjs.min.js';
-import { UserService } from '../service/user.service';
 import { Observable } from 'rxjs';
+import { UserService } from 'src/app/service/user.service';
 
 @Component({
   selector: 'app-chart-three',
