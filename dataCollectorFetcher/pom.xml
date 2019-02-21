@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.anjali</groupId>
 	<artifactId>dataCollector</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>v1.0.1-SNAPSHOT</version>
 	<name>dataCollectorFetcher</name>
 	<description>Data collector Service</description>
 
