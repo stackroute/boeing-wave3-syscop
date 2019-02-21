@@ -15,7 +15,7 @@
  */
 package com.syscop.monitoringService.monitoring.service.influxdb;
 
-import com.stackroute.processorservice.influxdb.converter.PointConverter;
+import com.syscop.monitoringService.monitoring.service.influxdb.converter.PointConverter;
 import org.influxdb.dto.Point;
 
 public class DefaultInfluxDBTemplate extends InfluxDBTemplate<Point>
