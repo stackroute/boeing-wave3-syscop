@@ -5,11 +5,10 @@ import com.stackroute.processorservice.model.Metrics;
 import com.stackroute.processorservice.model.Person;
 import org.influxdb.dto.Point;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
-
 import java.util.concurrent.TimeUnit;
 
+/*Service implementation for dtoring data in influxDB*/
 @Service
 public class InfluxServiceImpl implements InfluxService {
 
@@ -23,6 +22,8 @@ public class InfluxServiceImpl implements InfluxService {
 
     @Override
 
+
+    //Stores a Person data in influxDB
     public Person savePerson(Person person) {
 
         System.out.println("Saving Person");
@@ -42,7 +43,7 @@ public class InfluxServiceImpl implements InfluxService {
         System.out.println("Saved Person");
         return person1;
     }
-
+    //Stores metrics data in the InfluxDB
     public Metrics saveMetrics(Metrics metrics){
 
         System.out.println("Saving Metrics");
