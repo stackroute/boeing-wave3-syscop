@@ -32,6 +32,7 @@
 	<module>userservice</module>
 	<module>jwtauthentication</module>
 	<module>processor-service</module>
+	<module>dataCollector</module>
     </modules>
     <dependencies>
         <dependency>
