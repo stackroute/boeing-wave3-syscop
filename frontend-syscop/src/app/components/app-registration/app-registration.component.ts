@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { MydialogComponent } from '../mydialog/mydialog.component';
+import { AutofillMonitor } from '@angular/cdk/text-field';
+import { AppserviceService } from 'src/app/service/appservice.service';
+import { Application } from 'src/app/models/application';
 export interface PeriodicElement {
   name: string;
   position: number;
@@ -20,18 +23,17 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class AppRegistrationComponent implements OnInit {
 
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol', 'services', 'actions' ];
-  dataSource = ELEMENT_DATA;
+  constructor(public dialog: MatDialog, private appService: AppserviceService) {}
+  APP_DATA: Application[];
+  displayedColumns: string[] = ['appName', 'appType', 'ipAddress', 'services', 'actions' ];
+  dataSource = this.APP_DATA[0];
 
   animal: string;
   name: string;
 
-  constructor(public dialog: MatDialog) {}
-
   addNew(): void {
     const dialogRef = this.dialog.open(MydialogComponent, {
-      width: '400px',
-      data: {name: this.name, animal: this.animal}
+      maxWidth: '400px', maxHeight: '400px'
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -40,6 +42,7 @@ export class AppRegistrationComponent implements OnInit {
     });
   }
   ngOnInit() {
+    this.appService.getApplications();
   }
 
 }

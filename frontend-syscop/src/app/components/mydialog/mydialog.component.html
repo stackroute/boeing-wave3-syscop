@@ -1,19 +1,21 @@
-<div>
+<h2 mat-dialog-title>App Registration</h2>
+<mat-dialog-content>
+  <a href="https://drive.google.com/uc?authuser=0&id=1oh80rRSHFD146x7tE4vysQ6eLh96PVHY&export=download">Click</a>
   <form [formGroup]="appGroup" (ngSubmit)="onSubmit()">
     <table class="example-full-width" cellspacing="0">
       <tr>
         <td>
           <mat-form-field appearance="legacy">
-            <mat-label>Enter your App Name</mat-label>
-            <input matInput placeholder="AppName" formControlName="appname" required>
+            <mat-label>App Name</mat-label>
+            <input matInput placeholder="AppName" formControlName="applicationName" required>
           </mat-form-field>
         </td>
       </tr>
       <tr>
         <td>
           <mat-form-field>
-            <mat-label>Select your App Type</mat-label>
-            <select matNativeControl formControlname="selectFormControl">
+            <mat-label>App Type</mat-label>
+            <select matNativeControl formControlName="applicationType" required>
               <option value="docker">Docker</option>
               <option value="nondDocker">Non-Docker</option>
             </select>
@@ -21,24 +23,78 @@
         </td>
       </tr>
       <tr>
-        <td>
-          <mat-form-field appearance="legacy">
-            <input matInput placeholder="AppName" formControlName="appname" required>
-          </mat-form-field>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <mat-form-field appearance="legacy">
-            <input matInput placeholder="AppName" formControlName="appname" required>
-          </mat-form-field>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <button mat-raised-button (click)=onSubmit() color="primary">Save</button>
-        </td>
-      </tr>
+          <td>
+            <mat-form-field appearance="legacy">
+              <mat-label>Ip Address</mat-label>
+              <input matInput placeholder="Ip Address" formControlName="ipAddress" required>
+            </mat-form-field>
+          </td>
+        </tr>
+      <div formArrayName="services">
+        <div *ngFor="let group of serviceArray.controls;let idx = index">
+          <div [formGroupName]="idx">
+            <table>
+              <tr>
+                <td>
+                  <h3>Service {{idx+1}}</h3>
+                </td>
+                <td>
+                  <button mat-icon-button color="primary" (click)="addService()">
+                    <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+                  </button>
+
+                </td>
+                <td>
+                  <button mat-icon-button color="accent" (click)="removeService()">
+                    <mat-icon aria-label="Delete">delete</mat-icon>
+                  </button>
+
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <mat-form-field appearance="legacy">
+                    <mat-label>Service Name</mat-label>
+                    <input matInput placeholder="ServiceName" formControlName="serviceName" required>
+                  </mat-form-field>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <mat-form-field>
+                    <mat-label>Service Type</mat-label>
+                    <select matNativeControl formControlName="serviceType" required>
+                      <option value="java">Java</option>
+                      <option value="python">Python</option>
+                      <option value="node">Node</option>
+                    </select>
+                  </mat-form-field>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <mat-form-field appearance="legacy">
+                    <mat-label>Port-no.</mat-label>
+                    <input matInput placeholder="Port-no." formControlName="portNumber" required>
+                  </mat-form-field>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
     </table>
   </form>
-</div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <table>
+    <tr>
+      <td>
+        <button mat-raised-button (click)=onSubmit() color="primary">Save</button>
+      </td>
+      <td>
+        <button mat-raised-button (click)=onCancel() color="accent">Cancel</button>
+      </td>
+    </tr>
+  </table>
+</mat-dialog-actions>

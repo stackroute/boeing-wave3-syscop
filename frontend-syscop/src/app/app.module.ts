@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { MatTabsModule, MatSidenavModule, MatToolbarModule, MatIconModule,
   MatButtonModule, MatListModule, MatNativeDateModule, MatGridListModule, MatMenuModule, MatSelectModule } from '@angular/material';
 
@@ -28,6 +28,7 @@ import { ChartThreeComponent } from './components/chart-three/chart-three.compon
 import { ChartFourComponent } from './components/chart-four/chart-four.component';
 import { AppRegistrationComponent } from './components/app-registration/app-registration.component';
 import { MydialogComponent } from './components/mydialog/mydialog.component';
+import { ScrollDispatchModule } from '@angular/cdk/scrolling';
 
 @NgModule({
   declarations: [
@@ -71,9 +72,11 @@ import { MydialogComponent } from './components/mydialog/mydialog.component';
     MatSelectModule,
     MatTableModule,
     MatRadioModule,
-    MatSelectModule
+    MatSelectModule,
+    ScrollDispatchModule
 
   ],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   providers: [],
   bootstrap: [AppComponent ],
   entryComponents : [MydialogComponent]
