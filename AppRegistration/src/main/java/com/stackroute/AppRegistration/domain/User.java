@@ -9,6 +9,14 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 
+/**
+ * User is a domain object thet has list of applications
+ * and username. This class also defines the collection that
+ * is stored in mongo database
+ *
+ * @author Shri Ramya A
+ */
+
 @Document
 @Data
 @Builder

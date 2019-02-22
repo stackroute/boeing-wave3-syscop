@@ -12,6 +12,14 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * ApplicationServiceImpl is a java class that extends the
+ * interface ApplicationService. All the methods defined in the intergace
+ * are implemented in this class
+ *
+ * @author Shri Ramya A
+ */
+
 @Service
 public class ApplicationServiceImpl implements ApplicationService {
 

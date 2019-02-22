@@ -8,6 +8,15 @@ import lombok.NoArgsConstructor;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Application is a domain object class
+ * that has applications' name, type(Docker/non-docker),
+ * ipaddress of the system, application registration
+ * time and date and list of services
+ *
+ * @author Shri Ramya A
+ */
+
 @Data
 @Builder
 @NoArgsConstructor
