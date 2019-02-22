@@ -25,7 +25,8 @@ public class InfluxServiceImpl implements InfluxService {
         System.out.println("Saving Metrics");
         influxDBTemplate.createDatabase();
 
-        Monitor monitor1 =  new Monitor(monitor.getBlockIO(),
+        Monitor monitor1 = new Monitor();
+                monitor1.saveMonitor(monitor.getBlockIO(),
                 monitor.getContainerId(),
                 monitor.getContainerName(),
                 monitor.getCpu(),
