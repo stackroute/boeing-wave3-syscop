@@ -34,8 +34,8 @@ public class DataCollectorModel {
                 while (sc.hasNext ()) {
                     inline += sc.nextLine ();
                 }
-                System.out.println ("\nJSON Response in String format");
-                System.out.println (inline);
+//                System.out.println ("\nJSON Response in String format");
+               // System.out.println (inline);
                 //Close the stream when reading the data has been finished
                 sc.close ();
             }

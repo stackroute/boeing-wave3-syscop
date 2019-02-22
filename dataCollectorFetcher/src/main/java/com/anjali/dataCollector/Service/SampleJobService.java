@@ -32,7 +32,7 @@ public class SampleJobService {
         this.metricFactory = metricFactory;
     }
 
-    private static final String TOPIC = "Kafka_Example_Test_Final";
+    private static final String TOPIC = "Kafka_Example_Test_Final1";
 
     public void executeSampleJob() {
 

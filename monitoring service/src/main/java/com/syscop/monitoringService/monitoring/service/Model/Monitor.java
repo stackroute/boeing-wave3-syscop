@@ -73,7 +73,7 @@ public class Monitor {
     private String blockIO;
     private String pId;
 
-    public Monitor(String containerId, String containerName, String cpu, String mem, String netIO, String blockIO, String pId) {
+    public void saveMonitor(String containerId, String containerName, String cpu, String mem, String netIO, String blockIO, String pId) {
         this.containerId = containerId;
         this.containerName = containerName;
         this.cpu = cpu;
