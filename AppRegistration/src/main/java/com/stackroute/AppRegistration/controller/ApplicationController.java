@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping(value = "syscop/appregistration")
+@RequestMapping(value = "api/v2/syscop/appregistration")
 public class ApplicationController {
 
     private ApplicationService applicationService;
@@ -49,7 +49,7 @@ public class ApplicationController {
         return new ResponseEntity<User>(applicationService.getAllApplications(userName),HttpStatus.OK);
     }
 
-    @PutMapping(value = "update")
+    @PutMapping(value = "updateApp")
     public ResponseEntity<?> updateApplication(@RequestBody User userObj) throws ApplicationDoesNotExistException, JsonProcessingException{
         ResponseEntity responseEntity;
         User resultUserObj = applicationService.updateApplications(userObj);
