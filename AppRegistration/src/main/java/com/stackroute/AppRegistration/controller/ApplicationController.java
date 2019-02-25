@@ -1,5 +1,7 @@
 package com.stackroute.AppRegistration.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.stackroute.AppRegistration.domain.User;
 import com.stackroute.AppRegistration.exceptions.ApplicationAlreadyExistException;
 import com.stackroute.AppRegistration.exceptions.ApplicationDoesNotExistException;
@@ -29,11 +31,17 @@ public class ApplicationController {
     }
 
     @PostMapping(value = "new")
-    public ResponseEntity<?> newAppRegistration(@RequestBody User userObj) throws ApplicationAlreadyExistException{
+    public ResponseEntity<?> newAppRegistration(@RequestBody User userObj) throws ApplicationAlreadyExistException, JsonProcessingException {
         ResponseEntity responseEntity;
         User resultUserObj = applicationService.addApplication(userObj);
 
-        kafkaTemplate.send(TOPIC,resultUserObj.toString());
+
+     //   System.out.println( " $$$$#### ");
+        ObjectMapper obj = new ObjectMapper();
+
+        String jsonStr = obj.writeValueAsString(resultUserObj);
+        System.out.println("####" + jsonStr);
+        kafkaTemplate.send(TOPIC, jsonStr);
         responseEntity = new ResponseEntity<String>("User-Application Registration Successfull", HttpStatus.CREATED);
         return responseEntity;
     }
