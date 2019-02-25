@@ -35,13 +35,10 @@ public class ApplicationController {
         ResponseEntity responseEntity;
         User resultUserObj = applicationService.addApplication(userObj);
 
-
-     //   System.out.println( " $$$$#### ");
         ObjectMapper obj = new ObjectMapper();
-
         String jsonStr = obj.writeValueAsString(resultUserObj);
-        System.out.println("####" + jsonStr);
         kafkaTemplate.send(TOPIC, jsonStr);
+
         responseEntity = new ResponseEntity<String>("User-Application Registration Successfull", HttpStatus.CREATED);
         return responseEntity;
     }
@@ -50,5 +47,18 @@ public class ApplicationController {
     public ResponseEntity<?> showAllRegistrations(@PathVariable (value = "userName") String userName) throws ApplicationDoesNotExistException {
         System.out.println(applicationService.getAllApplications(userName));
         return new ResponseEntity<User>(applicationService.getAllApplications(userName),HttpStatus.OK);
+    }
+
+    @PutMapping(value = "update")
+    public ResponseEntity<?> updateApplication(@RequestBody User userObj) throws ApplicationDoesNotExistException, JsonProcessingException{
+        ResponseEntity responseEntity;
+        User resultUserObj = applicationService.updateApplications(userObj);
+
+        ObjectMapper obj = new ObjectMapper();
+        String jsonStr = obj.writeValueAsString(resultUserObj);
+        //kafkaTemplate.send(TOPIC, jsonStr);
+
+        responseEntity = new ResponseEntity<String>("Application Update Successfull", HttpStatus.OK);
+        return responseEntity;
     }
 }

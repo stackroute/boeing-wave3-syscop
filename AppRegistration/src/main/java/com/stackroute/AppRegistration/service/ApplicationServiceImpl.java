@@ -67,7 +67,24 @@ public class ApplicationServiceImpl implements ApplicationService {
 
     @Override
     public User updateApplications(User userObj) throws ApplicationDoesNotExistException {
-        return null;
+        User savedUser = applicationRepositoryObj.findById(userObj.getUserName()).get();
+        Application appToBeUpdated = userObj.getApplications().get(0);
+        String appNameToCompare = appToBeUpdated.getApplicationName();
+        List<Application> applicationList = savedUser.getApplications();
+        List<Application> updatedListOfApplications = new ArrayList<>();
+        Iterator applicationIterator = applicationList.iterator();
+        while (applicationIterator.hasNext()){
+            Application appToBeComparedWith = (Application) applicationIterator.next();
+            if (appToBeComparedWith.getApplicationName().equals(appNameToCompare)){
+                updatedListOfApplications.add(appToBeUpdated);
+            }
+            else{
+                updatedListOfApplications.add(appToBeComparedWith);
+            }
+        }
+        User updatedUser = new User(userObj.getUserName(),updatedListOfApplications);
+        applicationRepositoryObj.save(updatedUser);
+        return updatedUser;
     }
 
     @Override
