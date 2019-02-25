@@ -33,6 +33,7 @@
 	<module>jwtauthentication</module>
 	<module>processor-service</module>
 	<module>dataCollectorFetcher</module>
+	<module>monitoring-service</module>
     </modules>
     <dependencies>
         <dependency>
