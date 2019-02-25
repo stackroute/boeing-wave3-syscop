@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "syscop/appregistration")
 public class ApplicationController {
 
-    ApplicationService applicationService;
+    private ApplicationService applicationService;
 
     private KafkaTemplate<String,String> kafkaTemplate;
 

@@ -23,7 +23,7 @@ import java.util.List;
 @Service
 public class ApplicationServiceImpl implements ApplicationService {
 
-    ApplicationRepository applicationRepositoryObj;
+    private ApplicationRepository applicationRepositoryObj;
 
     @Autowired
     public ApplicationServiceImpl(ApplicationRepository applicationRepositoryObj) {
