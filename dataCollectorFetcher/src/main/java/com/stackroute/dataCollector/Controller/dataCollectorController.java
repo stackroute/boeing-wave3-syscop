@@ -1,7 +1,7 @@
-package com.anjali.dataCollector.Controller;
+package com.stackroute.dataCollector.Controller;
 
-//import com.anjali.dataCollector.Model.AgentUrl;
-import com.anjali.dataCollector.Model.DataCollectorModel;
+//import AgentUrl;
+import com.stackroute.dataCollector.Model.DataCollectorModel;
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

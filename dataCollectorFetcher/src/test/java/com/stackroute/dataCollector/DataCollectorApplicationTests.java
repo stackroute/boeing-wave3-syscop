@@ -1,4 +1,4 @@
-package com.anjali.dataCollector;
+package com.stackroute.dataCollector;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

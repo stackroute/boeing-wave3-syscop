@@ -1,10 +1,10 @@
-package com.anjali.dataCollector.MetricModel;
+package com.stackroute.dataCollector.MetricModel;
 
 
 import org.springframework.stereotype.Component;
 
 @Component
-public class NodeMetric implements MetricInterface{
+public class JavaMetric implements MetricInterface {
 
     @Override
     public void parse(String agentType) {

@@ -1,4 +1,4 @@
-package com.anjali.dataCollector.MetricModel;
+package com.stackroute.dataCollector.MetricModel;
 
 
 import org.springframework.stereotype.Component;

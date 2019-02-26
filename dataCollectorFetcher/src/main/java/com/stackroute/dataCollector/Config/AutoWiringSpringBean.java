@@ -1,4 +1,4 @@
-package com.anjali.dataCollector.Config;
+package com.stackroute.dataCollector.Config;
 
 //public class AutoWiringSpringBean {
 //}

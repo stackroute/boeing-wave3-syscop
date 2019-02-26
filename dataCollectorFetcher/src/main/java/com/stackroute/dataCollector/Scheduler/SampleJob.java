@@ -1,5 +1,5 @@
-package com.anjali.dataCollector.Scheduler;
-import com.anjali.dataCollector.Service.SampleJobService;
+package com.stackroute.dataCollector.Scheduler;
+import com.stackroute.dataCollector.Service.SampleJobService;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -21,7 +21,6 @@ public class SampleJob implements Job {
         logger.info("Job ** {} ** fired @ {}", context.getJobDetail().getKey().getName(), context.getFireTime());
 
         jobService.executeSampleJob();
-
 
         logger.info("Next job scheduled @ {}", context.getNextFireTime());
 

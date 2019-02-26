@@ -1,9 +1,9 @@
-package com.anjali.dataCollector.Scheduler;
+package com.stackroute.dataCollector.Scheduler;
 
 
 import javax.annotation.PostConstruct;
 
-import com.anjali.dataCollector.Config.AutoWiringSpringBean;
+import com.stackroute.dataCollector.Config.AutoWiringSpringBean;
 import org.quartz.JobDetail;
 import org.quartz.SimpleTrigger;
 import org.quartz.Trigger;

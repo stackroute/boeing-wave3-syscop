@@ -1,6 +1,6 @@
-package com.anjali.dataCollector.MetricModel;
+package com.stackroute.dataCollector.MetricModel;
 
-import com.anjali.dataCollector.Model.DataCollectorModel;
+import com.stackroute.dataCollector.Model.DataCollectorModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
