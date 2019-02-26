@@ -11,14 +11,36 @@ public class JobThreadManager {
 
     @Autowired
     public JobThreadManager(JobQueue jobQueue) {
+
         this.jobQueue = jobQueue;
+
+//        generate dummy data
+        JobModel tmp = new JobModel();
+
+        tmp.setUserId("Vaibhav");
+        tmp.setAgentType("dockermetric");
+        tmp.setAgentAPI("http://blahblah");
+
+        jobQueue.addJob(tmp);
+
+        tmp = new JobModel();
+        tmp.setUserId("Ramu");
+        tmp.setAgentType("dockermetric");
+        tmp.setAgentAPI("http://blahblah");
+
+        jobQueue.addJob(tmp);
     }
 
     public int getThreadCount() {
         return threadCount;
     }
 
-    public void setThreadCount(int threadCount) {
-        this.threadCount = threadCount;
+    public void incThreadCount() {
+        threadCount ++;
     }
+
+    public void decThreadCount() {
+        threadCount --;
+    }
+
 }
