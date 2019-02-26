@@ -21,14 +21,14 @@ public class JobThreadManager {
         tmp.setAgentType("dockermetric");
         tmp.setAgentAPI("http://blahblah");
 
-        jobQueue.addJob(tmp);
+        this.jobQueue.addJob(tmp);
 
         tmp = new JobModel();
         tmp.setUserId("Ramu");
         tmp.setAgentType("dockermetric");
         tmp.setAgentAPI("http://blahblah");
 
-        jobQueue.addJob(tmp);
+        this.jobQueue.addJob(tmp);
     }
 
     public int getThreadCount() {
@@ -41,6 +41,14 @@ public class JobThreadManager {
 
     public void decThreadCount() {
         threadCount --;
+    }
+
+    public void startJob() {
+        if(jobQueue.getSize()>0 && threadCount<maxThread){
+            JobThread newJob = new JobThread(this);
+            newJob.setJobModel(jobQueue.popJob());
+            newJob.run();
+        }
     }
 
 }

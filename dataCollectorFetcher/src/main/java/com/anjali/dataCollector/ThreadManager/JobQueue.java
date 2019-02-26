@@ -16,9 +16,9 @@ public class JobQueue {
 
     }
 
-    public void popJob(JobModel jobModel){
+    public JobModel popJob(){
 
-        queue.remove(jobModel);
+        return queue.remove();
 
     }
 
