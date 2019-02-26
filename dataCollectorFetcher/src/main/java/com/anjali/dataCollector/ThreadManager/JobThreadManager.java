@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class JobThreadManager {
-    private int maxThread = 2;
+    private int maxThread = 1;
     private int threadCount = 0;
     private JobQueue jobQueue;
 
@@ -26,6 +26,13 @@ public class JobThreadManager {
         tmp = new JobModel();
         tmp.setUserId("Ramu");
         tmp.setAgentType("dockermetric");
+        tmp.setAgentAPI("http://blahblah");
+
+        this.jobQueue.addJob(tmp);
+
+        tmp = new JobModel();
+        tmp.setUserId("Shyamu");
+        tmp.setAgentType("javametric");
         tmp.setAgentAPI("http://blahblah");
 
         this.jobQueue.addJob(tmp);
