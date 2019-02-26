@@ -46,8 +46,10 @@ public class JobThreadManager {
     public void startJob() {
         if(jobQueue.getSize()>0 && threadCount<maxThread){
             JobThread newJob = new JobThread(this);
-            newJob.setJobModel(jobQueue.popJob());
+            JobModel newJobModel = jobQueue.popJob();
+            newJob.setJobModel(newJobModel);
             newJob.run();
+            jobQueue.addJob(newJobModel);
         }
     }
 

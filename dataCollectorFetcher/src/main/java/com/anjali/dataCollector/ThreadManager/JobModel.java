@@ -28,4 +28,13 @@ public class JobModel {
     public void setAgentAPI(String agentAPI) {
         this.agentAPI = agentAPI;
     }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "userId='" + userId + '\'' +
+                ", agentType='" + agentType + '\'' +
+                ", agentAPI='" + agentAPI + '\'' +
+                '}';
+    }
 }
