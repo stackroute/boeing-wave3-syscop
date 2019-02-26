@@ -8,7 +8,7 @@
 		<version>v1.0.1-SNAPSHOT</version><!-- lookup parent from repository -->
 	    <relativePath>../pom.xml</relativePath>
 	</parent>
-	<groupId>com.anjali</groupId>
+	<groupId>com.stackroute</groupId>
 	<artifactId>dataCollector</artifactId>
 	<version>v1.0.1-SNAPSHOT</version>
 	<name>dataCollectorFetcher</name>
