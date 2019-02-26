@@ -8,8 +8,8 @@ import { Observable } from 'rxjs';
 })
 export class AppserviceService {
 
-  username = localStorage.getItem('AuthUsername');
-  public url = 'http://172.23.239.160:8888/syscop/appregistration';
+  public username = localStorage.getItem('AuthUsername');
+  public url = 'http://13.232.165.99:8088/api/v2/syscop/appregistration';
 
 
   constructor(private http: HttpClient) { }
@@ -21,14 +21,14 @@ export class AppserviceService {
         app
       ]
     };
-    this.http.post('http://172.23.239.160:8888/syscop/appregistration/new', obj, { responseType: 'text' }).subscribe((data) => {
+    this.http.post(`${this.url}/new`, obj, { responseType: 'text' }).subscribe((data) => {
       console.log(obj);
     });
 
     console.log(obj);
   }
   /*getUserBoard method fetches data from login service*/
-  getApplications(): Observable<Application[]> {
-    return this.http.get<Application[]>('http://172.23.239.160:8888/syscop/appregistration/showApp/username/Ramyaaa', );
+  getApplications(): Observable<Application> {
+    return this.http.get<Application>(`${this.url}/showApp/username/${this.username}` );
   }
 }

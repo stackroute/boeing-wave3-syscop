@@ -1,11 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { MatTabsModule, MatSidenavModule, MatToolbarModule, MatIconModule,
-  MatButtonModule, MatListModule, MatNativeDateModule, MatGridListModule, MatMenuModule, MatSelectModule } from '@angular/material';
+  MatButtonModule, MatListModule, MatNativeDateModule, MatGridListModule,
+  MatMenuModule, MatSelectModule, } from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent, } from './app.component';
-import { SignupComponent } from './signup/signup.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatFormFieldModule, MatError } from '@angular/material/form-field';
@@ -29,6 +29,8 @@ import { ChartFourComponent } from './components/chart-four/chart-four.component
 import { AppRegistrationComponent } from './components/app-registration/app-registration.component';
 import { MydialogComponent } from './components/mydialog/mydialog.component';
 import { ScrollDispatchModule } from '@angular/cdk/scrolling';
+import { SignupComponent } from './components/signup/signup.component';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
   declarations: [
@@ -73,7 +75,8 @@ import { ScrollDispatchModule } from '@angular/cdk/scrolling';
     MatTableModule,
     MatRadioModule,
     MatSelectModule,
-    ScrollDispatchModule
+    ScrollDispatchModule,
+    MatExpansionModule
 
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],

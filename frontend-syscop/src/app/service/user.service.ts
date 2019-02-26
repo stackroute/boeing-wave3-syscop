@@ -7,10 +7,14 @@ import { Observable } from 'rxjs';
 })
 export class UserService {
 
+
+  // public url = 'http://13.232.165.99:8096/register-service/api/v1/register';
+  // public datarUrl: 'http://13.232.165.99:8018/api/v1/data';
+
   /*this url is used for registration service */
   public url = 'http://13.232.165.99:8095/register-service/api/v1/register';
-  /*the userUrlrl is used for login service */
-  userUrl: string;
+  /*the data url is used for getting data from monitoring service */
+  public datarUrl: 'http://13.232.165.99:8018/api/v1/data';
 
 
   constructor(private http: HttpClient) { }
@@ -19,16 +23,11 @@ export class UserService {
     this.http.post(this.url, user, {responseType: 'text'} ).subscribe((data) => {
                console.log(data);
      });
-
     console.log(user);
   }
-
-  /*getUserBoard method fetches data from login service*/
-  getUserBoard(): Observable<string> {
-    return this.http.get(this.userUrl, { responseType: 'text' });
-  }
+  /* getDAta method gets data from monitoring service */
   getData() {
-    return this.http.get('http://172.23.239.170:9999/api/v1/data');
+    return this.http.get(this.datarUrl);
   }
 
 }

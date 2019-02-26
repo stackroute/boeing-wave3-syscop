@@ -1,7 +1,4 @@
 export interface Application {
-    applicationName;
-    applicationType;
-    ipAddress;
-    services: [
-    ];
+    username;
+    applications;
 }
