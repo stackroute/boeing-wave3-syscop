@@ -9,6 +9,7 @@ public class JobThread implements Runnable{
 
     @Autowired
     public JobThread(JobThreadManager jobThreadManager) {
+
         this.jobThreadManager = jobThreadManager;
     }
 
@@ -19,5 +20,6 @@ public class JobThread implements Runnable{
     @Override
     public void run() {
         System.out.println(jobModel.toString());
+        jobThreadManager.decThreadCount();
     }
 }
