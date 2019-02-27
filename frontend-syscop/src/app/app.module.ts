@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { MatTabsModule, MatSidenavModule, MatToolbarModule, MatIconModule,
   MatButtonModule, MatListModule, MatNativeDateModule, MatGridListModule,
-  MatMenuModule, MatSelectModule, } from '@angular/material';
+  MatMenuModule, MatSelectModule, MatPaginatorModule, MatSortModule, } from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent, } from './app.component';
@@ -76,7 +76,9 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MatRadioModule,
     MatSelectModule,
     ScrollDispatchModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatPaginatorModule,
+    MatSortModule
 
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],

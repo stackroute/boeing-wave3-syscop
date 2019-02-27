@@ -3,35 +3,29 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { MydialogComponent } from '../mydialog/mydialog.component';
 import { AppserviceService } from 'src/app/service/appservice.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-];
 
 @Component({
   selector: 'app-app-registration',
   templateUrl: './app-registration.component.html',
   styleUrls: ['./app-registration.component.css'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({ height: '0px', minHeight: '0', visibility: 'hidden' })),
+      state('expanded', style({ height: '*', visibility: 'visible' })),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],
 })
 
 export class AppRegistrationComponent implements OnInit {
 
-  panelOpenState = false;
-
   constructor(public dialog: MatDialog, private appService: AppserviceService) {}
-  APP_DATA;
+
+  panelOpenState = false;
   displayedColumns: string[] = ['applicationName', 'applicationType', 'ipAddress', 'registrationDateandTime', 'services', 'actions' ];
   dataSource ;
-
-  animal: string;
-  name: string;
+  expandedElement: any;
+  isExpansionDetailRow = (i: number, row: Object) => row.hasOwnProperty('detailRow');
 
   addNew(): void {
     const dialogRef = this.dialog.open(MydialogComponent, {
@@ -40,7 +34,6 @@ export class AppRegistrationComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      this.animal = result;
     });
   }
 

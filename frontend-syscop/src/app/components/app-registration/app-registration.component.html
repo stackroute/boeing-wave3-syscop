@@ -48,8 +48,19 @@
                 </button>
             </mat-cell>
         </ng-container>
+        <ng-container matColumnDef="expandedDetail">
+            <mat-cell *matCellDef="let detail"> 
+              The symbol for {{detail.element.applicationName}} is {{detail.element.applicationType}}
+            </mat-cell>
+        </ng-container>
 
+        <!-- <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr> -->
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" matRipple class="element-row" [class.expanded]="expandedElement == row"
+            (click)="expandedElement === row? expandedElement = null : expandedElement = row"></tr>
+        <tr mat-row *matRowDef="let row; columns: ['expandedDetail']; when: isExpansionDetailRow" [@detailExpand]="row.element == expandedElement ? 'expanded' : 'collapsed'"
+            style="overflow: hidden">
+        </tr>
     </table>
 </div>
