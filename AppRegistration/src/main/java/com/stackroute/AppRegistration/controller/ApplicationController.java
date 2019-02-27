@@ -24,6 +24,7 @@ public class ApplicationController {
 
     private static final String TOPIC = "kafkaAppRegistration";
 
+
     @Autowired
     public ApplicationController(ApplicationService applicationService, KafkaTemplate<String, String> kafkaTemplate) {
         this.applicationService = applicationService;
@@ -37,7 +38,7 @@ public class ApplicationController {
 
         ObjectMapper obj = new ObjectMapper();
         String jsonStr = obj.writeValueAsString(resultUserObj);
-        kafkaTemplate.send(TOPIC, jsonStr);
+        //kafkaTemplate.send(TOPIC, jsonStr);
 
         responseEntity = new ResponseEntity<String>("User-Application Registration Successfull", HttpStatus.CREATED);
         return responseEntity;
@@ -60,5 +61,19 @@ public class ApplicationController {
 
         responseEntity = new ResponseEntity<String>("Application Update Successfull", HttpStatus.OK);
         return responseEntity;
+    }
+
+    @DeleteMapping(value = "deleteApp")
+    public ResponseEntity<?> deleteApplication(@RequestBody User userObj) throws ApplicationDoesNotExistException, JsonProcessingException{
+        ResponseEntity responseEntity;
+        User resultUserObj = applicationService.deleteApplication(userObj);
+
+        ObjectMapper obj = new ObjectMapper();
+        String jsonStr = obj.writeValueAsString(resultUserObj);
+        //kafkaTemplate.send(TOPIC, jsonStr);
+
+        responseEntity = new ResponseEntity<String>("Application Deletion Successfull", HttpStatus.OK);
+        return responseEntity;
+
     }
 }

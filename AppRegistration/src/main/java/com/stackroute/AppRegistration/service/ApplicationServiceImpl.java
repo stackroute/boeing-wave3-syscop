@@ -89,6 +89,23 @@ public class ApplicationServiceImpl implements ApplicationService {
 
     @Override
     public User deleteApplication(User userObj) throws ApplicationDoesNotExistException {
-        return null;
+        User savedUser = applicationRepositoryObj.findById(userObj.getUserName()).get();
+        Application appToBedeleted = userObj.getApplications().get(0);
+        String appNameToCompare = appToBedeleted.getApplicationName();
+        List<Application> applicationList = savedUser.getApplications();
+        List<Application> listOfApplicationsAfterDeletion = new ArrayList<>();
+        Iterator applicationIterator = applicationList.iterator();
+        while (applicationIterator.hasNext()){
+            Application appToBeComparedWith = (Application) applicationIterator.next();
+            if (appToBeComparedWith.getApplicationName().equals(appNameToCompare)){
+
+            }
+            else{
+                listOfApplicationsAfterDeletion.add(appToBeComparedWith);
+            }
+        }
+        User updatedUser = new User(userObj.getUserName(),listOfApplicationsAfterDeletion);
+        applicationRepositoryObj.save(updatedUser);
+        return updatedUser;
     }
 }
