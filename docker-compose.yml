@@ -1,58 +1,50 @@
-version: "2"
-services:
-
-  apigateway:
-    image: zuul-service
+--- 
+services: 
+  apigateway: 
     build: zuul-gatewayservice/
-    restart: always
+    depends_on: 
+      - eurekaserver
+    expose: 
+      - 8095
+    image: zuul-service
     network_mode: host
-    depends_on:
-    - eurekaserver
-    ports:
-    - 8095:8095
-    expose:
-    - 8095
-
-  eurekaserver:
-    image: eureka-servcie:latest
+    ports: 
+      - "8095:8095"
+    restart: always
+  eurekaserver: 
     build: eureka-server/
-    restart: always
+    expose: 
+      - 8010
+    image: "eureka-servcie:latest"
     network_mode: host
-    ports:
-    - 8010:8010
-    expose:
-    - 8010
-
-  mongo:
-   image: mongo:3.4-jessie
-   ports:
-   - 27017:27017
-   container_name: mongo_docker
-   restart: always
-   network_mode: host
-   hostname: localhost
-   volumes:
-   - ./data/db:/data/db
-
-
-  music_app:
-    image: appRegistration:latest
-    build: appRegistration/
+    ports: 
+      - "8010:8010"
+    restart: always
+  mongo: 
+    container_name: mongo_docker
+    hostname: localhost
+    image: "mongo:3.4-jessie"
+    network_mode: host
+    ports: 
+      - "27017:27017"
+    restart: always
+    volumes: 
+      - "./data/db:/data/db"
+  music_app: 
+    build: AppRegistration/
     container_name: appRegistration_docker
-    restart: always
+    depends_on: 
+      - mongo
+      - eureka
+      - apigateway
+    expose: 
+      - 8088
+    image: "appRegistration:latest"
     network_mode: host
-    depends_on:
-    - mongo
-    - eureka
-    - apigateway
-    ports:
-    - 8088:8088
-    expose:
-    - 8088
-
- volumes:
-  data:
-
-
-
+    ports: 
+      - "8088:8088"
+    restart: always
+version: "3"
+volumes: 
+  data: ~
 
