@@ -1,5 +1,9 @@
 package com.stackroute.AppRegistration.exceptions;
 
+/**
+ * Custom Exception class thrown when we try to
+ * retrieve non-existing application
+ */
 public class ApplicationDoesNotExistException extends Exception{
 
     private String message;

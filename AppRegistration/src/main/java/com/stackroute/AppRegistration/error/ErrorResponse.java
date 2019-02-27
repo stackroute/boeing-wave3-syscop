@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+//Error response class to facilitate to create global exceptions
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

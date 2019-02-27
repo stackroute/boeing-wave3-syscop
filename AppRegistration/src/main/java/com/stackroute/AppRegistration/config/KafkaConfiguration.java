@@ -14,9 +14,16 @@ import java.util.Map;
 
 //In Order to publish JSON messages below all configuration is required..........for Serialization purpose.
 
+/**
+ * This is a configuration class for kafka
+ */
+
 @Configuration
 public class KafkaConfiguration {
 
+    /**
+     *This methoad provides configuration for kafka
+     */
     @Bean
     public ProducerFactory<String, String> producerFactory() {
         Map<String, Object> config = new HashMap<>();

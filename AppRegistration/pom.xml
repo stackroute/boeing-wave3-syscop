@@ -8,9 +8,7 @@
 		<version>v1.0.2</version><!-- lookup parent from repository -->
 		<relativePath>../pom.xml</relativePath>
 	</parent>
-	<groupId>com.stackroute</groupId>
 	<artifactId>AppRegistration</artifactId>
-	<version>v1.0.2</version>
 	<name>AppRegistration</name>
 	<description>Demo project for Spring Boot</description>
 
@@ -28,10 +26,15 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-		<!--<dependency>-->
-			<!--<groupId>org.springframework.cloud</groupId>-->
-			<!--<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>-->
-		<!--</dependency>-->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.kafka</groupId>
 			<artifactId>spring-kafka</artifactId>
