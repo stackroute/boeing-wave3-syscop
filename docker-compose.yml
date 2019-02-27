@@ -63,6 +63,45 @@ services:
    restart: always
    healthcheck:
     test: "exit 0"
+    
+  data-collector:
+   build: Data-Collector/
+   container_name: datacollector_docker
+   depends_on: 
+      - kafka
+      - eurekaserver
+      - apigateway
+   image: dockercollector:latest
+   network_mode: host
+   ports: 
+     - 8001:8001
+   restart: always
+   healthcheck:
+    test: "exit 0"
+    
+  kafkaservice:
+   image: landoop/fast-data-dev
+   container_name: kfka_docker
+   restart: always
+   network_mode: host
+   hostname: localhost
+   ports:
+    - 2181:2181
+    - 8030:8030
+    - 8081:8081
+    - 8084:8084
+    - 8083:8083
+    - 9092:9092
+   environment:
+    WEB_PORT: 8030
+    REST_PORT: 8084
+    BROKER_PORT: 9092
+    ZK_PORT: 2181
+    CONNECT_PORT: 8083
+    REGISTRY_PORT: 8081
+    ADV_HOST: localhost
+   healthcheck:
+    test: "exit 0"
    
 volumes: 
   data: ~
