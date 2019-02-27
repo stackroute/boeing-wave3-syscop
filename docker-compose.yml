@@ -33,6 +33,19 @@ services:
     restart: always
     volumes: 
       - ./data/db:/data/db
+      
+  mysqldb:
+   image: mysql
+   restart: always
+   environment:
+    MYSQL_ROOT_PASSWORD: root123
+   ports:
+    - 3306:3306
+   network_mode: host
+   hostname: localhost
+   container_name: mysql_docker
+   volumes:
+    - data:/var/lib/mysql
 
   app-registration: 
     build: AppRegistration/
@@ -89,6 +102,21 @@ services:
    network_mode: host
    ports: 
      - 8018:8018
+   restart: always
+   healthcheck:
+    test: "exit 0"
+    
+  login-service:
+   build: jwtauthentication/
+   container_name: login-service_docker
+   depends_on:
+      - mysql
+      - eurekaserver
+      - apigateway
+   image: loginservice:latest
+   network_mode: host
+   ports: 
+     - 8090:8090
    restart: always
    healthcheck:
     test: "exit 0"
