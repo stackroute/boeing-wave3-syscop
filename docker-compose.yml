@@ -68,7 +68,7 @@ services:
    build: Data-Collector/
    container_name: datacollector_docker
    depends_on: 
-      - kafka
+      - kafkaservice
       - eurekaserver
       - apigateway
    image: dockercollector:latest
