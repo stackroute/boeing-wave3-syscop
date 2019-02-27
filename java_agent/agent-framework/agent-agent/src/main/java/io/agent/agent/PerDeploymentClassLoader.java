@@ -7,10 +7,14 @@ import java.net.URLClassLoader;
 /**
  * Class loader for loading Hooks (like ServletHook or JdbcHook).
  * <p/>
+
  * There is one instance per deployment in an application server, because hook classes may
+
  * reference classes from the deployment, e.g. as parameters to the before() and after() methods.
  * <p/>
+
  * However, loading shared classes like the Prometheus client library is delegated to the {@link #sharedClassLoader},
+
  * because the Prometheus metric registry should be accessible across all deployments within an application server.
  */
 class PerDeploymentClassLoader extends URLClassLoader {

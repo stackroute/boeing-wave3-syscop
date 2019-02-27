@@ -15,7 +15,7 @@ import static java.util.stream.Collectors.toList;
 /**
  * Hard-coded list of JAR files that must go into the agent.jar.
  * Versions are resolved through Maven.
- * If the user adds a duplicate JAR with a different version, the plugin fails.
+ .
  */
 class AgentDependencies {
 
