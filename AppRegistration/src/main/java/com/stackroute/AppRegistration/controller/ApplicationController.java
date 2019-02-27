@@ -44,9 +44,12 @@ public class ApplicationController {
         ResponseEntity responseEntity;
         User resultUserObj = applicationService.addApplication(userObj);
 
+
         ObjectMapper obj = new ObjectMapper();
         String jsonStr = obj.writeValueAsString(resultUserObj);
+        System.out.println(jsonStr);
         kafkaTemplate.send(TOPIC, jsonStr);
+
 
         responseEntity = new ResponseEntity<String>("User-Application Registration Successfull", HttpStatus.CREATED);
         return responseEntity;
