@@ -21,6 +21,8 @@ public class SampleJobService {
     private DataCollectorModel dataCollectorModel;
 
     private KafkaTemplate<String, String> kafkaTemplate;
+    private static final String TOPIC = "Kafka_Example_Test_Final1";
+
 
     private MetricFactory metricFactory;
     private MetricInterface metricObject;
@@ -36,7 +38,6 @@ public class SampleJobService {
         this.jobThreadManager = jobThreadManager;
     }
 
-    private static final String TOPIC = "Kafka_Example_Test_Final1";
 
     public void executeSampleJob() {
 
