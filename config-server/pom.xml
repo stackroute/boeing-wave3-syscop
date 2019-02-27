@@ -6,13 +6,13 @@
 	<parent>
 		<groupId>com.stackroute</groupId>
 		<artifactId>syscop</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
+		<version>v1.0.2</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
 	<groupId>com.stackroute</groupId>
 	<artifactId>config-server</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>v1.0.2</version>
 	<name>config-server</name>
 	<description>Demo project for Spring Boot</description>
 
