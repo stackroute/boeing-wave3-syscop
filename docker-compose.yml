@@ -9,9 +9,9 @@ services:
     depends_on:
     - eurekaserver
     ports:
-    - 8092:8092
+    - 8095:8095
     expose:
-    - 8092
+    - 8095
 
   eurekaserver:
     image: eureka-servcie:latest
@@ -19,19 +19,39 @@ services:
     restart: always
     network_mode: host
     ports:
-    - 9091:9091
+    - 8010:8010
     expose:
-    - 9091
+    - 8010
 
-  configserver:
-      image: config-servcie:latest
-      build: config-server/
-      restart: always
-      network_mode: host
-      ports:
-      - 8888:8888
-      expose:
-      - 8888
+  mongo:
+   image: mongo:3.4-jessie
+   ports:
+   - 27017:27017
+   container_name: mongo_docker
+   restart: always
+   network_mode: host
+   hostname: localhost
+   volumes:
+   - ./data/db:/data/db
+
+
+  music_app:
+    image: appRegistration:latest
+    build: appRegistration/
+    container_name: appRegistration_docker
+    restart: always
+    network_mode: host
+    depends_on:
+    - mongo
+    - eureka
+    - apigateway
+    ports:
+    - 8088:8088
+    expose:
+    - 8088
+
+ volumes:
+  data:
 
 
 
