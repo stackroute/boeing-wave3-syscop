@@ -48,6 +48,22 @@ services:
     restart: always
     healthcheck:
      test: "exit 0"
+     
+  user-service:
+   build: userservice/
+   container_name: userservice_docker
+   depends_on: 
+      - mongo
+      - eurekaserver
+      - apigateway
+   image: userservice:latest
+   network_mode: host
+   ports: 
+     - 8096:8096
+   restart: always
+   healthcheck:
+    test: "exit 0"
+   
 volumes: 
   data: ~
 
