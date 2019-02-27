@@ -39,6 +39,8 @@ local.properties
 .factorypath
 .settings
 .mvn
+target
+target/*
 logs
 logs.*
 mvnw
@@ -91,6 +93,7 @@ bin
 ######################
 # Package Files
 ######################
+*.jar
 *.war
 *.ear
 *.db
