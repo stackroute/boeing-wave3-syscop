@@ -4,45 +4,39 @@ services:
     build: zuul-gatewayservice/
     depends_on: 
       - eurekaserver
-    expose: 
-      - 8095
     image: zuul-service
     network_mode: host
     ports: 
-      - "8095:8095"
+      - 8095:8095
     restart: always
   eurekaserver: 
     build: eureka-server/
-    expose: 
-      - 8010
-    image: "eureka-servcie:latest"
+    image: eureka-servcie:latest
     network_mode: host
     ports: 
-      - "8010:8010"
+      - 8010:8010
     restart: always
   mongo: 
     container_name: mongo_docker
     hostname: localhost
-    image: "mongo:3.4-jessie"
+    image: mongo:3.4-jessie
     network_mode: host
     ports: 
-      - "27017:27017"
+      - 27017:27017
     restart: always
     volumes: 
-      - "./data/db:/data/db"
-  music_app: 
+      - ./data/db:/data/db
+  app-registration: 
     build: AppRegistration/
-    container_name: appRegistration_docker
+    container_name: appregistration_docker
     depends_on: 
       - mongo
-      - eureka
+      - eurekaserver
       - apigateway
-    expose: 
-      - 8088
-    image: "appRegistration:latest"
+    image: appregistration:latest
     network_mode: host
     ports: 
-      - "8088:8088"
+      - 8088:8088
     restart: always
 version: "3"
 volumes: 
