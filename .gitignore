@@ -39,8 +39,6 @@ local.properties
 .factorypath
 .settings
 .mvn
-target
-target/*
 logs
 logs.*
 mvnw
