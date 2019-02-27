@@ -1,4 +1,5 @@
---- 
+version: '2.1'
+ 
 services: 
   apigateway: 
     build: zuul-gatewayservice/
@@ -9,6 +10,9 @@ services:
     ports: 
       - 8095:8095
     restart: always
+    healthcheck:
+     test: "exit 0"
+
   eurekaserver: 
     build: eureka-server/
     image: eureka-servcie:latest
@@ -16,6 +20,9 @@ services:
     ports: 
       - 8010:8010
     restart: always
+    healthcheck:
+     test: "exit 0"
+
   mongo: 
     container_name: mongo_docker
     hostname: localhost
@@ -26,6 +33,7 @@ services:
     restart: always
     volumes: 
       - ./data/db:/data/db
+
   app-registration: 
     build: AppRegistration/
     container_name: appregistration_docker
@@ -38,7 +46,8 @@ services:
     ports: 
       - 8088:8088
     restart: always
-version: "3"
+    healthcheck:
+     test: "exit 0"
 volumes: 
   data: ~
 
