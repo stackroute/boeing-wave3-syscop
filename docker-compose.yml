@@ -79,6 +79,20 @@ services:
    healthcheck:
     test: "exit 0"
     
+  monitoring-service:
+   build: monitoring-service/
+   container_name: monitoringservice_docker
+   depends_on: 
+      - eurekaserver
+      - apigateway
+   image: monitoringservice:latest
+   network_mode: host
+   ports: 
+     - 8018:8018
+   restart: always
+   healthcheck:
+    test: "exit 0"
+    
   kafkaservice:
    image: landoop/fast-data-dev
    container_name: kfka_docker
