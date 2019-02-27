@@ -110,7 +110,7 @@ services:
    build: jwtauthentication/
    container_name: login-service_docker
    depends_on:
-      - mysql
+      - mysqldb
       - eurekaserver
       - apigateway
    image: loginservice:latest
