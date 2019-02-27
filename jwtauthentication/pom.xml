@@ -6,16 +6,12 @@
 	<parent>
 		<groupId>com.stackroute</groupId>
 		<artifactId>syscop</artifactId>
-		<version>v1.0.1-SNAPSHOT</version><!-- lookup parent from repository -->
+		<version>v1.0.2</version><!-- lookup parent from repository -->
 	    <relativePath>../pom.xml</relativePath>
 	</parent>
 
-	<groupId>com.grokonez</groupId>
-	<artifactId>jwtauthentication</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>jwtauthentication</name>
-	<description>Demo project for Spring Boot</description>
 
+	<name>jwtauthentication</name>
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
@@ -90,7 +86,8 @@
 
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+			<artifactId>spring-cloud-netflix-eureka-client</artifactId>
+			<version>2.1.0.RELEASE</version>
 		</dependency>
 
 
@@ -106,3 +103,30 @@
 
 
 </project>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--For local system-->
+<!--<parent>-->
+<!--<groupId>org.springframework.boot</groupId>-->
+<!--<artifactId>spring-boot-starter-parent</artifactId>-->
+<!--<version>2.1.2.RELEASE</version>-->
+<!--<relativePath/> &lt;!&ndash; lookup parent from repository &ndash;&gt;-->
+<!--</parent>-->
+<!--<groupId>com.stackroute</groupId>-->
+<!--<artifactId>jwtauthentication</artifactId>-->
+<!--<version>0.0.1-SNAPSHOT</version>-->
+<!--<name>jwtauthentication</name>-->
+<!--<description>Demo project for Spring Boot</description>-->
