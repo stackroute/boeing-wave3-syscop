@@ -7,8 +7,30 @@ import org.springframework.stereotype.Service;
 @Service
 public class KafkaListenerService {
 
+    //Consumer for App Registration
     @KafkaListener(topics = "kafkaAppRegistration", groupId = "group_id2")
-    public void consume(String message) throws JsonProcessingException {
+    public void appRegistrationConsume(String message) throws JsonProcessingException {
+        System.out.println("Consumed msg : " + message);
+
+    }
+
+    //Consumer for collector service
+    @KafkaListener(topics = "kafkaCollectorService", groupId = "group_id2")
+    public void collectorServiceConsume(String message) throws JsonProcessingException {
+        System.out.println("Consumed msg : " + message);
+
+    }
+
+    //Consumer for alert service
+    @KafkaListener(topics = "kafkaAlertService", groupId = "group_id2")
+    public void alertServiceConsume(String message) throws JsonProcessingException {
+        System.out.println("Consumed msg : " + message);
+
+    }
+
+    //consumer for agent service
+    @KafkaListener(topics = "kafkaAgentService", groupId = "group_id2")
+    public void agentServiceConsume(String message) throws JsonProcessingException {
         System.out.println("Consumed msg : " + message);
 
     }
