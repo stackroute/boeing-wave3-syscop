@@ -15,6 +15,7 @@ import java.util.Map;
 
 @EnableKafka
 @Configuration
+//Kafka consumer config for dahboard service
 public class KafkaConsumerConfig {
 
 
