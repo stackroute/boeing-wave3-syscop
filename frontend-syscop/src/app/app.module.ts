@@ -31,6 +31,8 @@ import { MydialogComponent } from './components/mydialog/mydialog.component';
 import { ScrollDispatchModule } from '@angular/cdk/scrolling';
 import { SignupComponent } from './components/signup/signup.component';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { EditdialogComponent } from './components/editdialog/editdialog.component';
+import { DeletedialogComponent } from './components/deletedialog/deletedialog.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +48,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
     ChartFourComponent,
     AppRegistrationComponent,
     MydialogComponent,
+    EditdialogComponent,
+    DeletedialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -84,6 +88,6 @@ import { MatExpansionModule } from '@angular/material/expansion';
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   providers: [],
   bootstrap: [AppComponent ],
-  entryComponents : [MydialogComponent]
+  entryComponents : [MydialogComponent, EditdialogComponent, DeletedialogComponent ]
 })
 export class AppModule { }

@@ -10,10 +10,8 @@
   position: fixed;
   top: 0;
   z-index: 1000;
-  background: rgba(20,30,45,1);
 }
 .sidenav{
-  background: inherit;
   color: white;
 }
 .example-icon {

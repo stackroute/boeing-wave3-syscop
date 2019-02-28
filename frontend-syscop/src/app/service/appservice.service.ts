@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Application } from '../models/application';
 import { Observable } from 'rxjs';
 
@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 export class AppserviceService {
 
   public username = localStorage.getItem('AuthUsername');
-  public url = 'http://172.23.239.88:8088/api/v2/syscop/appregistration';
+  public url = 'http://localhost:8888/api/v2/syscop/appregistration';
 
 
   constructor(private http: HttpClient) { }
@@ -29,6 +29,34 @@ export class AppserviceService {
   }
   /*getUserBoard method fetches data from login service*/
   getApplications(): Observable<Application> {
-    return this.http.get<Application>(`${this.url}/showApp/username/${this.username}` );
+    return this.http.get<Application>(`${this.url}/showApp/username/${this.username}`);
+  }
+  editApplication(app) {
+    const obj = {
+    'userName': this.username,
+    'applications': [
+      app
+    ]
+  };
+    this.http.put(`${this.url}/updateApp`, obj, { responseType: 'text' }).subscribe((data) => {
+    console.log(obj);
+  });
+
+  console.log(obj);
+  }
+  deleteApp(app) {
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      body: {
+        'userName': this.username,
+        'applications': [
+        app
+      ]
+      },
+    };
+      this.http.delete(`${this.url}/deleteApp`, options);
+
   }
 }

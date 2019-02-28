@@ -7,7 +7,7 @@ import { TokenStorageService } from 'src/app/auth/token-storage.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
   info: any;
@@ -25,9 +25,9 @@ export class HomeComponent implements OnInit {
       username: this.token.getUsername(),
       authorities: this.token.getAuthorities()
     };
-    // if (!this.info.token) {
-    //   this.router.navigateByUrl('login');
-    // }
+    if (!this.info.token) {
+      this.router.navigateByUrl('login');
+    }
   }
   logout() {
     this.token.signOut();

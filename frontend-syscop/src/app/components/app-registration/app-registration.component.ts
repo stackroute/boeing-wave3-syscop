@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { MydialogComponent } from '../mydialog/mydialog.component';
 import { AppserviceService } from 'src/app/service/appservice.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { EditdialogComponent } from '../editdialog/editdialog.component';
+import { DeletedialogComponent } from '../deletedialog/deletedialog.component';
 
 @Component({
   selector: 'app-app-registration',
@@ -18,8 +20,9 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 })
 
 export class AppRegistrationComponent implements OnInit {
+  applicationName: string;
 
-  constructor(public dialog: MatDialog, private appService: AppserviceService) {}
+  constructor(public dialog: MatDialog, private appService: AppserviceService, ) {}
 
   panelOpenState = false;
   displayedColumns: string[] = ['applicationName', 'applicationType', 'ipAddress', 'registrationDateandTime', 'services', 'actions' ];
@@ -34,6 +37,31 @@ export class AppRegistrationComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
+    });
+  }
+
+  startEdit(applicationName: string, applicationType: string, ipAddress: string, services: Array<Object> ) {
+    const dialogRef = this.dialog.open(EditdialogComponent, {
+      width: '60vw', maxHeight: '400px', data: {applicationName: applicationName, applicationType: applicationType,
+        ipAddress: ipAddress, services: services}
+    });
+    console.log(this.dataSource);
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 1) {
+      }
+    });
+  }
+  deleteItem(applicationName: string, applicationType: string, ipAddress: string, services: Array<Object> ) {
+    const dialogRef = this.dialog.open(DeletedialogComponent, {
+      width: '60vw', maxHeight: '400px', data: {applicationName: applicationName, applicationType: applicationType,
+        ipAddress: ipAddress, services: services}
+    });
+    console.log(this.dataSource);
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 1) {
+      }
     });
   }
 

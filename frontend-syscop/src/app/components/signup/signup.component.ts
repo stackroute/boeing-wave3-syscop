@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { UserService } from 'src/app/service/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -10,7 +11,7 @@ import { UserService } from 'src/app/service/user.service';
 export class SignupComponent implements OnInit {
   hide;
   myForm: FormGroup;
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, public router: Router) { }
 
   ngOnInit() {
     this.myForm = new FormGroup({
@@ -30,6 +31,7 @@ export class SignupComponent implements OnInit {
     }
     console.log('registerForm.value : ', this.myForm.value);
     this.userService.saveUser(this.myForm.value);
+    this.router.navigateByUrl('login');
   }
 
 }
