@@ -9,6 +9,6 @@ import java.util.Optional;
 
 public interface DataCollectorRepository extends MongoRepository<User, String> {
 
-    @Query("{'applications.services.portNumber': ?0}")
-    public List<User> findUser(int portNumber);
+    @Query("{'applications.ipAddress': ?0}")
+    public User findUser(String applicationIP);
 }

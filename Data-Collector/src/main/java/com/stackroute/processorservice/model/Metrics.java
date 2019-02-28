@@ -9,11 +9,11 @@ public class Metrics {
 
     private String containerId;
     private String containerName;
-    private float cpu;
-    private float mem;
+    private String cpu;
+    private String mem;
     private String netIO;
     private String blockIO;
-    private long pId;
+    private String pId;
 
     public Metrics() {
     }
@@ -34,19 +34,19 @@ public class Metrics {
         this.containerName = containerName;
     }
 
-    public float getCpu() {
+    public String getCpu() {
         return cpu;
     }
 
-    public void setCpu(float cpu) {
+    public void setCpu(String cpu) {
         this.cpu = cpu;
     }
 
-    public float getMem() {
+    public String getMem() {
         return mem;
     }
 
-    public void setMem(float mem) {
+    public void setMem(String mem) {
         this.mem = mem;
     }
 
@@ -66,16 +66,15 @@ public class Metrics {
         this.blockIO = blockIO;
     }
 
-    public long getpId() {
+    public String getpId() {
         return pId;
     }
 
-    public void setpId(long pId) {
+    public void setpId(String pId) {
         this.pId = pId;
     }
 
-
-    public Metrics(String containerId, String containerName, float cpu, float mem, String netIO, String blockIO, long pId) {
+    public Metrics(String containerId, String containerName, String cpu, String mem, String netIO, String blockIO, String pId) {
         this.containerId = containerId;
         this.containerName = containerName;
         this.cpu = cpu;

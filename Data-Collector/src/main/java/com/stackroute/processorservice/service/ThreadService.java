@@ -1,41 +1,24 @@
 package com.stackroute.processorservice.service;
 //////////////////////////
-import com.mongodb.BasicDBObject;
-import com.mongodb.BulkWriteOperation;
-import com.mongodb.BulkWriteResult;
-import com.mongodb.Cursor;
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
-import com.mongodb.DBCursor;
-import com.mongodb.DBObject;
-import com.mongodb.MongoClient;
-
-
-
 
 
 ///////////////////////////////
+import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.mongodb.DB;
-import com.mongodb.MongoClient;
-import com.mongodb.client.ClientSession;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoCursor;
-import com.mongodb.client.MongoDatabase;
 import com.stackroute.processorservice.FactoryModel.MetricFactory;
 import com.stackroute.processorservice.MetricModel.MetricInterface;
-import com.stackroute.processorservice.model.DataCollectorModel;
-import com.stackroute.processorservice.model.ServiceFields;
-import com.stackroute.processorservice.model.User;
+import com.stackroute.processorservice.model.*;
 import com.stackroute.processorservice.repository.DataCollectorRepository;
+import org.apache.kafka.common.protocol.types.Field;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
+
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -44,7 +27,7 @@ import java.util.List;
 @Service
 public class ThreadService implements Runnable {
 
-    private static final String TOPIC = "Kafka_Example_Test_Thread";
+    private static final String TOPIC = "Kafka_Example_Test_Thread1";
 
     @Autowired
     private DataCollectorRepository dataCollectorRepository;
@@ -61,7 +44,8 @@ public class ThreadService implements Runnable {
 
     private DataCollectorModel dataCollectorModel;
 
-    private static String url;
+    private static List<String> url = new ArrayList<>();
+    private static List<String> ips = new ArrayList<>();
 
     public ThreadService(){
         System.out.println("in not arg constructor");
@@ -90,6 +74,7 @@ public class ThreadService implements Runnable {
     int f=0;
     String agentUrl1 = "";
 
+
     public void executeJavaJob() throws Exception {
         System.out.println("Executing Java Job.....");
 
@@ -110,75 +95,101 @@ public class ThreadService implements Runnable {
         if(f == 0){
             System.out.println("In agent URl" + f);
             agentUrl1 = serviceFields.getAgentUrl();
-            url = agentUrl1;
+            System.out.println("AgentURl" + agentUrl1);
+            url.add(agentUrl1);
+            System.out.println(url.size());
+            ips.add(serviceFields.getApplicationIP());
+            System.out.println(ips.get(0));
             f = 1;
         }
 
-          System.out.println("I am url" + url +" " +f);
-        if(!url.isEmpty() && url!=null) {
-            System.out.println("NONONONONONON");
-            System.out.println("333333" + agentUrl1);
+
+        for(int i=1;i<url.size();i++) {
+//            System.out.println("I am url" + url.get(i) + " " + f);
+            if (!url.get(i).isEmpty() && url.get(i) != null) {
+                System.out.println("NONONONONONON");
+                System.out.println("333333" + url.get(i));
 //           DataCollectorModel dataCollectorModel = new DataCollectorModel();
-            String response = dataCollectorModel.getMetrics(url);
-            System.out.println("!!@@" + agentUrl1);
-            System.out.println(response);
-            /////////////////////////////////////////////////
-            // Creating a Mongo client
-//            MongoClient mongo = new MongoClient( "localhost" , 27017 );
-//            MongoClient mongoClient = new MongoClient( "localhost" , 27017 );
+                String response = dataCollectorModel.getMetrics(url.get(i));
+                System.out.println("!!@@" + agentUrl1);
+                System.out.println(response);
+
+
+//                List<User> userList = new ArrayList<>();
+                User appUser = new User();
+                JsonParser jsonParser = new JsonParser();
+                ObjectMapper objMapper = new ObjectMapper();
+
+                JsonArray metricArr = (JsonArray) jsonParser.parse(response);
+
+                Gson gson = new Gson();
+
+                for (int j = 0; j < metricArr.size(); j++) {
+
+                    JsonObject dockerJsonObj = (JsonObject) metricArr.get(j);
+
+                    String jsonString = dockerJsonObj.toString();
+
+                    Metrics metrics = gson.fromJson(jsonString, Metrics.class);
+
+                    int port = Integer.parseInt(dockerJsonObj.get("port").toString().replace("\"", ""));
+
+                    String ipAddress = ips.get(i).replace("\"","");
+
+                    appUser = dataCollectorRepository.findUser(ipAddress);
+                    System.out.println(appUser.toString());
+                    List<Application> applicationList = new ArrayList<>();
+                    MetricsFinal metricsFinal = new MetricsFinal();
+                    applicationList.addAll(appUser.getApplications());
+                    System.out.println("aassssssss" + applicationList.size());
+                    for(int l=0;l<applicationList.size();l++) {
+
+                        System.out.println("Inside application loop");
+                        List<Services> servicesList = new ArrayList<>();
+
+                        servicesList.addAll(applicationList.get(l).getServices());
+//                    System.out.println("!!@@@@#####" + application.getServices().toString());
+//                    servicesList.addAll(application.getServices());
+                        System.out.println(servicesList.size());
+                        for (int k = 0; k < servicesList.size(); k++) {
+
+                            Services services = new Services();
+
+                            services = servicesList.get(k);
+                            if (services.getPortNumber() == port) {
+
+                                metricsFinal.setUserName(appUser.getUserName());
+                                metricsFinal.setServiceName(services.getServiceName());
+                                metricsFinal.setServiceType(services.getServiceType());
+                                metricsFinal.setPortNumber(port);
+                                metricsFinal.setMetrics(metrics);
+
+                                String metricFinalString = objMapper.writeValueAsString(metricsFinal);
+
+                                System.out.println("MetricFinalString" + metricFinalString);
+                                kafkaTemplate.send(TOPIC, metricFinalString);
+
+                            }
+
+
+                        }
+
+
+                    }
+
+                }
+
+
+//            for(int i=0;i<userList.size();i++){
 //
-//            DB db = mongoClient.getDB( "DataCollectorDB" );
-            // Creating Credentials
-//            MongoCredential credential;
-//            credential = MongoCredential.createCredential("Guru99", "DataCollectorDB",
-//                    "password".toCharArray());
-//            System.out.println("Connected to the database successfully");
-
-            // Accessing the database
-    //           MongoDatabase database = mongo.getDatabase("DataCollectorDB");
-    //            MongoCollection collection = database.getCollection("user");
-//            DBCollection collection = db.getCollection("user");
+//                JsonObject dockerJsonObj = (JsonObject) metricArr.get(i);
+//                User user = userList.get(i);
 //
-//            System.out.println("!!@@@Coll" + collection);
-//            DBObject allUsers = new BasicDBObject("applications.services.portNumber","27017");
-//            DBCursor cursor = collection.find(allUsers);
-    //
-
-//            DB db = mongo.getDatabase("DataCollectorDB");
-
-
-            //////////////////////////////////////////////////////////
-
-            List<User> userList = new ArrayList<>();
-            JsonParser jsonParser = new JsonParser();
-            ObjectMapper objMapper = new ObjectMapper();
-
-//            JsonObject dockerMetricObj = (JsonObject) jsonParser.parse(response);
-
-            JsonArray metricArr = (JsonArray) jsonParser.parse(response);
-
-            for(int i=0;i<metricArr.size();i++){
-
-                JsonObject dockerJsonObj = (JsonObject) metricArr.get(i);
-
-                String port = dockerJsonObj.get("port").toString().replace("\"","");
-                int portNumber = Integer.parseInt(port);
-                userList.addAll(dataCollectorRepository.findUser(portNumber));
-
-
-            }
-
-
-
-            for(int i=0;i<userList.size();i++){
-
-                JsonObject dockerJsonObj = (JsonObject) metricArr.get(i);
-                userList.get(i);
-//                System.out.println(it.next().toString());
-
-
-            }
-
+//
+////                System.out.println(it.next().toString());
+//
+//
+//            }
 
 
 //            metricObject = metricFactory.createObject("dockermetric");
@@ -188,7 +199,8 @@ public class ThreadService implements Runnable {
 //            System.out.println("Response=====");
 //            System.out.println(response);
 
-            kafkaTemplate.send(TOPIC, response);
+//                kafkaTemplate.send(TOPIC, response);
+            }
         }
 
         //End Of Job

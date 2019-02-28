@@ -19,7 +19,6 @@ import java.util.List;
 
 @Data
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
 public class Application {
 
@@ -27,9 +26,49 @@ public class Application {
     private String applicationType;
     private String ipAddress;
     private Date registrationDateandTime = new Date();
-    private List<Service> services;
+    private List<Services> services;
 
-    public Application(String applicationName, String applicationType, String ipAddress, List<Service> services) {
+    public String getApplicationName() {
+        return applicationName;
+    }
+
+    public void setApplicationName(String applicationName) {
+        this.applicationName = applicationName;
+    }
+
+    public String getApplicationType() {
+        return applicationType;
+    }
+
+    public void setApplicationType(String applicationType) {
+        this.applicationType = applicationType;
+    }
+
+    public String getIpAddress() {
+        return ipAddress;
+    }
+
+    public void setIpAddress(String ipAddress) {
+        this.ipAddress = ipAddress;
+    }
+
+    public Date getRegistrationDateandTime() {
+        return registrationDateandTime;
+    }
+
+    public void setRegistrationDateandTime(Date registrationDateandTime) {
+        this.registrationDateandTime = registrationDateandTime;
+    }
+
+    public List<Services> getServices() {
+        return services;
+    }
+
+    public void setServices(List<Services> services) {
+        this.services = services;
+    }
+
+    public Application(String applicationName, String applicationType, String ipAddress, List<Services> services) {
         this.applicationName = applicationName;
         this.applicationType = applicationType;
         this.ipAddress = ipAddress;
@@ -38,6 +77,9 @@ public class Application {
 
     public Application(String ipAddress) {
         this.ipAddress = ipAddress;
+    }
+
+    public Application() {
     }
 
     @Override
