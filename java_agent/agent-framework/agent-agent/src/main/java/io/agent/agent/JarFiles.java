@@ -49,7 +49,6 @@ class JarFiles {
      * Theoretically we could return a list of jar:/ URLs without extracting the JARs,
      * but the URLClassLoader has a bug such that jar:/ URLs cannot be used. Therefore, we have
      * to extract the JARs and return a list of file:/ URLs.
-     * See https://bugs.openjdk.java.net/browse/JDK-4735639
      */
     static JarFiles extract() {
         List<Path> perDeploymentJars = new ArrayList<>();

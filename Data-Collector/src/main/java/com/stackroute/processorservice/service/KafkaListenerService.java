@@ -1,17 +1,19 @@
 package com.stackroute.processorservice.service;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.google.gson.*;
 import com.stackroute.processorservice.FactoryModel.MetricFactory;
+import com.stackroute.processorservice.adapter.UnixEpochDateTypeAdapter;
+import com.stackroute.processorservice.model.Application;
 import com.stackroute.processorservice.model.DataCollectorModel;
 import com.stackroute.processorservice.model.ServiceFields;
+import com.stackroute.processorservice.model.User;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -26,12 +28,14 @@ public class KafkaListenerService {
 
     private ServiceFields dockerService;
 
+    private AppRegDataServiceImpl appRegDataService;
     @Autowired
-    public KafkaListenerService(ServiceFields serviceFields,KafkaTemplate<String, String> kafkaTemplate, MetricFactory metricFactory, DataCollectorModel dataCollectorModel) {
+    public KafkaListenerService(AppRegDataServiceImpl appRegDataService, ServiceFields serviceFields,KafkaTemplate<String, String> kafkaTemplate, MetricFactory metricFactory, DataCollectorModel dataCollectorModel) {
         this.kafkaTemplate = kafkaTemplate;
         this.metricFactory = metricFactory;
         this.dataCollectorModel = dataCollectorModel;
         this.dockerService = serviceFields;
+        this.appRegDataService = appRegDataService;
     }
 
 
@@ -52,6 +56,11 @@ public class KafkaListenerService {
         JsonObject obj = (JsonObject) jsonParser.parse(message);
 
         System.out.println("Consumed msg : " + message);
+
+
+        System.out.println("Save Message");
+        appRegDataService.saveUser(message);
+
 
         String userName = obj.get("userName").toString();
 

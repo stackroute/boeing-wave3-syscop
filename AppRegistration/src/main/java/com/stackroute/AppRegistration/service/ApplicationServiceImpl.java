@@ -30,6 +30,7 @@ public class ApplicationServiceImpl implements ApplicationService {
         this.applicationRepositoryObj = applicationRepositoryObj;
     }
 
+    //Adds new applications(Registration)
     @Override
     public User addApplication(User userObj) throws ApplicationAlreadyExistException{
         User returnedUser = new User();
@@ -53,6 +54,7 @@ public class ApplicationServiceImpl implements ApplicationService {
         return returnedUser;
     }
 
+    //To display all the registered applications
     @Override
     public User getAllApplications(String userName) throws ApplicationDoesNotExistException {
         User userObj;
@@ -65,10 +67,18 @@ public class ApplicationServiceImpl implements ApplicationService {
         return userObj;
     }
 
+    //Update already registered applications
     @Override
     public User updateApplications(User userObj) throws ApplicationDoesNotExistException {
         User savedUser = applicationRepositoryObj.findById(userObj.getUserName()).get();
-        Application appToBeUpdated = userObj.getApplications().get(0);
+
+        Application appToBeUpdated = new Application();
+        List<Application> checkApplications = userObj.getApplications();
+        Iterator checkApplicationsIterator = checkApplications.iterator();
+        if (checkApplicationsIterator.hasNext()){
+            appToBeUpdated = (Application) checkApplicationsIterator.next();
+        }
+
         String appNameToCompare = appToBeUpdated.getApplicationName();
         List<Application> applicationList = savedUser.getApplications();
         List<Application> updatedListOfApplications = new ArrayList<>();
@@ -87,11 +97,18 @@ public class ApplicationServiceImpl implements ApplicationService {
         return updatedUser;
     }
 
+    //Deletes already registered applications
     @Override
     public User deleteApplication(User userObj) throws ApplicationDoesNotExistException {
         User savedUser = applicationRepositoryObj.findById(userObj.getUserName()).get();
-        Application appToBedeleted = userObj.getApplications().get(0);
-        String appNameToCompare = appToBedeleted.getApplicationName();
+        Application appToBeDeleted = new Application();
+        List<Application> checkApplications = userObj.getApplications();
+        Iterator checkApplicationsIterator = checkApplications.iterator();
+        if (checkApplicationsIterator.hasNext()){
+            appToBeDeleted = (Application) checkApplicationsIterator.next();
+        }
+
+        String appNameToCompare = appToBeDeleted.getApplicationName();
         List<Application> applicationList = savedUser.getApplications();
         List<Application> listOfApplicationsAfterDeletion = new ArrayList<>();
         Iterator applicationIterator = applicationList.iterator();

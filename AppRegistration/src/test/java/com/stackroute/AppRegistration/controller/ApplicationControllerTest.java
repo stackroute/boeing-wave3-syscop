@@ -32,7 +32,10 @@ import org.mockito.Mockito;
 import static org.mockito.internal.verification.VerificationModeFactory.times;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-
+       /**
+        * Test cases for Controller layer where we mock the service layer
+        * There are four tests. Each for each method in controller
+        */
 @RunWith(SpringRunner.class)
 @WebMvcTest(ApplicationController.class)
 public class ApplicationControllerTest {
@@ -118,6 +121,13 @@ public class ApplicationControllerTest {
     public void deleteApplicationTest() throws Exception, JsonProcessingException{
         when(applicationService.deleteApplication(user)).thenReturn(user);
 
+        mockMvc.perform(delete("/api/v2/syscop/appregistration/deleteApp")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .content(jsonToString(user)))
+                .andExpect(status().isOk());
 
+        verify(applicationService,times(1)).deleteApplication(user);
+        verifyNoMoreInteractions(applicationService);
     }
 }

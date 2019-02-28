@@ -21,18 +21,19 @@ public class UserController {
     private KafkaTemplate<String, User> kafkaTemplate;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, KafkaTemplate<String, User> kafkaTemplate) {
         this.userService = userService;
+        this.kafkaTemplate = kafkaTemplate;
     }
 
-
-//Request mapping for posting user details
+    //Request mapping for posting user details
     @PostMapping("register")
     public ResponseEntity<String> saveUser(@RequestBody User user) {
         ResponseEntity responseEntity;
         try {
             userService.saveUser(user);
             responseEntity = new ResponseEntity<String>("Successfully created the User!!", HttpStatus.CREATED);
+            System.out.println(user);
             kafkaTemplate.send(TOPIC, user);
             System.out.println("Published to Kafka");
         }
