@@ -121,6 +121,19 @@ services:
    healthcheck:
     test: "exit 0"
     
+  frontend:
+   build: frontend-syscop/
+   container_name: frontend_docker
+   image: frontend:latest
+   container_name: frontend_docker
+   restart: always
+   network_mode: host
+   hostname: localhost
+   ports:
+    - 8004:8004
+   healthcheck:
+    test: "exit 0"
+    
   kafkaservice:
    image: landoop/fast-data-dev
    container_name: kfka_docker
