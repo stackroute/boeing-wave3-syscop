@@ -1,13 +1,6 @@
 spring:
-  influxdb:
-    url: http://localhost:8086
-    username: admin
-    password: admin
-    database: mydb
-    retention-policy: autogen
-    series: flux
   application:
-    name: appRegistration-service
+    name: dataCollector-service
 eureka:         #tells about the Eureka server details and its refresh time
   instance:
     leaseRenewalIntervalInSeconds: 1
