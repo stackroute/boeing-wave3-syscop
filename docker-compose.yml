@@ -81,7 +81,7 @@ services:
     
   alert-service:
    build: alert-service/
-   container_name:alertservice_docker
+   container_name: alertservice_docker
    depends_on: 
       - mysqldb
       - eurekaserver
