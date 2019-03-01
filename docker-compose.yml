@@ -140,6 +140,8 @@ services:
    restart: always
    network_mode: host
    hostname: localhost
+   depends_on: 
+      - eurekaserver
    ports:
     - 2181:2181
     - 8030:8030
