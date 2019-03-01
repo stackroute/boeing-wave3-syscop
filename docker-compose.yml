@@ -80,7 +80,7 @@ services:
     test: "exit 0"
     
   alert-service:
-   build: alert-service/
+   build: SysCopAlertService/
    container_name: alertservice_docker
    depends_on: 
       - mysqldb
