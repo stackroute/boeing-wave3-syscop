@@ -14,9 +14,9 @@ public class KafkaListenerService {
 
     }
 
-    //Consumer for collector service
-    @KafkaListener(topics = "kafkaCollectorService", groupId = "group_id2")
-    public void collectorServiceConsume(String message) throws JsonProcessingException {
+    //Consumer for processor service
+    @KafkaListener(topics = "kafkaProcessorService", groupId = "group_id2")
+    public void processorServiceConsume(String message) throws JsonProcessingException {
         System.out.println("Consumed msg : " + message);
 
     }
