@@ -79,6 +79,22 @@ services:
    healthcheck:
     test: "exit 0"
     
+  alert-service:
+   build: alert-service/
+   container_name:alertservice_docker
+   depends_on: 
+      - mysqldb
+      - eurekaserver
+      - apigateway
+      - kafkaservice
+   image: userservice:latest
+   network_mode: host
+   ports: 
+     - 8019:8019
+   restart: always
+   healthcheck:
+    test: "exit 0"
+    
   data-collector:
    build: Data-Collector/
    container_name: datacollector_docker
