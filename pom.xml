@@ -35,6 +35,7 @@
 	<module>monitoring-service</module>
 	    <module>Data-Collector</module>
 	<module>AppRegistration</module>
+	    <module>dashboard-service</module>
     </modules>
     <dependencies>
         <dependency>
