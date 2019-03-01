@@ -54,6 +54,7 @@ services:
       - mongo
       - eurekaserver
       - apigateway
+      - kafkaservice
     image: appregistration:latest
     network_mode: host
     ports: 
@@ -69,6 +70,7 @@ services:
       - mongo
       - eurekaserver
       - apigateway
+      - kafkaservice
    image: userservice:latest
    network_mode: host
    ports: 
@@ -98,6 +100,7 @@ services:
    depends_on: 
       - eurekaserver
       - apigateway
+      - kafkaservice
    image: monitoringservice:latest
    network_mode: host
    ports: 
@@ -113,6 +116,7 @@ services:
       - mysqldb
       - eurekaserver
       - apigateway
+      - kafkaservice
    image: loginservice:latest
    network_mode: host
    ports: 
