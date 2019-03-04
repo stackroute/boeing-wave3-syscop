@@ -184,4 +184,5 @@ services:
    
 volumes: 
   data: ~
+  SysCopAlertService/src/main/resources/quartz_tables.sql: ~
 
