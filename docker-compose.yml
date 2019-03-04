@@ -34,6 +34,16 @@ services:
     volumes: 
       - ./data/db:/data/db
       
+  influxdb:
+   image: influxdb:latest
+   container_name: influxdb
+   ports:
+     - 8086:8086
+   volumes:
+     - /opt/appdata/influxdb:/var/lib/influxdb
+   restart:
+     always
+      
   mysqldb:
    image: mysql
    restart: always
@@ -104,6 +114,7 @@ services:
       - eurekaserver
       - apigateway
       - kafkaservice
+      - influxdb
    image: processorservice:latest
    network_mode: host
    ports: 
