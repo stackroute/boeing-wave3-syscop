@@ -1,15 +1,18 @@
 package com.stackroute.processorservice.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.stackroute.processorservice.model.Metrics;
+import com.stackroute.processorservice.model.MetricsFinal;
 import com.stackroute.processorservice.model.Person;
+import org.influxdb.dto.QueryResult;
 
-
-/*Interface for service
- * to save person and metrics data in InfluxDB
- */
 public interface InfluxService {
 
     public Person savePerson(Person person);
 
-    public Metrics saveMetrics(Metrics metrics);
+    //public Metrics saveMetrics(Metrics metrics);
+
+    public MetricsFinal saveMetricsFinal(MetricsFinal metricsFinal);
+
+    public QueryResult calculateThreshold() throws JsonProcessingException;
 }

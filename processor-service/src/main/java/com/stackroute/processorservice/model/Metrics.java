@@ -2,18 +2,31 @@ package com.stackroute.processorservice.model;
 
 import org.springframework.stereotype.Component;
 
-/*Metrics POJO to identify the incoming metrics data from data-collector service.
-The data corresponds to the metrics collected by the docker-agent.*/
+
+
 @Component
 public class Metrics {
 
     private String containerId;
     private String containerName;
-    private String cpu;
-    private String mem;
+    private float cpu;
+    private float mem;
     private String netIO;
     private String blockIO;
-    private String pId;
+    private long pId;
+
+    public Metrics(String containerId, String containerName, float cpu, float mem, String netIO, String blockIO, long pId) {
+        this.containerId = containerId;
+        this.containerName = containerName;
+        this.cpu = cpu;
+        this.mem = mem;
+        this.netIO = netIO;
+        this.blockIO = blockIO;
+        this.pId = pId;
+    }
+
+    public Metrics() {
+    }
 
     public String getContainerId() {
         return containerId;
@@ -31,19 +44,19 @@ public class Metrics {
         this.containerName = containerName;
     }
 
-    public String getCpu() {
+    public float getCpu() {
         return cpu;
     }
 
-    public void setCpu(String cpu) {
+    public void setCpu(float cpu) {
         this.cpu = cpu;
     }
 
-    public String getMem() {
+    public float getMem() {
         return mem;
     }
 
-    public void setMem(String mem) {
+    public void setMem(float mem) {
         this.mem = mem;
     }
 
@@ -63,28 +76,11 @@ public class Metrics {
         this.blockIO = blockIO;
     }
 
-    public String getpId() {
+    public long getpId() {
         return pId;
     }
 
-    public void setpId(String pId) {
-        this.pId = pId;
-    }
-
-
-
-    public Metrics()
-    {
-
-    }
-
-    public Metrics(String containerId, String containerName, String cpu, String mem, String netIO, String blockIO, String pId) {
-        this.containerId = containerId;
-        this.containerName = containerName;
-        this.cpu = cpu;
-        this.mem = mem;
-        this.netIO = netIO;
-        this.blockIO = blockIO;
+    public void setpId(long pId) {
         this.pId = pId;
     }
 }
