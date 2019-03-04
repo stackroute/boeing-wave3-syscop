@@ -18,6 +18,7 @@ public class KafkaListenerService  {
 
     @KafkaListener(topics = "Kafka_Example_Test_Final", groupId = "group_id")
     public void consume(String message) throws JsonProcessingException {
+        System.out.println("*********DATA From Kafka**********");
         System.out.println("Consumed Kafka msg : " + message);
 
 
@@ -39,7 +40,7 @@ public class KafkaListenerService  {
         influxService.saveMetrics(monitor);
         System.out.println("Monitor Saved");
 
-        //to convert to  String  method
+        //convert to  String  method
         System.out.println(monitor.toString ());
 
 
