@@ -22,16 +22,6 @@ services:
     restart: always
     healthcheck:
      test: "exit 0"
-     
-  influxdb:
-  image: influxdb:latest
-  container_name: influxdb
-  ports:
-    - "8086:8086"
-  env_file:
-    - 'env.influxdb'
-  volumes:
-    - /srv/docker/influxdb/data:/var/lib/influxdb
 
   mongo: 
     container_name: mongo_docker
@@ -114,7 +104,6 @@ services:
       - eurekaserver
       - apigateway
       - kafkaservice
-      - influxdb
    image: processorservice:latest
    network_mode: host
    ports: 
