@@ -8,21 +8,19 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins="*")
 @RestController
 @RequestMapping("api/v1/")
 public class InfluxController {
 
-    private InfluxService influxService;
+    private Monitor monitor;
 
     @Autowired
-    public Monitor monitor;
-
-    @Autowired
-    public InfluxController(InfluxService influxService) {
-        this.influxService = influxService;
+    public InfluxController( Monitor monitor) {
+        this.monitor = monitor;
     }
 
-    //get method to get the metrics data
+    //get api to get the metrics data from datacollector
     @GetMapping("data")
     public ResponseEntity<?> getMonitorData(){
 

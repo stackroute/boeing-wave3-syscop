@@ -16,21 +16,22 @@ public class KafkaListenerService  {
     @Autowired
     private Monitor monitor;
 
-    @KafkaListener(topics = "Kafka_Example_Test_Final1", groupId = "group_id")
+    @KafkaListener(topics = "Kafka_Example_Test_Final", groupId = "group_id")
     public void consume(String message) throws JsonProcessingException {
-        System.out.println("Consumed msg : " + message);
+        System.out.println("Consumed Kafka msg : " + message);
 
 
 
         String[] strMessage = message.split(",");
 
-        monitor.setContainerId(strMessage[0].split("=")[1].replace("\"",""));
-        monitor.setContainerName(strMessage[1].split("=")[1].replace("\"",""));
-        monitor.setCpu(strMessage[4].split("=")[1].replace("\"",""));
-        monitor.setMem(strMessage[2].split("=")[1].replace("\"",""));
-        monitor.setNetIO(strMessage[3].split("=")[1].replace("\"",""));
-        monitor.setBlockIO (strMessage[5].split("=")[1].replace("\"",""));
-        monitor.setpId (strMessage[6].split("=")[1].replace("\"","").replace("}]"," "));
+        monitor.setContainerId(strMessage[0].split(":")[1].replace("\"",""));
+        monitor.setContainerName(strMessage[1].split(":")[1].replace("\"",""));
+        monitor.setCpu(strMessage[4].split(":")[1].replace("\"",""));
+        monitor.setMem(strMessage[2].split(":")[1].replace("\"",""));
+        monitor.setNetIO(strMessage[3].split(":")[1].replace("\"",""));
+        monitor.setBlockIO (strMessage[5].split(":")[1].replace("\"",""));
+        monitor.setpId (strMessage[6].split(":")[1].replace("\"",""));
+        monitor.setPort(strMessage[7].split(":")[1].replace("\"","").replace("}]"," "));
 
         System.out.println("Saving Monitor");
 

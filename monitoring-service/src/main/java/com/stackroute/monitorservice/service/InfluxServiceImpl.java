@@ -32,7 +32,8 @@ public class InfluxServiceImpl implements InfluxService {
                                         monitor.getCpu(),
                                         monitor.getMem(),
                                         monitor.getNetIO(),
-                                        monitor.getpId());
+                                        monitor.getpId(),
+                                         monitor.getPort());
         final Point p = Point.measurement("datacollectorMetrics")
                 .time(System.currentTimeMillis(), TimeUnit.MILLISECONDS)
                 .tag("tenant", "default")
@@ -45,6 +46,7 @@ public class InfluxServiceImpl implements InfluxService {
                 .addField("NetI/O", monitor.getNetIO())
                 .addField("Block I/O", monitor.getBlockIO())
                 .addField("PID", monitor.getpId())
+                .addField("port",monitor.getPort())
                 .build();
         influxDBTemplate.write(p);
         System.out.println("Saved Monitor");
