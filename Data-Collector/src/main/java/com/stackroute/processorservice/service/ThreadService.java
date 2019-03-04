@@ -20,9 +20,8 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import javax.validation.constraints.Null;
+import java.util.*;
 
 @Service
 public class ThreadService implements Runnable {
@@ -44,8 +43,9 @@ public class ThreadService implements Runnable {
 
     private DataCollectorModel dataCollectorModel;
 
-    private static List<String> url = new ArrayList<>();
+    private static Map<String, String> url = new LinkedHashMap<>();
     private static List<String> ips = new ArrayList<>();
+    private static  String userName;
 
     public ThreadService(){
         System.out.println("in not arg constructor");
@@ -72,6 +72,7 @@ public class ThreadService implements Runnable {
 
     }
     int f=0;
+
     String agentUrl1 = "";
 
 
@@ -83,7 +84,7 @@ public class ThreadService implements Runnable {
     public void executeSampleJob() throws Exception {
 
         logger.info("The docker job has begun...");
-
+        int i=0;
 
 
 //        Start Of Job
@@ -96,21 +97,31 @@ public class ThreadService implements Runnable {
             System.out.println("In agent URl" + f);
             agentUrl1 = serviceFields.getAgentUrl();
             System.out.println("AgentURl" + agentUrl1);
-            url.add(agentUrl1);
-            System.out.println(url.size());
-            ips.add(serviceFields.getApplicationIP());
-            System.out.println(ips.get(0));
+            userName = serviceFields.getUserName();
+            try {
+                if (!userName.isEmpty() && userName != null) {
+                    url.put(serviceFields.getUserName(), agentUrl1);
+                    System.out.println(url.size());
+                    ips.add(serviceFields.getApplicationIP());
+                    System.out.println(ips.get(0));
+                }
+            }
+            catch(NullPointerException e){
+                System.out.println("UserName is NULL");
+            }
             f = 1;
         }
 
+        System.out.println("UserNAme" + userName);
+//        for(int i=1;i<url.size();i++) {
+        for(String url : url.values()) {
 
-        for(int i=1;i<url.size();i++) {
-//            System.out.println("I am url" + url.get(i) + " " + f);
-            if (!url.get(i).isEmpty() && url.get(i) != null) {
+            System.out.println("I am url" + url + " " + f);
+            if (!url.isEmpty() && url != null) {
                 System.out.println("NONONONONONON");
-                System.out.println("333333" + url.get(i));
+                System.out.println("333333" + url);
 //           DataCollectorModel dataCollectorModel = new DataCollectorModel();
-                String response = dataCollectorModel.getMetrics(url.get(i));
+                String response = dataCollectorModel.getMetrics(url);
                 System.out.println("!!@@" + agentUrl1);
                 System.out.println(response);
 
@@ -135,7 +146,7 @@ public class ThreadService implements Runnable {
                     int port = Integer.parseInt(dockerJsonObj.get("port").toString().replace("\"", ""));
 
                     String ipAddress = ips.get(i).replace("\"","");
-
+                    System.out.println("IPADDRESS" + ipAddress);
                     appUser = dataCollectorRepository.findUser(ipAddress);
                     System.out.println(appUser.toString());
                     List<Application> applicationList = new ArrayList<>();
@@ -201,6 +212,8 @@ public class ThreadService implements Runnable {
 
 //                kafkaTemplate.send(TOPIC, response);
             }
+
+            i++;
         }
 
         //End Of Job
