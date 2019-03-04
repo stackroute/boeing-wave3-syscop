@@ -96,6 +96,23 @@ services:
    healthcheck:
     test: "exit 0"
     
+  processor-service:
+   build: processor-service/
+   container_name: processorservice_docker
+   depends_on: 
+      - mysqldb
+      - eurekaserver
+      - apigateway
+      - kafkaservice
+      - data-collector
+   image: processorservice:latest
+   network_mode: host
+   ports: 
+     - 8033:8033
+   restart: always
+   healthcheck:
+    test: "exit 0"
+    
   data-collector:
    build: Data-Collector/
    container_name: datacollector_docker
