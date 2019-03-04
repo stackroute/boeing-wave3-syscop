@@ -8,9 +8,8 @@
 		<version>v1.0.3</version><!-- lookup parent from repository -->
 	    <relativePath>../pom.xml</relativePath>
 	</parent>
-	<groupId>com.stackroute</groupId>
+
 	<artifactId>userservice</artifactId>
-	<version>v1.0.2</version>
 	<name>userservice</name>
 	<description>Demo project for Spring Boot</description>
 
