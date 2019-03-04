@@ -1,7 +1,5 @@
 package com.stackroute.processorservice.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -134,7 +132,7 @@ public class InfluxServiceImpl implements InfluxService {
     }
 
     @Override
-    public QueryResult calculateThreshold() throws JsonProcessingException {
+    public QueryResult calculateThreshold() {
 
 
 
@@ -201,14 +199,7 @@ public class InfluxServiceImpl implements InfluxService {
             metricsThreshold.setMem(Float.parseFloat(queryResult.getResults().get(0).getSeries().get(0).getValues().get(0).get(1).toString()));
 
             System.out.println(metricsThreshold.toString());
-
-            ObjectMapper obj = new ObjectMapper();
-            String metricsThresholdJson = obj.writeValueAsString(metricsThreshold);
-
-
-            System.out.println(metricsThresholdJson);
-
-            kafkaTemplate.send(TOPIC, metricsThresholdJson);
+            kafkaTemplate.send(TOPIC, metricsThreshold.toString());
 
 
         }

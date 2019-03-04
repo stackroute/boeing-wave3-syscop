@@ -1,7 +1,6 @@
 package com.stackroute.processorservice.controller;
 
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.stackroute.processorservice.model.Person;
 import com.stackroute.processorservice.service.InfluxService;
 import org.influxdb.dto.QueryResult;
@@ -38,7 +37,7 @@ public class InfluxController {
     }
 
     @GetMapping(value = "query")
-    public ResponseEntity<?> queryInfluxDB() throws JsonProcessingException {
+    public ResponseEntity<?> queryInfluxDB(){
         QueryResult queryResult1 = influxService.calculateThreshold();
         return new ResponseEntity<QueryResult>(queryResult1,HttpStatus.OK);
     }
