@@ -3,9 +3,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.stackroute</groupId>
 	<artifactId>eureka-server</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>eureka-server</name>
@@ -14,12 +12,9 @@
 	<parent>
 		<groupId>com.stackroute</groupId>
 		<artifactId>syscop</artifactId>
-		<version>0.0.1-SNAPSHOT</version><!-- lookup parent from repository -->
+		<version>v1.0.2</version><!-- lookup parent from repository -->
 	    <relativePath>../pom.xml</relativePath>
 	</parent>
-	<!--<properties>-->
-		<!--<java.version>11</java.version>-->
-	<!--</properties>-->
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

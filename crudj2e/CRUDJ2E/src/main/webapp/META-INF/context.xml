@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <!-- <Context path="/JNDI_JDBC" docBase="JNDI_JDBC"> <Resource name="jdbc/ds1" 
+	auth="Container" type="javax.sql.DataSource" url="jdbc:mysql://localhost:3306/mysql" 
+	username="shri" password="root123" driverClassName="com.mysql.cj.jdbc.Driver" maxActive="20" 
+	maxIdle="10"/> </Context>  --> 
+
+<!-- <Context>
+	<Resource name="jdbc/ds1" auth="Container"
+		type="javax.sql.DataSource" maxActive="100" maxIdle="30"
+		maxWait="10000" username="root" password="root123"
+		driverClassName="com.mysql.cj.jdbc.Driver"
+		url="jdbc:mysql://172.17.0.2:3306/mysql" />
+</Context> -->
+
+<!-- <Context>
+	<Resource name="jdbc/ds1" auth="Container"
+		type="javax.sql.DataSource" maxActive="100" maxIdle="30"
+		maxWait="10000" username="root" password="root123"
+		driverClassName="com.mysql.cj.jdbc.Driver"
+		url="jdbc:mysql://10.20.1.179:3306/mysql" />
+</Context> -->
+
+<Context>
+	<Resource name="jdbc/ds1" auth="Container"
+		type="javax.sql.DataSource" maxActive="100" maxIdle="30"
+		maxWait="10000" username="shri" password="root123"
+		driverClassName="com.mysql.cj.jdbc.Driver"
+		url="jdbc:mysql://localhost:3306/mysql" />
+</Context>
+
