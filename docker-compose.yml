@@ -87,6 +87,7 @@ services:
       - eurekaserver
       - apigateway
       - kafkaservice
+      - user-service
    image: userservice:latest
    network_mode: host
    ports: 
