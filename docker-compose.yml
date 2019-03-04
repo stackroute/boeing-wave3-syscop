@@ -46,6 +46,7 @@ services:
    container_name: mysql_docker
    volumes:
     - data:/var/lib/mysql
+    - SysCopAlertService/src/main/resources/quartz_tables.sql:/docker-entrypoint-initdb.d
 
   app-registration: 
     build: AppRegistration/
