@@ -23,6 +23,7 @@
               "src/assets"
             ],
             "styles": [
+              "src/assets/scss/material-dashboard.scss",
               "src/styles.css"
             ],
             "scripts": []

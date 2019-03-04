@@ -25,7 +25,7 @@ export class MydialogComponent implements OnInit {
     return new FormGroup({
       serviceName: new FormControl('', [Validators.required ]),
       serviceType: new FormControl('', Validators.required ),
-      portNumber: new FormControl('', [Validators.required ]),
+      portNumber: new FormControl('', [Validators.required , Validators.pattern('[1-9][0-9]{3}')]),
     });
   }
   addService() {

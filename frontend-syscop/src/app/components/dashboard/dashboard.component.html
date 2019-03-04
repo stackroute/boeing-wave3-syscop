@@ -1,24 +1,370 @@
-<div class="grid-container">
-  <h1 class="mat-h1">Dashboard</h1>
-  <mat-grid-list cols="2" rowHeight="500px">
-    <mat-grid-tile *ngFor="let card of cards | async;let idx=index" [colspan]="card.cols" [rowspan]="card.rows">
-      <mat-card  class="dashboard-card"*ngIf="idx === 0">
-        <mat-card-content class="dashboard-card-content">
-          <app-chart-three></app-chart-three>
-        </mat-card-content>
-      </mat-card>
-      <mat-card class="dashboard-card"*ngIf="idx === 1">
-        <mat-card-content class="dashboard-card-content">
-        </mat-card-content>
-      </mat-card>
-      <mat-card class="dashboard-card"*ngIf="idx === 2">
-        <mat-card-content class="dashboard-card-content">
-        </mat-card-content>
-      </mat-card>
-      <mat-card class="dashboard-card"*ngIf="idx === 3">
-        <mat-card-content class="dashboard-card-content">
-        </mat-card-content>
-      </mat-card>
-    </mat-grid-tile>
-  </mat-grid-list>
-</div>
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-info card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">content_copy</i>
+                        </div>
+                        <p class="card-category">Docker Agent</p>
+                        <h3 class="card-title">20
+                            <small>KB</small>
+                        </h3>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons">local_offer</i>
+                            <a href="https://drive.google.com/open?id=1tNuSjD9gM4ISP5xaMHATee5clO42ifqg">Download Agent</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-danger card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">content_copy</i>
+                        </div>
+                        <p class="card-category">Java Agent</p>
+                        <h3 class="card-title">20 KB</h3>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons">local_offer</i>
+                            <a href="https://drive.google.com/uc?authuser=0&id=1oh80rRSHFD146x7tE4vysQ6eLh96PVHY&export=download">Download Agent</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-danger card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">content_copy</i>
+                        </div>
+                        <p class="card-category">Node Agent</p>
+                        <h3 class="card-title">25 KB</h3>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons">local_offer</i> <a href="">Download Agent</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-info card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">content_copy</i>
+                        </div>
+                        <p class="card-category">Python Agent</p>
+                        <h3 class="card-title">24 KB</h3>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons">local_offer</i><a href="">Download Agent</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-tabs card-header-primary">
+                        <div class="nav-tabs-navigation">
+                            <div class="nav-tabs-wrapper">
+                                <span class="nav-tabs-title">Graphs:</span>
+                                <ul class="nav nav-tabs" data-tabs="tabs">
+                                    <li class="nav-item">
+                                        <a mat-button class="nav-link active" href="#docker" data-toggle="tab">
+                                            <i class="material-icons">code</i> Docker
+                                            <div class="ripple-container"></div>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a mat-button class="nav-link" href="#java" data-toggle="tab">
+                                            <i class="material-icons">code</i> Java
+                                            <div class="ripple-container"></div>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a mat-button class="nav-link" href="#python" data-toggle="tab">
+                                            <i class="material-icons">code</i> Python
+                                            <div class="ripple-container"></div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="docker">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="card card-chart">
+                                            <div class="card-header card-header-success">
+                                                <div class="ct-chart" id="dailySalesChart"></div>
+                                            </div>
+                                            <div class="card-body">
+                                                <h4 class="card-title">Memory </h4>
+                                                <p class="card-category">
+                                                    <span class="text-success"><i class="fa fa-long-arrow-up"></i>
+                                                    </span> Memory Performance</p>
+                                            </div>
+                                            <div class="card-footer">
+                                                <div class="stats">
+                                                    <i class="material-icons">access_time</i> updated 1 minutes ago
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card card-chart">
+                                            <div class="card-header card-header-warning">
+                                                <div class="ct-chart" id="websiteViewsChart"></div>
+                                            </div>
+                                            <div class="card-body">
+                                                <h4 class="card-title">CPU</h4>
+                                                <p class="card-category">CPU Performance</p>
+                                            </div>
+                                            <div class="card-footer">
+                                                <div class="stats">
+                                                    <i class="material-icons">access_time</i> updated 1min ago
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card card-chart">
+                                            <div class="card-header card-header-success">
+                                                <div class="ct-chart" id="completedTasksChart"></div>
+                                            </div>
+                                            <div class="card-body">
+                                                <h4 class="card-title">NetIO</h4>
+                                                <p class="card-category">NetIO Performance</p>
+                                            </div>
+                                            <div class="card-footer">
+                                                <div class="stats">
+                                                    <i class="material-icons">access_time</i> updated 1 min ago
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="java">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="card card-chart">
+                                            <div class="card-header card-header-success">
+                                                <div class="ct-chart" id="dailySalesChart"></div>
+                                            </div>
+                                            <div class="card-body">
+                                                <h4 class="card-title">CPU</h4>
+                                                <p class="card-category">
+                                                    <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55%
+                                                    </span> increase in
+                                                    today </p>
+                                            </div>
+                                            <div class="card-footer">
+                                                <div class="stats">
+                                                    <i class="material-icons">local_offer</i> updated 1 minutes ago
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card card-chart">
+                                            <div class="card-header card-header-warning">
+                                                <div class="ct-chart" id="websiteViewsChart"></div>
+                                            </div>
+                                            <div class="card-body">
+                                                <h4 class="card-title">Memory</h4>
+                                                <p class="card-category">M</p>
+                                            </div>
+                                            <div class="card-footer">
+                                                <div class="stats">
+                                                    <i class="material-icons">access_time</i> campaign sent 2 days ago
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card card-chart">
+                                            <div class="card-header card-header-success">
+                                                <div class="ct-chart" id="completedTasksChart"></div>
+                                            </div>
+                                            <div class="card-body">
+                                                <h4 class="card-title">Completed Tasks</h4>
+                                                <p class="card-category">Last Campaign Performance</p>
+                                            </div>
+                                            <div class="card-footer">
+                                                <div class="stats">
+                                                    <i class="material-icons">access_time</i> campaign sent 2 days ago
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="python">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="card card-chart">
+                                            <div class="card-header card-header-success">
+                                                <div class="ct-chart" id="dailySalesChart"></div>
+                                            </div>
+                                            <div class="card-body">
+                                                <h4 class="card-title">Daily Sales</h4>
+                                                <p class="card-category">
+                                                    <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55%
+                                                    </span> increase in
+                                                    today sales.</p>
+                                            </div>
+                                            <div class="card-footer">
+                                                <div class="stats">
+                                                    <i class="material-icons">local_offer</i> updated 4 minutes ago
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card card-chart">
+                                            <div class="card-header card-header-warning">
+                                                <div class="ct-chart" id="websiteViewsChart"></div>
+                                            </div>
+                                            <div class="card-body">
+                                                <h4 class="card-title">Email Subscriptions</h4>
+                                                <p class="card-category">Last Campaign Performance</p>
+                                            </div>
+                                            <div class="card-footer">
+                                                <div class="stats">
+                                                    <i class="material-icons">access_time</i> campaign sent 2 days ago
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card card-chart">
+                                            <div class="card-header card-header-success">
+                                                <div class="ct-chart" id="completedTasksChart"></div>
+                                            </div>
+                                            <div class="card-body">
+                                                <h4 class="card-title">Completed Tasks</h4>
+                                                <p class="card-category">Last Campaign Performance</p>
+                                            </div>
+                                            <div class="card-footer">
+                                                <div class="stats">
+                                                    <i class="material-icons">access_time</i> campaign sent 2 days ago
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-md-12">
+                        <div class="card">
+                            <div class="card-header card-header-primary">
+                                <h4 class="card-title">Docker Agent Stats</h4>
+                                <p class="card-category">New Agent</p>
+                            </div>
+                            <div class="card-body table-responsive">
+                                <table class="table table-hover">
+                                    <thead class="text-warning">
+                                        <th>Container ID</th>
+                                        <th>Container Name</th>
+                                        <th>CPU</th>
+                                        <th>Memory</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>abc</td>
+                                            <td>20%</td>
+                                            <td>1%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>xyz</td>
+                                            <td>1%</td>
+                                            <td>2%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td>pqr</td>
+                                            <td>3%</td>
+                                            <td>.01%</td>
+                                        </tr>
+                                        <tr>
+                                            <td>4</td>
+                                            <td>hgf</td>
+                                            <td>2%</td>
+                                            <td>1%</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-12">
+                        <div class="card">
+                            <div class="card-header card-header-primary">
+                                <h4 class="card-title">Java Agent Stats</h4>
+                                <p class="card-category">New Agent</p>
+                            </div>
+                            <div class="card-body table-responsive">
+                                <table class="table table-hover">
+                                    <thead class="text-warning">
+                                        <th>Process Name</th>
+                                        <th>Process Id</th>
+                                        <th>CPU</th>
+                                        <th>MEMORY</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>1</td>
+                                                <td>abc</td>
+                                                <td>20%</td>
+                                                <td>1%</td>
+                                        </tr>
+                                        <tr>
+                                                <td>2</td>
+                                                <td>abc</td>
+                                                <td>20%</td>
+                                                <td>1%</td>
+                                        </tr>
+                                        <tr>
+                                                <td>3</td>
+                                                <td>abc</td>
+                                                <td>20%</td>
+                                                <td>1%</td>
+                                        </tr>
+                                        <tr>
+                                                <td>4</td>
+                                                <td>abc</td>
+                                                <td>20%</td>
+                                                <td>1%</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+        <div>
+            <app-chart-three></app-chart-three>
+        </div>
+        <!-- <div>
+            <app-chart-four></app-chart-four>
+        </div> -->

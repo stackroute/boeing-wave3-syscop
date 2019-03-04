@@ -4,16 +4,12 @@
       <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
     </button>
     <span>SYSCOP</span>
-    <span class="example-spacer"></span>
-    <a>
-      <mat-icon class="example-icon">dashboard</mat-icon>
-    </a>
-    <a>
-      <mat-icon matBadge="15" matBadgeColor="warn" matBadgeOverlap="true">notification_important</mat-icon>
-    </a>
-    <a>
-      <mat-icon class="example-icon">account_circle</mat-icon>
-    </a>
+    <span class="example-spacer">
+    </span>
+    <a (click)="logout()"><mat-icon>account_circle</mat-icon></a>
+    <span>
+
+    </span>
   </mat-toolbar-row>
 </mat-toolbar>
 <mat-sidenav-container class="sidenav-container">
@@ -24,7 +20,7 @@
         <span>
           <mat-icon>assignment</mat-icon>
         </span>
-        <span> Application Registration </span>
+        <span> Applications</span>
       </a>
       <a mat-list-item routerLink='dashboard'>
         <span>
@@ -32,13 +28,13 @@
         </span>
         <span> Dashboard </span>
       </a>
-      <a mat-list-item href="#">
+      <a mat-list-item routerLink='notifications'>
         <span>
           <mat-icon matBadge="15" matBadgeColor="warn">notification_important</mat-icon>
         </span>
         <span>Notifications</span>
       </a>
-      <a mat-list-item href="#">
+      <a mat-list-item routerLink="data">
         <span>
           <mat-icon>trending_up</mat-icon>
         </span>
@@ -49,12 +45,6 @@
           <mat-icon>work</mat-icon>
         </span>
         <span>Company</span>
-      </a>
-      <a mat-list-item>
-        <span>
-          <mat-icon>account_circle</mat-icon>
-        </span>
-        <span><a (click)="logout()" color="primary">Logout</a></span>
       </a>
     </mat-nav-list>
   </mat-sidenav>

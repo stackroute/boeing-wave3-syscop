@@ -17,7 +17,7 @@ export class ChartThreeComponent implements OnInit {
 
   ngOnInit() {
     const dataPoints = [];
-    let dpsLength = 0;
+    let dpsLength = 50;
     const chart = new CanvasJS.Chart('chartContainer3', {
       theme: 'light1',
       exportEnabled: true,
@@ -29,9 +29,11 @@ export class ChartThreeComponent implements OnInit {
         dataPoints: dataPoints,
       }]
     });
-    $.getJSON('http://172.23.239.170:9999/api/v1/data', function (data) {
+    $.getJSON('http://172.23.239.205:8018/api/v1/data', function (data) {
       $.each(data, function () {
-        dataPoints.push({ y: parseFloat(data.mem) });
+        dataPoints.push({
+          x: dpsLength,
+          y: parseFloat(data.mem) });
         // console.log('mem' + data.mem);
       });
       dpsLength = dataPoints.length;
@@ -39,20 +41,20 @@ export class ChartThreeComponent implements OnInit {
       updateChart();
     });
     function updateChart() {
-      $.getJSON('http://172.23.239.170:9999/api/v1/data', function (data) {
+      $.getJSON('http://172.23.239.205:8018/api/v1/data', function (data) {
         $.each(data, function () {
           dataPoints.push({
+            x: dpsLength,
             y: parseFloat(data.mem)
           });
+          if (dpsLength > 20) {
+            dataPoints.shift();
+          }
           // console.log('netIO' + data.mem);
           dpsLength++;
         });
-
-        if (dataPoints.length > 10) {
-          dataPoints.shift();
-        }
         chart.render();
-        setTimeout(function () { updateChart(); }, 1000);
+        setTimeout(function () { updateChart(); }, 6000);
       });
     }
   }

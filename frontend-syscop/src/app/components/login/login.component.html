@@ -1,34 +1,46 @@
-<mat-card class="example-card">
-    <mat-card-header>
-        <mat-card-title>Login</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-        <form [formGroup] ="form" (ngSubmit)="onSubmit()" >
-            <table class="example-full-width" cellspacing="0">
-                <tr>
-                    <td>
-                        <mat-form-field appearance="outline">
-                            <mat-label>Enter your Username</mat-label>
-                            <input matInput placeholder="Username" formControlName="username" required>
-                            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-                            <mat-hint>Username must be unique</mat-hint>
-                        </mat-form-field>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <mat-form-field appearance="outline">
-                            <mat-label>Enter your Password</mat-label>
-                            <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'"
-                                formControlName="password" required>
-                            <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                        </mat-form-field>
-                    </td>
-                </tr>
-            </table>
-        </form>
-    </mat-card-content>
-    <mat-card-actions>
-        <button mat-raised-button (click)=onSubmit() color="primary">Login</button>
-    </mat-card-actions>
-</mat-card>
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-md-6" >
+                <div class="card" >
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Login</h4>
+                    </div>
+                    <div class="card-body">
+                        <form  [formGroup] ="form" >
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Enter your Username</mat-label>
+                                        <input matInput placeholder="Username" formControlName="username" required>
+                                        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+                                        <mat-hint>Username must be unique</mat-hint>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Enter your Password</mat-label>
+                                        <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'"
+                                            formControlName="password" required>
+                                        <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' :
+                                            'visibility'}}</mat-icon>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <a routerLink = "/signup"> New User ? Sign Up</a>
+                                </div>
+                            </div>
+                            <button mat-raised-button type="submit"   (click)="onSubmit()" [disabled]="form.invalid" class="btn btn-danger pull-right" style="margin-right:1vw">Login</button>
+                            <button mat-raised-button type="submit"   (click)="onCancel()" class="btn btn-danger pull-right">Cancel</button>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

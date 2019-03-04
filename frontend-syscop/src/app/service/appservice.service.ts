@@ -21,7 +21,7 @@ export class AppserviceService {
         app
       ]
     };
-    this.http.post(`${this.url}/new`, obj, { responseType: 'text' }).subscribe((data) => {
+    return this.http.post(`${this.url}/new`, obj, { responseType: 'text' }).subscribe((data) => {
       console.log(obj);
     });
 
@@ -38,7 +38,7 @@ export class AppserviceService {
       app
     ]
   };
-    this.http.put(`${this.url}/updateApp`, obj, { responseType: 'text' }).subscribe((data) => {
+    return this.http.put(`${this.url}/updateApp`, obj, { responseType: 'text' }).subscribe((data) => {
     console.log(obj);
   });
 

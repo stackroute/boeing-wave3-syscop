@@ -19,7 +19,6 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatTableModule } from '@angular/material/table';
 import { MatRadioModule } from '@angular/material/radio';
 import { LoginComponent } from './components/login/login.component';
-import { InitialViewComponent } from './components/initial-view/initial-view.component';
 import { HomeComponent } from './components/home/home.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ChartOneComponent } from './components/chart-one/chart-one.component';
@@ -33,13 +32,14 @@ import { SignupComponent } from './components/signup/signup.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { EditdialogComponent } from './components/editdialog/editdialog.component';
 import { DeletedialogComponent } from './components/deletedialog/deletedialog.component';
+import { LandingComponent } from './components/landing/landing.component';
+import { NotificationsComponent } from './components/notifications/notifications.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     SignupComponent,
-    InitialViewComponent,
     HomeComponent,
     DashboardComponent,
     ChartOneComponent,
@@ -50,6 +50,8 @@ import { DeletedialogComponent } from './components/deletedialog/deletedialog.co
     MydialogComponent,
     EditdialogComponent,
     DeletedialogComponent,
+    LandingComponent,
+    NotificationsComponent,
   ],
   imports: [
     BrowserModule,

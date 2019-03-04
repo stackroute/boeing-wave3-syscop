@@ -1,24 +1,27 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { InitialViewComponent } from './components/initial-view/initial-view.component';
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AppRegistrationComponent } from './components/app-registration/app-registration.component';
 import { SignupComponent } from './components/signup/signup.component';
+import { LandingComponent } from './components/landing/landing.component';
+import { NotificationsComponent } from './components/notifications/notifications.component';
+import { ChartThreeComponent } from './components/chart-three/chart-three.component';
 
 const routes: Routes = [
-  {path: '', component: InitialViewComponent},
-  {path: 'login', component: LoginComponent},
+  {path: '', component: LandingComponent},
+  {path: 'login', component: LoginComponent, },
   {path: 'signup', component: SignupComponent},
   { path: 'home',
     component: HomeComponent,
     children: [
       {path: 'dashboard', component: DashboardComponent },
-      {path: 'appRegistration', component: AppRegistrationComponent }
+      {path: 'appRegistration', component: AppRegistrationComponent },
+      {path: 'notifications', component: NotificationsComponent },
     ]
-  },
-];
+  }, ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

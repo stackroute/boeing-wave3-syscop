@@ -1,6 +1,6 @@
 <h2 mat-dialog-title>App Registration</h2>
 <mat-dialog-content >
-  <form [formGroup]="appGroup" (ngSubmit)="onSubmit()">
+  <form [formGroup]="appGroup">
     <table class="example-full-width" cellspacing="0">
       <tr>
         <td>
@@ -89,7 +89,7 @@
   <table>
     <tr>
       <td>
-        <button mat-raised-button (click)=onSubmit() color="primary">Save</button>
+        <button mat-raised-button (click)=onSubmit() [disabled]="appGroup.invalid" color="primary">Save</button>
       </td>
       <td>
         <button mat-raised-button (click)=onCancel() color="accent">Cancel</button>

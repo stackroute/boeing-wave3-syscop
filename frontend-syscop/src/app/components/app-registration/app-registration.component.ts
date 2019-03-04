@@ -25,24 +25,25 @@ export class AppRegistrationComponent implements OnInit {
   constructor(public dialog: MatDialog, private appService: AppserviceService, ) {}
 
   panelOpenState = false;
-  displayedColumns: string[] = ['applicationName', 'applicationType', 'ipAddress', 'registrationDateandTime', 'services', 'actions' ];
+  displayedColumns: string[] = ['applicationName', 'applicationType', 'ipAddress', 'registrationDateandTime', 'actions' ];
   dataSource ;
   expandedElement: any;
   isExpansionDetailRow = (i: number, row: Object) => row.hasOwnProperty('detailRow');
 
   addNew(): void {
     const dialogRef = this.dialog.open(MydialogComponent, {
-      width: '60vw', maxHeight: '400px',
+      width: '40vw', maxHeight: '400px',
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
     });
+    this.appService.getApplications();
   }
 
   startEdit(applicationName: string, applicationType: string, ipAddress: string, services: Array<Object> ) {
     const dialogRef = this.dialog.open(EditdialogComponent, {
-      width: '60vw', maxHeight: '400px', data: {applicationName: applicationName, applicationType: applicationType,
+      width: '40vw', maxHeight: '400px', data: {applicationName: applicationName, applicationType: applicationType,
         ipAddress: ipAddress, services: services}
     });
     console.log(this.dataSource);
@@ -54,7 +55,7 @@ export class AppRegistrationComponent implements OnInit {
   }
   deleteItem(applicationName: string, applicationType: string, ipAddress: string, services: Array<Object> ) {
     const dialogRef = this.dialog.open(DeletedialogComponent, {
-      width: '60vw', maxHeight: '400px', data: {applicationName: applicationName, applicationType: applicationType,
+      width: '40vw', maxHeight: '400px', data: {applicationName: applicationName, applicationType: applicationType,
         ipAddress: ipAddress, services: services}
     });
     console.log(this.dataSource);

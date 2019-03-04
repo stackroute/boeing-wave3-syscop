@@ -30,7 +30,7 @@ export class ChartFourComponent implements OnInit {
       }]
     });
     /*Url of datasource */
-    $.getJSON('', function (data) {
+    $.getJSON('http://172.23.239.205:8888/api/v1/data', function (data) {
       $.each(data, function () {
         dataPoints.push({y: parseFloat(data.netIO)});
         console.log('netIO' + data.netIO);
@@ -41,7 +41,7 @@ export class ChartFourComponent implements OnInit {
     });
     /*Url of datasource */
     function updateChart() {
-      $.getJSON('' , function (data) {
+      $.getJSON('http://172.23.239.205:8888/api/v1/data' , function (data) {
         $.each(data, function () {
           dataPoints.push({
             y: parseFloat(data.netIO)

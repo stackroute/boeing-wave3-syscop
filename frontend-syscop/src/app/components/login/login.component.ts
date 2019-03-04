@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
   errorMessage = '';
   roles: string[] = [];
   private loginInfo: AuthLoginInfo;
+  msg: string;
 
   constructor(private authService: AuthService, private tokenStorage: TokenStorageService, private router: Router) { }
 
@@ -57,10 +58,14 @@ export class LoginComponent implements OnInit {
         this.router.navigateByUrl('home');
       },
       error => {
+        alert('Username or Password Incorrect.Try again');
         console.log(error);
-        this.errorMessage = error.error.message;
+        this.errorMessage = error.message;
         this.isLoginFailed = true;
       }
     );
+  }
+  onCancel() {
+    this.router.navigateByUrl('');
   }
 }

@@ -26,12 +26,15 @@ export class SignupComponent implements OnInit {
   onSubmit() {
     // stop print if form is invalid
     if (this.myForm.invalid) {
-      console.log('register form is invalid ');
+      alert('Form is Invalid ');
       return;
     }
     console.log('registerForm.value : ', this.myForm.value);
     this.userService.saveUser(this.myForm.value);
     this.router.navigateByUrl('login');
+  }
+  onCancel() {
+    this.router.navigateByUrl('');
   }
 
 }
