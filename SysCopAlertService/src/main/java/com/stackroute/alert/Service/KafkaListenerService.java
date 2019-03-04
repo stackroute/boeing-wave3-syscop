@@ -98,7 +98,7 @@ public class KafkaListenerService {
 
         Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
         Message textMessage = Message.creator(
-                new PhoneNumber("+918861458359"),
+                new PhoneNumber("+918073829802"),
                 new PhoneNumber(TWILIO_NUMBER),
                 "SYSCOP Alert Emergency")
                 .create();
@@ -120,7 +120,7 @@ public class KafkaListenerService {
             ZonedDateTime dateTime = currentdateTime.plusSeconds(15);
 
             //scheduleEmailRequest.setEmail(user.getEmail());
-            scheduleEmailRequest.setEmail("bnj.anjali@gmail.com");
+            scheduleEmailRequest.setEmail("durgeshkumar0895@gmail.com");
             scheduleEmailRequest.setBody("CPU usage has increased tremendously.");
             scheduleEmailRequest.setSubject("Syscop Alert");
 
