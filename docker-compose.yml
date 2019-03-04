@@ -88,7 +88,7 @@ services:
       - apigateway
       - kafkaservice
       - user-service
-   image: userservice:latest
+   image: alertservice:latest
    network_mode: host
    ports: 
      - 8019:8019
