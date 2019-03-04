@@ -52,6 +52,7 @@ export class EditdialogComponent implements OnInit {
   }
   onSubmit() {
     this.appService.editApplication(this.appGroup.value);
+    this.appService.getApplications();
   }
   onCancel() {
     this.dialogRef.close();

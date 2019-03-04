@@ -1143,6 +1143,7 @@ var DeletedialogComponent = /** @class */ (function () {
     };
     DeletedialogComponent.prototype.confirmDelete = function () {
         this.appService.deleteApp(this.data);
+        this.appService.getApplications();
     };
     DeletedialogComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -1248,6 +1249,7 @@ var EditdialogComponent = /** @class */ (function () {
     });
     EditdialogComponent.prototype.onSubmit = function () {
         this.appService.editApplication(this.appGroup.value);
+        this.appService.getApplications();
     };
     EditdialogComponent.prototype.onCancel = function () {
         this.dialogRef.close();
@@ -1597,6 +1599,7 @@ var MydialogComponent = /** @class */ (function () {
     MydialogComponent.prototype.onSubmit = function () {
         this.appService.saveApplication(this.appGroup.value);
         console.log(this.appGroup.value);
+        this.appService.getApplications();
     };
     MydialogComponent.prototype.onCancel = function () {
         this.dialogRef.close();

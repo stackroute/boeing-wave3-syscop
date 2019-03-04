@@ -40,6 +40,7 @@ export class MydialogComponent implements OnInit {
   onSubmit() {
     this.appService.saveApplication(this.appGroup.value);
     console.log(this.appGroup.value);
+    this.appService.getApplications();
   }
   onCancel() {
     this.dialogRef.close();

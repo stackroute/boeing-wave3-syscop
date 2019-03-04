@@ -19,6 +19,7 @@ export class DeletedialogComponent implements OnInit {
 
   confirmDelete(): void {
     this.appService.deleteApp(this.data);
+    this.appService.getApplications();
   }
 
 }
