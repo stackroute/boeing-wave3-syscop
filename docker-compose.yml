@@ -91,7 +91,7 @@ services:
    image: alertservice:latest
    network_mode: host
    ports: 
-     - 8019:8019
+     - 8020:8020
    restart: always
    healthcheck:
     test: "exit 0"
