@@ -1,0 +1,23 @@
+.view{
+    background-image: url("/assets/images/image.jpg");
+    background-position: right;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100vw;
+    height: 50vh;
+  }
+  .centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  .log,.sign{
+    background:  rgba(20,30,45,1);
+    color:white;
+    width: 300%;
+    height:2rem;
+    border-radius: 5rem;
+
+  }

@@ -3,9 +3,7 @@
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.stackroute</groupId>
 	<artifactId>zuul-gatewayservice</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>zuul-gatewayservice</name>
@@ -14,7 +12,7 @@
 	<parent>
         <groupId>com.stackroute</groupId>
         <artifactId>syscop</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>v1.0.3</version>
 		<relativePath>../pom.xml</relativePath> <!-- lookup parent from repository -->
 	</parent>
 
@@ -36,11 +34,7 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-zuul</artifactId>
 		</dependency>
-		<!--<dependency>-->
-			<!--&lt;!&ndash; Spring Cloud starter &ndash;&gt;-->
-			<!--<groupId>org.springframework.cloud</groupId>-->
-			<!--<artifactId>spring-cloud-starter</artifactId>-->
-		<!--</dependency>-->
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -53,17 +47,6 @@
 		</dependency>
 	</dependencies>
 
-	<!--<dependencyManagement>-->
-	<!--<dependencies>-->
-	<!--<dependency>-->
-	<!--<groupId>org.springframework.cloud</groupId>-->
-	<!--<artifactId>spring-cloud-dependencies</artifactId>-->
-	<!--<version>Brixton.SR5</version>-->
-	<!--<type>pom</type>-->
-	<!--<scope>import</scope>-->
-	<!--</dependency>-->
-	<!--</dependencies>-->
-	<!--</dependencyManagement>-->
 
 	<dependencyManagement>
 		<dependencies>

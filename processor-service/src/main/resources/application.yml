@@ -1,0 +1,28 @@
+eureka:         #tells about the Eureka server details and its refresh time
+  instance:
+    leaseRenewalIntervalInSeconds: 1
+    leaseExpirationDurationInSeconds: 2
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8010/eureka/
+    healthcheck:
+      enabled: true
+    lease:
+      duration: 5
+spring:
+  influxdb:
+    url: http://localhost:8086
+    username: admin
+    password: admin
+    database: mydb
+    retention-policy: autogen
+    series: flux
+  application:
+    name: processor-service
+    #current service name to be used by the eureka server
+management:
+  security:
+    enabled: false  #disable the spring security on the management endpoints like /env, /refresh etc.
+logging:
+  level:
+    com.example.howtodoinjava: DEBUG

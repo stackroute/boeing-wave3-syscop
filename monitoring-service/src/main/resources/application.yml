@@ -1,0 +1,9 @@
+
+spring:
+  influxdb:
+    url: http://localhost:8086
+    username: admin
+    password: admin
+    database: monitorServiceDB
+    retention-policy: autogen
+    series: flux

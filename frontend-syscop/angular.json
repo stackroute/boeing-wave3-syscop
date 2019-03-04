@@ -102,7 +102,7 @@
         }
       }
     },
-    "frontend-syscop-e2e": {
+    "register-front-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "prefix": "",

@@ -1,0 +1,23 @@
+{
+  "name": "nodeapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "appmetrics-dash": "^4.0.0",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "logger": "0.0.1",
+    "mongoose": "^5.4.11",
+    "node-gyp": "^3.8.0",
+    "node-logger": "0.0.1",
+    "opentracing": "^0.14.3",
+    "prom-client": "^11.2.1",
+    "response-time": "^2.3.2"
+  }
+}
