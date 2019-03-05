@@ -52,7 +52,7 @@ public class Controller {
 
             commands2.add("/bin/sh");
             commands2.add("-c");
-            commands2.add("docker port "+newmodel.getContainerId());    //command to get port number of a particular container ID.
+            commands2.add("docker inspect --format='{{range $p, $conf := .Config.ExposedPorts}} {{$p}} {{end}}' containerid "+newmodel.getContainerId());    //command to get port number of a particular container ID.
 
             ProcessBuilder pb2 = new ProcessBuilder(commands2);
 
@@ -62,9 +62,10 @@ public class Controller {
 
 
             while ((s2 = stdInput2.readLine()) != null) {
-                String[] str2 =s2.trim().split(":");
-                newmodel.setPort(str2[1]);
+                String[] str2 =s2.trim().split("/");
+                newmodel.setPort(str2[0]);
             }
+            System.out.println(stdInput2);
 
             System.out.println(newmodel.getContainerId() + newmodel.getContainerName() + newmodel.getPort());
         }
