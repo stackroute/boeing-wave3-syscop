@@ -35,6 +35,7 @@
 	    <module>Data-Collector</module>
 	    <module>AppRegistration</module>
 	<module>SysCopAlertService</module>
+	    <module>threshhold-service</module>
     </modules>
     <dependencies>
         <dependency>
