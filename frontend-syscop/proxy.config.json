@@ -1,0 +1,8 @@
+{
+    "/delivery/all/*": {
+    "target": "https://localhost:8095",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+    }
+}

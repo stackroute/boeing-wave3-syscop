@@ -1,0 +1,58 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
+      <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+    </button>
+    <span>SYSCOP</span>
+    <span class="example-spacer">
+    </span>
+    <a (click)="logout()"><mat-icon>account_circle</mat-icon></a>
+    <span>
+
+    </span>
+  </mat-toolbar-row>
+</mat-toolbar>
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport="!(isHandset$ | async)" [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="!(isHandset$ | async)" fixedTopGap="56">
+    <mat-nav-list>
+      <a mat-list-item routerLink='appRegistration'>
+        <span>
+          <mat-icon>assignment</mat-icon>
+        </span>
+        <span> Applications</span>
+      </a>
+      <a mat-list-item routerLink='dashboard'>
+        <span>
+          <mat-icon>dashboard</mat-icon>
+        </span>
+        <span> Dashboard </span>
+      </a>
+      <a mat-list-item routerLink='notifications'>
+        <span>
+          <mat-icon matBadge="15" matBadgeColor="warn">notification_important</mat-icon>
+        </span>
+        <span>Notifications</span>
+      </a>
+      <a mat-list-item routerLink="data">
+        <span>
+          <mat-icon>trending_up</mat-icon>
+        </span>
+        <span>Data Sources</span>
+      </a>
+      <a mat-list-item href="#">
+        <span>
+          <mat-icon>work</mat-icon>
+        </span>
+        <span>Company</span>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-select>
+    <mat-option>
+    </mat-option>
+  </mat-select>
+  <mat-sidenav-content fixedTopGap="56">
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

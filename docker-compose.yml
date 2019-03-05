@@ -1,38 +1,213 @@
-version: "2"
-services:
-
-  apigateway:
-    image: zuul-service
+version: '2.1'
+ 
+services: 
+  apigateway: 
     build: zuul-gatewayservice/
-    restart: always
+    depends_on: 
+      - eurekaserver
+    image: zuul-service
     network_mode: host
-    depends_on:
-    - eurekaserver
-    ports:
-    - 8092:8092
-    expose:
-    - 8092
+    ports: 
+      - 8095:8095
+    restart: always
+    healthcheck:
+     test: "exit 0"
 
-  eurekaserver:
-    image: eureka-servcie:latest
+  eurekaserver: 
     build: eureka-server/
-    restart: always
+    image: eureka-servcie:latest
     network_mode: host
-    ports:
-    - 9091:9091
-    expose:
-    - 9091
+    ports: 
+      - 8010:8010
+    restart: always
+    healthcheck:
+     test: "exit 0"
 
-  configserver:
-      image: config-servcie:latest
-      build: config-server/
-      restart: always
-      network_mode: host
-      ports:
-      - 8888:8888
-      expose:
-      - 8888
-
-
-
+  mongo: 
+    container_name: mongo_docker
+    hostname: localhost
+    image: mongo:3.4-jessie
+    network_mode: host
+    ports: 
+      - 27017:27017
+    restart: always
+    volumes: 
+      - ./data/db:/data/db
+      
+  influxdb:
+   image: influxdb:latest
+   container_name: influxdb
+   ports:
+     - 8086:8086
+   volumes:
+     - /opt/appdata/influxdb:/var/lib/influxdb
+   restart:
+     always
+      
+  mysqldb:
+   image: mysql
+   restart: always
+   environment:
+    MYSQL_ROOT_PASSWORD: root123
+   ports:
+    - 3306:3306
+   network_mode: host
+   hostname: localhost
+   container_name: mysql_docker
+   volumes:
+    - data:/var/lib/mysql
+    
+  app-registration: 
+    build: AppRegistration/
+    container_name: appregistration_docker
+    depends_on: 
+      - mongo
+      - eurekaserver
+      - apigateway
+      - kafkaservice
+    image: appregistration:latest
+    network_mode: host
+    ports: 
+      - 8088:8088
+    restart: always
+    healthcheck:
+     test: "exit 0"
+     
+  user-service:
+   build: userservice/
+   container_name: userservice_docker
+   depends_on: 
+      - mongo
+      - eurekaserver
+      - apigateway
+      - kafkaservice
+   image: userservice:latest
+   network_mode: host
+   ports: 
+     - 8096:8096
+   restart: always
+   healthcheck:
+    test: "exit 0"
+    
+  alert-service:
+   build: SysCopAlertService/
+   container_name: alertservice_docker
+   depends_on: 
+      - mysqldb
+      - eurekaserver
+      - apigateway
+      - kafkaservice
+      - user-service
+   image: alertservice:latest
+   network_mode: host
+   ports: 
+     - 8020:8020
+   restart: always
+   healthcheck:
+    test: "exit 0"
+    
+  processor-service:
+   build: processor-service/
+   container_name: processorservice_docker
+   depends_on: 
+      - mysqldb
+      - eurekaserver
+      - apigateway
+      - kafkaservice
+      - influxdb
+   image: processorservice:latest
+   network_mode: host
+   ports: 
+     - 8033:8033
+   restart: always
+   healthcheck:
+    test: "exit 0"
+    
+  data-collector:
+   build: Data-Collector/
+   container_name: datacollector_docker
+   depends_on: 
+      - kafkaservice
+      - eurekaserver
+      - apigateway
+   image: dockercollector:latest
+   network_mode: host
+   ports: 
+     - 8001:8001
+   restart: always
+   healthcheck:
+    test: "exit 0"
+    
+  monitoring-service:
+   build: monitoring-service/
+   container_name: monitoringservice_docker
+   depends_on: 
+      - eurekaserver
+      - apigateway
+      - kafkaservice
+   image: monitoringservice:latest
+   network_mode: host
+   ports: 
+     - 8018:8018
+   restart: always
+   healthcheck:
+    test: "exit 0"
+    
+  login-service:
+   build: jwtauthentication/
+   container_name: login-service_docker
+   depends_on:
+      - mysqldb
+      - eurekaserver
+      - apigateway
+      - kafkaservice
+   image: loginservice:latest
+   network_mode: host
+   ports: 
+     - 8090:8090
+   restart: always
+   healthcheck:
+    test: "exit 0"
+    
+  frontend:
+   build: frontend-syscop/
+   container_name: frontend_docker
+   image: frontend:latest
+   container_name: frontend_docker
+   restart: always
+   network_mode: host
+   hostname: localhost
+   ports:
+    - 8004:8004
+   healthcheck:
+    test: "exit 0"
+    
+  kafkaservice:
+   image: landoop/fast-data-dev
+   container_name: kfka_docker
+   restart: always
+   network_mode: host
+   hostname: localhost
+   depends_on: 
+      - eurekaserver
+   ports:
+    - 2181:2181
+    - 8030:8030
+    - 8081:8081
+    - 8084:8084
+    - 8083:8083
+    - 9092:9092
+   environment:
+    WEB_PORT: 8030
+    REST_PORT: 8084
+    BROKER_PORT: 9092
+    ZK_PORT: 2181
+    CONNECT_PORT: 8083
+    REGISTRY_PORT: 8081
+    ADV_HOST: localhost
+   healthcheck:
+    test: "exit 0"
+   
+volumes: 
+  data: ~
 

@@ -23,6 +23,7 @@
               "src/assets"
             ],
             "styles": [
+              "src/assets/scss/material-dashboard.scss",
               "src/styles.css"
             ],
             "scripts": []
@@ -102,7 +103,7 @@
         }
       }
     },
-    "frontend-syscop-e2e": {
+    "register-front-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "prefix": "",

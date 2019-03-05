@@ -1,0 +1,98 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Sign Up</h4>
+                        <p class="card-category">Complete your profile</p>
+                    </div>
+                    <div class="card-body">
+                        <form [formGroup]="myForm">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Enter your Username</mat-label>
+                                        <input matInput placeholder="Username" formControlName="username" required>
+                                        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+                                        <mat-hint>Username must be unique</mat-hint>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-6">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Enter your password</mat-label>
+                                        <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'"
+                                            formControlName="password" required>
+                                        <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' :
+                                            'visibility'}}</mat-icon>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Enter your Phone no.</mat-label>
+                                        <input ng-minlength="10" ng-maxlength="10" type="phone" matInput placeholder="+91"
+                                            formControlName="phoneNumber" required>
+                                        <mat-icon matSuffix>phone</mat-icon>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-6">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Enter your Email</mat-label>
+                                        <input matInput placeholder="Email" formControlName="email" required>
+                                        <mat-icon matSuffix>email</mat-icon>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Enter your Company</mat-label>
+                                        <input matInput placeholder="Company" formControlName="company" required>
+                                        <mat-icon matSuffix>work</mat-icon>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-6">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Enter your DOB</mat-label>
+                                        <input matInput [matDatepicker]="picker" placeholder="Choose a date"
+                                            formControlName="dob" required>
+                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <a routerLink="/login">Already an User ? Login</a>
+                                </div>
+                            </div>
+                            <button mat-raised-button type="submit" (click)="onSubmit()" [disabled]="myForm.invalid"
+                                class="btn btn-danger pull-right">Sign Up</button>
+                            <button mat-raised-button type="submit" (click)="onCancel()" class="btn btn-danger pull-right">Cancel</button>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-profile">
+                    <div class="card-avatar">
+                        <a>
+                            <img class="img" src="./assets/images/sys.png" />
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">SYSCOP TEAM</h4>
+                        <p class="card-description">
+                            In business, the idea of measuring what you are doing, picking the measurements
+                            that count like customer satisfaction and performance… you thrive on that.
+                        </p>
+                        <a href="https://github.com/stackroute/boeing-wave3-syscop/tree/v1.0.2" class="btn btn-danger btn-round">Follow</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

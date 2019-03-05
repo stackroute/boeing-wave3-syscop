@@ -1,0 +1,23 @@
+version: '3'
+services:
+ db:
+  image: mysql
+  restart: always
+  environment:
+      MYSQL_ROOT_PASSWORD: root123
+  ports: 
+   - 3306:3306
+  container_name: mysql_docker
+ crudj2e:
+  image: crudjee:1.0.4
+  build: CRUDJ2E/
+  container_name: crudj2e_docker
+  restart: always
+  network_mode: host
+  depends_on:
+   - db
+  ports:
+   - 8084:8080
+  expose:
+   - 8080
+ 
