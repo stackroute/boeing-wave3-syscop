@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { AppserviceService } from 'src/app/service/appservice.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-deletedialog',
@@ -9,7 +10,7 @@ import { AppserviceService } from 'src/app/service/appservice.service';
 })
 export class DeletedialogComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<DeletedialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any, private appService: AppserviceService) { }
+    @Inject(MAT_DIALOG_DATA) public data: any, private appService: AppserviceService, private router: Router) { }
 
   ngOnInit() {}
 
@@ -20,6 +21,9 @@ export class DeletedialogComponent implements OnInit {
   confirmDelete(): void {
     this.appService.deleteApp(this.data);
     this.appService.getApplications();
+    this.dialogRef.close();
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() =>
+    this.router.navigate(['home', 'appRegistration']));
   }
 
 }

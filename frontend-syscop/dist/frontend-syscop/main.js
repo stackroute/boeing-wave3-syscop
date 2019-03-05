@@ -452,6 +452,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_animations__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/animations */ "./node_modules/@angular/animations/fesm5/animations.js");
 /* harmony import */ var _editdialog_editdialog_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../editdialog/editdialog.component */ "./src/app/components/editdialog/editdialog.component.ts");
 /* harmony import */ var _deletedialog_deletedialog_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../deletedialog/deletedialog.component */ "./src/app/components/deletedialog/deletedialog.component.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+
 
 
 
@@ -461,9 +463,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var AppRegistrationComponent = /** @class */ (function () {
-    function AppRegistrationComponent(dialog, appService) {
+    function AppRegistrationComponent(dialog, appService, router) {
         this.dialog = dialog;
         this.appService = appService;
+        this.router = router;
         this.panelOpenState = false;
         this.displayedColumns = ['applicationName', 'applicationType', 'ipAddress', 'registrationDateandTime', 'actions'];
         this.isExpansionDetailRow = function (i, row) { return row.hasOwnProperty('detailRow'); };
@@ -519,7 +522,7 @@ var AppRegistrationComponent = /** @class */ (function () {
             ],
             styles: [__webpack_require__(/*! ./app-registration.component.css */ "./src/app/components/app-registration/app-registration.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_material__WEBPACK_IMPORTED_MODULE_2__["MatDialog"], src_app_service_appservice_service__WEBPACK_IMPORTED_MODULE_4__["AppserviceService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_material__WEBPACK_IMPORTED_MODULE_2__["MatDialog"], src_app_service_appservice_service__WEBPACK_IMPORTED_MODULE_4__["AppserviceService"], _angular_router__WEBPACK_IMPORTED_MODULE_8__["Router"]])
     ], AppRegistrationComponent);
     return AppRegistrationComponent;
 }());
@@ -1127,23 +1130,31 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
 /* harmony import */ var src_app_service_appservice_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/service/appservice.service */ "./src/app/service/appservice.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+
 
 
 
 
 var DeletedialogComponent = /** @class */ (function () {
-    function DeletedialogComponent(dialogRef, data, appService) {
+    function DeletedialogComponent(dialogRef, data, appService, router) {
         this.dialogRef = dialogRef;
         this.data = data;
         this.appService = appService;
+        this.router = router;
     }
     DeletedialogComponent.prototype.ngOnInit = function () { };
     DeletedialogComponent.prototype.onCancel = function () {
         this.dialogRef.close();
     };
     DeletedialogComponent.prototype.confirmDelete = function () {
+        var _this = this;
         this.appService.deleteApp(this.data);
         this.appService.getApplications();
+        this.dialogRef.close();
+        this.router.navigateByUrl('/', { skipLocationChange: true }).then(function () {
+            return _this.router.navigate(['home', 'appRegistration']);
+        });
     };
     DeletedialogComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -1152,7 +1163,7 @@ var DeletedialogComponent = /** @class */ (function () {
             styles: [__webpack_require__(/*! ./deletedialog.component.css */ "./src/app/components/deletedialog/deletedialog.component.css")]
         }),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__param"](1, Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Inject"])(_angular_material__WEBPACK_IMPORTED_MODULE_2__["MAT_DIALOG_DATA"])),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_material__WEBPACK_IMPORTED_MODULE_2__["MatDialogRef"], Object, src_app_service_appservice_service__WEBPACK_IMPORTED_MODULE_3__["AppserviceService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_material__WEBPACK_IMPORTED_MODULE_2__["MatDialogRef"], Object, src_app_service_appservice_service__WEBPACK_IMPORTED_MODULE_3__["AppserviceService"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"]])
     ], DeletedialogComponent);
     return DeletedialogComponent;
 }());
@@ -1198,16 +1209,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
 /* harmony import */ var src_app_service_appservice_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/service/appservice.service */ "./src/app/service/appservice.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+
 
 
 
 
 
 var EditdialogComponent = /** @class */ (function () {
-    function EditdialogComponent(dialogRef, appService, data) {
+    function EditdialogComponent(dialogRef, appService, data, router) {
         this.dialogRef = dialogRef;
         this.appService = appService;
         this.data = data;
+        this.router = router;
     }
     EditdialogComponent.prototype.ngOnInit = function () {
         this.appGroup = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormGroup"]({
@@ -1248,8 +1262,12 @@ var EditdialogComponent = /** @class */ (function () {
         configurable: true
     });
     EditdialogComponent.prototype.onSubmit = function () {
+        var _this = this;
         this.appService.editApplication(this.appGroup.value);
-        this.appService.getApplications();
+        this.dialogRef.close();
+        this.router.navigateByUrl('/', { skipLocationChange: true }).then(function () {
+            return _this.router.navigate(['home', 'appRegistration']);
+        });
     };
     EditdialogComponent.prototype.onCancel = function () {
         this.dialogRef.close();
@@ -1261,7 +1279,7 @@ var EditdialogComponent = /** @class */ (function () {
             styles: [__webpack_require__(/*! ./editdialog.component.css */ "./src/app/components/editdialog/editdialog.component.css")]
         }),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__param"](2, Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Inject"])(_angular_material__WEBPACK_IMPORTED_MODULE_3__["MAT_DIALOG_DATA"])),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_material__WEBPACK_IMPORTED_MODULE_3__["MatDialogRef"], src_app_service_appservice_service__WEBPACK_IMPORTED_MODULE_4__["AppserviceService"], Object])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_material__WEBPACK_IMPORTED_MODULE_3__["MatDialogRef"], src_app_service_appservice_service__WEBPACK_IMPORTED_MODULE_4__["AppserviceService"], Object, _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"]])
     ], EditdialogComponent);
     return EditdialogComponent;
 }());
@@ -1539,7 +1557,7 @@ module.exports = ".container {\n    position:center;\n    width: 100%;\n  }\n  .
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"main-content\">\n  <div class=\"container-fluid\">\n    <div class=\"row\">\n      <div class=\"col-md-12\">\n        <div class=\"card\">\n          <div class=\"card-header card-header-danger\">\n            <h3 mat-dialog-title>App Registration</h3>\n          </div>\n          <div class=\"card-body justify-content-center\">\n            <mat-dialog-content>\n              <form [formGroup]=\"appGroup\" class=\"form\">\n                <div class=\"row\">\n                  <div class=\"col-md-12\">\n                    <mat-form-field appearance=\"legacy\">\n                      <mat-label>App Name</mat-label>\n                      <input matInput placeholder=\"AppName\" formControlName=\"applicationName\" required>\n                    </mat-form-field>\n                  </div>\n                </div>\n                <div class=\"row\">\n                  <div class=\"col-md-12\">\n                    <mat-form-field>\n                      <mat-label>App Type</mat-label>\n                      <select matNativeControl formControlName=\"applicationType\" required>\n                        <option value=\"docker\">Docker</option>\n                        <option value=\"nondDocker\">Non-Docker</option>\n                      </select>\n                    </mat-form-field>\n                  </div>\n                </div>\n                <div class=\"row\">\n                  <div class=\"col-md-12\">\n                    <mat-form-field appearance=\"legacy\">\n                      <mat-label>Ip Address</mat-label>\n                      <input matInput placeholder=\"Ip Address\" formControlName=\"ipAddress\" required>\n                    </mat-form-field>\n                  </div>\n                </div>\n                <div formArrayName=\"services\">\n                  <div *ngFor=\"let group of serviceArray.controls;let idx = index\">\n                    <div [formGroupName]=\"idx\">\n                      <div class=\"row \">\n                        <div class=\"col-md-4\">\n                          <h3>Service {{idx+1}}</h3>\n                        </div>\n                        <div class=\"col-md-1\">\n                          <button mat-icon-button color=\"primary\" (click)=\"addService()\">\n                            <mat-icon aria-label=\"Example icon-button with a heart icon\">add</mat-icon>\n                          </button>\n                        </div>\n                        <div class=\"col-md-1\">\n                          <button mat-icon-button color=\"accent\" (click)=\"removeService()\">\n                            <mat-icon aria-label=\"Delete\">delete</mat-icon>\n                          </button>\n                        </div>\n                      </div>\n                      <div class=\"row\">\n                        <div class=\"col-md-12\">\n                          <mat-form-field appearance=\"legacy\">\n                            <mat-label>Service Name</mat-label>\n                            <input matInput placeholder=\"ServiceName\" formControlName=\"serviceName\" required>\n                          </mat-form-field>\n                        </div>\n                      </div>\n                      <div class=\"row\">\n                        <div class=\"col-md-12\">\n                          <mat-form-field>\n                            <mat-label>Service Type</mat-label>\n                            <select matNativeControl formControlName=\"serviceType\" required>\n                              <option value=\"java\">Java</option>\n                              <option value=\"python\">Python</option>\n                              <option value=\"node\">Node</option>\n                            </select>\n                          </mat-form-field>\n                        </div>\n                      </div>\n                      <div class=\"row\">\n                        <div class=\"col-md-12\">\n                          <mat-form-field appearance=\"legacy\">\n                            <mat-label>Port-no.</mat-label>\n                            <input matInput placeholder=\"Port-no.\" formControlName=\"portNumber\" required>\n                          </mat-form-field>\n                        </div>\n                      </div>\n                    </div>\n                  </div>\n                </div>\n              </form>\n            </mat-dialog-content>\n            <mat-dialog-actions>\n              <table>\n                <tr>\n                  <td>\n                    <button mat-raised-button (click)=onSubmit() [disabled]=\"appGroup.invalid\" color=\"primary\">Save</button>\n                  </td>\n                  <td>\n                    <button mat-raised-button (click)=onCancel() color=\"accent\">Cancel</button>\n                  </td>\n                </tr>\n              </table>\n            </mat-dialog-actions>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>"
+module.exports = "<div class=\"main-content\">\n  <div class=\"container-fluid\">\n    <div class=\"row\">\n      <div class=\"col-md-12\">\n        <div class=\"card\">\n          <div class=\"card-header card-header-info\">\n            <h3 mat-dialog-title>App Registration</h3>\n          </div>\n          <div class=\"card-body justify-content-center\">\n            <mat-dialog-content>\n              <form [formGroup]=\"appGroup\" class=\"form\">\n                <div class=\"row\">\n                  <div class=\"col-md-12\">\n                    <mat-form-field appearance=\"legacy\">\n                      <mat-label>App Name</mat-label>\n                      <input matInput placeholder=\"AppName\" formControlName=\"applicationName\" required>\n                    </mat-form-field>\n                  </div>\n                </div>\n                <div class=\"row\">\n                  <div class=\"col-md-12\">\n                    <mat-form-field>\n                      <mat-label>App Type</mat-label>\n                      <select matNativeControl formControlName=\"applicationType\" required>\n                        <option value=\"docker\">Docker</option>\n                        <option value=\"nondDocker\">Non-Docker</option>\n                      </select>\n                    </mat-form-field>\n                  </div>\n                </div>\n                <div class=\"row\">\n                  <div class=\"col-md-12\">\n                    <mat-form-field appearance=\"legacy\">\n                      <mat-label>Ip Address</mat-label>\n                      <input matInput placeholder=\"Ip Address\" formControlName=\"ipAddress\" required>\n                    </mat-form-field>\n                  </div>\n                </div>\n                <div formArrayName=\"services\">\n                  <div *ngFor=\"let group of serviceArray.controls;let idx = index\">\n                    <div [formGroupName]=\"idx\">\n                      <div class=\"row \">\n                        <div class=\"col-md-4\">\n                          <h3>Service {{idx+1}}</h3>\n                        </div>\n                        <div class=\"col-md-1\">\n                          <button mat-icon-button color=\"primary\" (click)=\"addService()\">\n                            <mat-icon aria-label=\"Example icon-button with a heart icon\">add</mat-icon>\n                          </button>\n                        </div>\n                        <div class=\"col-md-1\">\n                          <button mat-icon-button color=\"accent\" (click)=\"removeService()\">\n                            <mat-icon aria-label=\"Delete\">delete</mat-icon>\n                          </button>\n                        </div>\n                      </div>\n                      <div class=\"row\">\n                        <div class=\"col-md-12\">\n                          <mat-form-field appearance=\"legacy\">\n                            <mat-label>Service Name</mat-label>\n                            <input matInput placeholder=\"ServiceName\" formControlName=\"serviceName\" required>\n                          </mat-form-field>\n                        </div>\n                      </div>\n                      <div class=\"row\">\n                        <div class=\"col-md-12\">\n                          <mat-form-field>\n                            <mat-label>Service Type</mat-label>\n                            <select matNativeControl formControlName=\"serviceType\" required>\n                              <option value=\"java\">Java</option>\n                              <option value=\"python\">Python</option>\n                              <option value=\"node\">Node</option>\n                            </select>\n                          </mat-form-field>\n                        </div>\n                      </div>\n                      <div class=\"row\">\n                        <div class=\"col-md-12\">\n                          <mat-form-field appearance=\"legacy\">\n                            <mat-label>Port-no.</mat-label>\n                            <input matInput placeholder=\"Port-no.\" formControlName=\"portNumber\" required>\n                          </mat-form-field>\n                        </div>\n                      </div>\n                    </div>\n                  </div>\n                </div>\n              </form>\n            </mat-dialog-content>\n            <mat-dialog-actions>\n              <table>\n                <tr>\n                  <td>\n                    <button mat-raised-button (click)=onSubmit() [disabled]=\"appGroup.invalid\" color=\"primary\">Save</button>\n                  </td>\n                  <td>\n                    <button mat-raised-button (click)=onCancel() color=\"accent\">Cancel</button>\n                  </td>\n                </tr>\n              </table>\n            </mat-dialog-actions>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>"
 
 /***/ }),
 
@@ -1558,15 +1576,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
 /* harmony import */ var src_app_service_appservice_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/service/appservice.service */ "./src/app/service/appservice.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+
 
 
 
 
 
 var MydialogComponent = /** @class */ (function () {
-    function MydialogComponent(dialogRef, appService) {
+    function MydialogComponent(dialogRef, appService, router) {
         this.dialogRef = dialogRef;
         this.appService = appService;
+        this.router = router;
     }
     MydialogComponent.prototype.ngOnInit = function () {
         this.appGroup = new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormGroup"]({
@@ -1597,9 +1618,13 @@ var MydialogComponent = /** @class */ (function () {
         configurable: true
     });
     MydialogComponent.prototype.onSubmit = function () {
+        var _this = this;
         this.appService.saveApplication(this.appGroup.value);
         console.log(this.appGroup.value);
-        this.appService.getApplications();
+        this.dialogRef.close();
+        this.router.navigateByUrl('/', { skipLocationChange: true }).then(function () {
+            return _this.router.navigate(['home', 'appRegistration']);
+        });
     };
     MydialogComponent.prototype.onCancel = function () {
         this.dialogRef.close();
@@ -1610,7 +1635,7 @@ var MydialogComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./mydialog.component.html */ "./src/app/components/mydialog/mydialog.component.html"),
             styles: [__webpack_require__(/*! ./mydialog.component.css */ "./src/app/components/mydialog/mydialog.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_material__WEBPACK_IMPORTED_MODULE_2__["MatDialogRef"], src_app_service_appservice_service__WEBPACK_IMPORTED_MODULE_4__["AppserviceService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_material__WEBPACK_IMPORTED_MODULE_2__["MatDialogRef"], src_app_service_appservice_service__WEBPACK_IMPORTED_MODULE_4__["AppserviceService"], _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"]])
     ], MydialogComponent);
     return MydialogComponent;
 }());

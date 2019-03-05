@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { MydialogComponent } from '../mydialog/mydialog.component';
 import { AppserviceService } from 'src/app/service/appservice.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-editdialog',
@@ -14,7 +15,7 @@ export class EditdialogComponent implements OnInit {
   appGroup: FormGroup;
 
   constructor(public dialogRef: MatDialogRef<MydialogComponent>, private appService: AppserviceService,
-    @Inject(MAT_DIALOG_DATA) public data: any, ) { }
+    @Inject(MAT_DIALOG_DATA) public data: any, private router: Router) { }
 
   ngOnInit() {
     this.appGroup = new FormGroup({
@@ -52,7 +53,9 @@ export class EditdialogComponent implements OnInit {
   }
   onSubmit() {
     this.appService.editApplication(this.appGroup.value);
-    this.appService.getApplications();
+    this.dialogRef.close();
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() =>
+    this.router.navigate(['home', 'appRegistration']));
   }
   onCancel() {
     this.dialogRef.close();

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
 import { FormGroup, FormControl, Validators, FormArray, FormBuilder } from '@angular/forms';
 import { AppserviceService } from 'src/app/service/appservice.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-mydialog',
@@ -11,7 +12,7 @@ import { AppserviceService } from 'src/app/service/appservice.service';
 export class MydialogComponent implements OnInit {
   appGroup: FormGroup;
 
-  constructor(public dialogRef: MatDialogRef<MydialogComponent>, private appService: AppserviceService, ) { }
+  constructor(public dialogRef: MatDialogRef<MydialogComponent>, private appService: AppserviceService, private router: Router ) { }
 
   ngOnInit() {
     this.appGroup = new FormGroup({
@@ -40,7 +41,9 @@ export class MydialogComponent implements OnInit {
   onSubmit() {
     this.appService.saveApplication(this.appGroup.value);
     console.log(this.appGroup.value);
-    this.appService.getApplications();
+    this.dialogRef.close();
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() =>
+    this.router.navigate(['home', 'appRegistration']));
   }
   onCancel() {
     this.dialogRef.close();

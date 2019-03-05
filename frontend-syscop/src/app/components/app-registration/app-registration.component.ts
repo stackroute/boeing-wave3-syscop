@@ -5,6 +5,7 @@ import { AppserviceService } from 'src/app/service/appservice.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { EditdialogComponent } from '../editdialog/editdialog.component';
 import { DeletedialogComponent } from '../deletedialog/deletedialog.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-app-registration',
@@ -22,7 +23,7 @@ import { DeletedialogComponent } from '../deletedialog/deletedialog.component';
 export class AppRegistrationComponent implements OnInit {
   applicationName: string;
 
-  constructor(public dialog: MatDialog, private appService: AppserviceService, ) {}
+  constructor(public dialog: MatDialog, private appService: AppserviceService, private router: Router) {}
 
   panelOpenState = false;
   displayedColumns: string[] = ['applicationName', 'applicationType', 'ipAddress', 'registrationDateandTime', 'actions' ];
