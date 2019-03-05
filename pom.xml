@@ -6,7 +6,7 @@
 
     <groupId>com.stackroute</groupId>
     <artifactId>syscop</artifactId>
-    <version>v1.0.3</version>
+    <version>v1.0.4</version>
     <packaging>pom</packaging>
 
     <parent>
