@@ -25,7 +25,6 @@ export class AppserviceService {
       console.log(obj);
     });
 
-    console.log(obj);
   }
   /*getUserBoard method fetches data from login service*/
   getApplications(): Observable<Application> {
@@ -56,7 +55,7 @@ export class AppserviceService {
       ]
       },
     };
-      this.http.delete(`${this.url}/deleteApp`, options);
+    return this.http.delete(`${this.url}/deleteApp`, options);
 
   }
 }

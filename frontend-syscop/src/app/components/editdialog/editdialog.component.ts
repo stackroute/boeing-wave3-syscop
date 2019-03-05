@@ -54,8 +54,6 @@ export class EditdialogComponent implements OnInit {
   onSubmit() {
     this.appService.editApplication(this.appGroup.value);
     this.dialogRef.close();
-    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() =>
-    this.router.navigate(['home', 'appRegistration']));
   }
   onCancel() {
     this.dialogRef.close();

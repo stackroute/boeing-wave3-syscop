@@ -472,15 +472,19 @@ var AppRegistrationComponent = /** @class */ (function () {
         this.isExpansionDetailRow = function (i, row) { return row.hasOwnProperty('detailRow'); };
     }
     AppRegistrationComponent.prototype.addNew = function () {
+        var _this = this;
         var dialogRef = this.dialog.open(_mydialog_mydialog_component__WEBPACK_IMPORTED_MODULE_3__["MydialogComponent"], {
             width: '40vw', maxHeight: '400px',
         });
         dialogRef.afterClosed().subscribe(function (result) {
             console.log('The dialog was closed');
         });
-        this.appService.getApplications();
+        this.appService.getApplications().subscribe(function (data) {
+            _this.dataSource = data.applications;
+        });
     };
     AppRegistrationComponent.prototype.startEdit = function (applicationName, applicationType, ipAddress, services) {
+        var _this = this;
         var dialogRef = this.dialog.open(_editdialog_editdialog_component__WEBPACK_IMPORTED_MODULE_6__["EditdialogComponent"], {
             width: '40vw', maxHeight: '400px', data: { applicationName: applicationName, applicationType: applicationType,
                 ipAddress: ipAddress, services: services }
@@ -490,8 +494,12 @@ var AppRegistrationComponent = /** @class */ (function () {
             if (result === 1) {
             }
         });
+        this.appService.getApplications().subscribe(function (data) {
+            _this.dataSource = data.applications;
+        });
     };
     AppRegistrationComponent.prototype.deleteItem = function (applicationName, applicationType, ipAddress, services) {
+        var _this = this;
         var dialogRef = this.dialog.open(_deletedialog_deletedialog_component__WEBPACK_IMPORTED_MODULE_7__["DeletedialogComponent"], {
             width: '40vw', maxHeight: '400px', data: { applicationName: applicationName, applicationType: applicationType,
                 ipAddress: ipAddress, services: services }
@@ -500,6 +508,9 @@ var AppRegistrationComponent = /** @class */ (function () {
         dialogRef.afterClosed().subscribe(function (result) {
             if (result === 1) {
             }
+        });
+        this.appService.getApplications().subscribe(function (data) {
+            _this.dataSource = data.applications;
         });
     };
     AppRegistrationComponent.prototype.ngOnInit = function () {
@@ -1148,13 +1159,9 @@ var DeletedialogComponent = /** @class */ (function () {
         this.dialogRef.close();
     };
     DeletedialogComponent.prototype.confirmDelete = function () {
-        var _this = this;
         this.appService.deleteApp(this.data);
         this.appService.getApplications();
         this.dialogRef.close();
-        this.router.navigateByUrl('/', { skipLocationChange: true }).then(function () {
-            return _this.router.navigate(['home', 'appRegistration']);
-        });
     };
     DeletedialogComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -1262,12 +1269,8 @@ var EditdialogComponent = /** @class */ (function () {
         configurable: true
     });
     EditdialogComponent.prototype.onSubmit = function () {
-        var _this = this;
         this.appService.editApplication(this.appGroup.value);
         this.dialogRef.close();
-        this.router.navigateByUrl('/', { skipLocationChange: true }).then(function () {
-            return _this.router.navigate(['home', 'appRegistration']);
-        });
     };
     EditdialogComponent.prototype.onCancel = function () {
         this.dialogRef.close();
@@ -1618,13 +1621,9 @@ var MydialogComponent = /** @class */ (function () {
         configurable: true
     });
     MydialogComponent.prototype.onSubmit = function () {
-        var _this = this;
         this.appService.saveApplication(this.appGroup.value);
         console.log(this.appGroup.value);
         this.dialogRef.close();
-        this.router.navigateByUrl('/', { skipLocationChange: true }).then(function () {
-            return _this.router.navigate(['home', 'appRegistration']);
-        });
     };
     MydialogComponent.prototype.onCancel = function () {
         this.dialogRef.close();
@@ -1818,7 +1817,6 @@ var AppserviceService = /** @class */ (function () {
         return this.http.post(this.url + "/new", obj, { responseType: 'text' }).subscribe(function (data) {
             console.log(obj);
         });
-        console.log(obj);
     };
     /*getUserBoard method fetches data from login service*/
     AppserviceService.prototype.getApplications = function () {
@@ -1848,7 +1846,7 @@ var AppserviceService = /** @class */ (function () {
                 ]
             },
         };
-        this.http.delete(this.url + "/deleteApp", options);
+        return this.http.delete(this.url + "/deleteApp", options);
     };
     AppserviceService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({

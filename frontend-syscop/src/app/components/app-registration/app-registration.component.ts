@@ -39,7 +39,9 @@ export class AppRegistrationComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
     });
-    this.appService.getApplications();
+    this.appService.getApplications().subscribe((data) => {
+      this.dataSource = data.applications;
+    });
   }
 
   startEdit(applicationName: string, applicationType: string, ipAddress: string, services: Array<Object> ) {
@@ -53,6 +55,9 @@ export class AppRegistrationComponent implements OnInit {
       if (result === 1) {
       }
     });
+    this.appService.getApplications().subscribe((data) => {
+      this.dataSource = data.applications;
+    });
   }
   deleteItem(applicationName: string, applicationType: string, ipAddress: string, services: Array<Object> ) {
     const dialogRef = this.dialog.open(DeletedialogComponent, {
@@ -64,6 +69,9 @@ export class AppRegistrationComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result === 1) {
       }
+    });
+    this.appService.getApplications().subscribe((data) => {
+      this.dataSource = data.applications;
     });
   }
 

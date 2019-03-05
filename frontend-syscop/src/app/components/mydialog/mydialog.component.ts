@@ -42,8 +42,6 @@ export class MydialogComponent implements OnInit {
     this.appService.saveApplication(this.appGroup.value);
     console.log(this.appGroup.value);
     this.dialogRef.close();
-    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() =>
-    this.router.navigate(['home', 'appRegistration']));
   }
   onCancel() {
     this.dialogRef.close();

@@ -22,8 +22,6 @@ export class DeletedialogComponent implements OnInit {
     this.appService.deleteApp(this.data);
     this.appService.getApplications();
     this.dialogRef.close();
-    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() =>
-    this.router.navigate(['home', 'appRegistration']));
   }
 
 }
