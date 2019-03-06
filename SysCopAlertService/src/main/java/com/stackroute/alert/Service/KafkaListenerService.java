@@ -1,6 +1,8 @@
 package com.stackroute.alert.Service;
 
 //import com.example.quartzdemo.controller.EmailJobSchedulerController;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.stackroute.alert.Repository.UserRepository;
 import com.stackroute.alert.job.EmailJob;
 import com.stackroute.alert.model.User;
@@ -13,6 +15,7 @@ import com.twilio.type.PhoneNumber;
 import org.quartz.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
 import java.time.ZonedDateTime;
@@ -21,6 +24,9 @@ import java.util.UUID;
 
 @Service
 public class KafkaListenerService {
+
+    @Autowired
+    SimpMessagingTemplate template;
 
     @Autowired(required = true)
     private UserRepository userRepository;
@@ -44,6 +50,7 @@ public class KafkaListenerService {
 
         user.setEmail(strMessage[4].split(":")[1].replace("\"",""));
         user.setUsername(strMessage[1].split(":")[1].replace("\"",""));
+        user.setPhoneNumber(strMessage[3].split(":")[1].replace("\"",""));
         System.out.println(user.getUsername());
 
         userRepository.save(user);
@@ -87,20 +94,35 @@ public class KafkaListenerService {
     // value and then it will send the alert to the respective user by matching username from locally s
     // tored database and getting email and phone number from their only.
 
-    @KafkaListener(topics = "kafkaAppRegistration", groupId = "group_id")
+    @KafkaListener(topics = "Kafka_Example_Alert", groupId = "group_id2")
     public void consumeThresholdData(String message) {
         System.out.println("Consumed message: " + message);
-        String[] strMessage = message.split(",");
-//        String usernameFromThreshold = strMessage[1].split(":")[1].replace("\"","");
-//
-        //User user = userRepository.getUserDetails(usernameFromThreshold);
 
+        JsonParser jsonParser = new JsonParser();
+        JsonObject jsonObject = (JsonObject) jsonParser.parse(message);
+
+
+       // String[] strMessage = message.split(",");
+        //String usernameFromThreshold = strMessage[1].split(":")[1].replace("\"","");
+//
+        User user = userRepository.getUserDetails(jsonObject.get("userName").toString().replace("\"",""));
+
+
+       // System.out.println(user.toString());
+
+        double d = 2.7;
+//        String sock = jsonObject.get("alert").toString()
+//                + jsonObject.get("serviceName").toString();
+
+        template.convertAndSend("/topic/temperature",d);
 
         Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
         Message textMessage = Message.creator(
-                new PhoneNumber("+918073829802"),
+                //new PhoneNumber("+918073829802"),
+                new PhoneNumber(user.getPhoneNumber()),
                 new PhoneNumber(TWILIO_NUMBER),
-                "SYSCOP Alert Emergency")
+                jsonObject.get("alert").toString()
+                )
                 .create();
 
 
@@ -114,14 +136,15 @@ public class KafkaListenerService {
 
 
 
+
         try {
 
             ZonedDateTime currentdateTime = ZonedDateTime.now();        //to get current date and time.......
-            ZonedDateTime dateTime = currentdateTime.plusSeconds(15);
+            ZonedDateTime dateTime = currentdateTime.plusSeconds(5);
 
-            //scheduleEmailRequest.setEmail(user.getEmail());
-            scheduleEmailRequest.setEmail("durgeshkumar0895@gmail.com");
-            scheduleEmailRequest.setBody("CPU usage has increased tremendously.");
+            scheduleEmailRequest.setEmail(user.getEmail());
+            //scheduleEmailRequest.setEmail("bnj.anjali@gmail.com");
+            scheduleEmailRequest.setBody(jsonObject.get("alert").toString()+ jsonObject.get("serviceName").toString());
             scheduleEmailRequest.setSubject("Syscop Alert");
 
             JobDetail jobDetail = buildJobDetail(scheduleEmailRequest);
