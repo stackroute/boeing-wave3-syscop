@@ -117,7 +117,7 @@ public class KafkaListenerService {
 
             dockerService.setUserName(obj.get("userName").toString());
             dockerService.setApplicationIP(appObj.get("ipAddress").toString().replace("\"", ""));
-            String agenturl = "http://" + appObj.get("ipAddress").toString().replace("\"", "") + ":8020/docker/stats";
+            String agenturl = "http://" + appObj.get("ipAddress").toString().replace("\"", "") + "/docker/stats";
             dockerService.setAgentUrl(agenturl);
             System.out.println("111111111111    docker service data is "+dockerService.toString());
             jobQueue.add(dockerService);
