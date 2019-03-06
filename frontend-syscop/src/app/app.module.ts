@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { MatTabsModule, MatSidenavModule, MatToolbarModule, MatIconModule,
   MatButtonModule, MatListModule, MatNativeDateModule, MatGridListModule,
-  MatMenuModule, MatSelectModule, MatPaginatorModule, MatSortModule, } from '@angular/material';
+  MatMenuModule, MatSelectModule, MatPaginatorModule, MatSortModule, MatAutocompleteModule, MatChipsModule, } from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent, } from './app.component';
@@ -84,7 +84,9 @@ import { NotificationsComponent } from './components/notifications/notifications
     ScrollDispatchModule,
     MatExpansionModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    MatAutocompleteModule,
+    MatChipsModule,
 
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],

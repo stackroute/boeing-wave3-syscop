@@ -2,6 +2,7 @@
     margin: 70px;
     display: flex;
     flex-direction: column;
+    min-height: 100vh;
 }
 .mat-table {
     overflow: auto;

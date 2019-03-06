@@ -79,20 +79,20 @@
                                 <span class="nav-tabs-title">Graphs:</span>
                                 <ul class="nav nav-tabs" data-tabs="tabs">
                                     <li class="nav-item">
-                                        <a mat-button class="nav-link active" href="#docker" data-toggle="tab">
-                                            <i class="material-icons">code</i> Docker
+                                        <a mat-button class="nav-link active" href="#cpu" data-toggle="tab">
+                                            <i class="material-icons">code</i> CPU
                                             <div class="ripple-container"></div>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a mat-button class="nav-link" href="#java" data-toggle="tab">
-                                            <i class="material-icons">code</i> Java
+                                        <a mat-button class="nav-link" href="#netio" data-toggle="tab">
+                                            <i class="material-icons">code</i> NetIO
                                             <div class="ripple-container"></div>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a mat-button class="nav-link" href="#python" data-toggle="tab">
-                                            <i class="material-icons">code</i> Python
+                                        <a mat-button class="nav-link" href="#memory" data-toggle="tab">
+                                            <i class="material-icons">code</i> Memory
                                             <div class="ripple-container"></div>
                                         </a>
                                     </li>
@@ -102,169 +102,14 @@
                     </div>
                     <div class="card-body">
                         <div class="tab-content">
-                            <div class="tab-pane active" id="docker">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="card card-chart">
-                                            <div class="card-header card-header-success">
-                                                <div class="ct-chart" id="dailySalesChart"></div>
-                                            </div>
-                                            <div class="card-body">
-                                                <h4 class="card-title">Memory </h4>
-                                                <p class="card-category">
-                                                    <span class="text-success"><i class="fa fa-long-arrow-up"></i>
-                                                    </span> Memory Performance</p>
-                                            </div>
-                                            <div class="card-footer">
-                                                <div class="stats">
-                                                    <i class="material-icons">access_time</i> updated 1 minutes ago
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="card card-chart">
-                                            <div class="card-header card-header-warning">
-                                                <div class="ct-chart" id="websiteViewsChart"></div>
-                                            </div>
-                                            <div class="card-body">
-                                                <h4 class="card-title">CPU</h4>
-                                                <p class="card-category">CPU Performance</p>
-                                            </div>
-                                            <div class="card-footer">
-                                                <div class="stats">
-                                                    <i class="material-icons">access_time</i> updated 1min ago
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="card card-chart">
-                                            <div class="card-header card-header-success">
-                                                <div class="ct-chart" id="completedTasksChart"></div>
-                                            </div>
-                                            <div class="card-body">
-                                                <h4 class="card-title">NetIO</h4>
-                                                <p class="card-category">NetIO Performance</p>
-                                            </div>
-                                            <div class="card-footer">
-                                                <div class="stats">
-                                                    <i class="material-icons">access_time</i> updated 1 min ago
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="tab-pane active" id="cpu">
+                                <app-chart-one></app-chart-one>
                             </div>
-                            <div class="tab-pane" id="java">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="card card-chart">
-                                            <div class="card-header card-header-success">
-                                                <div class="ct-chart" id="dailySalesChart"></div>
-                                            </div>
-                                            <div class="card-body">
-                                                <h4 class="card-title">CPU</h4>
-                                                <p class="card-category">
-                                                    <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55%
-                                                    </span> increase in
-                                                    today </p>
-                                            </div>
-                                            <div class="card-footer">
-                                                <div class="stats">
-                                                    <i class="material-icons">local_offer</i> updated 1 minutes ago
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="card card-chart">
-                                            <div class="card-header card-header-warning">
-                                                <div class="ct-chart" id="websiteViewsChart"></div>
-                                            </div>
-                                            <div class="card-body">
-                                                <h4 class="card-title">Memory</h4>
-                                                <p class="card-category">M</p>
-                                            </div>
-                                            <div class="card-footer">
-                                                <div class="stats">
-                                                    <i class="material-icons">access_time</i> campaign sent 2 days ago
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="card card-chart">
-                                            <div class="card-header card-header-success">
-                                                <div class="ct-chart" id="completedTasksChart"></div>
-                                            </div>
-                                            <div class="card-body">
-                                                <h4 class="card-title">Completed Tasks</h4>
-                                                <p class="card-category">Last Campaign Performance</p>
-                                            </div>
-                                            <div class="card-footer">
-                                                <div class="stats">
-                                                    <i class="material-icons">access_time</i> campaign sent 2 days ago
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="tab-pane" id="netio">
+                               <app-chart-two></app-chart-two>
                             </div>
-                            <div class="tab-pane" id="python">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="card card-chart">
-                                            <div class="card-header card-header-success">
-                                                <div class="ct-chart" id="dailySalesChart"></div>
-                                            </div>
-                                            <div class="card-body">
-                                                <h4 class="card-title">Daily Sales</h4>
-                                                <p class="card-category">
-                                                    <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55%
-                                                    </span> increase in
-                                                    today sales.</p>
-                                            </div>
-                                            <div class="card-footer">
-                                                <div class="stats">
-                                                    <i class="material-icons">local_offer</i> updated 4 minutes ago
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="card card-chart">
-                                            <div class="card-header card-header-warning">
-                                                <div class="ct-chart" id="websiteViewsChart"></div>
-                                            </div>
-                                            <div class="card-body">
-                                                <h4 class="card-title">Email Subscriptions</h4>
-                                                <p class="card-category">Last Campaign Performance</p>
-                                            </div>
-                                            <div class="card-footer">
-                                                <div class="stats">
-                                                    <i class="material-icons">access_time</i> campaign sent 2 days ago
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="card card-chart">
-                                            <div class="card-header card-header-success">
-                                                <div class="ct-chart" id="completedTasksChart"></div>
-                                            </div>
-                                            <div class="card-body">
-                                                <h4 class="card-title">Completed Tasks</h4>
-                                                <p class="card-category">Last Campaign Performance</p>
-                                            </div>
-                                            <div class="card-footer">
-                                                <div class="stats">
-                                                    <i class="material-icons">access_time</i> campaign sent 2 days ago
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="tab-pane" id="memory">
+                                <app-chart-three></app-chart-three>
                             </div>
                         </div>
                     </div>
@@ -362,9 +207,3 @@
             </div>
         </div>
         <div>
-        <div>
-            <app-chart-three></app-chart-three>
-        </div>
-        <!-- <div>
-            <app-chart-four></app-chart-four>
-        </div> -->

@@ -1,61 +1,102 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
+import * as Stomp from 'stompjs';
+import * as SockJS from 'sockjs-client';
+import * as Chart from 'chart.js';
 import * as $ from 'jquery';
-import * as CanvasJS from 'src/canvasjs-2.3.1/canvasjs.min.js';
-import { Observable } from 'rxjs';
-import { UserService } from 'src/app/service/user.service';
+
 
 @Component({
   selector: 'app-chart-three',
   templateUrl: './chart-three.component.html',
   styleUrls: ['./chart-three.component.css']
 })
-export class ChartThreeComponent implements OnInit {
+export class ChartThreeComponent implements AfterViewInit {
+  stompClient: any;
+  config = {
+    type: 'line',
+    data: {
+      labels: [],
+      datasets: [{
+        label: 'Memory Utilization',
+        color: 'black',
+        backgroudColor: 'rgb(255, 255, 255)',
+        borderColor: 'rgb(255, 255, 255)',
+        data: [],
+        fill: false
 
-  @Input() data$: Observable<any>;
-
-  constructor(private us: UserService) { }
-
-  ngOnInit() {
-    const dataPoints = [];
-    let dpsLength = 50;
-    const chart = new CanvasJS.Chart('chartContainer3', {
-      theme: 'light1',
-      exportEnabled: true,
-      title: {
-        text: 'Live Monitoring of Memory'
-      },
-      data: [{
-        type: 'spline',
-        dataPoints: dataPoints,
       }]
-    });
-    $.getJSON('http://172.23.239.205:8018/api/v1/data', function (data) {
-      $.each(data, function () {
-        dataPoints.push({
-          x: dpsLength,
-          y: parseFloat(data.mem) });
-        // console.log('mem' + data.mem);
-      });
-      dpsLength = dataPoints.length;
-      chart.render();
-      updateChart();
-    });
-    function updateChart() {
-      $.getJSON('http://172.23.239.205:8018/api/v1/data', function (data) {
-        $.each(data, function () {
-          dataPoints.push({
-            x: dpsLength,
-            y: parseFloat(data.mem)
-          });
-          if (dpsLength > 20) {
-            dataPoints.shift();
-          }
-          // console.log('netIO' + data.mem);
-          dpsLength++;
-        });
-        chart.render();
-        setTimeout(function () { updateChart(); }, 6000);
-      });
+    },
+    options: {
+      responsive: true,
+      title: {
+        display: true,
+        text: 'Memory Used',
+        fontColor: 'black',
+      },
+      tooltips: {
+        mode: 'index',
+        intersect: false
+      },
+      hover: {
+        mode: 'nearest',
+        intersect: true
+      },
+      scales: {
+        xAxes: [{
+          display: true,
+          type: 'time',
+          time: {
+            displayFormats: {
+              quarter: 'h:mm:ss a'
+            }
+          },
+          scaleLabel: {
+            display: true,
+            fontColor: 'black',
+            labelString: 'Time'
+          },
+          ticks: {
+            fontColor: 'black',
+          },
+        }],
+        yAxes: [{
+          display: true,
+          scaleLabel: {
+            display: true,
+            fontColor: 'black',
+            labelString: 'Value(%)'
+          },
+          ticks: {
+            fontColor: 'black',
+          },
+        }]
+      }
     }
+  };
+
+  constructor() { }
+
+  ngAfterViewInit() {
+    const that = this;
+    const canvas = <HTMLCanvasElement>document.getElementById('lineChart3');
+    const ctx = canvas.getContext('2d');
+    const myLine = new Chart(ctx, this.config);
+    /* Configuring WebSocket on Client Side */
+    /* Url of monitoring service */
+    const socket = new SockJS('http://172.23.239.205:8888/live-metrics');
+    this.stompClient = Stomp.over(socket);
+    this.stompClient.connect({}, function (frame) {
+      that.stompClient.subscribe('/topic/mem-metrics', function (temperature) {
+        console.log(temperature.body);
+        $('#temperature').text(temperature.body);
+        /* Push new data On X-Axis of Chart */
+        that.config.data.labels.push(new Date());
+        /* Push new data on Y-Axis of chart */
+        that.config.data.datasets.forEach(function (dataset) {
+          dataset.data.push(temperature.body);
+        });
+        myLine.update();
+      });
+    });
   }
 }

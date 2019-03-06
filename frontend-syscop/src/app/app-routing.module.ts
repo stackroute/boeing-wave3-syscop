@@ -7,7 +7,6 @@ import { AppRegistrationComponent } from './components/app-registration/app-regi
 import { SignupComponent } from './components/signup/signup.component';
 import { LandingComponent } from './components/landing/landing.component';
 import { NotificationsComponent } from './components/notifications/notifications.component';
-import { ChartThreeComponent } from './components/chart-three/chart-three.component';
 
 const routes: Routes = [
   {path: '', component: LandingComponent},
