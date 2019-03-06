@@ -26,7 +26,7 @@ public class KafkaListenerService  {
 
 
 
-    @KafkaListener(topics = "Kafka_Example_Test_Thread1", groupId = "group_id")
+    @KafkaListener(topics = "Kafka_Example_Test_Final3", groupId = "group_id")
     public void consume(String message) {
         System.out.println("Consumed msg : " + message);
 
