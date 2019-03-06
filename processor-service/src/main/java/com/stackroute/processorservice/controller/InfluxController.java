@@ -39,7 +39,7 @@ public class InfluxController {
 
     @GetMapping(value = "query")
     public ResponseEntity<?> queryInfluxDB() throws JsonProcessingException {
-        QueryResult queryResult1 = influxService.calculateThreshold();
+        QueryResult queryResult1 = influxService.calculateAllThreshold();
         return new ResponseEntity<QueryResult>(queryResult1,HttpStatus.OK);
     }
 }

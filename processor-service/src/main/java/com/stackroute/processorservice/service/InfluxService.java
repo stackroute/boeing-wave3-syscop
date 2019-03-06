@@ -14,5 +14,6 @@ public interface InfluxService {
 
     public MetricsFinal saveMetricsFinal(MetricsFinal metricsFinal) throws  JsonProcessingException;
 
-    public QueryResult calculateThreshold() throws JsonProcessingException;
+    public QueryResult calculateThreshold(String tablename) throws JsonProcessingException;
+    public QueryResult calculateAllThreshold() throws JsonProcessingException;
 }
