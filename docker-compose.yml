@@ -106,6 +106,21 @@ services:
    healthcheck:
     test: "exit 0"
     
+  threshold-service:
+   build: threshhold-service/
+   container_name: threshold_docker
+   depends_on: 
+      - eurekaserver
+      - apigateway
+      - kafkaservice
+   image: threshold:latest
+   network_mode: host
+   ports: 
+     - 8044:8044
+   restart: always
+   healthcheck:
+    test: "exit 0"
+    
   processor-service:
    build: processor-service/
    container_name: processorservice_docker
@@ -130,7 +145,7 @@ services:
       - kafkaservice
       - eurekaserver
       - apigateway
-   image: dockercollector:latest
+   image: datacollector:latest
    network_mode: host
    ports: 
      - 8001:8001
