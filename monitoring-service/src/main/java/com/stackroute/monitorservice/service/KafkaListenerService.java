@@ -22,7 +22,7 @@ public class KafkaListenerService  {
     @Autowired
     private Monitor monitor;
 
-    @KafkaListener(topics = "Kafka_Example_Test_Final2", groupId = "group_id_monitoring")
+    @KafkaListener(topics = "Kafka_Example_Test_Final3", groupId = "group_id_monitoring")
     public void consume(String message) throws JsonProcessingException {
         System.out.println("Consumed Kafka msg : " + message);
 
