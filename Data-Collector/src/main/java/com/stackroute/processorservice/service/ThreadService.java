@@ -26,7 +26,7 @@ import java.util.*;
 @Service
 public class ThreadService implements Runnable {
 
-    private static final String TOPIC = "Kafka_Example_Test_Thread1";
+    private static final String TOPIC = "Kafka_Example_Test_Final3";
 
     @Autowired
     private DataCollectorRepository dataCollectorRepository;
