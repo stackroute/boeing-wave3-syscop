@@ -1009,7 +1009,7 @@ var ChartOneComponent = /** @class */ (function () {
         var ctx = canvas.getContext('2d');
         var myLine = new chart_js__WEBPACK_IMPORTED_MODULE_4__(ctx, this.config);
         /* Configuring WebSocket on Client Side */
-        var socket = new sockjs_client__WEBPACK_IMPORTED_MODULE_3__('http://172.23.239.205:8888/live-metrics');
+        var socket = new sockjs_client__WEBPACK_IMPORTED_MODULE_3__('http://13.232.165.99:8095/monitoring-service/live-metrics');
         this.stompClient = stompjs__WEBPACK_IMPORTED_MODULE_2__["over"](socket);
         this.stompClient.connect({}, function (frame) {
             that.stompClient.subscribe('/topic/cpu-metrics', function (temperature) {
@@ -1157,7 +1157,7 @@ var ChartThreeComponent = /** @class */ (function () {
         var myLine = new chart_js__WEBPACK_IMPORTED_MODULE_4__(ctx, this.config);
         /* Configuring WebSocket on Client Side */
         /* Url of monitoring service */
-        var socket = new sockjs_client__WEBPACK_IMPORTED_MODULE_3__('http://172.23.239.205:8888/live-metrics');
+        var socket = new sockjs_client__WEBPACK_IMPORTED_MODULE_3__('http://13.232.165.99:8095/monitoring-service/live-metrics');
         this.stompClient = stompjs__WEBPACK_IMPORTED_MODULE_2__["over"](socket);
         this.stompClient.connect({}, function (frame) {
             that.stompClient.subscribe('/topic/mem-metrics', function (temperature) {
@@ -1307,7 +1307,7 @@ var ChartTwoComponent = /** @class */ (function () {
         var ctx = canvas.getContext('2d');
         var myLine = new chart_js__WEBPACK_IMPORTED_MODULE_4__(ctx, this.config);
         /* Configuring WebSocket on Client Side */
-        var socket = new sockjs_client__WEBPACK_IMPORTED_MODULE_3__('http://172.23.239.205:8888/live-metrics');
+        var socket = new sockjs_client__WEBPACK_IMPORTED_MODULE_3__('http://13.232.165.99:8095/monitoring-service/live-metrics');
         this.stompClient = stompjs__WEBPACK_IMPORTED_MODULE_2__["over"](socket);
         this.stompClient.connect({}, function (frame) {
             that.stompClient.subscribe('/topic/netIO-metrics', function (temperature) {
@@ -2338,7 +2338,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/user/Syscop/frontend-syscop/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /home/user/Syscop/v1.0.5/boeing-wave3-syscop/frontend-syscop/src/main.ts */"./src/main.ts");
 
 
 /***/ })
