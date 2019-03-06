@@ -1,5 +1,6 @@
 package com.stackroute.processorservice.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.stackroute.processorservice.model.Metrics;
 import com.stackroute.processorservice.model.MetricsFinal;
 import com.stackroute.processorservice.model.Person;
@@ -11,7 +12,7 @@ public interface InfluxService {
 
     //public Metrics saveMetrics(Metrics metrics);
 
-    public MetricsFinal saveMetricsFinal(MetricsFinal metricsFinal);
+    public MetricsFinal saveMetricsFinal(MetricsFinal metricsFinal) throws  JsonProcessingException;
 
-    public QueryResult calculateThreshold();
+    public QueryResult calculateThreshold() throws JsonProcessingException;
 }

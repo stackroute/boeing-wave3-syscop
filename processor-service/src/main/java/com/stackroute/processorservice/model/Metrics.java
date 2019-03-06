@@ -83,4 +83,17 @@ public class Metrics {
     public void setpId(long pId) {
         this.pId = pId;
     }
+
+    @Override
+    public String toString() {
+        return "Metrics{" +
+                "containerId='" + containerId + '\'' +
+                ", containerName='" + containerName + '\'' +
+                ", cpu=" + cpu +
+                ", mem=" + mem +
+                ", netIO='" + netIO + '\'' +
+                ", blockIO='" + blockIO + '\'' +
+                ", pId=" + pId +
+                '}';
+    }
 }

@@ -1,5 +1,6 @@
 package com.stackroute.processorservice.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.stackroute.processorservice.model.Metrics;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
+import java.util.Queue;
 import java.util.TimerTask;
 
 @Service
@@ -27,7 +29,7 @@ public class KafkaListenerService  {
 
 
     @KafkaListener(topics = "Kafka_Example_Test_Final3", groupId = "group_id")
-    public void consume(String message) {
+    public void consume(String message) throws JsonProcessingException {
         System.out.println("Consumed msg : " + message);
 
         JsonParser jsonParser = new JsonParser();
@@ -51,16 +53,17 @@ public class KafkaListenerService  {
         metricsFinal.setMetrics(metrics);
 
 
-        System.out.println("Saving Metrics");
+
         counter++;
-        System.out.println(counter);
+        System.out.println("Messages received "+counter);
 
 
-        if(counter <= 10) {
+
+
             influxService.saveMetricsFinal(metricsFinal);
-            System.out.println("Metrics Saved");
+//            System.out.println("Metrics Saved");
 
-        }
+
 
         System.out.println(metricsFinal.toString ());
 

@@ -1,5 +1,7 @@
 package com.stackroute.processorservice.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -97,42 +99,78 @@ public class InfluxServiceImpl implements InfluxService {
 //
 //    }
 
-    public MetricsFinal saveMetricsFinal(MetricsFinal metricsFinal){
+    public MetricsFinal saveMetricsFinal(MetricsFinal metricsFinal) throws JsonProcessingException {
+        String dbName = "mydb";
 
-        System.out.println("Saving Metrics");
-        influxDBTemplate.createDatabase();
+        int currCount =0;
 
-        MetricsFinal metricsFinal1 =  new MetricsFinal(metricsFinal.getUserName(),
-                                                       metricsFinal.getServiceName(),
-                                                        metricsFinal.getServiceType(),
-                                                        metricsFinal.getPortNumber(),
-                                                        metricsFinal.getMetrics());
+        Double currD = new Double(0);
 
 
-        final Point p = Point.measurement(metricsFinal.getServiceName())
-                .time(System.currentTimeMillis(), TimeUnit.MILLISECONDS)
-                .tag("tenant", "default")
-                .addField("username", metricsFinal.getUserName())
-                .addField("servicename", metricsFinal.getServiceName())
-                .addField("servicetype", metricsFinal.getServiceType())
-                .addField("portnumber", metricsFinal.getPortNumber())
-                .addField("ConainerId", metricsFinal.getMetrics().getContainerId())
-                .addField("containerName", metricsFinal.getMetrics().getContainerName())
-                .addField("Cpu", metricsFinal.getMetrics().getCpu())
-                .addField("Memory", metricsFinal.getMetrics().getMem())
-                .addField("NetI/O", metricsFinal.getMetrics().getNetIO())
-                .addField("Block I/O", metricsFinal.getMetrics().getBlockIO())
-                .addField("PID", metricsFinal.getMetrics().getpId())
-                .build();
-        influxDBTemplate.write(p);
-        System.out.println("Saved Metrics");
+        MetricsFinal metricsFinal1 = new MetricsFinal(metricsFinal.getUserName(),
+                metricsFinal.getServiceName(),
+                metricsFinal.getServiceType(),
+                metricsFinal.getPortNumber(),
+                metricsFinal.getMetrics());
+
+        try {
+
+            Query query5 = new Query("SELECT count(username) from " + metricsFinal.getUserName() + metricsFinal.getServiceName(), dbName);
+
+            QueryResult queryResult5 = influxDBTemplate.query(query5);
+
+            currD = (double) queryResult5.getResults().get(0).getSeries().get(0).getValues().get(0).get(1);
+
+            System.out.println("rows currCount "+currD.intValue());
+            currCount = currD.intValue();
+        }catch (Exception e){
+            System.out.println(e);
+        }
+
+//        int currCount = Integer.parseInt( queryResult5.getResults().get(0).getSeries().get(0).getValues().get(0).get(1).toString());
+
+//        System.out.println(currCount);
+
+
+            if (currCount <= 60) {
+
+
+                System.out.println("Saving Metrics");
+                influxDBTemplate.createDatabase();
+
+
+                final Point p = Point.measurement(metricsFinal.getUserName() + metricsFinal.getServiceName())
+                        .time(System.currentTimeMillis(), TimeUnit.MILLISECONDS)
+                        .tag("tenant", "default")
+                        .addField("username", metricsFinal.getUserName())
+                        .addField("servicename", metricsFinal.getServiceName())
+                        .addField("servicetype", metricsFinal.getServiceType())
+                        .addField("portnumber", metricsFinal.getPortNumber())
+                        .addField("ConainerId", metricsFinal.getMetrics().getContainerId())
+                        .addField("containerName", metricsFinal.getMetrics().getContainerName())
+                        .addField("Cpu", metricsFinal.getMetrics().getCpu())
+                        .addField("Memory", metricsFinal.getMetrics().getMem())
+                        .addField("NetI/O", metricsFinal.getMetrics().getNetIO())
+                        .addField("Block I/O", metricsFinal.getMetrics().getBlockIO())
+                        .addField("PID", metricsFinal.getMetrics().getpId())
+                        .build();
+                influxDBTemplate.write(p);
+                System.out.println("Saved Metrics");
+
+            }
+            if (currCount == 60) {
+                System.out.println("calculating threshold");
+                QueryResult queryResult = calculateThreshold();
+            }
+
+
+
+
         return metricsFinal1;
-
-
     }
 
     @Override
-    public QueryResult calculateThreshold() {
+    public QueryResult calculateThreshold() throws JsonProcessingException {
 
 
 
@@ -176,10 +214,12 @@ public class InfluxServiceImpl implements InfluxService {
             Query query1 = new Query("SELECT MEAN(\"Memory\") FROM " + var, dbName);
             Query query2 = new Query("SELECT MEAN(\"Cpu\") FROM " + var, dbName);
             Query query3 = new Query("SELECT username from "+ var +" limit 1;", dbName);
+            Query query4 = new Query("SELECT servicename from "+ var +" limit 1;",dbName);
 
             QueryResult queryResult = influxDBTemplate.query(query1);
             QueryResult queryResult2 = influxDBTemplate.query(query2);
             QueryResult queryResult3 = influxDBTemplate.query(query3);
+            QueryResult queryResult4 = influxDBTemplate.query(query4);
 
 
             System.out.println(var);
@@ -189,20 +229,32 @@ public class InfluxServiceImpl implements InfluxService {
             System.out.println(queryResult2.getResults().get(0).getSeries().get(0).getValues().get(0).get(1));
             System.out.println("!!!!!!!!!!!!!!!!!!Username");
             System.out.println(queryResult3.getResults().get(0).getSeries().get(0).getValues().get(0).get(1));
+            System.out.println("!!!!!!!!!!!!!!!!!!Servicename");
+            System.out.println(queryResult4.getResults().get(0).getSeries().get(0).getValues().get(0).get(1));
+
 
 
             MetricsThreshold metricsThreshold = new MetricsThreshold();
 
             metricsThreshold.setUserName(queryResult3.getResults().get(0).getSeries().get(0).getValues().get(0).get(1).toString());
-            metricsThreshold.setServiceName(var);
+            metricsThreshold.setServiceName(queryResult4.getResults().get(0).getSeries().get(0).getValues().get(0).get(1).toString());
             metricsThreshold.setCpu(Float.parseFloat(queryResult2.getResults().get(0).getSeries().get(0).getValues().get(0).get(1).toString()));
             metricsThreshold.setMem(Float.parseFloat(queryResult.getResults().get(0).getSeries().get(0).getValues().get(0).get(1).toString()));
 
             System.out.println(metricsThreshold.toString());
-            kafkaTemplate.send(TOPIC, metricsThreshold.toString());
+
+            ObjectMapper obj = new ObjectMapper();
+            String metricsThresholdJson = obj.writeValueAsString(metricsThreshold);
+
+
+            System.out.println(metricsThresholdJson);
+
+            kafkaTemplate.send(TOPIC, metricsThresholdJson);
 
 
         }
+
+
 
 
 
