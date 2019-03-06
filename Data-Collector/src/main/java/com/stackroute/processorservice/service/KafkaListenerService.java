@@ -141,7 +141,7 @@ public class KafkaListenerService {
                 serviceFields.setServiceType(serviceObj.get("serviceType").toString().replace("\"", ""));
                 serviceFields.setServicePort(serviceObj.get("portNumber").toString().replace("\"", ""));
 
-                String agenturl = "http://" + appObj.get("ipAddress").toString().replace("\"", "") + ":8020/docker/stats";
+                String agenturl = "http://" + appObj.get("ipAddress").toString().replace("\"", "") + "/docker/stats";
 
                 serviceFields.setAgentUrl(agenturl);
 
