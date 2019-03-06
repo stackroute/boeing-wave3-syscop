@@ -21,14 +21,9 @@ public class AppRegDataServiceImpl implements AppRegDataService {
     }
 
     @Override
-    public User saveUser(String message) {
+    public User saveUser(User user) {
 
-        UnixEpochDateTypeAdapter unixEpochDateTypeAdapter = new UnixEpochDateTypeAdapter();
-        Gson gson = new GsonBuilder()
-                .registerTypeAdapter(Date.class, unixEpochDateTypeAdapter.getUnixEpochDateTypeAdapter())
-                .create();
 
-        User user = gson.fromJson(message, User.class);
         System.out.println(user.toString());
         System.out.println("Saving......");
         dataCollectorRepository.save(user);

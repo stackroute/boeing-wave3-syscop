@@ -47,6 +47,12 @@ public class KafkaListenerService {
     @KafkaListener(topics = "kafkaAppRegistration", groupId = "group_id2")
     public void consumeAppRegister(String message) {
 
+        UnixEpochDateTypeAdapter unixEpochDateTypeAdapter = new UnixEpochDateTypeAdapter();
+        Gson gson = new GsonBuilder()
+                .registerTypeAdapter(Date.class, unixEpochDateTypeAdapter.getUnixEpochDateTypeAdapter())
+                .create();
+
+
         System.out.println("inside the kafka listener");
         JsonParser jsonParser = new JsonParser();
         ObjectMapper objMapper = new ObjectMapper();
@@ -57,9 +63,10 @@ public class KafkaListenerService {
 
         System.out.println("Consumed msg : " + message);
 
+        User user = gson.fromJson(message, User.class);
 
-        System.out.println("Save Message");
-        appRegDataService.saveUser(message);
+        System.out.println("Save User");
+        appRegDataService.saveUser(user);
 
 
         String userName = obj.get("userName").toString();
