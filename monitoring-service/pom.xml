@@ -8,7 +8,6 @@
 		<version>v1.0.5</version><!-- lookup parent from repository -->
 		<relativePath>../pom.xml</relativePath>
 	</parent>
-	<groupId>com.stackroute</groupId>
 	<artifactId>monitoring-service</artifactId>
 	<name>monitoring-service</name>
 	<description>Demo project for Spring Boot</description>
