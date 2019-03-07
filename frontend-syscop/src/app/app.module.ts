@@ -34,6 +34,7 @@ import { EditdialogComponent } from './components/editdialog/editdialog.componen
 import { DeletedialogComponent } from './components/deletedialog/deletedialog.component';
 import { LandingComponent } from './components/landing/landing.component';
 import { NotificationsComponent } from './components/notifications/notifications.component';
+import { NgMatSearchBarModule } from 'ng-mat-search-bar';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { NotificationsComponent } from './components/notifications/notifications
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
+    NgMatSearchBarModule,
     MatTabsModule,
     MatSidenavModule,
     MatToolbarModule,
