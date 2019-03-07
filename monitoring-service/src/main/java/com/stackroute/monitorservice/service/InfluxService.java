@@ -1,9 +1,19 @@
 package com.stackroute.monitorservice.service;
 
-import com.stackroute.monitorservice.model.Monitor;
+import com.fasterxml.jackson.core.JsonProcessingException;
+
+
+import com.stackroute.monitorservice.model.MetricsFinal;
+import org.influxdb.dto.QueryResult;
 
 public interface InfluxService {
 
 
-    public Monitor saveMetrics(Monitor monitor);
+
+    //public Metrics saveMetrics(Metrics metrics);
+
+    public MetricsFinal saveMetricsFinal(MetricsFinal metricsFinal) throws  JsonProcessingException;
+
+    public QueryResult calculateThreshold(String tablename) throws JsonProcessingException;
+    public QueryResult calculateAllThreshold() throws JsonProcessingException;
 }
