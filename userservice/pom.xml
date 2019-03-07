@@ -6,7 +6,7 @@
 		<groupId>com.stackroute</groupId>
 		<artifactId>syscop</artifactId>
 		<version>v1.0.5</version><!-- lookup parent from repository -->
-	    <relativePath>../pom.xml</relativePath>
+	    	<relativePath>../pom.xml</relativePath>
 	</parent>
 
 	<artifactId>userservice</artifactId>
