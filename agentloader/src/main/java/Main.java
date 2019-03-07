@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args){
-
+//        args[0] is agent name, args[1] is start port
         List<VirtualMachineDescriptor> vmList = VirtualMachine.list();
 
         int port = Integer.valueOf(args[1]);
