@@ -7,6 +7,7 @@ import com.stackroute.monitorservice.model.Metrics;
 import com.stackroute.monitorservice.model.MetricsFinal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,16 +15,21 @@ public class KafkaListenerService  {
 
 
     int counter = 0;
-    @Autowired
     private InfluxServiceImpl influxService;
 
-    @Autowired
     private MetricsFinal metricsFinal;
 
-    @Autowired
     private Metrics metrics;
 
+    private SimpMessagingTemplate template;
 
+    @Autowired
+    public KafkaListenerService(InfluxServiceImpl influxService, MetricsFinal metricsFinal, Metrics metrics, SimpMessagingTemplate template) {
+        this.influxService = influxService;
+        this.metricsFinal = metricsFinal;
+        this.metrics = metrics;
+        this.template = template;
+    }
 
     @KafkaListener(topics = "Kafka_Example_Test_Final3", groupId = "group_id_monitoring")
     public void consume(String message) throws JsonProcessingException {
@@ -57,8 +63,29 @@ public class KafkaListenerService  {
 
 
 
-            influxService.saveMetricsFinal(metricsFinal);
+        influxService.saveMetricsFinal(metricsFinal);
 //            System.out.println("Metrics Saved");
+
+
+        String cpu = metricObj.get("cpu").toString().replace("%","").replace("\"","");
+        String mem = metricObj.get("mem").toString().replace("%","").replace("\"","");
+        String netIO = metricObj.get("netIO").toString().replace("%","").replace("\"","");;
+        String str[] = netIO.split("kB");
+        String netio = str[0];
+        System.out.println("net i o" + netio);
+        //double d = Double.parseDouble(cpu);
+        Double sock = Double.valueOf(cpu);
+        Double sock1 = Double.valueOf(mem);
+        Double sock2 = Double.valueOf(netio);
+        System.out.println("cpu======="+cpu);
+//        System.out.println("double===="+sock);
+//
+////
+        template.convertAndSend("/topic/cpu-metrics",cpu);
+        template.convertAndSend("/topic/mem-metrics",sock1);
+        template.convertAndSend("/topic/netIO-metrics",sock2);
+        //to convert to  String  method
+//        System.out.println(monitor.toString ());
 
 
 
