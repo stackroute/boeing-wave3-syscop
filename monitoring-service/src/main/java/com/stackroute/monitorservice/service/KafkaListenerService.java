@@ -3,8 +3,8 @@ package com.stackroute.monitorservice.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.stackroute.processorservice.model.Metrics;
-import com.stackroute.processorservice.model.MetricsFinal;
+import com.stackroute.monitorservice.model.Metrics;
+import com.stackroute.monitorservice.model.MetricsFinal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
@@ -21,11 +21,11 @@ public class KafkaListenerService  {
     private MetricsFinal metricsFinal;
 
     @Autowired
-    private  Metrics metrics;
+    private Metrics metrics;
 
 
 
-    @KafkaListener(topics = "Kafka_Example_Test_Final3", groupId = "group_id")
+    @KafkaListener(topics = "Kafka_Example_Test_Final3", groupId = "group_id_monitoring")
     public void consume(String message) throws JsonProcessingException {
         System.out.println("Consumed msg : " + message);
 
