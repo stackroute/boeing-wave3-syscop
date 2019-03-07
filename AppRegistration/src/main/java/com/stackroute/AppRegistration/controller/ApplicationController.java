@@ -48,7 +48,7 @@ public class ApplicationController {
         ObjectMapper obj = new ObjectMapper();
         String jsonStr = obj.writeValueAsString(resultUserObj);
         System.out.println(jsonStr);
-        kafkaTemplate.send(TOPIC, jsonStr);
+        //kafkaTemplate.send(TOPIC, jsonStr);
 
 
         responseEntity = new ResponseEntity<String>("User-Application Registration Successfull", HttpStatus.CREATED);
@@ -70,7 +70,7 @@ public class ApplicationController {
 
         ObjectMapper obj = new ObjectMapper();
         String jsonStr = obj.writeValueAsString(resultUserObj);
-        kafkaTemplate.send(TOPIC, jsonStr);
+        //kafkaTemplate.send(TOPIC, jsonStr);
 
         responseEntity = new ResponseEntity<String>("Application Update Successfull", HttpStatus.OK);
         return responseEntity;
@@ -84,7 +84,7 @@ public class ApplicationController {
 
         ObjectMapper obj = new ObjectMapper();
         String jsonStr = obj.writeValueAsString(resultUserObj);
-        kafkaTemplate.send(TOPIC, jsonStr);
+        //kafkaTemplate.send(TOPIC, jsonStr);
 
         responseEntity = new ResponseEntity<String>("Application Deletion Successfull", HttpStatus.OK);
         return responseEntity;
