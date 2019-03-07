@@ -87,7 +87,7 @@ ngAfterViewInit() {
   const myLine = new Chart(ctx, this.config);
 
   /* Configuring WebSocket on Client Side */
-  const socket = new WebSocket('ws://13.232.165.99:8095/monitoring-service/live-metrics');
+  const socket = new WebSocket('ws://0.0.0.0:8095/monitoring-service/live-metrics');
   this.stompClient = Stomp.over(socket);
   this.stompClient.connect({}, function (frame) {
     that.stompClient.subscribe('/topic/netIO-metrics', function (temperature) {
