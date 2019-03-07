@@ -1009,7 +1009,7 @@ var ChartOneComponent = /** @class */ (function () {
         var ctx = canvas.getContext('2d');
         var myLine = new chart_js__WEBPACK_IMPORTED_MODULE_3__(ctx, this.config);
         /* Configuring WebSocket on Client Side */
-        var socket = new WebSocket('ws:/0.0.0.0:8095/monitoring-service/live-metrics');
+        var socket = new WebSocket('ws:/13.262.165.99:8018/live-metrics');
         this.stompClient = stompjs__WEBPACK_IMPORTED_MODULE_2__["over"](socket);
         this.stompClient.connect({}, function (frame) {
             that.stompClient.subscribe('/topic/cpu-metrics', function (temperature) {
