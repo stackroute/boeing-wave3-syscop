@@ -27,6 +27,7 @@
 
     <modules>
         <module>eureka-server</module>
+	<module>config-service</module>
 	    <module>zuul-gatewayservice</module>
 	<module>userservice</module>
 	<module>jwtauthentication</module>
