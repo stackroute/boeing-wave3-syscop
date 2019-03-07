@@ -1012,7 +1012,8 @@ var ChartOneComponent = /** @class */ (function () {
         var ctx = canvas.getContext('2d');
         var myLine = new chart_js__WEBPACK_IMPORTED_MODULE_4__(ctx, this.config);
         /* Configuring WebSocket on Client Side */
-        var socket = new sockjs_client__WEBPACK_IMPORTED_MODULE_3__('http:/13.232.165.99:8095/live-metrics');
+        var proxyurl = 'http://cors-anywhere.herokuapp.com/';
+        var socket = new sockjs_client__WEBPACK_IMPORTED_MODULE_3__(proxyurl + 'http://13.232.165.99:8095/monitoring-service/live-metrics');
         this.stompClient = stompjs__WEBPACK_IMPORTED_MODULE_2__["over"](socket);
         this.stompClient.connect({}, function (frame) {
             that.stompClient.subscribe('/topic/cpu-metrics', function (temperature) {

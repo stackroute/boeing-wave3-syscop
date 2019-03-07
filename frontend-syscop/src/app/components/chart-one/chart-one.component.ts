@@ -85,7 +85,8 @@ ngAfterViewInit() {
   const myLine = new Chart(ctx, this.config);
 
   /* Configuring WebSocket on Client Side */
-  const socket = new SockJS('http:/13.232.165.99:8095/live-metrics');
+  const proxyurl = 'http://cors-anywhere.herokuapp.com/';
+  const socket = new SockJS(proxyurl + 'http://13.232.165.99:8095/monitoring-service/live-metrics');
   this.stompClient = Stomp.over(socket);
   this.stompClient.connect({}, function (frame) {
     that.stompClient.subscribe('/topic/cpu-metrics', function (temperature) {
