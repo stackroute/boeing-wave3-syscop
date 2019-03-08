@@ -1,4 +1,4 @@
-package com.stackroute.threshholdservice.model;
+package com.stackroute.thresholdservice.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;

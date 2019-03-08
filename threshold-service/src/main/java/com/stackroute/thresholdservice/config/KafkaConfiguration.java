@@ -1,4 +1,4 @@
-package com.stackroute.threshholdservice.config;
+package com.stackroute.thresholdservice.config;
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;

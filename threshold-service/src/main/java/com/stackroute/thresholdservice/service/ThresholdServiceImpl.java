@@ -1,7 +1,7 @@
-package com.stackroute.threshholdservice.service;
+package com.stackroute.thresholdservice.service;
 
-import com.stackroute.threshholdservice.model.MetricsThreshold;
-import com.stackroute.threshholdservice.repository.ThresholdRepository;
+import com.stackroute.thresholdservice.model.MetricsThreshold;
+import com.stackroute.thresholdservice.repository.ThresholdRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

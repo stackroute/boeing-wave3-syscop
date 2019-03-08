@@ -1,10 +1,9 @@
-package com.stackroute.threshholdservice.service;
+package com.stackroute.thresholdservice.service;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.stackroute.threshholdservice.model.AlertObject;
-import com.stackroute.threshholdservice.model.MetricsThreshold;
-import org.codehaus.jackson.JsonProcessingException;
+import com.stackroute.thresholdservice.model.AlertObject;
+import com.stackroute.thresholdservice.model.MetricsThreshold;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;

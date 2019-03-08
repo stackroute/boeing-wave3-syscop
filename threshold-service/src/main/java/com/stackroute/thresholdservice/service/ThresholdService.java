@@ -1,6 +1,6 @@
-package com.stackroute.threshholdservice.service;
+package com.stackroute.thresholdservice.service;
 
-import com.stackroute.threshholdservice.model.MetricsThreshold;
+import com.stackroute.thresholdservice.model.MetricsThreshold;
 
 public interface ThresholdService {
 

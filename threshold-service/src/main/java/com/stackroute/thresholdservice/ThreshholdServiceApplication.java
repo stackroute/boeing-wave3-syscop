@@ -1,4 +1,4 @@
-package com.stackroute.threshholdservice;
+package com.stackroute.thresholdservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

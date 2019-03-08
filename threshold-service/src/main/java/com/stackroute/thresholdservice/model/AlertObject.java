@@ -1,4 +1,4 @@
-package com.stackroute.threshholdservice.model;
+package com.stackroute.thresholdservice.model;
 
 public class AlertObject {
 

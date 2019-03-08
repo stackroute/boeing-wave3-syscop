@@ -1,6 +1,6 @@
-package com.stackroute.threshholdservice.repository;
+package com.stackroute.thresholdservice.repository;
 
-import com.stackroute.threshholdservice.model.MetricsThreshold;
+import com.stackroute.thresholdservice.model.MetricsThreshold;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 
