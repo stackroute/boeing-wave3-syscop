@@ -1,6 +1,6 @@
 FROM openjdk:11
 
-ADD ./target/zuul-gatewayservice-v1.0.6.jar /event/src/zuul-gatewayservice-v1.0.6.jar
+ADD ./target/zuul-gatewayservice-v1.0.7.jar /event/src/zuul-gatewayservice-v1.0.7.jar
 EXPOSE 8095
 WORKDIR event/src
-ENTRYPOINT ["java","-jar","zuul-gatewayservice-v1.0.6.jar"]
+ENTRYPOINT ["java","-jar","zuul-gatewayservice-v1.0.7.jar"]
