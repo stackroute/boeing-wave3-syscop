@@ -66,24 +66,24 @@ public class KafkaListenerService  {
 
         String cpu = metricObj.get("cpu").toString().replace("%","").replace("\"","");
         String mem = metricObj.get("mem").toString().replace("%","").replace("\"","");
-        String netIO = metricObj.get("netIO").toString().replace("%","").replace("\"","");;
+        //String netIO = metricObj.get("netIO").toString().replace("%","").replace("\"","");;
 
-        String str[] = netIO.split("kB");
+        //String str[] = netIO.split("kB");
 
-        String netio = str[0];
-        System.out.println("net i o" + netio);
+        //String netio = str[0];
+        //System.out.println("net i o" + netio);
         //double d = Double.parseDouble(cpu);
         Double sock = Double.valueOf(cpu);
         Double sock1 = Double.valueOf(mem);
-        Double sock2 = Double.valueOf(netio);
+        //Double sock2 = Double.valueOf(netio);
 
         System.out.println("cpu======="+cpu);
 //        System.out.println("double===="+sock);
 //
 ////
-        template.convertAndSend("/topic/cpu-metrics",cpu);
+        template.convertAndSend("/topic/cpu-metrics",sock);
         template.convertAndSend("/topic/mem-metrics",sock1);
-        template.convertAndSend("/topic/netIO-metrics",sock2);
+        //template.convertAndSend("/topic/netIO-metrics",sock2);
 
         //to convert to  String  method
         System.out.println(monitor.toString ());
