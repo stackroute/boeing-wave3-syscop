@@ -1,6 +1,6 @@
 FROM openjdk:11
 
-ADD ./target/config-server-v1.0.6.jar /event/src/config-server-v1.0.6.jar
+ADD ./target/config-server-v1.0.7.jar /event/src/config-server-v1.0.7.jar
 EXPOSE 8077
 WORKDIR event/src
-ENTRYPOINT ["java","-jar","config-server-v1.0.6.jar"]
+ENTRYPOINT ["java","-jar","config-server-v1.0.7.jar"]
