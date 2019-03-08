@@ -14,12 +14,8 @@ public class SampleJob implements Job {
 
     Logger logger = LoggerFactory.getLogger(getClass());
 
-    private ThreadService jobService;
-
     @Autowired
-    public SampleJob(ThreadService jobService) {
-        this.jobService = jobService;
-    }
+    private ThreadService jobService;
 
     public void execute(JobExecutionContext context) throws JobExecutionException {
 

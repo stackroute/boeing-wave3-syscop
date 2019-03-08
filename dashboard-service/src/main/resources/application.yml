@@ -11,7 +11,7 @@ eureka:         #tells about the Eureka server details and its refresh time
       duration: 5
 spring:
   application:
-    name: zuul-gatewayservice
+    name: dashboard-service
     #current service name to be used by the eureka server
 management:
   security:
@@ -19,3 +19,5 @@ management:
 logging:
   level:
     com.example.howtodoinjava: DEBUG
+server:
+  port: 8035

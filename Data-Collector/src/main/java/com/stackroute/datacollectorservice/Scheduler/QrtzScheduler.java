@@ -26,13 +26,8 @@ public class QrtzScheduler {
 
     Logger logger = LoggerFactory.getLogger(getClass());
 
-
-    private ApplicationContext applicationContext;
-
     @Autowired
-    public QrtzScheduler(ApplicationContext applicationContext) {
-        this.applicationContext = applicationContext;
-    }
+    private ApplicationContext applicationContext;
 
     @PostConstruct
     public void init() {

@@ -467,6 +467,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_deletedialog_deletedialog_component__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./components/deletedialog/deletedialog.component */ "./src/app/components/deletedialog/deletedialog.component.ts");
 /* harmony import */ var _components_landing_landing_component__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./components/landing/landing.component */ "./src/app/components/landing/landing.component.ts");
 /* harmony import */ var _components_notifications_notifications_component__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./components/notifications/notifications.component */ "./src/app/components/notifications/notifications.component.ts");
+/* harmony import */ var ng_mat_search_bar__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ng-mat-search-bar */ "./node_modules/ng-mat-search-bar/fesm5/ng-mat-search-bar.js");
+
 
 
 
@@ -530,6 +532,7 @@ var AppModule = /** @class */ (function () {
                 _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_6__["BrowserAnimationsModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_10__["FormsModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_10__["ReactiveFormsModule"],
+                ng_mat_search_bar__WEBPACK_IMPORTED_MODULE_34__["NgMatSearchBarModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_3__["MatTabsModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_3__["MatSidenavModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_3__["MatToolbarModule"],
@@ -940,6 +943,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ChartOneComponent = /** @class */ (function () {
     function ChartOneComponent() {
+        this.stompClient = null;
         /* Chart Configuration */
         this.config = {
             type: 'line',
@@ -1089,6 +1093,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ChartThreeComponent = /** @class */ (function () {
     function ChartThreeComponent() {
+        this.stompClient = null;
         this.config = {
             type: 'line',
             data: {
@@ -1238,7 +1243,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ChartTwoComponent = /** @class */ (function () {
     function ChartTwoComponent() {
-        /* Chart Configuration */
+        this.stompClient = null;
         this.config = {
             type: 'line',
             data: {
@@ -1654,7 +1659,7 @@ module.exports = ".sidenav-container {\n  height: 100%;\n}\n\n.sidenav {\n  widt
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-toolbar color=\"primary\">\n  <mat-toolbar-row>\n    <button type=\"button\" aria-label=\"Toggle sidenav\" mat-icon-button (click)=\"drawer.toggle()\">\n      <mat-icon aria-label=\"Side nav toggle icon\">menu</mat-icon>\n    </button>\n    <span>SYSCOP</span>\n    <span class=\"example-spacer\">\n    </span>\n    <a (click)=\"logout()\"><mat-icon>account_circle</mat-icon></a>\n    <span>\n    </span>\n  </mat-toolbar-row>\n</mat-toolbar>\n<mat-sidenav-container class=\"sidenav-container\">\n  <mat-sidenav #drawer class=\"sidenav\" fixedInViewport=\"!(isHandset$ | async)\" [attr.role]=\"(isHandset$ | async) ? 'dialog' : 'navigation'\"\n    [mode]=\"(isHandset$ | async) ? 'over' : 'side'\" [opened]=\"!(isHandset$ | async)\" fixedTopGap=\"56\">\n    <mat-nav-list>\n      <a mat-list-item routerLink='appRegistration'>\n        <span>\n          <mat-icon>assignment</mat-icon>\n        </span>\n        <span> Applications</span>\n      </a>\n      <a mat-list-item routerLink='dashboard'>\n        <span>\n          <mat-icon>dashboard</mat-icon>\n        </span>\n        <span> Dashboard </span>\n      </a>\n      <a mat-list-item routerLink='notifications'>\n        <span>\n          <mat-icon matBadge=\"15\" matBadgeColor=\"warn\">notification_important</mat-icon>\n        </span>\n        <span>Notifications</span>\n      </a>\n      <a mat-list-item routerLink=\"data\">\n        <span>\n          <mat-icon>trending_up</mat-icon>\n        </span>\n        <span>Data Sources</span>\n      </a>\n      <a mat-list-item href=\"#\">\n        <span>\n          <mat-icon>work</mat-icon>\n        </span>\n        <span>Company</span>\n      </a>\n    </mat-nav-list>\n  </mat-sidenav>\n  <mat-select>\n    <mat-option>\n    </mat-option>\n  </mat-select>\n  <mat-sidenav-content fixedTopGap=\"56\">\n    <router-outlet></router-outlet>\n  </mat-sidenav-content>\n</mat-sidenav-container>"
+module.exports = "<mat-toolbar color=\"primary\">\n  <mat-toolbar-row>\n    <button type=\"button\" aria-label=\"Toggle sidenav\" mat-icon-button (click)=\"drawer.toggle()\">\n      <mat-icon aria-label=\"Side nav toggle icon\">menu</mat-icon>\n    </button>\n    <span>SYSCOP</span>\n    <span class=\"example-spacer\">\n    </span>\n    <span>\n    <button type=\"button\" mat-icon-button (click)=\"logout()\"><mat-icon>account_circle</mat-icon></button>\n  </span>\n    <span>\n    </span>\n  </mat-toolbar-row>\n</mat-toolbar>\n<mat-sidenav-container class=\"sidenav-container\">\n  <mat-sidenav #drawer class=\"sidenav\" fixedInViewport=\"!(isHandset$ | async)\" [attr.role]=\"(isHandset$ | async) ? 'dialog' : 'navigation'\"\n    [mode]=\"(isHandset$ | async) ? 'over' : 'side'\" [opened]=\"!(isHandset$ | async)\" fixedTopGap=\"56\">\n    <mat-nav-list>\n      <a mat-list-item routerLink='appRegistration'>\n        <span>\n          <mat-icon>assignment</mat-icon>\n        </span>\n        <span> Applications</span>\n      </a>\n      <a mat-list-item routerLink='dashboard'>\n        <span>\n          <mat-icon>dashboard</mat-icon>\n        </span>\n        <span> Dashboard </span>\n      </a>\n      <a mat-list-item routerLink='notifications'>\n        <span>\n          <mat-icon matBadge=\"15\" matBadgeColor=\"warn\">notification_important</mat-icon>\n        </span>\n        <span>Notifications</span>\n      </a>\n      <a mat-list-item routerLink=\"data\">\n        <span>\n          <mat-icon>trending_up</mat-icon>\n        </span>\n        <span>Data Sources</span>\n      </a>\n      <a mat-list-item href=\"#\">\n        <span>\n          <mat-icon>work</mat-icon>\n        </span>\n        <span>Company</span>\n      </a>\n    </mat-nav-list>\n  </mat-sidenav>\n  <mat-select>\n    <mat-option>\n    </mat-option>\n  </mat-select>\n  <mat-sidenav-content fixedTopGap=\"56\">\n    <router-outlet></router-outlet>\n  </mat-sidenav-content>\n</mat-sidenav-container>"
 
 /***/ }),
 
@@ -2039,7 +2044,7 @@ var NotificationsComponent = /** @class */ (function () {
     }
     NotificationsComponent.prototype.ngOnInit = function () {
         var that = this;
-        var socket = new sockjs_client__WEBPACK_IMPORTED_MODULE_3__('http://172.23.239.95:8095/alert-service/live-temperature');
+        var socket = new sockjs_client__WEBPACK_IMPORTED_MODULE_3__('http://13.232.165.99:8020/live-temperature');
         this.stompClient = stompjs__WEBPACK_IMPORTED_MODULE_2__["over"](socket);
         this.stompClient.connect({}, function (frame) {
             that.stompClient.subscribe('/topic/temperature', function (temperature) {
@@ -2338,7 +2343,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/user/Documents/boeing-wave3-syscop/v1.0.5/boeing-wave3-syscop/frontend-syscop/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /home/user/Syscop/v1.0.5/boeing-wave3-syscop/frontend-syscop/src/main.ts */"./src/main.ts");
 
 
 /***/ })

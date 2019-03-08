@@ -3,6 +3,7 @@ import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
 import * as Chart from 'chart.js';
 import * as $ from 'jquery';
+import * as webstomp from 'webstomp-client';
 
 
 @Component({
@@ -11,7 +12,7 @@ import * as $ from 'jquery';
   styleUrls: ['./chart-three.component.css']
 })
 export class ChartThreeComponent implements AfterViewInit {
-  stompClient: any;
+  private stompClient = null;
   config = {
     type: 'line',
     data: {

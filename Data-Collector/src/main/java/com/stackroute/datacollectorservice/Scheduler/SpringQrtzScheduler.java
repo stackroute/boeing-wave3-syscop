@@ -25,12 +25,9 @@ import javax.annotation.PostConstruct;
 public class SpringQrtzScheduler {
 
     Logger logger = LoggerFactory.getLogger(getClass());
-    private ApplicationContext applicationContext;
 
     @Autowired
-    public SpringQrtzScheduler(ApplicationContext applicationContext) {
-        this.applicationContext = applicationContext;
-    }
+    private ApplicationContext applicationContext;
 
     @PostConstruct
     public void init() {

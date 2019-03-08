@@ -1,10 +1,9 @@
 package com.stackroute.monitorservice.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.stackroute.monitorservice.model.Metrics;
-import com.stackroute.monitorservice.model.MetricsFinal;
+import com.stackroute.monitorservice.model.Monitor;
+import org.codehaus.jackson.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -14,82 +13,80 @@ import org.springframework.stereotype.Service;
 public class KafkaListenerService  {
 
 
-    int counter = 0;
-    private InfluxServiceImpl influxService;
-
-    private MetricsFinal metricsFinal;
-
-    private Metrics metrics;
-
-    private SimpMessagingTemplate template;
+    @Autowired
+    SimpMessagingTemplate template;
 
     @Autowired
-    public KafkaListenerService(InfluxServiceImpl influxService, MetricsFinal metricsFinal, Metrics metrics, SimpMessagingTemplate template) {
-        this.influxService = influxService;
-        this.metricsFinal = metricsFinal;
-        this.metrics = metrics;
-        this.template = template;
-    }
+    private InfluxServiceImpl influxService;
+
+    @Autowired
+    private Monitor monitor;
 
     @KafkaListener(topics = "Kafka_Example_Test_Final3", groupId = "group_id_monitoring")
     public void consume(String message) throws JsonProcessingException {
-        System.out.println("Consumed msg : " + message);
+        System.out.println("Consumed Kafka msg : " + message);
+
 
         JsonParser jsonParser = new JsonParser();
-
-        JsonObject obj = (JsonObject) jsonParser.parse(message);
-
-        JsonObject metricObj = obj.getAsJsonObject("metrics");
-
-        metrics.setBlockIO(metricObj.get("blockIO").toString().replace("\"",""));
-        metrics.setContainerId(metricObj.get("containerId").toString().replace("\"",""));
-        metrics.setContainerName(metricObj.get("containerName").toString().replace("\"",""));
-        metrics.setCpu(Float.parseFloat(metricObj.get("cpu").toString().replace("\"","").replace("%","")));
-        metrics.setMem(Float.parseFloat(metricObj.get("mem").toString().replace("\"","").replace("%","")));
-        metrics.setNetIO(metricObj.get("netIO").toString().replace("\"",""));
-        metrics.setpId(Long.parseLong(metricObj.get("pId").toString().replace("\"","")));
-
-        metricsFinal.setUserName(obj.get("userName").toString().replace("\"",""));
-        metricsFinal.setServiceName(obj.get("serviceName").toString().replace("\"",""));
-        metricsFinal.setServiceType(obj.get("serviceType").toString().replace("\"",""));
-        metricsFinal.setPortNumber(Integer.parseInt(obj.get("portNumber").toString()));
-        metricsFinal.setMetrics(metrics);
+        JsonObject jsonObject = (JsonObject) jsonParser.parse(message);
 
 
 
-        counter++;
-        System.out.println("Messages received "+counter);
+        JsonObject metricObj = jsonObject.getAsJsonObject("metrics");
+
+        monitor.setContainerId(metricObj.get("containerId").toString());
+        monitor.setContainerName(metricObj.get("containerName").toString());
+        monitor.setCpu(metricObj.get("cpu").toString());
+        monitor.setMem(metricObj.get("mem").toString());
+        monitor.setNetIO(metricObj.get("netIO").toString());
+        monitor.setBlockIO (metricObj.get("blockIO").toString());
+        monitor.setpId (metricObj.get("pId").toString());
+        monitor.setPort(jsonObject.get("portNumber").toString());
+
+
+        //String[] strMessage = message.split(",");
 
 
 
 
-        influxService.saveMetricsFinal(metricsFinal);
-//            System.out.println("Metrics Saved");
+//        monitor.setContainerId(strMessage[0].split(":")[1].replace("\"",""));
+//        monitor.setContainerName(strMessage[1].split(":")[1].replace("\"",""));
+//        monitor.setCpu(strMessage[4].split(":")[1].replace("\"",""));
+//        monitor.setMem(strMessage[2].split(":")[1].replace("\"",""));
+//        monitor.setNetIO(strMessage[3].split(":")[1].replace("\"",""));
+//        monitor.setBlockIO (strMessage[5].split(":")[1].replace("\"",""));
+//        monitor.setpId (strMessage[6].split(":")[1].replace("\"",""));
+//        monitor.setPort(strMessage[7].split(":")[1].replace("\"","").replace("}]"," "));
 
+        System.out.println("Saving Monitor");
+
+        //to save the monitor to db
+        influxService.saveMetrics(monitor);
+        System.out.println("Monitor Saved");
 
         String cpu = metricObj.get("cpu").toString().replace("%","").replace("\"","");
         String mem = metricObj.get("mem").toString().replace("%","").replace("\"","");
-        String netIO = metricObj.get("netIO").toString().replace("%","").replace("\"","");;
-        String str[] = netIO.split("kB");
-        String netio = str[0];
-        System.out.println("net i o" + netio);
+        //String netIO = metricObj.get("netIO").toString().replace("%","").replace("\"","");;
+
+        //String str[] = netIO.split("kB");
+
+        //String netio = str[0];
+        //System.out.println("net i o" + netio);
         //double d = Double.parseDouble(cpu);
         Double sock = Double.valueOf(cpu);
         Double sock1 = Double.valueOf(mem);
-        Double sock2 = Double.valueOf(netio);
+        //Double sock2 = Double.valueOf(netio);
+
         System.out.println("cpu======="+cpu);
 //        System.out.println("double===="+sock);
 //
 ////
-        template.convertAndSend("/topic/cpu-metrics",cpu);
+        template.convertAndSend("/topic/cpu-metrics",sock);
         template.convertAndSend("/topic/mem-metrics",sock1);
-        template.convertAndSend("/topic/netIO-metrics",sock2);
+        //template.convertAndSend("/topic/netIO-metrics",sock2);
+
         //to convert to  String  method
-//        System.out.println(monitor.toString ());
-
-
-
-        System.out.println(metricsFinal.toString ());
+        System.out.println(monitor.toString ());
 
 
     }
