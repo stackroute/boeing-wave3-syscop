@@ -1,5 +1,5 @@
 
 FROM openjdk:11.0-oracle
-ADD ./target/userservice-v1.0.6.jar /usr/src/userservice-v1.0.6.jar
+ADD ./target/userservice-v1.0.7.jar /usr/src/userservice-v1.0.7.jar
 WORKDIR usr/src
-ENTRYPOINT ["java","-jar","userservice-v1.0.6.jar"]
+ENTRYPOINT ["java","-jar","userservice-v1.0.7.jar"]
