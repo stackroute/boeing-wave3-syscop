@@ -49,6 +49,8 @@ services:
    restart: always
    volumes: 
     - ./data/db:/data/db
+   healthcheck:
+    test: "exit 0"
 
   influxdb:
    image: influxdb:latest
@@ -59,6 +61,8 @@ services:
     - /opt/appdata/influxdb:/var/lib/influxdb
    restart:
     always
+   healthcheck:
+    test: "exit 0"
 
   mysqldb:
    image: mysql
@@ -72,6 +76,8 @@ services:
    container_name: mysql_docker
    volumes:
     - data:/var/lib/mysql
+   healthcheck:
+    test: "exit 0"
 
   app-registration: 
    build: AppRegistration/
