@@ -10,6 +10,18 @@ services:
       - 8077:8077
       healthcheck:
        test: "exit 0"
+ 
+  eurekaserver: 
+    build: eureka-server/
+    image: eureka-servcie:latest
+    network_mode: host
+    depends_on: 
+      - configserver
+    ports: 
+      - 8010:8010
+    restart: always
+    healthcheck:
+     test: "exit 0"
 
   apigateway: 
     build: zuul-gatewayservice/
@@ -20,18 +32,6 @@ services:
     network_mode: host
     ports: 
       - 8095:8095
-    restart: always
-    healthcheck:
-     test: "exit 0"
-
-  eurekaserver: 
-    build: eureka-server/
-    image: eureka-servcie:latest
-    network_mode: host
-    depends_on: 
-      - configserver
-    ports: 
-      - 8010:8010
     restart: always
     healthcheck:
      test: "exit 0"
