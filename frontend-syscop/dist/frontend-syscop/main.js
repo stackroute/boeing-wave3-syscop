@@ -929,10 +929,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var stompjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! stompjs */ "./node_modules/stompjs/index.js");
 /* harmony import */ var stompjs__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(stompjs__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! chart.js */ "./node_modules/chart.js/src/chart.js");
-/* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(chart_js__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var sockjs_client__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! sockjs-client */ "./node_modules/sockjs-client/lib/entry.js");
+/* harmony import */ var sockjs_client__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(sockjs_client__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! chart.js */ "./node_modules/chart.js/src/chart.js");
+/* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(chart_js__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_5__);
+
 
 
 
@@ -1008,14 +1011,14 @@ var ChartOneComponent = /** @class */ (function () {
         var that = this;
         var canvas = document.getElementById('lineChart');
         var ctx = canvas.getContext('2d');
-        var myLine = new chart_js__WEBPACK_IMPORTED_MODULE_3__(ctx, this.config);
+        var myLine = new chart_js__WEBPACK_IMPORTED_MODULE_4__(ctx, this.config);
         /* Configuring WebSocket on Client Side */
-        var socket = new WebSocket('ws://13.232.165.99:8095/monitoring-service/live-metrics');
+        var socket = new sockjs_client__WEBPACK_IMPORTED_MODULE_3__('http://13.232.165.99:8018/live-metrics');
         this.stompClient = stompjs__WEBPACK_IMPORTED_MODULE_2__["over"](socket);
         this.stompClient.connect({}, function (frame) {
             that.stompClient.subscribe('/topic/cpu-metrics', function (temperature) {
                 console.log(temperature.body);
-                jquery__WEBPACK_IMPORTED_MODULE_4__('#temperature').text(temperature.body);
+                jquery__WEBPACK_IMPORTED_MODULE_5__('#temperature').text(temperature.body);
                 /* Push new data On X-Axis of Chart */
                 that.config.data.labels.push(new Date());
                 /* Push new data on Y-Axis of chart */
@@ -1076,10 +1079,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var stompjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! stompjs */ "./node_modules/stompjs/index.js");
 /* harmony import */ var stompjs__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(stompjs__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! chart.js */ "./node_modules/chart.js/src/chart.js");
-/* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(chart_js__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var sockjs_client__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! sockjs-client */ "./node_modules/sockjs-client/lib/entry.js");
+/* harmony import */ var sockjs_client__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(sockjs_client__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! chart.js */ "./node_modules/chart.js/src/chart.js");
+/* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(chart_js__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_5__);
+
 
 
 
@@ -1153,15 +1159,15 @@ var ChartThreeComponent = /** @class */ (function () {
         var that = this;
         var canvas = document.getElementById('lineChart3');
         var ctx = canvas.getContext('2d');
-        var myLine = new chart_js__WEBPACK_IMPORTED_MODULE_3__(ctx, this.config);
+        var myLine = new chart_js__WEBPACK_IMPORTED_MODULE_4__(ctx, this.config);
         /* Configuring WebSocket on Client Side */
         /* Url of monitoring service */
-        var socket = new WebSocket('ws://13.232.165.99:8095/monitoring-service/live-metrics');
+        var socket = new sockjs_client__WEBPACK_IMPORTED_MODULE_3__('http://13.232.165.99:8018/live-metrics');
         this.stompClient = stompjs__WEBPACK_IMPORTED_MODULE_2__["over"](socket);
         this.stompClient.connect({}, function (frame) {
             that.stompClient.subscribe('/topic/mem-metrics', function (temperature) {
                 console.log(temperature.body);
-                jquery__WEBPACK_IMPORTED_MODULE_4__('#temperature').text(temperature.body);
+                jquery__WEBPACK_IMPORTED_MODULE_5__('#temperature').text(temperature.body);
                 /* Push new data On X-Axis of Chart */
                 that.config.data.labels.push(new Date());
                 /* Push new data on Y-Axis of chart */
@@ -1223,10 +1229,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var stompjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! stompjs */ "./node_modules/stompjs/index.js");
 /* harmony import */ var stompjs__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(stompjs__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! chart.js */ "./node_modules/chart.js/src/chart.js");
-/* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(chart_js__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var sockjs_client__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! sockjs-client */ "./node_modules/sockjs-client/lib/entry.js");
+/* harmony import */ var sockjs_client__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(sockjs_client__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! chart.js */ "./node_modules/chart.js/src/chart.js");
+/* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(chart_js__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_5__);
+
 
 
 
@@ -1301,14 +1310,14 @@ var ChartTwoComponent = /** @class */ (function () {
         var that = this;
         var canvas = document.getElementById('lineChart2');
         var ctx = canvas.getContext('2d');
-        var myLine = new chart_js__WEBPACK_IMPORTED_MODULE_3__(ctx, this.config);
+        var myLine = new chart_js__WEBPACK_IMPORTED_MODULE_4__(ctx, this.config);
         /* Configuring WebSocket on Client Side */
-        var socket = new WebSocket('ws://13.232.165.99:8095/monitoring-service/live-metrics');
+        var socket = new sockjs_client__WEBPACK_IMPORTED_MODULE_3__('http://13.232.165.99:8018/live-metrics');
         this.stompClient = stompjs__WEBPACK_IMPORTED_MODULE_2__["over"](socket);
         this.stompClient.connect({}, function (frame) {
             that.stompClient.subscribe('/topic/netIO-metrics', function (temperature) {
                 console.log(temperature.body);
-                jquery__WEBPACK_IMPORTED_MODULE_4__('#temperature').text(temperature.body);
+                jquery__WEBPACK_IMPORTED_MODULE_5__('#temperature').text(temperature.body);
                 /* Push new data On X-Axis of Chart */
                 that.config.data.labels.push(new Date());
                 /* Push new data on Y-Axis of chart */

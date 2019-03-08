@@ -84,7 +84,7 @@ export class ChartThreeComponent implements AfterViewInit {
     const myLine = new Chart(ctx, this.config);
     /* Configuring WebSocket on Client Side */
     /* Url of monitoring service */
-    const socket = new WebSocket('ws://13.232.165.99:8095/monitoring-service/live-metrics');
+    const socket = new SockJS('http://13.232.165.99:8018/live-metrics');
     this.stompClient = Stomp.over(socket);
     this.stompClient.connect({}, function (frame) {
       that.stompClient.subscribe('/topic/mem-metrics', function (temperature) {
