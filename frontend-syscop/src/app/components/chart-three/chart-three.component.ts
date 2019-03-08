@@ -86,7 +86,7 @@ export class ChartThreeComponent implements AfterViewInit {
     /* Url of monitoring service */
     const socket = new SockJS('http://13.232.165.99:8095/monitoring-service/live-metrics');
     this.stompClient = webstomp.over(socket);
-    this.stompClient.connect({}, function (frame) {
+    this.stompClient.connect({'Access-Control-Allow-Origin': '*'}, function (frame) {
       that.stompClient.subscribe('/topic/mem-metrics', function (temperature) {
         console.log(temperature.body);
         $('#temperature').text(temperature.body);
