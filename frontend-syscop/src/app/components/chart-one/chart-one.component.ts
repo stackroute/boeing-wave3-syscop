@@ -3,6 +3,7 @@ import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
 import * as Chart from 'chart.js';
 import * as $ from 'jquery';
+import * as webstomp from 'webstomp-client';
 
 @Component({
   selector: 'app-chart-one',
@@ -11,8 +12,7 @@ import * as $ from 'jquery';
 })
 export class ChartOneComponent implements AfterViewInit {
 
-
-stompClient;
+private stompClient = null;
 
 /* Chart Configuration */
 config = {
@@ -85,10 +85,9 @@ ngAfterViewInit() {
   const myLine = new Chart(ctx, this.config);
 
   /* Configuring WebSocket on Client Side */
-  const proxyurl = 'http://cors-anywhere.herokuapp.com/';
-  const socket = new SockJS(proxyurl + 'http://13.232.165.99:8095/monitoring-service/live-metrics');
-  this.stompClient = Stomp.over(socket);
-  this.stompClient.connect({}, function (frame) {
+  const socket = new SockJS('http://13.232.165.99:8095/monitoring-service/live-metrics');
+  this.stompClient = webstomp.over(socket);
+  this.stompClient.connect({'Access-Control-Allow-Origin': '*'}, function (frame) {
     that.stompClient.subscribe('/topic/cpu-metrics', function (temperature) {
       console.log(temperature.body);
       $('#temperature').text(temperature.body);

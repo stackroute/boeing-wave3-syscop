@@ -3,6 +3,7 @@ import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
 import * as Chart from 'chart.js';
 import * as $ from 'jquery';
+import * as webstomp from 'webstomp-client';
 
 
 @Component({
@@ -14,9 +15,7 @@ export class ChartTwoComponent implements AfterViewInit {
 
   constructor() { }
 
-  stompClient;
-
-/* Chart Configuration */
+  private stompClient = null;
 config = {
   type: 'line',
   data: {
@@ -88,8 +87,8 @@ ngAfterViewInit() {
 
   /* Configuring WebSocket on Client Side */
   const socket = new SockJS('http://13.232.165.99:8095/monitoring-service/live-metrics');
-  this.stompClient = Stomp.over(socket);
-  this.stompClient.connect({}, function (frame) {
+  this.stompClient = webstomp.over(socket);
+  this.stompClient.connect({'Access-Control-Allow-Origin': '*'}, function (frame) {
     that.stompClient.subscribe('/topic/netIO-metrics', function (temperature) {
       console.log(temperature.body);
       $('#temperature').text(temperature.body);

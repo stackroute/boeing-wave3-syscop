@@ -927,14 +927,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ChartOneComponent", function() { return ChartOneComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var stompjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! stompjs */ "./node_modules/stompjs/index.js");
-/* harmony import */ var stompjs__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(stompjs__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var sockjs_client__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! sockjs-client */ "./node_modules/sockjs-client/lib/entry.js");
-/* harmony import */ var sockjs_client__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(sockjs_client__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! chart.js */ "./node_modules/chart.js/src/chart.js");
-/* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(chart_js__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var sockjs_client__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! sockjs-client */ "./node_modules/sockjs-client/lib/entry.js");
+/* harmony import */ var sockjs_client__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(sockjs_client__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! chart.js */ "./node_modules/chart.js/src/chart.js");
+/* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(chart_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var webstomp_client__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! webstomp-client */ "./node_modules/webstomp-client/dist/webstomp.js");
+/* harmony import */ var webstomp_client__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(webstomp_client__WEBPACK_IMPORTED_MODULE_5__);
 
 
 
@@ -943,6 +943,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ChartOneComponent = /** @class */ (function () {
     function ChartOneComponent() {
+        this.stompClient = null;
         /* Chart Configuration */
         this.config = {
             type: 'line',
@@ -1010,15 +1011,14 @@ var ChartOneComponent = /** @class */ (function () {
         var that = this;
         var canvas = document.getElementById('lineChart');
         var ctx = canvas.getContext('2d');
-        var myLine = new chart_js__WEBPACK_IMPORTED_MODULE_4__(ctx, this.config);
+        var myLine = new chart_js__WEBPACK_IMPORTED_MODULE_3__(ctx, this.config);
         /* Configuring WebSocket on Client Side */
-        var proxyurl = 'http://cors-anywhere.herokuapp.com/';
-        var socket = new sockjs_client__WEBPACK_IMPORTED_MODULE_3__(proxyurl + 'http://13.232.165.99:8095/monitoring-service/live-metrics');
-        this.stompClient = stompjs__WEBPACK_IMPORTED_MODULE_2__["over"](socket);
-        this.stompClient.connect({}, function (frame) {
+        var socket = new sockjs_client__WEBPACK_IMPORTED_MODULE_2__('http://13.232.165.99:8095/monitoring-service/live-metrics');
+        this.stompClient = webstomp_client__WEBPACK_IMPORTED_MODULE_5__["over"](socket);
+        this.stompClient.connect({ 'Access-Control-Allow-Origin': '*' }, function (frame) {
             that.stompClient.subscribe('/topic/cpu-metrics', function (temperature) {
                 console.log(temperature.body);
-                jquery__WEBPACK_IMPORTED_MODULE_5__('#temperature').text(temperature.body);
+                jquery__WEBPACK_IMPORTED_MODULE_4__('#temperature').text(temperature.body);
                 /* Push new data On X-Axis of Chart */
                 that.config.data.labels.push(new Date());
                 /* Push new data on Y-Axis of chart */
@@ -1077,14 +1077,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ChartThreeComponent", function() { return ChartThreeComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var stompjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! stompjs */ "./node_modules/stompjs/index.js");
-/* harmony import */ var stompjs__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(stompjs__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var sockjs_client__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! sockjs-client */ "./node_modules/sockjs-client/lib/entry.js");
-/* harmony import */ var sockjs_client__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(sockjs_client__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! chart.js */ "./node_modules/chart.js/src/chart.js");
-/* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(chart_js__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var sockjs_client__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! sockjs-client */ "./node_modules/sockjs-client/lib/entry.js");
+/* harmony import */ var sockjs_client__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(sockjs_client__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! chart.js */ "./node_modules/chart.js/src/chart.js");
+/* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(chart_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var webstomp_client__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! webstomp-client */ "./node_modules/webstomp-client/dist/webstomp.js");
+/* harmony import */ var webstomp_client__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(webstomp_client__WEBPACK_IMPORTED_MODULE_5__);
 
 
 
@@ -1093,6 +1093,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ChartThreeComponent = /** @class */ (function () {
     function ChartThreeComponent() {
+        this.stompClient = null;
         this.config = {
             type: 'line',
             data: {
@@ -1158,15 +1159,15 @@ var ChartThreeComponent = /** @class */ (function () {
         var that = this;
         var canvas = document.getElementById('lineChart3');
         var ctx = canvas.getContext('2d');
-        var myLine = new chart_js__WEBPACK_IMPORTED_MODULE_4__(ctx, this.config);
+        var myLine = new chart_js__WEBPACK_IMPORTED_MODULE_3__(ctx, this.config);
         /* Configuring WebSocket on Client Side */
         /* Url of monitoring service */
-        var socket = new sockjs_client__WEBPACK_IMPORTED_MODULE_3__('http://13.232.165.99:8095/monitoring-service/live-metrics');
-        this.stompClient = stompjs__WEBPACK_IMPORTED_MODULE_2__["over"](socket);
-        this.stompClient.connect({}, function (frame) {
+        var socket = new sockjs_client__WEBPACK_IMPORTED_MODULE_2__('http://13.232.165.99:8095/monitoring-service/live-metrics');
+        this.stompClient = webstomp_client__WEBPACK_IMPORTED_MODULE_5__["over"](socket);
+        this.stompClient.connect({ 'Access-Control-Allow-Origin': '*' }, function (frame) {
             that.stompClient.subscribe('/topic/mem-metrics', function (temperature) {
                 console.log(temperature.body);
-                jquery__WEBPACK_IMPORTED_MODULE_5__('#temperature').text(temperature.body);
+                jquery__WEBPACK_IMPORTED_MODULE_4__('#temperature').text(temperature.body);
                 /* Push new data On X-Axis of Chart */
                 that.config.data.labels.push(new Date());
                 /* Push new data on Y-Axis of chart */
@@ -1226,14 +1227,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ChartTwoComponent", function() { return ChartTwoComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var stompjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! stompjs */ "./node_modules/stompjs/index.js");
-/* harmony import */ var stompjs__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(stompjs__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var sockjs_client__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! sockjs-client */ "./node_modules/sockjs-client/lib/entry.js");
-/* harmony import */ var sockjs_client__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(sockjs_client__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! chart.js */ "./node_modules/chart.js/src/chart.js");
-/* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(chart_js__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var sockjs_client__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! sockjs-client */ "./node_modules/sockjs-client/lib/entry.js");
+/* harmony import */ var sockjs_client__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(sockjs_client__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! chart.js */ "./node_modules/chart.js/src/chart.js");
+/* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(chart_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var webstomp_client__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! webstomp-client */ "./node_modules/webstomp-client/dist/webstomp.js");
+/* harmony import */ var webstomp_client__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(webstomp_client__WEBPACK_IMPORTED_MODULE_5__);
 
 
 
@@ -1242,7 +1243,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ChartTwoComponent = /** @class */ (function () {
     function ChartTwoComponent() {
-        /* Chart Configuration */
+        this.stompClient = null;
         this.config = {
             type: 'line',
             data: {
@@ -1309,14 +1310,14 @@ var ChartTwoComponent = /** @class */ (function () {
         var that = this;
         var canvas = document.getElementById('lineChart2');
         var ctx = canvas.getContext('2d');
-        var myLine = new chart_js__WEBPACK_IMPORTED_MODULE_4__(ctx, this.config);
+        var myLine = new chart_js__WEBPACK_IMPORTED_MODULE_3__(ctx, this.config);
         /* Configuring WebSocket on Client Side */
-        var socket = new sockjs_client__WEBPACK_IMPORTED_MODULE_3__('http://13.232.165.99:8095/monitoring-service/live-metrics');
-        this.stompClient = stompjs__WEBPACK_IMPORTED_MODULE_2__["over"](socket);
-        this.stompClient.connect({}, function (frame) {
+        var socket = new sockjs_client__WEBPACK_IMPORTED_MODULE_2__('http://13.232.165.99:8095/monitoring-service/live-metrics');
+        this.stompClient = webstomp_client__WEBPACK_IMPORTED_MODULE_5__["over"](socket);
+        this.stompClient.connect({ 'Access-Control-Allow-Origin': '*' }, function (frame) {
             that.stompClient.subscribe('/topic/netIO-metrics', function (temperature) {
                 console.log(temperature.body);
-                jquery__WEBPACK_IMPORTED_MODULE_5__('#temperature').text(temperature.body);
+                jquery__WEBPACK_IMPORTED_MODULE_4__('#temperature').text(temperature.body);
                 /* Push new data On X-Axis of Chart */
                 that.config.data.labels.push(new Date());
                 /* Push new data on Y-Axis of chart */
@@ -2342,7 +2343,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/user/Syscop/v1.0.5/boeing-wave3-syscop/frontend-syscop/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /home/user/Syscop/frontend-syscop/src/main.ts */"./src/main.ts");
 
 
 /***/ })
