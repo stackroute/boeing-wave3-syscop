@@ -1,62 +1,65 @@
-version: '2.1'
- 
+version: "2.1"
+
 services: 
   configserver:
-      image: config-servcie:latest
-      build: config-server/
-      restart: always
-      network_mode: host
-      ports:
-      - 8077:8077
-      healthcheck:
-       test: "exit 0"
- 
+   image: config-service:latest
+   build: config-server/
+   restart: always
+   network_mode: host
+   ports:
+    - 8077:8077
+   healthcheck:
+    test: "exit 0"
+
   eurekaserver: 
-    build: eureka-server/
-    image: eureka-servcie:latest
-    network_mode: host
-    depends_on: 
-      - configserver
-    ports: 
-      - 8010:8010
-    restart: always
-    healthcheck:
-     test: "exit 0"
+   build: eureka-server/
+   image: eureka-service:latest
+   network_mode: host
+   depends_on:
+    configserver:
+     condition: service_healthy
+   ports: 
+    - 8010:8010
+   restart: always
+   healthcheck:
+    test: "exit 0"
 
   apigateway: 
-    build: zuul-gatewayservice/
-    depends_on: 
-      - eurekaserver
-      - configserver
-    image: zuul-service:latest
-    network_mode: host
-    ports: 
-      - 8095:8095
-    restart: always
-    healthcheck:
-     test: "exit 0"
+   build: zuul-gatewayservice/
+   depends_on: 
+    eurekaserver:
+     condition: service_healthy
+    configserver:
+     condition: service_healthy
+   image: zuul-service:latest
+   network_mode: host
+   ports: 
+    - 8095:8095
+   restart: always
+   healthcheck:
+    test: "exit 0"
 
   mongo: 
-    container_name: mongo_docker
-    hostname: localhost
-    image: mongo:3.4-jessie
-    network_mode: host
-    ports: 
-      - 27017:27017
-    restart: always
-    volumes: 
-      - ./data/db:/data/db
-      
+   container_name: mongo_docker
+   hostname: localhost
+   image: mongo:3.4-jessie
+   network_mode: host
+   ports: 
+    - 27017:27017
+   restart: always
+   volumes: 
+    - ./data/db:/data/db
+
   influxdb:
    image: influxdb:latest
    container_name: influxdb
    ports:
-     - 8086:8086
+    - 8086:8086
    volumes:
-     - /opt/appdata/influxdb:/var/lib/influxdb
+    - /opt/appdata/influxdb:/var/lib/influxdb
    restart:
-     always
-      
+    always
+
   mysqldb:
    image: mysql
    restart: always
@@ -69,55 +72,71 @@ services:
    container_name: mysql_docker
    volumes:
     - data:/var/lib/mysql
-    
+
   app-registration: 
-    build: AppRegistration/
-    container_name: appregistration_docker
-    depends_on: 
-      - mongo
-      - eurekaserver
-      - apigateway
-      - configserver
-      - kafkaservice
-    image: appregistration:latest
-    network_mode: host
-    ports: 
-      - 8088:8088
-    restart: always
-    healthcheck:
-     test: "exit 0"
+   build: AppRegistration/
+   container_name: appregistration_docker
+   depends_on: 
+    mongo:
+     condition: service_healthy
+    eurekaserver:
+     condition: service_healthy
+    apigateway:
+     condition: service_healthy
+    configserver:
+     condition: service_healthy
+    kafkaservice:
+     condition: service_healthy
+   image: appregistration:latest
+   network_mode: host
+   ports: 
+    - 8088:8088
+   restart: always
+   healthcheck:
+    test: "exit 0"
      
   user-service:
    build: userservice/
    container_name: userservice_docker
    depends_on: 
-      - mongo
-      - eurekaserver
-      - apigateway
-      - configserver
-      - kafkaservice
+    mongo:
+     condition: service_healthy
+    eurekaserver:
+     condition: service_healthy
+    apigateway:
+     condition: service_healthy
+    configserver:
+     condition: service_healthy
+    kafkaservice:
+     condition: service_healthy
    image: userservice:latest
    network_mode: host
    ports: 
-     - 8096:8096
+    - 8096:8096
    restart: always
    healthcheck:
     test: "exit 0"
-    
+
   alert-service:
    build: SysCopAlertService/
    container_name: alertservice_docker
    depends_on: 
-      - mysqldb
-      - eurekaserver
-      - apigateway
-      - configserver
-      - kafkaservice
-      - user-service
+    mysqldb:
+     condition: service_healthy
+    eurekaserver:
+     condition: service_healthy
+    apigateway:
+     condition: service_healthy
+    configserver:
+     condition: service_healthy
+    kafkaservice:
+     condition: service_healthy
+    user-service:
+     condition: service_healthy
    image: alertservice:latest
    network_mode: host
    ports: 
-     - 8020:8020
+    - 8020:8020
    restart: always
    healthcheck:
     test: "exit 0"
@@ -126,14 +145,18 @@ services:
    build: threshold-service/
    container_name: threshold_docker
    depends_on: 
-      - eurekaserver
-      - apigateway
-      - configserver
-      - kafkaservice
+    eurekaserver:
+     condition: service_healthy
+    apigateway:
+     condition: service_healthy
+    configserver:
+     condition: service_healthy
+    kafkaservice:
+     condition: service_healthy
    image: threshold:latest
    network_mode: host
    ports: 
-     - 8044:8044
+    - 8044:8044
    restart: always
    healthcheck:
     test: "exit 0"
@@ -142,16 +165,22 @@ services:
    build: processor-service/
    container_name: processorservice_docker
    depends_on: 
-      - mysqldb
-      - eurekaserver
-      - apigateway
-      - configserver
-      - kafkaservice
-      - influxdb
+    mysqldb:
+     condition: service_healthy
+    eurekaserver:
+     condition: service_healthy
+    apigateway:
+     condition: service_healthy
+    configserver:
+     condition: service_healthy
+    kafkaservice:
+     condition: service_healthy
+    influxdb:
+     condition: service_healthy
    image: processorservice:latest
    network_mode: host
    ports: 
-     - 8033:8033
+    - 8033:8033
    restart: always
    healthcheck:
     test: "exit 0"
@@ -160,14 +189,18 @@ services:
    build: Data-Collector/
    container_name: datacollector_docker
    depends_on: 
-      - kafkaservice
-      - eurekaserver
-      - apigateway
-      - configserver
+    kafkaservice:
+     condition: service_healthy
+    eurekaserver:
+     condition: service_healthy
+    apigateway:
+     condition: service_healthy
+    configserver:
+     condition: service_healthy
    image: datacollector:latest
    network_mode: host
    ports: 
-     - 8001:8001
+    - 8001:8001
    restart: always
    healthcheck:
     test: "exit 0"
@@ -176,14 +209,18 @@ services:
    build: monitoring-service/
    container_name: monitoringservice_docker
    depends_on: 
-      - eurekaserver
-      - apigateway
-      - configserver
-      - kafkaservice
+    eurekaserver:
+     condition: service_healthy
+    apigateway:
+     condition: service_healthy
+    configserver:
+     condition: service_healthy
+    kafkaservice:
+     condition: service_healthy
    image: monitoringservice:latest
    network_mode: host
    ports: 
-     - 8018:8018
+    - 8018:8018
    restart: always
    healthcheck:
     test: "exit 0"
@@ -192,15 +229,20 @@ services:
    build: jwtauthentication/
    container_name: login-service_docker
    depends_on:
-      - mysqldb
-      - eurekaserver
-      - apigateway
-      - configserver
-      - kafkaservice
+    mysqldb:
+     condition: service_healthy
+    eurekaserver:
+     condition: service_healthy
+    apigateway:
+     condition: service_healthy
+    configserver:
+     condition: service_healthy
+    kafkaservice:
+     condition: service_healthy
    image: loginservice:latest
    network_mode: host
    ports: 
-     - 8090:8090
+    - 8090:8090
    restart: always
    healthcheck:
     test: "exit 0"
@@ -225,7 +267,8 @@ services:
    network_mode: host
    hostname: localhost
    depends_on: 
-      - eurekaserver
+    eurekaserver:
+     condition: service_healthy
    ports:
     - 2181:2181
     - 8030:8030
@@ -243,7 +286,7 @@ services:
     ADV_HOST: localhost
    healthcheck:
     test: "exit 0"
-   
-volumes: 
+
+volumes:
   data: ~
 
