@@ -123,7 +123,7 @@ services:
     test: "exit 0"
     
   threshold-service:
-   build: threshhold-service/
+   build: threshold-service/
    container_name: threshold_docker
    depends_on: 
       - eurekaserver
