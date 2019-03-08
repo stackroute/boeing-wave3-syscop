@@ -1015,7 +1015,7 @@ var ChartOneComponent = /** @class */ (function () {
         /* Configuring WebSocket on Client Side */
         var socket = new sockjs_client__WEBPACK_IMPORTED_MODULE_2__('http://13.232.165.99:8095/monitoring-service/live-metrics');
         this.stompClient = webstomp_client__WEBPACK_IMPORTED_MODULE_5__["over"](socket);
-        this.stompClient.connect({ 'Access-Control-Allow-Origin': '*' }, function (frame) {
+        this.stompClient.connect({}, function (frame) {
             that.stompClient.subscribe('/topic/cpu-metrics', function (temperature) {
                 console.log(temperature.body);
                 jquery__WEBPACK_IMPORTED_MODULE_4__('#temperature').text(temperature.body);
@@ -1164,7 +1164,7 @@ var ChartThreeComponent = /** @class */ (function () {
         /* Url of monitoring service */
         var socket = new sockjs_client__WEBPACK_IMPORTED_MODULE_2__('http://13.232.165.99:8095/monitoring-service/live-metrics');
         this.stompClient = webstomp_client__WEBPACK_IMPORTED_MODULE_5__["over"](socket);
-        this.stompClient.connect({ 'Access-Control-Allow-Origin': '*' }, function (frame) {
+        this.stompClient.connect({}, function (frame) {
             that.stompClient.subscribe('/topic/mem-metrics', function (temperature) {
                 console.log(temperature.body);
                 jquery__WEBPACK_IMPORTED_MODULE_4__('#temperature').text(temperature.body);
@@ -1314,7 +1314,7 @@ var ChartTwoComponent = /** @class */ (function () {
         /* Configuring WebSocket on Client Side */
         var socket = new sockjs_client__WEBPACK_IMPORTED_MODULE_2__('http://13.232.165.99:8095/monitoring-service/live-metrics');
         this.stompClient = webstomp_client__WEBPACK_IMPORTED_MODULE_5__["over"](socket);
-        this.stompClient.connect({ 'Access-Control-Allow-Origin': '*' }, function (frame) {
+        this.stompClient.connect({}, function (frame) {
             that.stompClient.subscribe('/topic/netIO-metrics', function (temperature) {
                 console.log(temperature.body);
                 jquery__WEBPACK_IMPORTED_MODULE_4__('#temperature').text(temperature.body);
