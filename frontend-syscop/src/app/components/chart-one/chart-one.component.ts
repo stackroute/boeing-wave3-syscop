@@ -87,7 +87,7 @@ ngAfterViewInit() {
   /* Configuring WebSocket on Client Side */
   const socket = new SockJS('http://13.232.165.99:8095/monitoring-service/live-metrics');
   this.stompClient = webstomp.over(socket);
-  this.stompClient.connect({'Access-Control-Allow-Origin': '*'}, function (frame) {
+  this.stompClient.connect({}, function (frame) {
     that.stompClient.subscribe('/topic/cpu-metrics', function (temperature) {
       console.log(temperature.body);
       $('#temperature').text(temperature.body);
