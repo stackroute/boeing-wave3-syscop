@@ -16,7 +16,7 @@ export class NotificationsComponent implements OnInit {
 
   ngOnInit() {
   const that = this;
-  const socket = new SockJS('http://172.23.239.95:8095/alert-service/live-temperature');
+  const socket = new SockJS('http://13.232.165.99:8020/live-temperature');
   this.stompClient = Stomp.over(socket);
   this.stompClient.connect({}, function (frame) {
     that.stompClient.subscribe('/topic/temperature', function (temperature) {

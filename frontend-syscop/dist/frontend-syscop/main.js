@@ -2044,7 +2044,7 @@ var NotificationsComponent = /** @class */ (function () {
     }
     NotificationsComponent.prototype.ngOnInit = function () {
         var that = this;
-        var socket = new sockjs_client__WEBPACK_IMPORTED_MODULE_3__('http://172.23.239.95:8095/alert-service/live-temperature');
+        var socket = new sockjs_client__WEBPACK_IMPORTED_MODULE_3__('http://13.232.165.99:8020/live-temperature');
         this.stompClient = stompjs__WEBPACK_IMPORTED_MODULE_2__["over"](socket);
         this.stompClient.connect({}, function (frame) {
             that.stompClient.subscribe('/topic/temperature', function (temperature) {
