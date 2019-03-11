@@ -2,6 +2,8 @@ package com.stackroute.monitorservice.service;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.stackroute.monitorservice.model.Metrics;
+import com.stackroute.monitorservice.model.MetricsFinal;
 import com.stackroute.monitorservice.model.Monitor;
 import org.codehaus.jackson.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +21,13 @@ public class KafkaListenerService  {
     @Autowired
     private InfluxServiceImpl influxService;
 
+
     @Autowired
-    private Monitor monitor;
+    private MetricsFinal metricsFinal;
+
+    @Autowired
+    private Metrics metrics;
+
 
     @KafkaListener(topics = "Kafka_Example_Test_Final3", groupId = "group_id_monitoring")
     public void consume(String message) throws JsonProcessingException {
@@ -28,21 +35,25 @@ public class KafkaListenerService  {
 
 
         JsonParser jsonParser = new JsonParser();
-        JsonObject jsonObject = (JsonObject) jsonParser.parse(message);
+        JsonObject obj = (JsonObject) jsonParser.parse(message);
 
 
 
-        JsonObject metricObj = jsonObject.getAsJsonObject("metrics");
+        JsonObject metricObj = obj.getAsJsonObject("metrics");
 
-        monitor.setContainerId(metricObj.get("containerId").toString());
-        monitor.setContainerName(metricObj.get("containerName").toString());
-        monitor.setCpu(metricObj.get("cpu").toString());
-        monitor.setMem(metricObj.get("mem").toString());
-        monitor.setNetIO(metricObj.get("netIO").toString());
-        monitor.setBlockIO (metricObj.get("blockIO").toString());
-        monitor.setpId (metricObj.get("pId").toString());
-        monitor.setPort(jsonObject.get("portNumber").toString());
+        metrics.setBlockIO(metricObj.get("blockIO").toString().replace("\"",""));
+        metrics.setContainerId(metricObj.get("containerId").toString().replace("\"",""));
+        metrics.setContainerName(metricObj.get("containerName").toString().replace("\"",""));
+        metrics.setCpu(Float.parseFloat(metricObj.get("cpu").toString().replace("\"","").replace("%","")));
+        metrics.setMem(Float.parseFloat(metricObj.get("mem").toString().replace("\"","").replace("%","")));
+        metrics.setNetIO(metricObj.get("netIO").toString().replace("\"",""));
+        metrics.setpId(Long.parseLong(metricObj.get("pId").toString().replace("\"","")));
 
+        metricsFinal.setUserName(obj.get("userName").toString().replace("\"",""));
+        metricsFinal.setServiceName(obj.get("serviceName").toString().replace("\"",""));
+        metricsFinal.setServiceType(obj.get("serviceType").toString().replace("\"",""));
+        metricsFinal.setPortNumber(Integer.parseInt(obj.get("portNumber").toString()));
+        metricsFinal.setMetrics(metrics);
 
         //String[] strMessage = message.split(",");
 
@@ -61,7 +72,7 @@ public class KafkaListenerService  {
         System.out.println("Saving Monitor");
 
         //to save the monitor to db
-        influxService.saveMetrics(monitor);
+        influxService.saveMetrics(metricsFinal);
         System.out.println("Monitor Saved");
 
         String cpu = metricObj.get("cpu").toString().replace("%","").replace("\"","");
@@ -86,7 +97,7 @@ public class KafkaListenerService  {
         //template.convertAndSend("/topic/netIO-metrics",sock2);
 
         //to convert to  String  method
-        System.out.println(monitor.toString ());
+        System.out.println(metricsFinal.toString ());
 
 
     }

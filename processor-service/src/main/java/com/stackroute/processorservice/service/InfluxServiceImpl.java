@@ -18,6 +18,7 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -91,7 +92,7 @@ public class InfluxServiceImpl implements InfluxService {
 
 
             final Point p = Point.measurement(metricsFinal.getUserName() + metricsFinal.getServiceName())
-                    .time(System.currentTimeMillis(), TimeUnit.MILLISECONDS)
+                    .time(Long.parseLong(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.S'Z'").format(System.currentTimeMillis())), TimeUnit.MILLISECONDS)
                     .tag("tenant", "default")
                     .addField("username", metricsFinal.getUserName())
                     .addField("servicename", metricsFinal.getServiceName())
