@@ -214,6 +214,17 @@ public class ThreadService implements Runnable {
             i++;
         }
 
+
+        //Java HardCode
+
+        String responseJava = dataCollectorModel.getMetrics("https://10.20.1.44:8090/metrics");
+
+        MetricInterface javaMetric = metricFactory.createObject("javametric");
+        javaMetric.parse(responseJava);
+        
+
+//        EO Java Hard Code
+
         //End Of Job
         try {
             Thread.sleep(5000);
