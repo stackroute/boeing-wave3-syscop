@@ -1,12 +1,20 @@
 package com.stackroute.monitorservice.service;
 
 import com.stackroute.monitorservice.influxdb.InfluxDBTemplate;
+import com.stackroute.monitorservice.model.HistoricalDockerMetric;
 import com.stackroute.monitorservice.model.MetricsFinal;
 import com.stackroute.monitorservice.model.Monitor;
 import org.influxdb.dto.Point;
+import org.influxdb.dto.Query;
+import org.influxdb.dto.QueryResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -48,6 +56,34 @@ public class InfluxServiceImpl implements InfluxService {
 
         return metricsFinal;
 
+    }
+
+    @Override
+    public List<HistoricalDockerMetric> getHistoricalMetrics(String toDate, String fromDate) throws ParseException {
+
+        String todateString = toDate;
+        String fromdateString = fromDate;
+        DateFormat dateFormat = new SimpleDateFormat("EEE, dd MMM yyyy hh:mm:ss z");
+//        DateFormat fromDateFormat = new SimpleDateFormat("EEE, dd MMM yyyy hh:mm:ss z");
+
+        Date toDate1 = dateFormat.parse(todateString);
+        Date fromDate1 = dateFormat.parse(fromdateString);
+        long tounixTime = (long)toDate1.getTime()/1000;
+        long fromunixTime = (long)fromDate1.getTime()/1000;
+        System.out.println(tounixTime);
+        System.out.println(fromunixTime);
+
+
+        String dbName = "monitorServiceDB";
+
+        Query query1 = new Query("select time, Cpu, Memory from dockerMetrics where time >= "+tounixTime + " and time <= "+fromunixTime,dbName);
+
+        QueryResult queryResult = influxDBTemplate.query(query1);
+
+        System.out.println(queryResult);
+
+        return null;
+        //<- prints 1352504418
     }
 
 
