@@ -92,7 +92,7 @@ public class InfluxServiceImpl implements InfluxService {
 
 
             final Point p = Point.measurement(metricsFinal.getUserName() + metricsFinal.getServiceName())
-                    .time(Long.parseLong(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.S'Z'").format(System.currentTimeMillis())), TimeUnit.MILLISECONDS)
+                    .time(System.currentTimeMillis(), TimeUnit.MILLISECONDS)
                     .tag("tenant", "default")
                     .addField("username", metricsFinal.getUserName())
                     .addField("servicename", metricsFinal.getServiceName())
