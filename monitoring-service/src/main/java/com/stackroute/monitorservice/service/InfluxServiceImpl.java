@@ -4,6 +4,7 @@ import com.stackroute.monitorservice.influxdb.InfluxDBTemplate;
 import com.stackroute.monitorservice.model.HistoricalDockerMetric;
 import com.stackroute.monitorservice.model.MetricsFinal;
 import com.stackroute.monitorservice.model.Monitor;
+import com.stackroute.monitorservice.model.Range;
 import org.influxdb.dto.Point;
 import org.influxdb.dto.Query;
 import org.influxdb.dto.QueryResult;
@@ -59,10 +60,10 @@ public class InfluxServiceImpl implements InfluxService {
     }
 
     @Override
-    public List<HistoricalDockerMetric> getHistoricalMetrics(String toDate, String fromDate) throws ParseException {
+    public List<HistoricalDockerMetric> getHistoricalMetrics(Range range) throws ParseException {
 
-        String todateString = toDate;
-        String fromdateString = fromDate;
+        String todateString = range.getToDate();
+        String fromdateString = range.getFromDate();
         DateFormat dateFormat = new SimpleDateFormat("EEE, dd MMM yyyy hh:mm:ss z");
 //        DateFormat fromDateFormat = new SimpleDateFormat("EEE, dd MMM yyyy hh:mm:ss z");
 
@@ -76,7 +77,7 @@ public class InfluxServiceImpl implements InfluxService {
 
         String dbName = "monitorServiceDB";
 
-        Query query1 = new Query("select time, Cpu, Memory from dockerMetrics where time >= "+tounixTime + " and time <= "+fromunixTime,dbName);
+        Query query1 = new Query("select time, Cpu, Memory from "+range.getTableName()+" where time >= "+tounixTime + " and time <= "+fromunixTime,dbName);
 
         QueryResult queryResult = influxDBTemplate.query(query1);
 

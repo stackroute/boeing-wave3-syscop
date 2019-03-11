@@ -40,7 +40,7 @@ public class InfluxController {
     public ResponseEntity<?> getHistoricalData(@RequestBody Range range) throws ParseException {
 
 
-        influxServiceInpl.getHistoricalMetrics(range.getToDate(), range.getFromDate());
+        influxServiceInpl.getHistoricalMetrics(range);
 
         return  null;
     }
