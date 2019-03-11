@@ -38,7 +38,7 @@ public class InfluxServiceImpl implements InfluxService {
 
 
         final Point p = Point.measurement(metricsFinal.getUserName() + metricsFinal.getServiceName())
-                .time(System.currentTimeMillis(), TimeUnit.SECONDS)
+                .time(System.currentTimeMillis(), TimeUnit. MILLISECONDS)
                 .tag("tenant", "default")
                 .addField("username", metricsFinal.getUserName())
                 .addField("servicename", metricsFinal.getServiceName())
@@ -69,14 +69,14 @@ public class InfluxServiceImpl implements InfluxService {
 
         Date toDate1 = dateFormat.parse(todateString);
         Date fromDate1 = dateFormat.parse(fromdateString);
-        long tounixTime = (long)toDate1.getTime()/1000;
-        long fromunixTime = (long)fromDate1.getTime()/1000;
+        long tounixTime = (long)toDate1.getTime();
+        long fromunixTime = (long)fromDate1.getTime();
         System.out.println(tounixTime);
         System.out.println(fromunixTime);
 
 
         String dbName = "monitorServiceDB";
-
+        System.out.println("TableName" + range.getTableName());
         Query query1 = new Query("select time, Cpu, Memory from "+range.getTableName()+" where time >= "+tounixTime + " and time <= "+fromunixTime,dbName);
 
         QueryResult queryResult = influxDBTemplate.query(query1);
