@@ -64,7 +64,7 @@ public class InfluxServiceImpl implements InfluxService {
 
         String todateString = range.getToDate();
         String fromdateString = range.getFromDate();
-        DateFormat dateFormat = new SimpleDateFormat("EEE, dd MMM yyyy hh:mm:ss z");
+        DateFormat dateFormat = new SimpleDateFormat("EEE, dd MMM yyyy hh:mm:ss.SSS z");
 //        DateFormat fromDateFormat = new SimpleDateFormat("EEE, dd MMM yyyy hh:mm:ss z");
 
         Date toDate1 = dateFormat.parse(todateString);
@@ -79,9 +79,12 @@ public class InfluxServiceImpl implements InfluxService {
         System.out.println("TableName" + range.getTableName());
         Query query1 = new Query("select time, Cpu, Memory from "+range.getTableName()+" where time >= "+tounixTime + " and time <= "+fromunixTime,dbName);
 
+        Query query2 = new Query("select time, Cpu, Memory from "+range.getTableName(),dbName);
         QueryResult queryResult = influxDBTemplate.query(query1);
+        QueryResult queryResult2 = influxDBTemplate.query(query2);
 
         System.out.println(queryResult);
+        System.out.println(queryResult2);
 
         return null;
         //<- prints 1352504418
