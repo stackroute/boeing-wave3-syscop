@@ -92,6 +92,9 @@ public class KafkaListenerService  {
 //        System.out.println("double===="+sock);
 //
 ////
+       
+        template.convertAndSend("/topic/username", obj.get("userName").toString().replace("\"",""));
+         template.convertAndSend("/topic/servicename", obj.get("serviceName").toString().replace("\"",""));
         template.convertAndSend("/topic/cpu-metrics",sock);
         template.convertAndSend("/topic/mem-metrics",sock1);
         //template.convertAndSend("/topic/netIO-metrics",sock2);
