@@ -5,6 +5,7 @@ import com.stackroute.monitorservice.model.Monitor;
 import com.stackroute.monitorservice.model.Range;
 import com.stackroute.monitorservice.service.InfluxService;
 import com.stackroute.monitorservice.service.InfluxServiceImpl;
+import org.influxdb.dto.QueryResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,13 +19,13 @@ import java.text.ParseException;
 public class InfluxController {
 
     private Monitor monitor;
-    private InfluxServiceImpl influxServiceInpl;
+    private InfluxServiceImpl influxServiceImpl;
 
     @Autowired
     public InfluxController( Monitor monitor, InfluxServiceImpl influxServiceImpl )
     {
         this.monitor = monitor;
-        this.influxServiceInpl = influxServiceImpl;
+        this.influxServiceImpl = influxServiceImpl;
     }
 
     //get api to get the metrics data from datacollector
@@ -40,8 +41,10 @@ public class InfluxController {
     public ResponseEntity<?> getHistoricalData(@RequestBody Range range) throws ParseException {
 
 
-        influxServiceInpl.getHistoricalMetrics(range);
+        QueryResult queryResult = new QueryResult();
 
-        return  null;
+        queryResult = influxServiceImpl.getHistoricalMetrics(range);
+
+        return  new ResponseEntity<QueryResult>(queryResult, HttpStatus.OK);
     }
 }

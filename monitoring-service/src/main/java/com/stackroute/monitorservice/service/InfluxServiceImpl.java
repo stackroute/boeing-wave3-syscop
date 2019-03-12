@@ -60,7 +60,7 @@ public class InfluxServiceImpl implements InfluxService {
     }
 
     @Override
-    public List<HistoricalDockerMetric> getHistoricalMetrics(Range range) throws ParseException {
+    public QueryResult getHistoricalMetrics(Range range) throws ParseException {
 
         String todateString = range.getToDate();
         String fromdateString = range.getFromDate();
@@ -86,7 +86,12 @@ public class InfluxServiceImpl implements InfluxService {
         System.out.println(queryResult);
         System.out.println(queryResult2);
 
-        return null;
+        System.out.println("!!@@11111"+queryResult.getResults().get(0));
+        System.out.println("!!@@22222" + queryResult.getResults().get(0).getSeries());
+        System.out.println("!!@@33333" + queryResult.getResults().get(0).getSeries().get(0));
+
+
+        return queryResult;
         //<- prints 1352504418
     }
 
