@@ -83,13 +83,19 @@ public class InfluxServiceImpl implements InfluxService {
         QueryResult queryResult = influxDBTemplate.query(query1);
         QueryResult queryResult2 = influxDBTemplate.query(query2);
 
-        System.out.println(queryResult);
-        System.out.println(queryResult2);
+//        System.out.println(queryResult);
+//        System.out.println(queryResult2);
 
-        System.out.println("!!@@11111"+queryResult.getResults().get(0));
-        System.out.println("!!@@22222" + queryResult.getResults().get(0).getSeries());
-        System.out.println("!!@@33333" + queryResult.getResults().get(0).getSeries().get(0));
 
+        System.out.println("Size");
+        System.out.println(queryResult.getResults().get(0).getSeries().get(0).getValues().size());
+
+        System.out.println("!!!!!!!!!Time");
+        System.out.println(queryResult.getResults().get(0).getSeries().get(0).getValues().get(0).get(0));
+        System.out.println("!!!!!!!!!CPu");
+        System.out.println(queryResult.getResults().get(0).getSeries().get(0).getValues().get(0).get(1));
+        System.out.println("!!!!!!!!!Mem");
+        System.out.println(queryResult.getResults().get(0).getSeries().get(0).getValues().get(0).get(2));
 
         return queryResult;
         //<- prints 1352504418
