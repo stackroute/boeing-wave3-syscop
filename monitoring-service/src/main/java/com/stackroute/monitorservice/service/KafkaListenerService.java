@@ -1,15 +1,20 @@
 package com.stackroute.monitorservice.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.stackroute.monitorservice.model.GraphMetrics;
 import com.stackroute.monitorservice.model.Metrics;
 import com.stackroute.monitorservice.model.MetricsFinal;
 import com.stackroute.monitorservice.model.Monitor;
-import org.codehaus.jackson.JsonProcessingException;
+//import org.codehaus.jackson.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
+
+
 
 @Service
 public class KafkaListenerService  {
@@ -30,7 +35,7 @@ public class KafkaListenerService  {
 
 
     @KafkaListener(topics = "Kafka_Example_Test_Final3", groupId = "group_id_monitoring")
-    public void consume(String message) throws JsonProcessingException {
+    public void consume(String message) throws JsonProcessingException, JsonProcessingException {
         System.out.println("Consumed Kafka msg : " + message);
 
 
@@ -90,16 +95,26 @@ public class KafkaListenerService  {
 
         System.out.println("cpu======="+cpu);
 //        System.out.println("double===="+sock);
-//
-////
-       
-        template.convertAndSend("/topic/username", obj.get("userName").toString().replace("\"",""));
-         template.convertAndSend("/topic/servicename", obj.get("serviceName").toString().replace("\"",""));
-        template.convertAndSend("/topic/cpu-metrics",sock);
-        template.convertAndSend("/topic/mem-metrics",sock1);
-        //template.convertAndSend("/topic/netIO-metrics",sock2);
 
-        //to convert to  String  method
+
+
+
+        //GraphMetrics object to convert to JSON to send through Socket
+        GraphMetrics graphMetrics = new GraphMetrics(
+                obj.get("userName").toString().replace("\"",""),
+                obj.get("serviceName").toString().replace("\"",""),
+                cpu,
+                mem,
+                metricObj.get("netIO").toString().replace("\"","")
+        );
+
+        ObjectMapper graphObj = new ObjectMapper();
+        String jsonStr = graphObj.writeValueAsString(graphMetrics);
+
+
+       
+        template.convertAndSend("/topic/graphMetrics",jsonStr);
+        System.out.println("!!@@@@@@" + jsonStr);
         System.out.println(metricsFinal.toString ());
 
 
