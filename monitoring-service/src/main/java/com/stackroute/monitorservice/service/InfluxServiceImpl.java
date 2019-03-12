@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -60,7 +61,7 @@ public class InfluxServiceImpl implements InfluxService {
     }
 
     @Override
-    public QueryResult getHistoricalMetrics(Range range) throws ParseException {
+    public List<HistoricalDockerMetric> getHistoricalMetrics(Range range) throws ParseException {
 
         String todateString = range.getToDate();
         String fromdateString = range.getFromDate();
@@ -89,7 +90,7 @@ public class InfluxServiceImpl implements InfluxService {
 
         System.out.println("Size");
         System.out.println(queryResult.getResults().get(0).getSeries().get(0).getValues().size());
-
+        int valSize = queryResult.getResults().get(0).getSeries().get(0).getValues().size();
         System.out.println("!!!!!!!!!Time");
         System.out.println(queryResult.getResults().get(0).getSeries().get(0).getValues().get(0).get(0));
         System.out.println("!!!!!!!!!CPu");
@@ -97,7 +98,23 @@ public class InfluxServiceImpl implements InfluxService {
         System.out.println("!!!!!!!!!Mem");
         System.out.println(queryResult.getResults().get(0).getSeries().get(0).getValues().get(0).get(2));
 
-        return queryResult;
+
+        List<HistoricalDockerMetric> historicalDockerMetricList = new ArrayList<>();
+
+         for(int i=0;i<valSize;i++) {
+             HistoricalDockerMetric historicalDockerMetric = new HistoricalDockerMetric();
+
+             historicalDockerMetric.setTime(queryResult.getResults().get(0).getSeries().get(0).getValues().get(0).get(0).toString());
+             historicalDockerMetric.setCpu(queryResult.getResults().get(0).getSeries().get(0).getValues().get(0).get(1).toString());
+             historicalDockerMetric.setMem(queryResult.getResults().get(0).getSeries().get(0).getValues().get(0).get(2).toString());
+
+             historicalDockerMetricList.add(historicalDockerMetric);
+
+
+         }
+
+
+        return historicalDockerMetricList;
         //<- prints 1352504418
     }
 

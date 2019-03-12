@@ -14,5 +14,5 @@ public interface InfluxService {
 
     public MetricsFinal saveMetrics(MetricsFinal metricsFinal);
 
-    public QueryResult getHistoricalMetrics(Range range) throws ParseException;
+    public List<HistoricalDockerMetric> getHistoricalMetrics(Range range) throws ParseException;
 }

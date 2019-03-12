@@ -1,6 +1,7 @@
 package com.stackroute.monitorservice.controller;
 
 
+import com.stackroute.monitorservice.model.HistoricalDockerMetric;
 import com.stackroute.monitorservice.model.Monitor;
 import com.stackroute.monitorservice.model.Range;
 import com.stackroute.monitorservice.service.InfluxService;
@@ -12,6 +13,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
 
 @CrossOrigin(origins="*")
 @RestController
@@ -41,10 +44,10 @@ public class InfluxController {
     public ResponseEntity<?> getHistoricalData(@RequestBody Range range) throws ParseException {
 
 
-        QueryResult queryResult = new QueryResult();
+       List<HistoricalDockerMetric> list = new ArrayList<>();
 
-        queryResult = influxServiceImpl.getHistoricalMetrics(range);
+        list = influxServiceImpl.getHistoricalMetrics(range);
 
-        return  new ResponseEntity<QueryResult>(queryResult, HttpStatus.OK);
+        return  new ResponseEntity<List<HistoricalDockerMetric>>(list, HttpStatus.OK);
     }
 }
