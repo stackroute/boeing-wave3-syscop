@@ -3,8 +3,6 @@ import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
 import * as Chart from 'chart.js';
 import * as $ from 'jquery';
-import * as webstomp from 'webstomp-client';
-
 @Component({
   selector: 'app-chart-one',
   templateUrl: './chart-one.component.html',

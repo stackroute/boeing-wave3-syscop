@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
-  hide;
+  hide = false;
   myForm: FormGroup;
   constructor(private userService: UserService, public router: Router) { }
 
