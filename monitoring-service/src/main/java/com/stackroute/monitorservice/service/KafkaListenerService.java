@@ -112,7 +112,7 @@ public class KafkaListenerService  {
 
 
        
-        template.convertAndSend("/topic/graphMetrics/"+userName, "Hello");
+        template.convertAndSend("/topic/graphMetrics/"+userName, jsonStr);
         System.out.println("!!@@@@@@" + jsonStr);
         System.out.println(metricsFinal.toString ());
 
