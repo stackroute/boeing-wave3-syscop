@@ -81,13 +81,29 @@ public class KafkaListenerService  {
 
         String cpu = metricObj.get("cpu").toString().replace("%","").replace("\"","");
         String mem = metricObj.get("mem").toString().replace("%","").replace("\"","");
-        //String netIO = metricObj.get("netIO").toString().replace("%","").replace("\"","");;
+        String netIO = metricObj.get("netIO").toString().replace("\"","");;
 
         //String str[] = netIO.split("kB");
 
         //String netio = str[0];
         //System.out.println("net i o" + netio);
         //double d = Double.parseDouble(cpu);
+       
+        //for netIO......
+       String netio;
+       Double sock2;
+         
+       if(netIO.contains("kB"))
+       {
+           String str[]= netIO.split("k");
+           netio = strrr[0];
+       }
+       else if(netIO.contains("B"))
+       {
+           String str[]= netIO.split("B");
+           sock2 = (str[0])/1000;
+           netio = Double.toString(sock2);
+       }
         Double sock = Double.valueOf(cpu);
         Double sock1 = Double.valueOf(mem);
         //Double sock2 = Double.valueOf(netio);
@@ -104,9 +120,9 @@ public class KafkaListenerService  {
                 obj.get("serviceName").toString().replace("\"",""),
                 cpu,
                 mem,
-                metricObj.get("netIO").toString().replace("\"","")
+                netio
         );
-
+//metricObj.get("netIO").toString().replace("\"","")
         ObjectMapper graphObj = new ObjectMapper();
         String jsonStr = graphObj.writeValueAsString(graphMetrics);
 
