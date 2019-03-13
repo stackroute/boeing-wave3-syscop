@@ -15,7 +15,6 @@
  */
 package com.stackroute.processorservice.influxdb;
 
-import com.stackroute.processorservice.influxdb.InfluxDBProperties;
 import okhttp3.OkHttpClient;
 import okhttp3.OkHttpClient.Builder;
 import org.influxdb.InfluxDB;
@@ -61,7 +60,6 @@ public class InfluxDBConnectionFactory implements InitializingBean
         .readTimeout(properties.getReadTimeout(), TimeUnit.SECONDS);
       connection = InfluxDBFactory
         .connect(properties.getUrl(), properties.getUsername(), properties.getPassword(), client);
-    //  logger.debug("Using InfluxDB '{}' on '{}'", properties.getDatabase(), properties.getUrl());
       if (properties.isGzip())
       {
         logger.debug("Enabled gzip compression for HTTP requests");

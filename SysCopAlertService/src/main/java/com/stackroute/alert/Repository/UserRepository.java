@@ -1,6 +1,5 @@
 package com.stackroute.alert.Repository;
 
-//import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.stackroute.alert.model.User;
 import org.springframework.data.jpa.repository.Query;

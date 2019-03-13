@@ -15,7 +15,6 @@
  */
 package com.stackroute.processorservice.influxdb;
 
-import com.stackroute.processorservice.influxdb.InfluxDBAccessor;
 import com.stackroute.processorservice.influxdb.converter.PointConverter;
 import org.influxdb.InfluxDB;
 import org.influxdb.dto.*;

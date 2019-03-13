@@ -9,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
-import java.util.Queue;
-import java.util.TimerTask;
 
 @Service
 public class KafkaListenerService  {
@@ -51,22 +49,11 @@ public class KafkaListenerService  {
         metricsFinal.setServiceType(obj.get("serviceType").toString().replace("\"",""));
         metricsFinal.setPortNumber(Integer.parseInt(obj.get("portNumber").toString()));
         metricsFinal.setMetrics(metrics);
-
-
-
+        
         counter++;
         System.out.println("Messages received "+counter);
-
-
-
-
             influxService.saveMetricsFinal(metricsFinal);
-//            System.out.println("Metrics Saved");
-
-
-
         System.out.println(metricsFinal.toString ());
-
 
     }
 

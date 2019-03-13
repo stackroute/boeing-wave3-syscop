@@ -26,7 +26,7 @@ public class ThresholdServiceImpl implements ThresholdService {
     @Override
     public MetricsThreshold getMetricThresholdObj(String serviceName, String userName) {
 
-        MetricsThreshold metricsThreshold = new MetricsThreshold();
+        MetricsThreshold metricsThreshold;
         metricsThreshold = thresholdRepository.getMetricThresholdObject(serviceName, userName);
 
         return metricsThreshold;

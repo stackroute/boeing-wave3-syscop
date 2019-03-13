@@ -2,7 +2,6 @@ package com.stackroute.processorservice.controller;
 
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.stackroute.processorservice.model.Person;
 import com.stackroute.processorservice.service.InfluxService;
 import org.influxdb.dto.QueryResult;
 import org.springframework.beans.factory.annotation.Autowired;

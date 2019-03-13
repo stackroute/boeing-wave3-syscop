@@ -8,8 +8,6 @@ public class ThreadService implements Runnable {
 
     @Override
     public void run() {
-
-
-
+        //DoNothing
     }
 }

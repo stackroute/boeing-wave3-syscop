@@ -1,6 +1,5 @@
 package com.stackroute.alert.Service;
 
-//import com.example.quartzdemo.controller.EmailJobSchedulerController;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.stackroute.alert.Repository.UserRepository;
@@ -102,23 +101,18 @@ public class KafkaListenerService {
         JsonObject jsonObject = (JsonObject) jsonParser.parse(message);
 
 
-       // String[] strMessage = message.split(",");
         //String usernameFromThreshold = strMessage[1].split(":")[1].replace("\"","");
 //
         User user = userRepository.getUserDetails(jsonObject.get("userName").toString().replace("\"",""));
 
 
-       // System.out.println(user.toString());
 
         double d = 2.7;
-//        String sock = jsonObject.get("alert").toString()
-//                + jsonObject.get("serviceName").toString();
 
         template.convertAndSend("/topic/temperature",d);
 
         Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
         Message textMessage = Message.creator(
-                //new PhoneNumber("+918073829802"),
                 new PhoneNumber(user.getPhoneNumber()),
                 new PhoneNumber(TWILIO_NUMBER),
                 jsonObject.get("alert").toString()

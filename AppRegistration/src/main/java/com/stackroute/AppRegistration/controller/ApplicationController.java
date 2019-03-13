@@ -47,7 +47,6 @@ public class ApplicationController {
 
         ObjectMapper obj = new ObjectMapper();
         String jsonStr = obj.writeValueAsString(resultUserObj);
-        System.out.println(jsonStr);
         kafkaTemplate.send(TOPIC, jsonStr);
 
 
@@ -58,7 +57,6 @@ public class ApplicationController {
     //Displays all the registered applications
     @GetMapping(value = "showApp/username/{userName}")
     public ResponseEntity<?> showAllRegistrations(@PathVariable (value = "userName") String userName) throws ApplicationDoesNotExistException {
-        System.out.println(applicationService.getAllApplications(userName));
         return new ResponseEntity<User>(applicationService.getAllApplications(userName),HttpStatus.OK);
     }
 
