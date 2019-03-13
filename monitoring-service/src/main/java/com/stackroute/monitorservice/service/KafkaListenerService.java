@@ -62,8 +62,7 @@ public class KafkaListenerService  {
 
         //String[] strMessage = message.split(",");
 
-
-
+        String userName = obj.get("userName").toString().replace("\"","");
 
 //        monitor.setContainerId(strMessage[0].split(":")[1].replace("\"",""));
 //        monitor.setContainerName(strMessage[1].split(":")[1].replace("\"",""));
@@ -113,7 +112,7 @@ public class KafkaListenerService  {
 
 
        
-        template.convertAndSend("/topic/graphMetrics",jsonStr);
+        template.convertAndSend("/topic/graphMetrics/"+userName, "Hello");
         System.out.println("!!@@@@@@" + jsonStr);
         System.out.println(metricsFinal.toString ());
 
