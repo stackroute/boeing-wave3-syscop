@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { WOW } from 'wowjs/dist/wow.min';
 
@@ -7,11 +7,11 @@ import { WOW } from 'wowjs/dist/wow.min';
   templateUrl: './landing.component.html',
   styleUrls: ['./landing.component.css']
 })
-export class LandingComponent implements OnInit {
+export class LandingComponent implements AfterViewInit {
 
   constructor(public router: Router) { }
 
-  ngOnInit() {
+  ngAfterViewInit() {
     $(function() {
       new WOW().init();
     });
