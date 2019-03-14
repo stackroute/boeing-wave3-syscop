@@ -13,10 +13,10 @@ import * as $ from 'jquery';
 })
 export class DashboardComponent implements AfterViewInit {
   constructor(private dataService: DataService) { }
-  private stompClient = null;
-  private username = localStorage.getItem('AuthUsername');
-  private url = 'http://13.232.165.99:8018/live-metrics';
-  private services = this.dataService.services;
+  public stompClient = null;
+  public username = localStorage.getItem('AuthUsername');
+  public url = 'http://13.232.165.99:8018/live-metrics';
+  public services = this.dataService.services;
 
   /*This option is used in ChartJS */
   options = {
