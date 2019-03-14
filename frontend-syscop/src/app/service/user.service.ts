@@ -12,9 +12,9 @@ export class UserService {
   // public datarUrl: 'http://13.232.165.99:8018/api/v1/data';
 
   /*this url is used for registration service */
-  public registerurl = 'http://13.232.165.99:8095/register-service/api/v1/register';
+  public registerurl = 'https://13.232.165.99:8095/register-service/api/v1/register';
   /*the data url is used for getting data from monitoring service */
-  public datarUrl: 'http://13.232.165.99:8018/api/v1/data';
+  public datarUrl: 'https://13.232.165.99:8018/api/v1/data';
 
 
   constructor(private http: HttpClient) { }
