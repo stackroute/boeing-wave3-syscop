@@ -19,7 +19,7 @@ public class HttpRedirect {
 
     private static final String USER_CONSTRAINT = "CONFIDENTIAL";
     private static final String HTTP = "http";
-    private static final int HTTPS_PORT = 8095  ;
+    private static final int HTTPS_PORT = 8095;
 
     @Bean
     public ServletWebServerFactory servletContainer() {
