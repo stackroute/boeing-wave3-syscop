@@ -90,18 +90,18 @@ public class KafkaListenerService  {
         //double d = Double.parseDouble(cpu);
        
         //for netIO......
-       String netio;
+       String netio="";
        Double sock2;
          
        if(netIO.contains("kB"))
        {
            String str[]= netIO.split("k");
-           netio = strrr[0];
+           netio = str[0];
        }
        else if(netIO.contains("B"))
        {
            String str[]= netIO.split("B");
-           sock2 = (str[0])/1000;
+           sock2 = (Double.valueOf(str[0]))/1000;
            netio = Double.toString(sock2);
        }
         Double sock = Double.valueOf(cpu);
