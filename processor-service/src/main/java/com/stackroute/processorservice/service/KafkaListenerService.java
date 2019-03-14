@@ -28,7 +28,6 @@ public class KafkaListenerService  {
 
     @KafkaListener(topics = "Kafka_Example_Test_Final3", groupId = "group_id")
     public void consume(String message) throws JsonProcessingException {
-        System.out.println("Consumed msg : " + message);
 
         JsonParser jsonParser = new JsonParser();
 
@@ -51,9 +50,7 @@ public class KafkaListenerService  {
         metricsFinal.setMetrics(metrics);
         
         counter++;
-        System.out.println("Messages received "+counter);
             influxService.saveMetricsFinal(metricsFinal);
-        System.out.println(metricsFinal.toString ());
 
     }
 

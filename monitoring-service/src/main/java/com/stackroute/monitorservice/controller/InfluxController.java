@@ -4,9 +4,7 @@ package com.stackroute.monitorservice.controller;
 import com.stackroute.monitorservice.model.HistoricalDockerMetric;
 import com.stackroute.monitorservice.model.Monitor;
 import com.stackroute.monitorservice.model.Range;
-import com.stackroute.monitorservice.service.InfluxService;
 import com.stackroute.monitorservice.service.InfluxServiceImpl;
-import org.influxdb.dto.QueryResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,7 +33,6 @@ public class InfluxController {
     @GetMapping("data")
     public ResponseEntity<?> getMonitorData(){
 
-        System.out.println (monitor);
         return new ResponseEntity<>(monitor, HttpStatus.OK);
 
     }

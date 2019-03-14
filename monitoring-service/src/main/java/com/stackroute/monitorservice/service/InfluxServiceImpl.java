@@ -3,7 +3,6 @@ package com.stackroute.monitorservice.service;
 import com.stackroute.monitorservice.influxdb.InfluxDBTemplate;
 import com.stackroute.monitorservice.model.HistoricalDockerMetric;
 import com.stackroute.monitorservice.model.MetricsFinal;
-import com.stackroute.monitorservice.model.Monitor;
 import com.stackroute.monitorservice.model.Range;
 import org.influxdb.dto.Point;
 import org.influxdb.dto.Query;
@@ -34,7 +33,6 @@ public class InfluxServiceImpl implements InfluxService {
 
     public MetricsFinal saveMetrics(MetricsFinal metricsFinal){
 
-        System.out.println("Saving Metrics");
         influxDBTemplate.createDatabase();
 
 
@@ -54,7 +52,6 @@ public class InfluxServiceImpl implements InfluxService {
                 .addField("PID", metricsFinal.getMetrics().getpId())
                 .build();
         influxDBTemplate.write(p);
-        System.out.println("Saved Metrics");
 
         return metricsFinal;
 
@@ -66,38 +63,21 @@ public class InfluxServiceImpl implements InfluxService {
         String todateString = range.getToDate();
         String fromdateString = range.getFromDate();
         DateFormat dateFormat = new SimpleDateFormat("EEE, dd MMM yyyy hh:mm:ss.SSS z");
-//        DateFormat fromDateFormat = new SimpleDateFormat("EEE, dd MMM yyyy hh:mm:ss z");
 
         Date toDate1 = dateFormat.parse(todateString);
         Date fromDate1 = dateFormat.parse(fromdateString);
         long tounixTime = (long)toDate1.getTime()*1000000;
         long fromunixTime = (long)fromDate1.getTime()*1000000;
-        System.out.println(tounixTime);
-        System.out.println(fromunixTime);
 
 
         String dbName = "monitorServiceDB";
-        System.out.println("TableName" + range.getTableName());
         Query query1 = new Query("select time, Cpu, Memory from "+range.getTableName()+" where time >= "+tounixTime + " and time <= "+fromunixTime,dbName);
 
         Query query2 = new Query("select time, Cpu, Memory from "+range.getTableName(),dbName);
         QueryResult queryResult = influxDBTemplate.query(query1);
         QueryResult queryResult2 = influxDBTemplate.query(query2);
 
-//        System.out.println(queryResult);
-//        System.out.println(queryResult2);
-
-
-        System.out.println("Size");
-        System.out.println(queryResult.getResults().get(0).getSeries().get(0).getValues().size());
         int valSize = queryResult.getResults().get(0).getSeries().get(0).getValues().size();
-        System.out.println("!!!!!!!!!Time");
-        System.out.println(queryResult.getResults().get(0).getSeries().get(0).getValues().get(0).get(0));
-        System.out.println("!!!!!!!!!CPu");
-        System.out.println(queryResult.getResults().get(0).getSeries().get(0).getValues().get(0).get(1));
-        System.out.println("!!!!!!!!!Mem");
-        System.out.println(queryResult.getResults().get(0).getSeries().get(0).getValues().get(0).get(2));
-
 
         List<HistoricalDockerMetric> historicalDockerMetricList = new ArrayList<>();
 
@@ -107,15 +87,11 @@ public class InfluxServiceImpl implements InfluxService {
              historicalDockerMetric.setTime(queryResult.getResults().get(0).getSeries().get(0).getValues().get(0).get(0).toString());
              historicalDockerMetric.setCpu(queryResult.getResults().get(0).getSeries().get(0).getValues().get(0).get(1).toString());
              historicalDockerMetric.setMem(queryResult.getResults().get(0).getSeries().get(0).getValues().get(0).get(2).toString());
-
              historicalDockerMetricList.add(historicalDockerMetric);
-
-
          }
 
 
         return historicalDockerMetricList;
-        //<- prints 1352504418
     }
 
 

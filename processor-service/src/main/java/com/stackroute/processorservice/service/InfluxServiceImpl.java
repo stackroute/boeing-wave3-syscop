@@ -52,14 +52,12 @@ public class InfluxServiceImpl implements InfluxService {
 
             currD = (double) queryResult5.getResults().get(0).getSeries().get(0).getValues().get(0).get(1);
 
-            System.out.println("rows currCount "+currD.intValue());
             currCount = currD.intValue();
         }catch (Exception e){
-            System.out.println(e);
+            //throws exception
         }
 
         if (currCount <= 30) {
-            System.out.println("Saving Metrics");
             influxDBTemplate.createDatabase();
             final Point p = Point.measurement(metricsFinal.getUserName() + metricsFinal.getServiceName())
                     .time(System.currentTimeMillis(), TimeUnit.MILLISECONDS)
@@ -77,10 +75,9 @@ public class InfluxServiceImpl implements InfluxService {
                     .addField("PID", metricsFinal.getMetrics().getpId())
                     .build();
             influxDBTemplate.write(p);
-            System.out.println("Saved Metrics");
         }
         if (currCount == 30) {
-            System.out.println("calculating threshold");
+            //if sttatement
         }
         return metricsFinal1;
     }
@@ -88,7 +85,6 @@ public class InfluxServiceImpl implements InfluxService {
     public QueryResult calculateThreshold(String tablename) throws JsonProcessingException {
         String dbName = "mydb";
         String var = tablename;
-        System.out.println(var);
 
         Query query1 = new Query("SELECT MEAN(\"Memory\") FROM " + var, dbName);
         Query query2 = new Query("SELECT MEAN(\"Cpu\") FROM " + var, dbName);
@@ -101,15 +97,6 @@ public class InfluxServiceImpl implements InfluxService {
         QueryResult queryResult4 = influxDBTemplate.query(query4);
 
 
-        System.out.println(var);
-        System.out.println("!!!!!!!!!!!!!!!!!!Memory");
-        System.out.println(queryResult.getResults().get(0).getSeries().get(0).getValues().get(0).get(1));
-        System.out.println("!!!!!!!!!!!!!!!!!!Cpu");
-        System.out.println(queryResult2.getResults().get(0).getSeries().get(0).getValues().get(0).get(1));
-        System.out.println("!!!!!!!!!!!!!!!!!!Username");
-        System.out.println(queryResult3.getResults().get(0).getSeries().get(0).getValues().get(0).get(1));
-        System.out.println("!!!!!!!!!!!!!!!!!!Servicename");
-        System.out.println(queryResult4.getResults().get(0).getSeries().get(0).getValues().get(0).get(1));
 
         MetricsThreshold metricsThreshold = new MetricsThreshold();
 
@@ -118,13 +105,11 @@ public class InfluxServiceImpl implements InfluxService {
         metricsThreshold.setCpu(Float.parseFloat(queryResult2.getResults().get(0).getSeries().get(0).getValues().get(0).get(1).toString()));
         metricsThreshold.setMem(Float.parseFloat(queryResult.getResults().get(0).getSeries().get(0).getValues().get(0).get(1).toString()));
 
-        System.out.println(metricsThreshold.toString());
 
         ObjectMapper obj = new ObjectMapper();
         String metricsThresholdJson = obj.writeValueAsString(metricsThreshold);
 
 
-        System.out.println(metricsThresholdJson);
 
         kafkaTemplate.send(TOPIC, metricsThresholdJson);
 
@@ -148,7 +133,6 @@ public class InfluxServiceImpl implements InfluxService {
 
         Iterator iterator = tableNames.iterator();
         while (iterator.hasNext()){
-            System.out.println("--------");
             String var = iterator.next().toString();
 
 
@@ -162,16 +146,6 @@ public class InfluxServiceImpl implements InfluxService {
             QueryResult queryResult3 = influxDBTemplate.query(query3);
             QueryResult queryResult4 = influxDBTemplate.query(query4);
 
-
-            System.out.println(var);
-            System.out.println("!!!!!!!!!!!!!!!!!!Memory");
-            System.out.println(queryResult.getResults().get(0).getSeries().get(0).getValues().get(0).get(1));
-            System.out.println("!!!!!!!!!!!!!!!!!!Cpu");
-            System.out.println(queryResult2.getResults().get(0).getSeries().get(0).getValues().get(0).get(1));
-            System.out.println("!!!!!!!!!!!!!!!!!!Username");
-            System.out.println(queryResult3.getResults().get(0).getSeries().get(0).getValues().get(0).get(1));
-            System.out.println("!!!!!!!!!!!!!!!!!!Servicename");
-            System.out.println(queryResult4.getResults().get(0).getSeries().get(0).getValues().get(0).get(1));
             MetricsThreshold metricsThreshold = new MetricsThreshold();
 
             metricsThreshold.setUserName(queryResult3.getResults().get(0).getSeries().get(0).getValues().get(0).get(1).toString());
@@ -179,13 +153,9 @@ public class InfluxServiceImpl implements InfluxService {
             metricsThreshold.setCpu(Float.parseFloat(queryResult2.getResults().get(0).getSeries().get(0).getValues().get(0).get(1).toString()));
             metricsThreshold.setMem(Float.parseFloat(queryResult.getResults().get(0).getSeries().get(0).getValues().get(0).get(1).toString()));
 
-            System.out.println(metricsThreshold.toString());
 
             ObjectMapper obj = new ObjectMapper();
             String metricsThresholdJson = obj.writeValueAsString(metricsThreshold);
-
-
-            System.out.println(metricsThresholdJson);
 
             kafkaTemplate.send(TOPIC, metricsThresholdJson);
         }

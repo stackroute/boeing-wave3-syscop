@@ -11,10 +11,8 @@ public class DataCollectorModel {
 
     public String getMetrics(String inputUrl){
         String inline = "";
-        System.out.println("get metrics");
         try {
 
-            System.out.println("Connection established");
             URL url = new URL (inputUrl);
             //Parse URL into HttpURLConnection in order to open the connection in order to get the JSON data
             HttpURLConnection conn = (HttpURLConnection) url.openConnection ();
@@ -24,7 +22,6 @@ public class DataCollectorModel {
             conn.connect();
             //Get the response status of the Rest API
             int responsecode = conn.getResponseCode ();
-            System.out.println ("Response code is: " + responsecode);
 
             //Iterating condition to if response code is not 200 then throw a runtime exception
             //else continue the actual process of getting the JSON data
