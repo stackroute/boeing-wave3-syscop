@@ -34,7 +34,11 @@ public class InfluxController {
     public ResponseEntity<?> getMonitorData(){
 
         return new ResponseEntity<>(monitor, HttpStatus.OK);
+    }
 
+    @GetMapping("hi")
+    public ResponseEntity<?> test() {
+        return new ResponseEntity<String>("Hello Monitor", HttpStatus.OK);
     }
 
     @PostMapping("history")
