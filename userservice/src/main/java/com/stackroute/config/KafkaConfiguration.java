@@ -2,7 +2,6 @@ package com.stackroute.config;
 
 import java.util.HashMap;
 import java.util.Map;
-//import com.stackroute.kafka.springbootwithkafka.model.User;
 import com.stackroute.model.User;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
@@ -14,7 +13,7 @@ import org.springframework.kafka.core.ProducerFactory;
 import org.springframework.kafka.support.serializer.JsonSerializer;
 
 @Configuration
-//Kafka Configuration class to produce the
+//Kafka configuration class to produce the
 public class KafkaConfiguration {
     @Bean
     public ProducerFactory<String, User> producerFactory() {

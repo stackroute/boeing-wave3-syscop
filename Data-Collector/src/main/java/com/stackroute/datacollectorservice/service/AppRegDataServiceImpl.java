@@ -19,10 +19,7 @@ public class AppRegDataServiceImpl implements AppRegDataService {
     public User saveUser(User user) {
 
 
-        System.out.println(user.toString());
-        System.out.println("Saving......");
         dataCollectorRepository.save(user);
-        System.out.println("Saved......");
 
         return user;
 

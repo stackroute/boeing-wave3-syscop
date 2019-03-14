@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
 
 
 /**
- * Test case for Repository layer where connection is checked
+ * Test case for repository layer where connection is checked
  */
 @RunWith(SpringRunner.class)
 @DataMongoTest(excludeAutoConfiguration = EmbeddedMongoAutoConfiguration.class)

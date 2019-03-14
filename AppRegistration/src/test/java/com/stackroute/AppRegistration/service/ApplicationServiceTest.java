@@ -25,7 +25,7 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
 /**
-        * Test cases for Service layer where we mock the repository layer
+        * Test cases for service layer where we mock the repository layer
         * There are four tests. Each for each method in controller
         */
 public class ApplicationServiceTest {

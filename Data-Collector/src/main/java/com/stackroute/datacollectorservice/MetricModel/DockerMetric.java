@@ -117,9 +117,6 @@ public class DockerMetric implements MetricInterface {
             docMet.add (strMetric);
         }
 
-        //System.out.println (docMet);
-        System.out.println (str);
-
 
     }
 

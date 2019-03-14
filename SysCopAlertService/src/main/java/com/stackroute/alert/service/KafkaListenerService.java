@@ -1,8 +1,8 @@
-package com.stackroute.alert.Service;
+package com.stackroute.alert.service;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.stackroute.alert.Repository.UserRepository;
+import com.stackroute.alert.repository.UserRepository;
 import com.stackroute.alert.job.EmailJob;
 import com.stackroute.alert.model.User;
 import com.stackroute.alert.payload.ScheduleEmailRequest;
@@ -38,19 +38,16 @@ public class KafkaListenerService {
     public static final String TWILIO_NUMBER = "+12017205671";
 
 
-    //Listener for User Registration Service to store user details like username,email & phone number
+    //Listener for User Registration service to store user details like username,email & phone number
     //in local mysql.
     @KafkaListener(topics = "Kafka_NewUser_Registration", groupId = "group_id")
     public void consumeUserRegData(String message) {
-        System.out.println("Consumed message: " + message);
-
         String[] strMessage = message.split(",");
         User user = new User();
 
         user.setEmail(strMessage[4].split(":")[1].replace("\"",""));
         user.setUsername(strMessage[1].split(":")[1].replace("\"",""));
         user.setPhoneNumber(strMessage[3].split(":")[1].replace("\"",""));
-        System.out.println(user.getUsername());
 
         userRepository.save(user);
 
@@ -89,23 +86,18 @@ public class KafkaListenerService {
                 .build();
     }
 
-    //Listener for Threshold Service to get the details of metrics that have crossed their threshold
+    //Listener for Threshold service to get the details of metrics that have crossed their threshold
     // value and then it will send the alert to the respective user by matching username from locally s
     // tored database and getting email and phone number from their only.
 
     @KafkaListener(topics = "Kafka_Example_Alert", groupId = "group_id2")
     public void consumeThresholdData(String message) {
-        System.out.println("Consumed message: " + message);
 
         JsonParser jsonParser = new JsonParser();
         JsonObject jsonObject = (JsonObject) jsonParser.parse(message);
 
 
-        //String usernameFromThreshold = strMessage[1].split(":")[1].replace("\"","");
-//
         User user = userRepository.getUserDetails(jsonObject.get("userName").toString().replace("\"",""));
-
-
 
         double d = 2.7;
 
@@ -123,13 +115,9 @@ public class KafkaListenerService {
         Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
         ResourceSet<Message> messages = Message.reader().read();
         for (Message message1 : messages) {
-            System.out.println(message1.getSid() + " : " + message1.getStatus());
         }
 
         ScheduleEmailRequest scheduleEmailRequest= new ScheduleEmailRequest();
-
-
-
 
         try {
 
@@ -137,7 +125,6 @@ public class KafkaListenerService {
             ZonedDateTime dateTime = currentdateTime.plusSeconds(5);
 
             scheduleEmailRequest.setEmail(user.getEmail());
-            //scheduleEmailRequest.setEmail("bnj.anjali@gmail.com");
             scheduleEmailRequest.setBody(jsonObject.get("alert").toString()+ jsonObject.get("serviceName").toString());
             scheduleEmailRequest.setSubject("Syscop Alert");
 

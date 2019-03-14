@@ -1,4 +1,4 @@
-package com.stackroute.alert.Configuration;
+package com.stackroute.alert.configuration;
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;

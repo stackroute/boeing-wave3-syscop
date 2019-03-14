@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- *Service is a domain object class
+ *service is a domain object class
  * that stores a services' name, type(java/python/node) and
  * port on which the service is running
  * in the system

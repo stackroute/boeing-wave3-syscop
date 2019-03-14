@@ -1,4 +1,4 @@
-package com.stackroute.alert.Repository;
+package com.stackroute.alert.repository;
 
 
 import com.stackroute.alert.model.User;
