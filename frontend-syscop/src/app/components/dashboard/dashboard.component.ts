@@ -15,7 +15,7 @@ export class DashboardComponent implements AfterViewInit {
   constructor(private dataService: DataService) { }
   public stompClient = null;
   public username = localStorage.getItem('AuthUsername');
-  public url = 'http://13.232.165.99:8018/live-metrics';
+  public url = 'https://13.232.165.99:8018/live-metrics';
   public services = this.dataService.services;
 
   /*This option is used in ChartJS */
