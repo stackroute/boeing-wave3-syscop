@@ -115,7 +115,7 @@ public class ApplicationServiceImpl implements ApplicationService {
         while (applicationIterator.hasNext()){
             Application appToBeComparedWith = (Application) applicationIterator.next();
             if (appToBeComparedWith.getApplicationName().equals(appNameToCompare)){
-
+                //Empty Block
             }
             else{
                 listOfApplicationsAfterDeletion.add(appToBeComparedWith);
