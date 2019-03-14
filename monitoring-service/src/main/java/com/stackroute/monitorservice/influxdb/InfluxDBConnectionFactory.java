@@ -60,7 +60,6 @@ public class InfluxDBConnectionFactory implements InitializingBean
         .readTimeout(properties.getReadTimeout(), TimeUnit.SECONDS);
       connection = InfluxDBFactory
         .connect(properties.getUrl(), properties.getUsername(), properties.getPassword(), client);
-    //  logger.debug("Using InfluxDB '{}' on '{}'", properties.getDatabase(), properties.getUrl());
       if (properties.isGzip())
       {
         logger.debug("Enabled gzip compression for HTTP requests");

@@ -22,10 +22,6 @@
 		<maven.compiler.target>${java.version}</maven.compiler.target>
 		<spring-cloud.version>Greenwich.RELEASE</spring-cloud.version>
 	</properties>
-    <!--<properties>-->
-        <!--<java.version>11</java.version>-->
-    <!--</properties>-->
-
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
