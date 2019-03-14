@@ -1,12 +1,11 @@
-package com.stackroute.AppRegistration.controller;
+package com.stackroute.appregistration.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.stackroute.AppRegistration.domain.Application;
-import com.stackroute.AppRegistration.domain.Service;
-import com.stackroute.AppRegistration.domain.User;
-import com.stackroute.AppRegistration.exceptions.ApplicationAlreadyExistException;
-import com.stackroute.AppRegistration.service.ApplicationService;
+import com.stackroute.appregistration.domain.Application;
+import com.stackroute.appregistration.domain.Service;
+import com.stackroute.appregistration.domain.User;
+import com.stackroute.appregistration.service.ApplicationService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,9 +25,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import static org.junit.Assert.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import org.mockito.Mockito;
 import static org.mockito.internal.verification.VerificationModeFactory.times;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 

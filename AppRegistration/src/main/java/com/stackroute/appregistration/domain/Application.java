@@ -1,4 +1,4 @@
-package com.stackroute.AppRegistration.domain;
+package com.stackroute.appregistration.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

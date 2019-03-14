@@ -1,10 +1,10 @@
-package com.stackroute.AppRegistration.service;
+package com.stackroute.appregistration.service;
 
-import com.stackroute.AppRegistration.domain.Application;
-import com.stackroute.AppRegistration.domain.User;
-import com.stackroute.AppRegistration.exceptions.ApplicationAlreadyExistException;
-import com.stackroute.AppRegistration.exceptions.ApplicationDoesNotExistException;
-import com.stackroute.AppRegistration.repository.ApplicationRepository;
+import com.stackroute.appregistration.domain.Application;
+import com.stackroute.appregistration.domain.User;
+import com.stackroute.appregistration.exceptions.ApplicationAlreadyExistException;
+import com.stackroute.appregistration.exceptions.ApplicationDoesNotExistException;
+import com.stackroute.appregistration.repository.ApplicationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

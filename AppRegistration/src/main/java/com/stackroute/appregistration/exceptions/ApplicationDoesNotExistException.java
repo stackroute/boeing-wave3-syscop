@@ -1,4 +1,4 @@
-package com.stackroute.AppRegistration.exceptions;
+package com.stackroute.appregistration.exceptions;
 
 /**
  * Custom Exception class thrown when we try to

@@ -1,8 +1,8 @@
-package com.stackroute.AppRegistration.repository;
+package com.stackroute.appregistration.repository;
 
-import com.stackroute.AppRegistration.domain.Application;
-import com.stackroute.AppRegistration.domain.Service;
-import com.stackroute.AppRegistration.domain.User;
+import com.stackroute.appregistration.domain.Application;
+import com.stackroute.appregistration.domain.Service;
+import com.stackroute.appregistration.domain.User;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.mongo.embedded.EmbeddedMongoAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import scala.App;
 
 import java.util.ArrayList;
 import java.util.Date;

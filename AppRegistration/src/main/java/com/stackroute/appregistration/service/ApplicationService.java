@@ -1,8 +1,8 @@
-package com.stackroute.AppRegistration.service;
+package com.stackroute.appregistration.service;
 
-import com.stackroute.AppRegistration.domain.User;
-import com.stackroute.AppRegistration.exceptions.ApplicationAlreadyExistException;
-import com.stackroute.AppRegistration.exceptions.ApplicationDoesNotExistException;
+import com.stackroute.appregistration.domain.User;
+import com.stackroute.appregistration.exceptions.ApplicationAlreadyExistException;
+import com.stackroute.appregistration.exceptions.ApplicationDoesNotExistException;
 
 /**
  * ApplicationService is an interface in the service layer

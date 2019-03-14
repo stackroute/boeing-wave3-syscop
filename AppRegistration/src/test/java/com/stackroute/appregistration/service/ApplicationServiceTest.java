@@ -1,11 +1,11 @@
-package com.stackroute.AppRegistration.service;
+package com.stackroute.appregistration.service;
 
-import com.stackroute.AppRegistration.domain.Application;
-import com.stackroute.AppRegistration.domain.Service;
-import com.stackroute.AppRegistration.domain.User;
-import com.stackroute.AppRegistration.exceptions.ApplicationAlreadyExistException;
-import com.stackroute.AppRegistration.exceptions.ApplicationDoesNotExistException;
-import com.stackroute.AppRegistration.repository.ApplicationRepository;
+import com.stackroute.appregistration.domain.Application;
+import com.stackroute.appregistration.domain.Service;
+import com.stackroute.appregistration.domain.User;
+import com.stackroute.appregistration.exceptions.ApplicationAlreadyExistException;
+import com.stackroute.appregistration.exceptions.ApplicationDoesNotExistException;
+import com.stackroute.appregistration.repository.ApplicationRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -16,10 +16,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.Assert.*;
 import static org.mockito.internal.verification.VerificationModeFactory.times;
 import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;

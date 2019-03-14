@@ -1,6 +1,6 @@
-package com.stackroute.AppRegistration.repository;
+package com.stackroute.appregistration.repository;
 
-import com.stackroute.AppRegistration.domain.User;
+import com.stackroute.appregistration.domain.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 /**

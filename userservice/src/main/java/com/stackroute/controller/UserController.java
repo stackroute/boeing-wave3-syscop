@@ -33,13 +33,10 @@ public class UserController {
         try {
             userService.saveUser(user);
             responseEntity = new ResponseEntity<String>("Successfully created the User!!", HttpStatus.CREATED);
-            System.out.println(user);
             kafkaTemplate.send(TOPIC, user);
-            System.out.println("Published to Kafka");
         }
         catch (UserAlreadyExistsException ex){
             responseEntity = new ResponseEntity<String>(ex.getMessage(),HttpStatus.BAD_REQUEST);
-            //ex.printStackTrace();
         }
         return responseEntity;
     }
@@ -69,14 +66,12 @@ public class UserController {
     @PutMapping("users/{id}")
     public ResponseEntity<User> updateUser(@PathVariable("id") String userId, @RequestBody User user) {
         ResponseEntity responseEntity;
-        System.out.println("I am in controller");
         try{
             User user1 = userService.updateUser(userId,user);
             responseEntity = new ResponseEntity<User>(user1, HttpStatus.OK);
         }
         catch (UserNotFoundException ex){
             responseEntity = new ResponseEntity<String>(ex.getMessage(),HttpStatus.NOT_FOUND);
-            //ex.printStackTrace();
         }
         return responseEntity;
 

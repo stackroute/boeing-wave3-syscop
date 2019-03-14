@@ -1,4 +1,4 @@
-package com.stackroute.AppRegistration.exceptions;
+package com.stackroute.appregistration.exceptions;
 
 /**
  * Custom Exceptions thrown when we try to save already existing exception

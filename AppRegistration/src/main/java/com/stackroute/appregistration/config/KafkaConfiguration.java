@@ -1,4 +1,4 @@
-package com.stackroute.AppRegistration.config;
+package com.stackroute.appregistration.config;
 
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;

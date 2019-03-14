@@ -1,4 +1,4 @@
-package com.stackroute.AppRegistration.error;
+package com.stackroute.appregistration.error;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

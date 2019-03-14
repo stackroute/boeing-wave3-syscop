@@ -42,12 +42,10 @@ public class ThreadService implements Runnable {
     private static  String userName;
 
     public ThreadService(){
-        System.out.println("in not arg constructor");
     }
 
     @Autowired
     public ThreadService(ServiceFields serviceFields, DataCollectorModel dataCollectorModel,KafkaTemplate<String, String> kafkaTemplate, MetricFactory metricFactory) {
-        System.out.println("in all arg constructor");
         this.dataCollectorModel = dataCollectorModel;
         this.kafkaTemplate = kafkaTemplate;
         this.metricFactory = metricFactory;
@@ -57,7 +55,6 @@ public class ThreadService implements Runnable {
     @Override
     public void run() {
 
-        System.out.println("IN THREAD");
         try {
             executeSampleJob();
         } catch (Exception e) {
@@ -71,7 +68,6 @@ public class ThreadService implements Runnable {
 
 
     public void executeJavaJob() throws Exception {
-        System.out.println("Executing Java Job.....");
 
     }
 

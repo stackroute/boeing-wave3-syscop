@@ -1,11 +1,11 @@
-package com.stackroute.AppRegistration.controller;
+package com.stackroute.appregistration.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.stackroute.AppRegistration.domain.User;
-import com.stackroute.AppRegistration.exceptions.ApplicationAlreadyExistException;
-import com.stackroute.AppRegistration.exceptions.ApplicationDoesNotExistException;
-import com.stackroute.AppRegistration.service.ApplicationService;
+import com.stackroute.appregistration.domain.User;
+import com.stackroute.appregistration.exceptions.ApplicationAlreadyExistException;
+import com.stackroute.appregistration.exceptions.ApplicationDoesNotExistException;
+import com.stackroute.appregistration.service.ApplicationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

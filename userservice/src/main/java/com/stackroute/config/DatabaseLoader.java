@@ -42,7 +42,6 @@ public abstract class DatabaseLoader implements ApplicationListener<ContextRefre
 
     @Override
     public void onApplicationEvent(final ContextRefreshedEvent event){
-        System.out.println("");
         seedData();
     }
 
@@ -56,29 +55,8 @@ public abstract class DatabaseLoader implements ApplicationListener<ContextRefre
         user2.setCompany(company1);
         user2.setDob(dob1);
         userRepository.save(user2);
-        System.out.println("gogogogogo: ====>"+username1);
         }
 
-
-
-//    //Method to be over-ridden for applicationListener
-//    @Override
-//    public void onApplicationEvent(final ApplicationReadyEvent applicationReadyEvent) {
-//        seedData();
-//    }
-//
-//    private void seedData() {
-//        User user2 = new User();
-//        user2.setPassword(password1);
-//        user2.setDob(dob1);
-//        user2.setPhoneNumber(phonenumber1);
-//        user2.setName(organisationname1);
-//        user2.setEmail(emailId1);
-//        user2.setCid(id1);
-//        user2.setUsername(username1);
-//        userRepository.save(user2);
-//
-//    }
 
 }
 
