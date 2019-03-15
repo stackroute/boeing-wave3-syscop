@@ -22,6 +22,8 @@ public class ThreadService implements Runnable {
 
     private static final String TOPIC = "Kafka_Example_Test_Final3";
 
+    private static final String TOPIC_JAVA = "Kafka_Example_Test_JAVA";
+
     @Autowired
     private DataCollectorRepository dataCollectorRepository;
 
@@ -161,6 +163,10 @@ public class ThreadService implements Runnable {
 
           MetricInterface javaMetric = metricFactory.createObject("javametric");
           javaMetric.parse(responseJava);
+          ObjectMapper obj = new ObjectMapper();
+          String javaMetrics = obj.writeValueAsString(javaMetric);
+
+          kafkaTemplate.send(TOPIC_JAVA, javaMetrics);
          System.out.println(javaMetric.toString());
         
 

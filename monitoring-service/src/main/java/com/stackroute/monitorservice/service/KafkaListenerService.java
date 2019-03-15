@@ -103,6 +103,14 @@ public class KafkaListenerService  {
     }
 
 
+    @KafkaListener(topics = "Kafka_Example_Test_JAVA", groupId = "group_id_monitoring_java")
+    public void consumeJava(String message) {
+
+        System.out.println(message);
+
+    }
+
+
 }
 
 

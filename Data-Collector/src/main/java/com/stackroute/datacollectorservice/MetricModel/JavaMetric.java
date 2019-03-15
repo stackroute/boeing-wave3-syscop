@@ -43,14 +43,14 @@ public class JavaMetric implements MetricInterface {
             path = Arrays.copyOf(endpointMap.keySet().toArray(), endpointMap.keySet().toArray().length, String[].class);
             responseTime = Arrays.copyOf(endpointMap.values().toArray(), endpointMap.values().toArray().length, String[].class);
         }
-        for(int i=0; i<path.length; i++){
-            System.out.println(path[i]+" "+responseTime[i]);
-        }
+//        for(int i=0; i<path.length; i++){
+////            System.out.println(path[i]+" "+responseTime[i]);
+//        }
     }
 
     @Override
     public String toString() {
-        return "{" +
+        return "JavaMetric{" +
                 "path=" + Arrays.toString(path) +
                 ", responseTime=" + Arrays.toString(responseTime) +
                 '}';
