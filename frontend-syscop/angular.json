@@ -23,6 +23,8 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/angular-bootstrap-md/scss/bootstrap/bootstrap.scss",
+              "node_modules/angular-bootstrap-md/scss/mdb-free.scss",
               "src/assets/scss/material-dashboard.scss",
               "src/styles.css"
             ],
