@@ -31,24 +31,20 @@ public class JavaMetric implements MetricInterface {
     public void parse(String metricStr) {
         if(metricStr.contains("http_request_duration")){
             String httpReq = metricStr.split("# TYPE http_request_duration summary")[1].split("# HELP sql_queries_total Total number of sql queries")[0];
-            String[] httpReqArr = httpReq.split("http_request_duration");
-            List<Endpoint> endpointList = new ArrayList<Endpoint>();
-            Endpoint tmp;
+            String[] httpReqArr = httpReq.split("\n");
             HashMap<String,String> endpointMap = new HashMap<String,String>();
 
             for(int i=0; i<httpReqArr.length; i++){
-                if(httpReqArr[i].contains("http_request_duration\\{")){
-                    tmp = new Endpoint();
+                if(httpReqArr[i].contains("http_request_duration{")){
                     httpReqArr[i] = httpReqArr[i].trim();
-                    tmp.setPath(httpReqArr[i].split("path=\"")[1].split("\"")[0]);
-                    tmp.setMethod(httpReqArr[i].split("method=\"")[1].split("\"")[0]);
-                    tmp.setRequestDuration(Integer.getInteger(httpReqArr[i].split(" ")[1]));
-                    endpointList.add(tmp);
                     endpointMap.put(httpReqArr[i].split("path=\"")[1].split("\"")[0],httpReqArr[i].split(" ")[1]);
                 }
             }
             path = Arrays.copyOf(endpointMap.keySet().toArray(), endpointMap.keySet().toArray().length, String[].class);
             responseTime = Arrays.copyOf(endpointMap.values().toArray(), endpointMap.values().toArray().length, String[].class);
+        }
+        for(int i=0; i<path.length; i++){
+            System.out.println(path[i]+" "+responseTime[i]);
         }
     }
 
