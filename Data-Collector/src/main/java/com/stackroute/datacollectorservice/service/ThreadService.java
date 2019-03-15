@@ -217,7 +217,7 @@ public class ThreadService implements Runnable {
 
         //Java HardCode
 
-          String responseJava = dataCollectorModel.getMetrics("https://localhost:8051/metrics");
+          String responseJava = dataCollectorModel.getMetrics("https://10.20.1.44:8003/metrics");
 
           MetricInterface javaMetric = metricFactory.createObject("javametric");
           javaMetric.parse(responseJava);
