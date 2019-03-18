@@ -30,6 +30,8 @@ public class KafkaListenerService  {
 
     @Autowired
     private Metrics metrics;
+    
+    private String javaMetrics[] = null;
 
 
     @KafkaListener(topics = "Kafka_Example_Test_Final3", groupId = "group_id_monitoring")
