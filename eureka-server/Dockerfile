@@ -1,6 +1,6 @@
 FROM openjdk:11
 
-ADD ./target/eureka-server-v1.0.9.jar /event/src/eureka-server-v1.0.9.jar
+ADD ./target/eureka-server-v3.0.0.jar /event/src/eureka-server-v3.0.0.jar
 EXPOSE 8010
 WORKDIR event/src
-ENTRYPOINT ["java","-jar","eureka-server-v1.0.9.jar"]
+ENTRYPOINT ["java","-jar","eureka-server-v3.0.0.jar"]

@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>com.stackroute</groupId>
 		<artifactId>syscop</artifactId>
-		<version>v1.0.9</version><!-- lookup parent from repository -->
+		<version>v3.0.0</version><!-- lookup parent from repository -->
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<artifactId>monitoring-service</artifactId>
