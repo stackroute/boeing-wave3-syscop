@@ -31,7 +31,7 @@ public class DataCollectorModel {
                 //Scanner functionality will read the JSON data from the stream
                 Scanner sc = new Scanner (url.openStream ());
                 while (sc.hasNext ()) {
-                    inline += sc.nextLine ();
+                    inline += "\n"+sc.nextLine ();
                 }
 
                 sc.close ();

@@ -4,6 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.stackroute.datacollectorservice.FactoryModel.MetricFactory;
+import com.stackroute.datacollectorservice.MetricModel.JavaMetric;
 import com.stackroute.datacollectorservice.MetricModel.MetricInterface;
 import com.stackroute.datacollectorservice.model.*;
 import com.stackroute.datacollectorservice.repository.DataCollectorRepository;
@@ -161,12 +162,10 @@ public class ThreadService implements Runnable {
         //Java HardCode
          String responseJava = dataCollectorModel.getMetrics("http://10.20.1.44:8003/metrics");
 
-          MetricInterface javaMetric = metricFactory.createObject("javametric");
+          JavaMetric javaMetric = new JavaMetric();
           javaMetric.parse(responseJava);
-          ObjectMapper obj = new ObjectMapper();
-          String javaMetrics = obj.writeValueAsString(javaMetric);
 
-          kafkaTemplate.send(TOPIC_JAVA, javaMetrics);
+          kafkaTemplate.send(TOPIC_JAVA, javaMetric.toString());
          System.out.println(javaMetric.toString());
         
 

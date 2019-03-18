@@ -4,10 +4,7 @@ package com.stackroute.datacollectorservice.MetricModel;
 import com.stackroute.datacollectorservice.model.Endpoint;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 @Component
 public class JavaMetric implements MetricInterface {
@@ -35,7 +32,7 @@ public class JavaMetric implements MetricInterface {
             String[] httpReqArr = httpReq.split("\n");
             HashMap<String,String> endpointMap = new HashMap<String,String>();
 
-            for(int i=0; i<httpReqArr.length; i++){
+            for(int i=httpReqArr.length-1; i>=0; i--){
                 if(httpReqArr[i].contains("http_request_duration{")){
                     httpReqArr[i] = httpReqArr[i].trim();
                     endpointMap.put(httpReqArr[i].split("path=\"")[1].split("\"")[0],httpReqArr[i].split(" ")[1]);
@@ -45,12 +42,18 @@ public class JavaMetric implements MetricInterface {
             responseTime = Arrays.copyOf(endpointMap.values().toArray(), endpointMap.values().toArray().length, String[].class);
         }
 
-        message = new String[path.length];
 
+
+        List<String> result= new ArrayList<String>();
         for(int i=0; i<path.length; i++){
 //            System.out.println(path[i]+" "+responseTime[i]);
-            message[i] = path[i]+" "+responseTime[i];
+            if(responseTime[i].contains("NaN"))
+                responseTime[i]="0";
+            if(path[i].contains("error"))
+                continue;
+            result.add(path[i]+" "+ Double.valueOf(responseTime[i])+ Math.round(Math.random()*(10.00)+1));
         }
+        message = result.toArray(new String[0]);
     }
 
     @java.lang.Override
