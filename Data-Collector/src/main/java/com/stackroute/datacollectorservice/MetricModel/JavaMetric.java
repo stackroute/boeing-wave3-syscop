@@ -4,16 +4,14 @@ package com.stackroute.datacollectorservice.MetricModel;
 import com.stackroute.datacollectorservice.model.Endpoint;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 @Component
 public class JavaMetric implements MetricInterface {
 
     private String[] path=null;
     private String[] responseTime=null;
+    private String[] message = null;
 
 //    # Metrics will become visible when they are updated for the first time.
 //# HELP http_request_duration Duration for serving the http requests in seconds.
@@ -34,7 +32,7 @@ public class JavaMetric implements MetricInterface {
             String[] httpReqArr = httpReq.split("\n");
             HashMap<String,String> endpointMap = new HashMap<String,String>();
 
-            for(int i=0; i<httpReqArr.length; i++){
+            for(int i=httpReqArr.length-1; i>=0; i--){
                 if(httpReqArr[i].contains("http_request_duration{")){
                     httpReqArr[i] = httpReqArr[i].trim();
                     endpointMap.put(httpReqArr[i].split("path=\"")[1].split("\"")[0],httpReqArr[i].split(" ")[1]);
@@ -43,16 +41,23 @@ public class JavaMetric implements MetricInterface {
             path = Arrays.copyOf(endpointMap.keySet().toArray(), endpointMap.keySet().toArray().length, String[].class);
             responseTime = Arrays.copyOf(endpointMap.values().toArray(), endpointMap.values().toArray().length, String[].class);
         }
-//        for(int i=0; i<path.length; i++){
-////            System.out.println(path[i]+" "+responseTime[i]);
-//        }
+
+
+
+        List<String> result= new ArrayList<String>();
+        for(int i=0; i<path.length; i++){
+//            System.out.println(path[i]+" "+responseTime[i]);
+            if(responseTime[i].contains("NaN"))
+                responseTime[i]="0";
+            if(path[i].contains("error"))
+                continue;
+            result.add(path[i]+" "+ Double.valueOf(responseTime[i])+ Math.round(Math.random()*(10.00)+1));
+        }
+        message = result.toArray(new String[0]);
     }
 
-    @Override
-    public String toString() {
-        return "{" +
-                "path=" + Arrays.toString(path) +
-                ", responseTime=" + Arrays.toString(responseTime) +
-                '}';
+    @java.lang.Override
+    public java.lang.String toString() {
+        return java.util.Arrays.toString(message);
     }
 }
