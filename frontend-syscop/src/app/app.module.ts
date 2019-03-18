@@ -34,6 +34,7 @@ import { NgMatSearchBarModule } from 'ng-mat-search-bar';
 import { DataComponent } from './components/data/data.component';
 import { MatDatetimepickerModule } from '@mat-datetimepicker/core';
 import { MatMomentDatetimeModule } from '@mat-datetimepicker/moment';
+import { JavaGraphsComponent } from './components/java-graphs/java-graphs.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { MatMomentDatetimeModule } from '@mat-datetimepicker/moment';
     LandingComponent,
     NotificationsComponent,
     DataComponent,
+    JavaGraphsComponent,
   ],
   imports: [
     BrowserModule,
