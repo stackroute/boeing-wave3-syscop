@@ -13,7 +13,8 @@ import { UserService } from 'src/app/service/user.service';
 
 export class DataComponent implements OnInit, AfterViewInit {
   form: FormGroup;
-
+  exampleHeader;
+  idx;
   constructor(private dataService: DataService , private userService: UserService) { }
   public stompClient = null;
   public username = localStorage.getItem('AuthUsername');
@@ -81,8 +82,9 @@ export class DataComponent implements OnInit, AfterViewInit {
       console.log(res);
     });
     console.log(this.form.value);
-    this.userService.getMonitoringData(this.form.value);
-    this.connect(this.url);
+    this.userService.getMonitoringData(this.form.value).subscribe(data => {
+      this.connect(data);
+    });
   }
   connect(url) {
     /*Arrays needed for ChartJS configuration for cpu graph*/
