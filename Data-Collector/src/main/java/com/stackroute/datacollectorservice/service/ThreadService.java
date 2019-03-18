@@ -163,10 +163,10 @@ public class ThreadService implements Runnable {
 
           MetricInterface javaMetric = metricFactory.createObject("javametric");
           javaMetric.parse(responseJava);
-          ObjectMapper obj = new ObjectMapper();
-          String javaMetrics = obj.writeValueAsString(javaMetric);
+//          ObjectMapper obj = new ObjectMapper();
+//          String javaMetrics = obj.writeValueAsString(javaMetric);
 
-          kafkaTemplate.send(TOPIC_JAVA, javaMetrics);
+          kafkaTemplate.send(TOPIC_JAVA, javaMetric.toString());
          System.out.println(javaMetric.toString());
         
 

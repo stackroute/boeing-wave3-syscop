@@ -50,7 +50,7 @@ public class JavaMetric implements MetricInterface {
 
     @Override
     public String toString() {
-        return "JavaMetric{" +
+        return "{" +
                 "path=" + Arrays.toString(path) +
                 ", responseTime=" + Arrays.toString(responseTime) +
                 '}';
