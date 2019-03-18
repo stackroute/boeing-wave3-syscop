@@ -8,24 +8,25 @@
               <div class="nav-tabs-wrapper">
                 <div class="d-flex" [formGroup]="form">
                   <mat-form-field>
-                    <mat-select #select="matSelect" placeholder="Select Service" formcontrolName="serviceName">
-                      <mat-option  *ngFor="let service of services;" value="service.serviceName" >
+                    <mat-select placeholder="Select Service" formControlName="serviceName">
+                      <mat-option  *ngFor="let service of services;" [value]="service.serviceName" >
                         {{service.serviceName}}
                       </mat-option>
                     </mat-select>
                   </mat-form-field>
                   <mat-form-field >
                       <mat-placeholder>Start DateTime</mat-placeholder>
-                      <mat-datetimepicker-toggle  [for]="datetimePicker" matSuffix></mat-datetimepicker-toggle>
-                      <mat-datetimepicker  #datetimePicker [calendarHeaderComponent]="exampleHeader" type="datetime" mode="portrait" openOnFocus="true" timeInterval="5"></mat-datetimepicker>
-                      <input matInput formControlName="fromDate" [matDatetimepicker]="datetimePicker" required autocomplete="false">
+                      <mat-datetimepicker-toggle  [for]="fromdatetimePicker" matSuffix></mat-datetimepicker-toggle>
+                      <mat-datetimepicker  #fromdatetimePicker  type="datetime" mode="portrait" openOnFocus="true" timeInterval="1"></mat-datetimepicker>
+                      <input matInput formControlName="fromDate" [matDatetimepicker]="fromdatetimePicker" required autocomplete="false">
                     </mat-form-field>
                     <mat-form-field >
                       <mat-placeholder>End DateTime</mat-placeholder>
-                      <mat-datetimepicker-toggle  [for]="datetimePicker" matSuffix></mat-datetimepicker-toggle>
-                      <mat-datetimepicker  #datetimePicker1 [calendarHeaderComponent]="exampleHeader" type="datetime" mode="portrait" openOnFocus="true" timeInterval="5"></mat-datetimepicker>
-                      <input matInput formControlName="toDate" [matDatetimepicker]="datetimePicker1" required autocomplete="false">
+                      <mat-datetimepicker-toggle  [for]="todatetimePicker" matSuffix></mat-datetimepicker-toggle>
+                      <mat-datetimepicker  #todatetimePicker type="datetime" mode="portrait" openOnFocus="true" timeInterval="1"></mat-datetimepicker>
+                      <input matInput formControlName="toDate" [matDatetimepicker]="todatetimePicker" required autocomplete="false">
                     </mat-form-field>
+                    <button type="button" class="btn btn-primary btn-sm" (click)=onSubmit()>GetData</button>
                 </div>
                 <span class="nav-tabs-title">Graphs:</span>
                 <ul class="nav nav-tabs" data-tabs="tabs">

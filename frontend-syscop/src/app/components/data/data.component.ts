@@ -81,8 +81,11 @@ export class DataComponent implements OnInit, AfterViewInit {
     this.select.optionSelectionChanges.subscribe(res => {
       console.log(res);
     });
+  }
+  onSubmit() {
     console.log(this.form.value);
     this.userService.getMonitoringData(this.form.value).subscribe(data => {
+      console.log(data);
       this.connect(data);
     });
   }

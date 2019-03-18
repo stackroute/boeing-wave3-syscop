@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import * as moment from 'moment';
+import { MomentDatetimeModule } from '@mat-datetimepicker/moment';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class UserService {
   /*this url is used for registration service */
   public registerurl = 'https://13.232.165.99:8095/register-service/api/v1/register';
   /*the data url is used for getting data from monitoring service */
-  public dataUrl = 'https://13.232.165.99:8018/api/v1/history';
+  public dataUrl = 'http://13.232.165.99:8018/api/v1/history';
   public username = localStorage.getItem('AuthUsername');
 
   constructor(private http: HttpClient) { }
@@ -26,8 +27,14 @@ export class UserService {
     console.log(user);
   }
   /* getData method gets data from monitoring service */
-  getMonitoringData(obj) {
-    return this.http.post(`${this.dataUrl}/${this.username}+${obj.serviceName}`, obj);
+  getMonitoringData(input) {
+    const obj = {
+      'tableName': this.username + input.serviceName,
+      'fromDate': moment(input.fromDate._d).format('ddd DD MMM YYYY hh:mm:ss.SS'),
+      'toDate': moment(input.toDate._d).format('ddd DD MMM YYYY hh:mm:ss.SS'),
+    };
+    console.log(obj);
+    return this.http.post(`${this.dataUrl}`, obj);
   }
 
 }

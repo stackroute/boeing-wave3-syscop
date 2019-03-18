@@ -1,6 +1,7 @@
 
 .rgba-gradient {
     background: -webkit-linear-gradient(45deg,#68d0ff,#453cf5 100%);
+    min-height: 100vh;
 }
 .blue-gradient-mask{
   background: linear-gradient(40deg,rgba(116,184,255,.8),rgba(87,79,240,.8));

@@ -1,6 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { EditdialogComponent } from './editdialog.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+
 
 describe('EditdialogComponent', () => {
   let component: EditdialogComponent;
@@ -8,7 +13,13 @@ describe('EditdialogComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EditdialogComponent ]
+      declarations: [ EditdialogComponent ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      imports: [HttpClientTestingModule,
+        RouterTestingModule,
+        FormsModule,
+        ReactiveFormsModule, ],
+      providers: [{ provide: MatDialogRef, }, { provide: MAT_DIALOG_DATA, }]
     })
     .compileComponents();
   }));

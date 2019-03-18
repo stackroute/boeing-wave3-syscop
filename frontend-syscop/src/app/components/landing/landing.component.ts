@@ -1,5 +1,6 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
+import * as $ from 'jquery';
 import { WOW } from 'wowjs/dist/wow.min';
 
 @Component({
