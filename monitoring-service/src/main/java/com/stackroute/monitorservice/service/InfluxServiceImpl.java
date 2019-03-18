@@ -62,10 +62,13 @@ public class InfluxServiceImpl implements InfluxService {
 
         String todateString = range.getToDate();
         String fromdateString = range.getFromDate();
-        DateFormat dateFormat = new SimpleDateFormat("EEE, dd MMM yyyy hh:mm:ss.SSS z");
+        DateFormat dateFormat = new SimpleDateFormat("EEE, dd MMM yyyy hh:mm:ss.SS z");
 
         Date toDate1 = dateFormat.parse(todateString);
         Date fromDate1 = dateFormat.parse(fromdateString);
+
+        System.out.println("toDate" + toDate1);
+        System.out.println("fromDate" + fromDate1);
         long tounixTime = (long)toDate1.getTime()*1000000;
         long fromunixTime = (long)fromDate1.getTime()*1000000;
 
