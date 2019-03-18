@@ -62,7 +62,7 @@ public class InfluxServiceImpl implements InfluxService {
 
         String todateString = range.getToDate();
         String fromdateString = range.getFromDate();
-        DateFormat dateFormat = new SimpleDateFormat("EEE, dd MMM yyyy hh:mm:ss.SS z");
+        DateFormat dateFormat = new SimpleDateFormat("EEE, dd MMM yyyy hh:mm:ss.SSS z");
 
         Date toDate1 = dateFormat.parse(todateString);
         Date fromDate1 = dateFormat.parse(fromdateString);
@@ -87,9 +87,9 @@ public class InfluxServiceImpl implements InfluxService {
          for(int i=0;i<valSize;i++) {
              HistoricalDockerMetric historicalDockerMetric = new HistoricalDockerMetric();
 
-             historicalDockerMetric.setTime(queryResult.getResults().get(0).getSeries().get(0).getValues().get(0).get(0).toString());
-             historicalDockerMetric.setCpu(queryResult.getResults().get(0).getSeries().get(0).getValues().get(0).get(1).toString());
-             historicalDockerMetric.setMem(queryResult.getResults().get(0).getSeries().get(0).getValues().get(0).get(2).toString());
+             historicalDockerMetric.setTime(queryResult.getResults().get(0).getSeries().get(0).getValues().get(i).get(0).toString());
+             historicalDockerMetric.setCpu(queryResult.getResults().get(0).getSeries().get(0).getValues().get(i).get(1).toString());
+             historicalDockerMetric.setMem(queryResult.getResults().get(0).getSeries().get(0).getValues().get(i).get(2).toString());
              historicalDockerMetricList.add(historicalDockerMetric);
          }
 
