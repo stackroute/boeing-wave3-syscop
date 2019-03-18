@@ -1,0 +1,125 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="card">
+          <div class="card-header card-header-tabs card-header-primary">
+            <div class="nav-tabs-navigation">
+              <div class="nav-tabs-wrapper">
+                <div class="d-flex" [formGroup]="form">
+                  <mat-form-field>
+                    <mat-select #select="matSelect" placeholder="Select Service" formcontrolName="serviceName">
+                      <mat-option  *ngFor="let service of services;" value="service.serviceName" >
+                        {{service.serviceName}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <mat-form-field >
+                      <mat-placeholder>Start DateTime</mat-placeholder>
+                      <mat-datetimepicker-toggle  [for]="datetimePicker" matSuffix></mat-datetimepicker-toggle>
+                      <mat-datetimepicker  #datetimePicker [calendarHeaderComponent]="exampleHeader" type="datetime" mode="portrait" openOnFocus="true" timeInterval="5"></mat-datetimepicker>
+                      <input matInput formControlName="fromDate" [matDatetimepicker]="datetimePicker" required autocomplete="false">
+                    </mat-form-field>
+                    <mat-form-field >
+                      <mat-placeholder>End DateTime</mat-placeholder>
+                      <mat-datetimepicker-toggle  [for]="datetimePicker" matSuffix></mat-datetimepicker-toggle>
+                      <mat-datetimepicker  #datetimePicker1 [calendarHeaderComponent]="exampleHeader" type="datetime" mode="portrait" openOnFocus="true" timeInterval="5"></mat-datetimepicker>
+                      <input matInput formControlName="toDate" [matDatetimepicker]="datetimePicker1" required autocomplete="false">
+                    </mat-form-field>
+                </div>
+                <span class="nav-tabs-title">Graphs:</span>
+                <ul class="nav nav-tabs" data-tabs="tabs">
+                  <li class="nav-item">
+                    <a mat-button class="nav-link active" href="#cpu{{idx}}" data-toggle="tab">
+                      <i class="material-icons">code</i> CPU
+                      <div class="ripple-container"></div>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a mat-button class="nav-link" href="#netio{{idx}}" data-toggle="tab">
+                      <i class="material-icons">code</i> NetIO
+                      <div class="ripple-container"></div>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a mat-button class="nav-link" href="#memory{{idx}}" data-toggle="tab">
+                      <i class="material-icons">code</i> Memory
+                      <div class="ripple-container"></div>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="tab-content">
+              <div class="tab-pane active" id="cpu{{idx}}">
+                <div class="row justify-content-center">
+                  <div class="col-sm-12 col-md-12">
+                    <div class="card">
+                      <div class="card-header card-header-success">
+                        <canvas class="ct-chart" id="lineChart0{{idx}}"></canvas>
+                      </div>
+                      <div class="card-body">
+                        <h4 class="card-title">CPU</h4>
+                        <p class="card-category">CPU Performance</p>
+                      </div>
+                      <div class="card-footer">
+                        <div class="stats">
+                          <i class="material-icons">access_time</i> updated
+                          every 6 seconds
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane" id="netio{{idx}}">
+                <div class="row justify-content-center">
+                  <div class="col-sm-12 col-md-12">
+                    <div class="card">
+                      <div class="card-header card-header-warning">
+                        <canvas class="ct-chart" id="lineChart1{{idx}}"></canvas>
+                      </div>
+                      <div class="card-body">
+                        <h4 class="card-title">NetIO</h4>
+                        <p class="card-category">NetIO Performance</p>
+                      </div>
+                      <div class="card-footer">
+                        <div class="stats">
+                          <i class="material-icons">access_time</i> updated
+                          every 6 seconds
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane" id="memory{{idx}}">
+                <div class="row justify-content-center">
+                  <div class="col-sm-12 col-md-12">
+                    <div class="card">
+                      <div class="card-header card-header-success">
+                        <canvas class="ct-chart" id="lineChart2{{idx}}"></canvas>
+                      </div>
+                      <div class="card-body">
+                        <h4 class="card-title">Memory</h4>
+                        <p class="card-category">Memory Performance</p>
+                      </div>
+                      <div class="card-footer">
+                        <div class="stats">
+                          <i class="material-icons">access_time</i> updated
+                          every 6 seconds
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

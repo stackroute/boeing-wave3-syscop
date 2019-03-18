@@ -31,6 +31,9 @@ import { DeletedialogComponent } from './components/deletedialog/deletedialog.co
 import { LandingComponent } from './components/landing/landing.component';
 import { NotificationsComponent } from './components/notifications/notifications.component';
 import { NgMatSearchBarModule } from 'ng-mat-search-bar';
+import { DataComponent } from './components/data/data.component';
+import { MatDatetimepickerModule } from '@mat-datetimepicker/core';
+import { MatMomentDatetimeModule } from '@mat-datetimepicker/moment';
 
 @NgModule({
   declarations: [
@@ -45,6 +48,7 @@ import { NgMatSearchBarModule } from 'ng-mat-search-bar';
     DeletedialogComponent,
     LandingComponent,
     NotificationsComponent,
+    DataComponent,
   ],
   imports: [
     BrowserModule,
@@ -81,6 +85,8 @@ import { NgMatSearchBarModule } from 'ng-mat-search-bar';
     MatSortModule,
     MatAutocompleteModule,
     MatChipsModule,
+    MatDatetimepickerModule,
+    MatMomentDatetimeModule,
 
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],

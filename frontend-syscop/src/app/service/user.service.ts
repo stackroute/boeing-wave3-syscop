@@ -14,8 +14,8 @@ export class UserService {
   /*this url is used for registration service */
   public registerurl = 'https://13.232.165.99:8095/register-service/api/v1/register';
   /*the data url is used for getting data from monitoring service */
-  public datarUrl: 'https://13.232.165.99:8018/api/v1/data';
-
+  public dataUrl = 'https://13.232.165.99:8018/api/v1/history';
+  public username = localStorage.getItem('AuthUsername');
 
   constructor(private http: HttpClient) { }
   /* saveUser method saves data into the registration service */
@@ -26,8 +26,8 @@ export class UserService {
     console.log(user);
   }
   /* getData method gets data from monitoring service */
-  getData() {
-    return this.http.get(this.datarUrl);
+  getMonitoringData(obj) {
+    return this.http.post(`${this.dataUrl}/${this.username}+${obj.serviceName}`, obj);
   }
 
 }
