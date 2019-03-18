@@ -78,6 +78,8 @@ public class InfluxServiceImpl implements InfluxService {
         }
         if (currCount == 30) {
             //if sttatement
+            String tablename= metricsFinal.getUserName() + metricsFinal.getServiceName();
+            QueryResult queryResult = calculateThreshold(tablename);
         }
         return metricsFinal1;
     }
