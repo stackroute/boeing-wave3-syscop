@@ -3,7 +3,7 @@
         <div class="row justify-content-center">
             <div class="col-md-6" >
                 <div class="card" >
-                    <div class="card-header card-header-danger">
+                    <div class="card-header blue-gradient">
                         <h4 class="card-title">Login</h4>
                     </div>
                     <div class="card-body">
@@ -31,11 +31,11 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <a routerLink = "/signup"> New User ? Sign Up</a>
+                                    <p class="card-title"><a routerLink = "/signup"> New User ? Sign Up</a></p>
                                 </div>
                             </div>
-                            <button mat-raised-button type="submit"   (click)="onSubmit()" [disabled]="form.invalid" class="btn btn-danger pull-right" style="margin-right:1vw">Login</button>
-                            <button mat-raised-button type="submit"   (click)="onCancel()" class="btn btn-danger pull-right">Cancel</button>
+                            <button mat-raised-button type="submit"   (click)="onSubmit()" [disabled]="form.invalid" class="btn blue-gradient pull-right btn-round" style="margin-right:1vw">Login</button>
+                            <button mat-raised-button type="submit"   (click)="onCancel()" class="btn blue-gradient pull-right btn-round">Cancel</button>
                             <div class="clearfix"></div>
                         </form>
                     </div>

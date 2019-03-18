@@ -3,9 +3,8 @@
         <div class="row">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header card-header-danger">
-                        <h4 class="card-title">Sign Up</h4>
-                        <p class="card-category">Complete your profile</p>
+                    <div class="card-header blue-gradient">
+                        <h3 class="card-title">Sign Up</h3>
                     </div>
                     <div class="card-body">
                         <form [formGroup]="myForm">
@@ -65,12 +64,12 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <a routerLink="/login">Already an User ? Login</a>
+                                    <p class="card-title"><a routerLink="/login">Already an User ? Login</a></p>
                                 </div>
                             </div>
                             <button mat-raised-button type="submit" (click)="onSubmit()" [disabled]="myForm.invalid"
-                                class="btn btn-danger pull-right">Sign Up</button>
-                            <button mat-raised-button type="submit" (click)="onCancel()" class="btn btn-danger pull-right">Cancel</button>
+                                class="btn blue-gradient pull-right btn-round">Sign Up</button>
+                            <button mat-raised-button type="submit" (click)="onCancel()" class="btn blue-gradient pull-right btn-round">Cancel</button>
                             <div class="clearfix"></div>
                         </form>
                     </div>
@@ -89,7 +88,7 @@
                             In business, the idea of measuring what you are doing, picking the measurements
                             that count like customer satisfaction and performance… you thrive on that.
                         </p>
-                        <a href="https://github.com/stackroute/boeing-wave3-syscop/tree/v1.0.2" class="btn btn-danger btn-round">Follow</a>
+                        <a href="https://github.com/stackroute/boeing-wave3-syscop/tree/v1.0.2" class="btn blue-gradient btn-round">Follow</a>
                     </div>
                 </div>
             </div>
