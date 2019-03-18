@@ -14,6 +14,7 @@ public class JavaMetric implements MetricInterface {
 
     private String[] path=null;
     private String[] responseTime=null;
+    private String[] message = null;
 
 //    # Metrics will become visible when they are updated for the first time.
 //# HELP http_request_duration Duration for serving the http requests in seconds.
@@ -43,16 +44,17 @@ public class JavaMetric implements MetricInterface {
             path = Arrays.copyOf(endpointMap.keySet().toArray(), endpointMap.keySet().toArray().length, String[].class);
             responseTime = Arrays.copyOf(endpointMap.values().toArray(), endpointMap.values().toArray().length, String[].class);
         }
-//        for(int i=0; i<path.length; i++){
-////            System.out.println(path[i]+" "+responseTime[i]);
-//        }
+
+        message = new String[path.length];
+
+        for(int i=0; i<path.length; i++){
+//            System.out.println(path[i]+" "+responseTime[i]);
+            message[i] = path[i]+" "+responseTime[i];
+        }
     }
 
-    @Override
-    public String toString() {
-        return "JavaMetric{" +
-                "path=" + Arrays.toString(path) +
-                ", responseTime=" + Arrays.toString(responseTime) +
-                '}';
+    @java.lang.Override
+    public java.lang.String toString() {
+        return java.util.Arrays.toString(message);
     }
 }
