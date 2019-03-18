@@ -62,7 +62,7 @@ public class InfluxServiceImpl implements InfluxService {
 
         String todateString = range.getToDate();
         String fromdateString = range.getFromDate();
-        DateFormat dateFormat = new SimpleDateFormat("EEE MMM dd yyyy hh:mm:ss.SS");
+        DateFormat dateFormat = new SimpleDateFormat("EEE dd MMM yyyy hh:mm:ss.SS a");
 
         Date toDate1 = dateFormat.parse(todateString);
         Date fromDate1 = dateFormat.parse(fromdateString);
