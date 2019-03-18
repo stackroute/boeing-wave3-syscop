@@ -4,6 +4,8 @@ import * as Chart from 'chart.js';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSelect } from '@angular/material';
 import { UserService } from 'src/app/service/user.service';
+import { Data } from '@angular/router';
+import { connect } from 'net';
 
 @Component({
   selector: 'app-data',
@@ -13,9 +15,12 @@ import { UserService } from 'src/app/service/user.service';
 
 export class DataComponent implements OnInit, AfterViewInit {
   form: FormGroup;
-  exampleHeader;
   idx;
-  constructor(private dataService: DataService , private userService: UserService) { }
+  cpuudata = [];
+  memmdata = [];
+  time = [];
+  netIOOdata = [];
+  constructor(private dataService: DataService, private userService: UserService) { }
   public stompClient = null;
   public username = localStorage.getItem('AuthUsername');
   public url = 'https://13.232.165.99:8018/api/v1/history';
@@ -72,9 +77,9 @@ export class DataComponent implements OnInit, AfterViewInit {
   };
   ngOnInit() {
     this.form = new FormGroup({
-      serviceName: new FormControl('', ),
-      fromDate: new FormControl('', ),
-      toDate: new FormControl('', )
+      serviceName: new FormControl(''),
+      fromDate: new FormControl(''),
+      toDate: new FormControl('')
     });
   }
   ngAfterViewInit() {
@@ -84,12 +89,19 @@ export class DataComponent implements OnInit, AfterViewInit {
   }
   onSubmit() {
     console.log(this.form.value);
-    this.userService.getMonitoringData(this.form.value).subscribe(data => {
-      console.log(data);
-      this.connect(data);
+    this.userService.getMonitoringData(this.form.value).subscribe((res: []) => {
+      res.forEach((y: Data ) => {
+          this.cpuudata.push(parseFloat(y.cpu));
+          this.memmdata.push(parseFloat(y.mem));
+          this.time.push(y.time);
+      });
+      console.log(res);
+      console.log(this.cpuudata);
+      console.log(this.memmdata);
+      this.connect();
     });
   }
-  connect(url) {
+  connect() {
     /*Arrays needed for ChartJS configuration for cpu graph*/
     let cpucanvas;
     let cpuctx;
@@ -100,7 +112,6 @@ export class DataComponent implements OnInit, AfterViewInit {
     let netIOctx;
     let netIOLine;
     let netIOdata;
-
     /*Arrays needed for ChartJS configuration for memory graph*/
     let memcanvas;
     let memctx;
@@ -108,37 +119,37 @@ export class DataComponent implements OnInit, AfterViewInit {
     let memdata;
     /*Arrays needed for ChartJS configuration for memory graph*/
     cpudata = {
-      labels: [],
+      labels: this.time,
       datasets: [{
         label: 'CPU Utilization',
         color: 'black',
         backgroudColor: 'rgb(255, 255, 255)',
         borderColor: 'rgb(255, 255, 255)',
-        data: [],
+        data: this.cpuudata,
         fill: false
       }]
     };
     /*Datasets and labels needed for ChartJS configuration for cpu graph*/
     netIOdata = {
-      labels: [],
+      labels: this.time,
       datasets: [{
         label: 'netIO Utilization',
         color: 'black',
         backgroudColor: 'rgb(255, 255, 255)',
         borderColor: 'rgb(255, 255, 255)',
-        data: [],
+        data: this.netIOOdata,
         fill: false
       }]
     };
     /*Datasets and labels needed for ChartJS configuration for netIO graph*/
     memdata = {
-      labels: [],
+      labels: this.time,
       datasets: [{
         label: 'Memory Utilization',
         color: 'black',
         backgroudColor: 'rgb(255, 255, 255)',
         borderColor: 'rgb(255, 255, 255)',
-        data: [],
+        data: this.memmdata,
         fill: false
       }]
     };
@@ -153,28 +164,10 @@ export class DataComponent implements OnInit, AfterViewInit {
     memcanvas = <HTMLCanvasElement>document.getElementById('lineChart2');
     memctx = memcanvas.getContext('2d');
     memLine = new Chart(memctx, { type: 'line', data: memdata, options: this.options });
-    /* Push new data On X-Axis of Chart */
-    cpudata.labels.push(new Date());
-    /* Push new data on Y-Axis of chart */
-    cpudata.datasets.forEach(function (dataset) {
-      dataset.data.push();
-    });
-    /* Push new data On X-Axis of Chart */
-    netIOdata.labels.push(new Date());
-    /* Push new data on Y-Axis of chart */
-    netIOdata.datasets.forEach(function (dataset) {
-      dataset.data.push();
-    });
-
-    /* Push new data On X-Axis of Chart */
-    memdata.labels.push(new Date());
-    /* Push new data on Y-Axis of chart */
-    memdata.datasets.forEach(function (dataset) {
-      dataset.data.push();
-    });
     cpuLine.update();
     netIOLine.update();
     memLine.update();
+
   }
 
 }

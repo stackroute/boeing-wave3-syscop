@@ -30,8 +30,8 @@ export class UserService {
   getMonitoringData(input) {
     const obj = {
       'tableName': this.username + input.serviceName,
-      'fromDate': moment(input.fromDate._d).format('ddd DD MMM YYYY hh:mm:ss.SS'),
-      'toDate': moment(input.toDate._d).format('ddd DD MMM YYYY hh:mm:ss.SS'),
+      'fromDate': moment(input.fromDate._d).format('ddd, DD MMM YYYY hh:mm:ss.SS ') + 'GMT',
+      'toDate': moment(input.toDate._d).format('ddd, DD MMM YYYY hh:mm:ss.SS ') + 'GMT',
     };
     console.log(obj);
     return this.http.post(`${this.dataUrl}`, obj);
