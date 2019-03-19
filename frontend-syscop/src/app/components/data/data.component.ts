@@ -23,7 +23,7 @@ export class DataComponent implements OnInit, AfterViewInit {
   constructor(private dataService: DataService, private userService: UserService) { }
   public stompClient = null;
   public username = localStorage.getItem('AuthUsername');
-  public url = 'https://13.232.165.99:8018/api/v1/history';
+  public url = 'http://13.232.165.99:8018/api/v1/history';
   public services = this.dataService.services;
   @ViewChild('select') select: MatSelect;
 

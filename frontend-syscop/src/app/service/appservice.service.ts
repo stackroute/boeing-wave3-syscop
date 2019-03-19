@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 export class AppserviceService {
 
   public username = localStorage.getItem('AuthUsername');
-  public url = 'https://13.232.165.99:8095/appRegistration-service/api/v2/syscop/appregistration';
+  public url = 'http://13.232.165.99:8095/appRegistration-service/api/v2/syscop/appregistration';
 
 
   constructor(private http: HttpClient) { }
