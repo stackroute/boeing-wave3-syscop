@@ -108,14 +108,12 @@ public class KafkaListenerService  {
     @KafkaListener(topics = "Kafka_Example_Test_JAVA", groupId = "group_id_monitoring_java")
     public void consumeJava(String message) {
         javaMetrics = message.substring(message.indexOf("[")+1, message.indexOf("]")).split(",");
-//        System.out.println("lenght====="+javaMetrics.length);
-        if(javaMetrics.length==2){
+        
             for(int i=0; i<javaMetrics.length&&i<2; i++){
                 javaMetrics[i] = javaMetrics[i].trim();
                 System.out.println(javaMetrics[i]);
                 template.convertAndSend("/topic/javaMetric/"+i, javaMetrics[i]);
             }
-        }
     }
 
 
