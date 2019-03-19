@@ -159,16 +159,22 @@ public class ThreadService implements Runnable {
             i++;
         }
 
-        //Java HardCode
-          String responseJava = dataCollectorModel.getMetrics("http://10.20.1.44:8003/metrics");
 
-          JavaMetric javaMetric = new JavaMetric();
-          javaMetric.parse(responseJava);
+        try {
+            //Java HardCode
+            String responseJava = dataCollectorModel.getMetrics("http://10.20.1.44:8003/metrics");
 
-          kafkaTemplate.send(TOPIC_JAVA, javaMetric.toString());
-         System.out.println(javaMetric.toString());
+            JavaMetric javaMetric = new JavaMetric();
+            javaMetric.parse(responseJava);
 
-        
+            kafkaTemplate.send(TOPIC_JAVA, javaMetric.toString());
+            System.out.println(javaMetric.toString());
+
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            System.out.println("Couldn't Connect to Java Agent OR No Java Application Running");
+        }
 
         // EO Java Hard Code
 
