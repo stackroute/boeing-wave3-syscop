@@ -12,7 +12,7 @@ import { TokenStorageService } from 'src/app/auth/token-storage.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  hide = false;
+  hide = true;
   form: FormGroup;
   isLoggedIn = false;
   isLoginFailed = false;

@@ -1,36 +1,8 @@
-.bg {
-    /* The image used */
-    background-image: url("src/assets/images/image2.jpg");
-  
-    height: 100vh;
-  
-    /* Center and scale the image nicely */
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
 
-    color: white;
-  }
-  .top-left {
-    position: absolute;
-    top: 8px;
-    left: 16px;
-  }
-  
-  .top-right {
-    position: absolute;
-    top: 8px;
-    right: 16px;
-  }
-
-  .centered {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-  }
-  a{
-    color: white;
-    text-decoration: none;
-  }
+.rgba-gradient {
+    background: -webkit-linear-gradient(45deg,#68d0ff,#453cf5 100%);
+    min-height: 100vh;
+}
+.blue-gradient-mask{
+  background: linear-gradient(40deg,rgba(116,184,255,.8),rgba(87,79,240,.8));
+}

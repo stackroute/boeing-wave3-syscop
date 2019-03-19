@@ -20,11 +20,6 @@ import { MatTableModule } from '@angular/material/table';
 import { MatRadioModule } from '@angular/material/radio';
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { ChartOneComponent } from './components/chart-one/chart-one.component';
-import { ChartTwoComponent } from './components/chart-two/chart-two.component';
-import { ChartThreeComponent } from './components/chart-three/chart-three.component';
-import { ChartFourComponent } from './components/chart-four/chart-four.component';
 import { AppRegistrationComponent } from './components/app-registration/app-registration.component';
 import { MydialogComponent } from './components/mydialog/mydialog.component';
 import { ScrollDispatchModule } from '@angular/cdk/scrolling';
@@ -35,6 +30,11 @@ import { DeletedialogComponent } from './components/deletedialog/deletedialog.co
 import { LandingComponent } from './components/landing/landing.component';
 import { NotificationsComponent } from './components/notifications/notifications.component';
 import { NgMatSearchBarModule } from 'ng-mat-search-bar';
+import { DataComponent } from './components/data/data.component';
+import { MatDatetimepickerModule } from '@mat-datetimepicker/core';
+import { MatMomentDatetimeModule } from '@mat-datetimepicker/moment';
+import { JavaGraphsComponent } from './components/java-graphs/java-graphs.component';
+import { DockerComponent } from './components/docker/docker.component';
 
 @NgModule({
   declarations: [
@@ -42,17 +42,15 @@ import { NgMatSearchBarModule } from 'ng-mat-search-bar';
     LoginComponent,
     SignupComponent,
     HomeComponent,
-    DashboardComponent,
-    ChartOneComponent,
-    ChartTwoComponent,
-    ChartThreeComponent,
-    ChartFourComponent,
     AppRegistrationComponent,
     MydialogComponent,
     EditdialogComponent,
     DeletedialogComponent,
     LandingComponent,
     NotificationsComponent,
+    DataComponent,
+    JavaGraphsComponent,
+    DockerComponent,
   ],
   imports: [
     BrowserModule,
@@ -89,6 +87,8 @@ import { NgMatSearchBarModule } from 'ng-mat-search-bar';
     MatSortModule,
     MatAutocompleteModule,
     MatChipsModule,
+    MatDatetimepickerModule,
+    MatMomentDatetimeModule,
 
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],

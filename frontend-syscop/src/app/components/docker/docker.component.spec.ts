@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ChartOneComponent } from './chart-one.component';
+import { DockerComponent } from './docker.component';
 
-describe('ChartOneComponent', () => {
-  let component: ChartOneComponent;
-  let fixture: ComponentFixture<ChartOneComponent>;
+describe('DockerComponent', () => {
+  let component: DockerComponent;
+  let fixture: ComponentFixture<DockerComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ChartOneComponent ]
+      declarations: [ DockerComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ChartOneComponent);
+    fixture = TestBed.createComponent(DockerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
