@@ -49,7 +49,7 @@ public class KafkaListenerService {
 
     }
 
-    @KafkaListener(topics = "Kafka_Example_Test_Thread1", groupId = "group_id2")
+    @KafkaListener(topics = "Kafka_Example_Test_Final3", groupId = "group_id2")
     public void consumeDataCollectorServiceData(String message) throws IOException {
 
         System.out.println(message);
