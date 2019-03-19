@@ -11,6 +11,7 @@ import org.springframework.boot.autoconfigure.mongo.embedded.EmbeddedMongoAutoCo
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -34,7 +35,7 @@ public class ApplicationRepositoryTest {
         Service service = new Service("crudj2e","J2E", 8000);
         List<Service> serviceList = new ArrayList<>();
         serviceList.add(service);
-        Date dateObj = new Date();
+        String dateObj = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(new Date());
         Application application = new Application("SysCop","Docker","172.13.44.55",dateObj,serviceList);
         List<Application> applicationList = new ArrayList<>();
         user = new User("Ramya",applicationList);

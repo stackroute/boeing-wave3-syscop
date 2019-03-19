@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -26,7 +27,7 @@ public class Application {
     private String applicationName;
     private String applicationType;
     private String ipAddress;
-    private Date registrationDateandTime = new Date();
+    private String registrationDateandTime = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(new Date());
     private List<Service> services;
 
     public Application(String applicationName, String applicationType, String ipAddress, List<Service> services) {
