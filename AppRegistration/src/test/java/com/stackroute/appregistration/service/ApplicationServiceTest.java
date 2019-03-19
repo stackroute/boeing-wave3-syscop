@@ -11,7 +11,6 @@ import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -44,7 +43,7 @@ public class ApplicationServiceTest {
         Service service = new Service("crudj2e","J2E", 8000);
         List<Service> serviceList = new ArrayList<>();
         serviceList.add(service);
-        String dateObj = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(new Date());
+        Date dateObj = new Date();
         application = new Application("SysCop","Docker","172.13.44.55",dateObj,serviceList);
         List<Application> applicationList = new ArrayList<>();
         user = new User("Ramya",applicationList);
