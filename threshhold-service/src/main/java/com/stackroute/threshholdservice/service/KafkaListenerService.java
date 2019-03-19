@@ -92,13 +92,13 @@ public class KafkaListenerService {
 
         ObjectMapper objectMapper = new ObjectMapper();
 
-        if(cpuCurrent > 1.2 * cpuThreshold){
+        if(cpuCurrent > 0.9 * cpuThreshold){
             alertObject.setAlert("WARNING!! CPU USAGE EXCEEDED THRESHHOLD" + Float.toString(cpuCurrent));
             String alertString = objectMapper.writeValueAsString(alertObject);
             System.out.println(alertString);
             kafkaTemplate.send(TOPIC, alertString);
         }
-        if(memCurrent > 1.2 * memThreshold) {
+        if(memCurrent > 1.0 * memThreshold) {
             alertObject.setAlert("WARNING!! MEMORY USAGE EXCEEDED THRESHHOLD" + Float.toString(memCurrent));
             String alertString = objectMapper.writeValueAsString(alertObject);
             kafkaTemplate.send(TOPIC, alertString);
