@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { JavaGraphsComponent } from './java-graphs.component';
+import { ChartTwoComponent } from './chart-two.component';
 
-describe('JavaGraphsComponent', () => {
-  let component: JavaGraphsComponent;
-  let fixture: ComponentFixture<JavaGraphsComponent>;
+describe('ChartTwoComponent', () => {
+  let component: ChartTwoComponent;
+  let fixture: ComponentFixture<ChartTwoComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ JavaGraphsComponent ]
+      declarations: [ ChartTwoComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(JavaGraphsComponent);
+    fixture = TestBed.createComponent(ChartTwoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

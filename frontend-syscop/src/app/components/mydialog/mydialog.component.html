@@ -21,10 +21,10 @@
                   <div class="col-md-12">
                     <mat-form-field>
                       <mat-label>App Type</mat-label>
-                      <mat-select formControlName="applicationType" required>
-                        <mat-option value="docker">Docker</mat-option>
-                        <mat-option value="nondDocker">Non-Docker</mat-option>
-                      </mat-select>
+                      <select matNativeControl formControlName="applicationType" required>
+                        <option value="docker">Docker</option>
+                        <option value="nondDocker">Non-Docker</option>
+                      </select>
                     </mat-form-field>
                   </div>
                 </div>
@@ -66,11 +66,11 @@
                         <div class="col-md-12">
                           <mat-form-field>
                             <mat-label>Service Type</mat-label>
-                            <mat-select formControlName="serviceType" required>
-                              <mat-option value="java">Java</mat-option>
-                              <mat-option value="python">Python</mat-option>
-                              <mat-option value="node">Node</mat-option>
-                            </mat-select>
+                            <select matNativeControl formControlName="serviceType" required>
+                              <option value="java">Java</option>
+                              <option value="python">Python</option>
+                              <option value="node">Node</option>
+                            </select>
                           </mat-form-field>
                         </div>
                       </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, OnChanges } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { MydialogComponent } from '../mydialog/mydialog.component';
 import { AppserviceService } from 'src/app/service/appservice.service';
@@ -6,7 +6,6 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { EditdialogComponent } from '../editdialog/editdialog.component';
 import { DeletedialogComponent } from '../deletedialog/deletedialog.component';
 import { Router } from '@angular/router';
-import { DataService } from 'src/app/service/data.service';
 
 @Component({
   selector: 'app-app-registration',
@@ -21,10 +20,10 @@ import { DataService } from 'src/app/service/data.service';
   ],
 })
 
-export class AppRegistrationComponent implements OnInit, OnChanges {
+export class AppRegistrationComponent implements OnInit {
   applicationName: string;
 
-  constructor(public dialog: MatDialog, private appService: AppserviceService, private router: Router , private dataService: DataService) {}
+  constructor(public dialog: MatDialog, private appService: AppserviceService, private router: Router) {}
 
   panelOpenState = false;
   displayedColumns: string[] = ['applicationName', 'applicationType', 'ipAddress', 'registrationDateandTime', 'actions' ];
@@ -40,6 +39,7 @@ export class AppRegistrationComponent implements OnInit, OnChanges {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
     });
+    this.ngOnInit();
   }
 
   startEdit(applicationName: string, applicationType: string, ipAddress: string, services: Array<Object> ) {
@@ -53,6 +53,7 @@ export class AppRegistrationComponent implements OnInit, OnChanges {
       if (result === 1) {
       }
     });
+    this.ngOnInit();
   }
   deleteItem(applicationName: string, applicationType: string, ipAddress: string, services: Array<Object> ) {
     const dialogRef = this.dialog.open(DeletedialogComponent, {
@@ -65,21 +66,14 @@ export class AppRegistrationComponent implements OnInit, OnChanges {
       if (result === 1) {
       }
     });
+    this.ngOnInit();
   }
 
   ngOnInit() {
       this.appService.getApplications().subscribe((data) => {
         this.dataSource = data.applications;
-        this.dataService.services =  data.applications[0].services;
         console.log(data.applications);
       });
-  }
-  ngOnChanges() {
-    this.appService.getApplications().subscribe((data) => {
-      this.dataSource = data.applications;
-      this.dataService.services =  data.applications[0].services;
-      console.log(data.applications);
-    });
   }
 
 }

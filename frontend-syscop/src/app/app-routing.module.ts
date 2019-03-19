@@ -7,8 +7,6 @@ import { AppRegistrationComponent } from './components/app-registration/app-regi
 import { SignupComponent } from './components/signup/signup.component';
 import { LandingComponent } from './components/landing/landing.component';
 import { NotificationsComponent } from './components/notifications/notifications.component';
-import { DataComponent } from './components/data/data.component';
-import { JavaGraphsComponent } from './components/java-graphs/java-graphs.component';
 
 const routes: Routes = [
   {path: '', component: LandingComponent},
@@ -20,8 +18,6 @@ const routes: Routes = [
       {path: 'dashboard', component: DashboardComponent },
       {path: 'appRegistration', component: AppRegistrationComponent },
       {path: 'notifications', component: NotificationsComponent },
-      {path: 'data', component: DataComponent },
-      {path: 'java', component: JavaGraphsComponent },
     ]
   }, ];
 

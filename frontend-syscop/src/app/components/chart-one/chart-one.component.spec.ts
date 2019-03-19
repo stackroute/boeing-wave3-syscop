@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EditdialogComponent } from './editdialog.component';
+import { ChartOneComponent } from './chart-one.component';
 
-describe('EditdialogComponent', () => {
-  let component: EditdialogComponent;
-  let fixture: ComponentFixture<EditdialogComponent>;
+describe('ChartOneComponent', () => {
+  let component: ChartOneComponent;
+  let fixture: ComponentFixture<ChartOneComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EditdialogComponent ]
+      declarations: [ ChartOneComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EditdialogComponent);
+    fixture = TestBed.createComponent(ChartOneComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
