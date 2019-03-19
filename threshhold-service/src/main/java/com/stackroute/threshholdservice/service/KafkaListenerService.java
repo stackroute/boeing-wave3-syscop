@@ -92,7 +92,7 @@ public class KafkaListenerService {
 
         ObjectMapper objectMapper = new ObjectMapper();
 
-        if(cpuCurrent > 0.9 * cpuThreshold){
+        if(cpuCurrent > 1.0 * cpuThreshold){
             alertObject.setAlert("WARNING!! CPU USAGE EXCEEDED THRESHHOLD" + Float.toString(cpuCurrent));
             String alertString = objectMapper.writeValueAsString(alertObject);
             System.out.println(alertString);
