@@ -17,6 +17,7 @@ const routes: Routes = [
   { path: 'home',
     component: HomeComponent,
     children: [
+      {path: '', component: AppRegistrationComponent },
       {path: 'dashboard', component: DockerComponent },
       {path: 'appRegistration', component: AppRegistrationComponent },
       {path: 'notifications', component: NotificationsComponent },

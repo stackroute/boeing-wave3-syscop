@@ -7,9 +7,15 @@
     <span class="example-spacer">
     </span>
     <span>
-    <button type="button" mat-icon-button (click)="logout()"><mat-icon>account_circle</mat-icon></button>
-  </span>
-    <span>
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>account_circle</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <p mat-menu-item> Welcome {{info.username}}</p>
+        <button  mat-menu-item  color="primary" (click)="logout()">
+          Logout
+        </button>
+      </mat-menu>
     </span>
   </mat-toolbar-row>
 </mat-toolbar>
@@ -30,11 +36,11 @@
         <span> Docker Dashboard </span>
       </a>
       <a mat-list-item routerLink="java">
-          <span>
-            <mat-icon>dashboard</mat-icon>
-          </span>
-          <span>Java Dashboard</span>
-        </a>
+        <span>
+          <mat-icon>dashboard</mat-icon>
+        </span>
+        <span>Java Dashboard</span>
+      </a>
       <a mat-list-item routerLink='notifications'>
         <span>
           <mat-icon matBadge="15" matBadgeColor="warn">notification_important</mat-icon>
@@ -45,9 +51,9 @@
         <span>
           <mat-icon>trending_up</mat-icon>
         </span>
-        <span>Data Sources</span>
+        <span>Historical Data</span>
       </a>
-      
+
     </mat-nav-list>
   </mat-sidenav>
   <mat-select>

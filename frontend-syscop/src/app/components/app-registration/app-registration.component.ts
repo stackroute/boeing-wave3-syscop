@@ -34,9 +34,8 @@ export class AppRegistrationComponent implements OnInit, OnChanges {
     const dialogRef = this.dialog.open(MydialogComponent, {
       width: '40vw', maxHeight: '400px',
     });
-
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      this.onLoad();
     });
   }
 
@@ -45,11 +44,8 @@ export class AppRegistrationComponent implements OnInit, OnChanges {
       width: '40vw', maxHeight: '400px', data: {applicationName: applicationName, applicationType: applicationType,
         ipAddress: ipAddress, services: services}
     });
-    console.log(this.dataSource);
-
     dialogRef.afterClosed().subscribe(result => {
-      if (result === 1) {
-      }
+      this.onLoad();
     });
   }
   deleteItem(applicationName: string, applicationType: string, ipAddress: string, services: Array<Object> ) {
@@ -60,19 +56,17 @@ export class AppRegistrationComponent implements OnInit, OnChanges {
     console.log(this.dataSource);
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result === 1) {
-      }
+      this.onLoad();
     });
   }
 
   ngOnInit() {
-      this.appService.getApplications().subscribe((data) => {
-        this.dataSource = data.applications;
-        this.dataService.services =  data.applications[0].services;
-        console.log(data.applications);
-      });
+      this.onLoad();
   }
   ngOnChanges() {
+    this.onLoad();
+  }
+  onLoad() {
     this.appService.getApplications().subscribe((data) => {
       this.dataSource = data.applications;
       this.dataService.services =  data.applications[0].services;
