@@ -27,6 +27,10 @@ export class DockerComponent implements OnInit, AfterViewInit {
   public url = 'http://13.232.165.99:8018/live-metrics';
   public services = this.dataService.services;
   @ViewChild('select') select: MatSelect;
+  cpuLine;
+  netIOLine;
+  memLine;
+
 
 
   /*This option is used in ChartJS */
@@ -82,28 +86,21 @@ export class DockerComponent implements OnInit, AfterViewInit {
     });
   }
   ngAfterViewInit() {
+
   }
-  onSubmit() {
-  this.select.optionSelectionChanges.subscribe(res => {
-    console.log(res);
-  });
-}
   /*This method connects to socket of backend and renders graph */
-  connect() {
+  getGraph() {
     /*Arrays needed for ChartJS configuration for cpu graph*/
     let cpucanvas;
     let cpuctx;
-    let cpuLine;
 
     /*Arrays needed for ChartJS configuration for netIO graph*/
     let netIOcanvas;
     let netIOctx;
-    let netIOLine;
 
     /*Arrays needed for ChartJS configuration for memory graph*/
     let memcanvas;
     let memctx;
-    let memLine;
 
 
     /*Arrays needed for ChartJS configuration for memory graph*/
@@ -145,20 +142,26 @@ export class DockerComponent implements OnInit, AfterViewInit {
       }]
     };
 
+    if (this.cpuLine !== undefined) {
+      this.cpuLine.destroy();
+      this.netIOLine.destroy();
+      this.memLine.destroy();
+    }
     /*This loop renders cpu graph for all the registered services */
     cpucanvas = <HTMLCanvasElement>document.getElementById('lineChart0');
     cpuctx = cpucanvas.getContext('2d');
-    cpuLine = new Chart(cpuctx, { type: 'line', data: cpudata, options: this.options });
+    this.cpuLine = new Chart(cpuctx, { type: 'line', data: cpudata, options: this.options });
 
     netIOcanvas = <HTMLCanvasElement>document.getElementById('lineChart1');
     netIOctx = netIOcanvas.getContext('2d');
-    netIOLine = new Chart(netIOctx, { type: 'line', data: netIOdata, options: this.options });
+    this.netIOLine = new Chart(netIOctx, { type: 'line', data: netIOdata, options: this.options });
 
     memcanvas = <HTMLCanvasElement>document.getElementById('lineChart2');
     memctx = memcanvas.getContext('2d');
-    memLine = new Chart(memctx, { type: 'line', data: memdata, options: this.options });
+    this.memLine = new Chart(memctx, { type: 'line', data: memdata, options: this.options });
 
     const that = this;
+
     /* Configuring WebSocket on Client Side */
     this.socket = new SockJS(this.url);
     this.stompClient = Stomp.over(this.socket);
@@ -190,9 +193,9 @@ export class DockerComponent implements OnInit, AfterViewInit {
           memdata.datasets.forEach(function (dataset) {
             dataset.data.push(parseFloat(JSON.parse(metric.body).memory));
           });
-          cpuLine.update();
-          netIOLine.update();
-          memLine.update();
+          that.cpuLine.update();
+          that.netIOLine.update();
+          that.memLine.update();
         }
       });
     });

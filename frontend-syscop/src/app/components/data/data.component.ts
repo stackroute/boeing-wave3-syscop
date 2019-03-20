@@ -22,6 +22,9 @@ export class DataComponent implements OnInit, AfterViewInit {
   public url = 'http://13.232.165.99:8018/api/v1/history';
   public services = this.dataService.services;
   @ViewChild('select') select: MatSelect;
+  cpuLine;
+  netIOLine;
+  memLine;
 
 
   /*This option is used in ChartJS */
@@ -105,17 +108,14 @@ export class DataComponent implements OnInit, AfterViewInit {
     /*Arrays needed for ChartJS configuration for cpu graph*/
     let cpucanvas;
     let cpuctx;
-    let cpuLine;
     let cpudata;
     /*Arrays needed for ChartJS configuration for netIO graph*/
     let netIOcanvas;
     let netIOctx;
-    let netIOLine;
     let netIOdata;
     /*Arrays needed for ChartJS configuration for memory graph*/
     let memcanvas;
     let memctx;
-    let memLine;
     let memdata;
     /*Arrays needed for ChartJS configuration for cpu graph*/
     cpudata = {
@@ -153,20 +153,25 @@ export class DataComponent implements OnInit, AfterViewInit {
         fill: false
       }]
     };
+    if (this.cpuLine !== undefined) {
+      this.cpuLine.destroy();
+      this.netIOLine.destroy();
+      this.memLine.destroy();
+    }
     cpucanvas = <HTMLCanvasElement>document.getElementById('lineChart0');
     cpuctx = cpucanvas.getContext('2d');
-    cpuLine = new Chart(cpuctx, { type: 'line', data: cpudata, options: this.options });
+    this.cpuLine = new Chart(cpuctx, { type: 'line', data: cpudata, options: this.options });
 
     netIOcanvas = <HTMLCanvasElement>document.getElementById('lineChart1');
     netIOctx = netIOcanvas.getContext('2d');
-    netIOLine = new Chart(netIOctx, { type: 'line', data: netIOdata, options: this.options });
+    this.netIOLine = new Chart(netIOctx, { type: 'line', data: netIOdata, options: this.options });
 
     memcanvas = <HTMLCanvasElement>document.getElementById('lineChart2');
     memctx = memcanvas.getContext('2d');
-    memLine = new Chart(memctx, { type: 'line', data: memdata, options: this.options });
-    cpuLine.update();
-    netIOLine.update();
-    memLine.update();
+    this.memLine = new Chart(memctx, { type: 'line', data: memdata, options: this.options });
+    this.cpuLine.update();
+    this.netIOLine.update();
+    this.memLine.update();
 
   }
 
