@@ -7,12 +7,12 @@
     <span class="example-spacer">
     </span>
     <span>
-    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <button mat-icon-button [matMenuTriggerFor]="menu">
         <mat-icon>account_circle</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
         <p mat-menu-item> Welcome {{info.username}}</p>
-        <button  mat-menu-item  color="primary" (click)="logout()">
+        <button mat-menu-item color="primary" (click)="logout()">
           Logout
         </button>
       </mat-menu>
@@ -41,18 +41,19 @@
         </span>
         <span>Java Dashboard</span>
       </a>
-      <a mat-list-item routerLink='notifications'>
-        <span>
-          <mat-icon matBadge="15" matBadgeColor="warn">notification_important</mat-icon>
-        </span>
-        <span>Notifications</span>
-      </a>
       <a mat-list-item routerLink="data">
         <span>
           <mat-icon>trending_up</mat-icon>
         </span>
         <span>Historical Data</span>
       </a>
+      <a mat-list-item routerLink='notifications'>
+        <span>
+          <mat-icon matBadge="15" matBadgeColor="warn">notification_important</mat-icon>
+        </span>
+        <span>Notifications</span>
+      </a>
+
 
     </mat-nav-list>
   </mat-sidenav>
