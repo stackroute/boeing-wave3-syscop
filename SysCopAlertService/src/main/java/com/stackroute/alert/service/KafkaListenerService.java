@@ -32,10 +32,10 @@ public class KafkaListenerService {
     @Autowired
     private Scheduler scheduler;
 
-    public static final String ACCOUNT_SID = "AC20c22dfaa7aefee958ba5eda0b46edf5";
-    public static final String AUTH_TOKEN  = "6df52a709d0cb96805763728992e2495";
+    public static final String ACCOUNT_SID = "AC6d4ebda348d5a8d3bc56841f2810ba04";
+    public static final String AUTH_TOKEN  = "5527cd087017ac830f59a872e36cf440";
     // Create a phone number in the Twilio console.................
-    public static final String TWILIO_NUMBER = "+12017205671";
+    public static final String TWILIO_NUMBER = "+12017786294";
 
 
     //Listener for User Registration service to store user details like username,email & phone number
