@@ -6,6 +6,6 @@ import org.springframework.data.mongodb.repository.Query;
 
 public interface ThresholdRepository extends MongoRepository<MetricsThreshold, String> {
 
-    @Query("{'serviceName' : ?0, '_id' : ?1}")
+    @Query("{'serviceName' : ?0, 'userName' : ?1}")
     public MetricsThreshold getMetricThresholdObject(String serviceName, String userName);
 }
