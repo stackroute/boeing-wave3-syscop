@@ -96,12 +96,9 @@ public class KafkaListenerService {
         JsonParser jsonParser = new JsonParser();
         JsonObject jsonObject = (JsonObject) jsonParser.parse(message);
 
-
         User user = userRepository.getUserDetails(jsonObject.get("userName").toString().replace("\"",""));
 
-        double d = 2.7;
-
-        template.convertAndSend("/topic/temperature",d);
+        template.convertAndSend("/topic/temperature",jsonObject.get("alert").toString()+ jsonObject.get("serviceName").toString());
 
         Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
         Message textMessage = Message.creator(
