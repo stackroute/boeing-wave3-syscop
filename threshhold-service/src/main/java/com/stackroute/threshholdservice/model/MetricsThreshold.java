@@ -6,11 +6,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document
 public class MetricsThreshold {
 
-   
-    private String userName;
-    
-    
     @Id
+    private String id;
+   
+    private String userName; 
+    
+    
     private String serviceName;
     private float cpu;
     private float mem;
