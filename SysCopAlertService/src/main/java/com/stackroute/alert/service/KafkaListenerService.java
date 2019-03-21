@@ -104,7 +104,8 @@ public class KafkaListenerService {
         Message textMessage = Message.creator(
                 new PhoneNumber(user.getPhoneNumber()),
                 new PhoneNumber(TWILIO_NUMBER),
-                jsonObject.get("alert").toString()
+                jsonObject.get("alert").toString()+ jsonObject.get("serviceName").toString()
+
                 )
                 .create();
 
