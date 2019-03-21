@@ -74,7 +74,7 @@ public class InfluxServiceImpl implements InfluxService {
 
 
         String dbName = "monitorServiceDB";
-        Query query1 = new Query("select time, Cpu, Memory from "+range.getTableName()+" where time >= "+tounixTime + " and time <= "+fromunixTime,dbName);
+        Query query1 = new Query("select time, Cpu, Memory from "+range.getTableName()+" where time >= "+fromunixTime + " and time <= "+tounixTime,dbName);
 
         Query query2 = new Query("select time, Cpu, Memory from "+range.getTableName(),dbName);
         QueryResult queryResult = influxDBTemplate.query(query1);
