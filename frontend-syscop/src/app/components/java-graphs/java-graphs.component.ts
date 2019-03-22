@@ -151,7 +151,7 @@ export class JavaGraphsComponent implements AfterViewInit {
   const that = this;
 
   /* Configuring WebSocket on Client Side */
-  const socket = new SockJS('http://172.23.239.95:8018/live-metrics');
+  const socket = new SockJS('http://13.232.165.99:8018/live-metrics');
   this.stompClient = Stomp.over(socket);
   this.stompClient.connect({}, function (frame) {
     that.stompClient.subscribe('/topic/javaMetric/0', function (temperature) {
