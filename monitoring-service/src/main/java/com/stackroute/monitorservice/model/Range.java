@@ -3,8 +3,8 @@ package com.stackroute.monitorservice.model;
 public class Range {
 
     private String tableName;
-    private String toDate;
     private String fromDate;
+    private String toDate;
 
     public String getToDate() {
         return toDate;

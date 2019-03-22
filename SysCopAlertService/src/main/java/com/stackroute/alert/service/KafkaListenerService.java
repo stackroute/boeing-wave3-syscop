@@ -32,10 +32,10 @@ public class KafkaListenerService {
     @Autowired
     private Scheduler scheduler;
 
-    public static final String ACCOUNT_SID = "AC20c22dfaa7aefee958ba5eda0b46edf5";
-    public static final String AUTH_TOKEN  = "6df52a709d0cb96805763728992e2495";
+    public static final String ACCOUNT_SID = "AC6d4ebda348d5a8d3bc56841f2810ba04";
+    public static final String AUTH_TOKEN  = "5527cd087017ac830f59a872e36cf440";
     // Create a phone number in the Twilio console.................
-    public static final String TWILIO_NUMBER = "+12017205671";
+    public static final String TWILIO_NUMBER = "+12017786294";
 
 
     //Listener for User Registration service to store user details like username,email & phone number
@@ -96,18 +96,16 @@ public class KafkaListenerService {
         JsonParser jsonParser = new JsonParser();
         JsonObject jsonObject = (JsonObject) jsonParser.parse(message);
 
-
         User user = userRepository.getUserDetails(jsonObject.get("userName").toString().replace("\"",""));
 
-        double d = 2.7;
-
-        template.convertAndSend("/topic/temperature",d);
+        template.convertAndSend("/topic/temperature",jsonObject.get("alert").toString()+ jsonObject.get("serviceName").toString());
 
         Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
         Message textMessage = Message.creator(
                 new PhoneNumber(user.getPhoneNumber()),
                 new PhoneNumber(TWILIO_NUMBER),
-                jsonObject.get("alert").toString()
+                jsonObject.get("alert").toString()+ jsonObject.get("serviceName").toString()
+
                 )
                 .create();
 
